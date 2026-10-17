@@ -1,0 +1,809 @@
+---
+import { TOP_30_CURRENCIES } from '../data/currencies';
+import { createDefaultRentReceipt } from '../lib/rent-receipt';
+
+const defaultRent = createDefaultRentReceipt();
+---
+
+<div
+  id="rent-receipt-workspace"
+  class="w-full max-w-[1560px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10"
+>
+  <!-- Privacy & Serverless Guarantee Banner -->
+  <aside
+    class="mb-6 rounded-3xl bg-surface-card border border-hairline p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4 no-print"
+    aria-label="Privacy guarantee"
+  >
+    <div class="flex items-start sm:items-center gap-3.5">
+      <div class="h-10 w-10 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center shrink-0 text-accent-teal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h2 class="text-xs sm:text-sm font-bold text-ink">
+            100% Private & Serverless Rent Receipt Maker
+          </h2>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse"></span>
+            <span>Zero Server Uploads</span>
+          </span>
+        </div>
+        <p class="text-xs text-mute mt-0.5 leading-relaxed">
+          Generate valid rent receipts for HRA tax exemption and proof of tenancy. All calculations
+          and PDF exports run strictly inside your browser.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="btn-clear-rent-data"
+        class="h-9 px-3.5 text-xs font-semibold rounded-full text-accent-danger bg-accent-danger/10 hover:bg-accent-danger/20 border border-accent-danger/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        <span>Clear Rent Data</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Segmented Form / Preview Toggle -->
+  <div
+    id="rent-mobile-view-toggle"
+    class="lg:hidden sticky top-18 z-30 mb-5 bg-surface-card/95 backdrop-blur-md p-1.5 rounded-2xl border border-hairline shadow-card flex items-center gap-1.5 no-print"
+  >
+    <button
+      type="button"
+      id="btn-toggle-rent-form"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer"
+      aria-pressed="true"
+    >
+      <span>Edit Details</span>
+    </button>
+    <button
+      type="button"
+      id="btn-toggle-rent-preview"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer"
+      aria-pressed="false"
+    >
+      <span>Live Rent Receipt</span>
+    </button>
+  </div>
+
+  <!-- 2-Column Responsive Workspace -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Left Column: Rent Receipt Form -->
+    <div id="rent-form-column" class="lg:col-span-6 xl:col-span-6 w-full">
+      <form
+        id="rent-receipt-form"
+        class="space-y-6 sm:space-y-8"
+        novalidate
+        onsubmit="return false;"
+      >
+        <!-- Top Action & Export Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-hairline">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+              Rent Receipt Tool
+            </span>
+            <span
+              id="rent-save-status"
+              class="text-xs text-mute font-medium opacity-0 transition-opacity flex items-center gap-1"
+            >
+              <svg class="h-3.5 w-3.5 text-accent-teal" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Saved
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button
+              type="button"
+              id="btn-reset-rent"
+              class="btn-outline h-9 px-3 text-xs font-semibold rounded-full hover:bg-surface-soft hover:text-accent-danger transition-colors cursor-pointer"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              id="btn-print-rent"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span>Print</span>
+            </button>
+            <button
+              type="button"
+              id="btn-png-rent"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>PNG</span>
+            </button>
+            <button
+              type="button"
+              id="btn-pdf-rent"
+              class="btn-cobalt h-9 px-3.5 text-xs font-semibold rounded-full shadow-xs cursor-pointer flex items-center gap-1.5"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Form Body -->
+        <div class="bg-surface-card border border-hairline rounded-3xl p-4 sm:p-8 shadow-card space-y-6">
+          <!-- Meta Grid: Receipt #, Payment Date, Currency -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-hairline">
+            <div>
+              <label for="rent-number" class="block text-xs font-semibold text-charcoal mb-1">
+                Receipt Number <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="text"
+                id="rent-number"
+                class="text-input h-11 text-sm font-mono font-medium"
+                value={defaultRent.receiptNumber}
+                required
+              />
+            </div>
+
+            <div>
+              <label for="rent-date" class="block text-xs font-semibold text-charcoal mb-1">
+                Payment Date <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="date"
+                id="rent-date"
+                class="text-input h-11 text-sm"
+                value={defaultRent.paymentDate}
+                required
+              />
+            </div>
+
+            <div>
+              <label for="rent-currency" class="block text-xs font-semibold text-charcoal mb-1">
+                Currency
+              </label>
+              <select id="rent-currency" class="text-input h-11 text-sm">
+                {TOP_30_CURRENCIES.map((c) => (
+                  <option value={c.code} selected={c.code === defaultRent.currency}>
+                    {c.code} ({c.symbol}) - {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <!-- Landlord Information & Optional PAN Field -->
+          <div class="space-y-4 pb-6 border-b border-hairline">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                Landlord / Property Owner Details
+              </h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label for="landlord-name" class="block text-xs font-semibold text-charcoal mb-1">
+                  Landlord Full Name <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="landlord-name"
+                  class="text-input h-11 text-sm font-semibold"
+                  placeholder="e.g. Robert Vance"
+                  value={defaultRent.landlord.name}
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  for="landlord-pan"
+                  class="block text-xs font-semibold text-charcoal mb-1 flex items-center justify-between"
+                >
+                  <span>
+                    Landlord PAN / Tax ID{' '}
+                    <span class="text-mute font-normal text-[11px]">(Optional)</span>
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  id="landlord-pan"
+                  class="text-input h-11 text-sm font-mono uppercase"
+                  placeholder="e.g. ABCDE1234F"
+                  value={defaultRent.landlord.pan}
+                />
+              </div>
+            </div>
+
+            <!-- Landlord PAN Short Explanation Callout -->
+            <div class="p-3 bg-primary/5 border border-primary/15 rounded-2xl flex items-start gap-2.5 text-xs text-charcoal">
+              <svg
+                class="h-4 w-4 shrink-0 text-primary mt-0.5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="leading-relaxed text-[11px]">
+                <strong class="font-bold text-ink">Why Landlord PAN?</strong> Under Indian Income
+                Tax guidelines, Landlord PAN is mandatory for claiming HRA tax deductions if total
+                annual rent exceeds <strong>₹1,00,000</strong> (~₹8,333/month). In other countries,
+                this acts as the landlord's official tax registration number.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label for="landlord-email" class="block text-xs font-semibold text-charcoal mb-1">
+                  Landlord Email
+                </label>
+                <input
+                  type="email"
+                  id="landlord-email"
+                  class="text-input h-10 text-xs"
+                  placeholder="landlord@example.com"
+                  value={defaultRent.landlord.email}
+                />
+              </div>
+              <div>
+                <label for="landlord-phone" class="block text-xs font-semibold text-charcoal mb-1">
+                  Landlord Phone
+                </label>
+                <input
+                  type="tel"
+                  id="landlord-phone"
+                  class="text-input h-10 text-xs"
+                  placeholder="+1 (555) 000-0000"
+                  value={defaultRent.landlord.phone}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="landlord-address" class="block text-xs font-semibold text-charcoal mb-1">
+                Landlord Contact Address
+              </label>
+              <textarea
+                id="landlord-address"
+                class="text-input text-xs py-2 h-14 resize-y"
+                placeholder="Landlord's residential or business address"
+              >{defaultRent.landlord.address}</textarea>
+            </div>
+          </div>
+
+          <!-- Tenant & Property Details -->
+          <div class="space-y-4 pb-6 border-b border-hairline">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Tenant & Rented Property
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label for="tenant-name" class="block text-xs font-semibold text-charcoal mb-1">
+                  Tenant Full Name <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="tenant-name"
+                  class="text-input h-11 text-sm font-semibold"
+                  placeholder="e.g. Elena Rostova"
+                  value={defaultRent.tenant.name}
+                  required
+                />
+              </div>
+              <div>
+                <label for="tenant-phone" class="block text-xs font-semibold text-charcoal mb-1">
+                  Tenant Phone / Email
+                </label>
+                <input
+                  type="text"
+                  id="tenant-phone"
+                  class="text-input h-11 text-xs"
+                  placeholder="Tenant phone or email"
+                  value={defaultRent.tenant.phone}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="property-address" class="block text-xs font-semibold text-charcoal mb-1">
+                Rented Property Full Address <span class="text-accent-danger">*</span>
+              </label>
+              <textarea
+                id="property-address"
+                class="text-input text-xs py-2.5 h-16 resize-y font-medium"
+                placeholder="e.g. Flat 4B, Pinecrest Towers, 120 Main Street..."
+                required
+              >{defaultRent.propertyAddress}</textarea>
+            </div>
+          </div>
+
+          <!-- Rental Period & Financials -->
+          <div class="space-y-4 pb-6 border-b border-hairline">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Rent Period & Amount
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              <div class="sm:col-span-1">
+                <label
+                  for="rent-period-month"
+                  class="block text-xs font-semibold text-charcoal mb-1"
+                >
+                  Month & Year <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="rent-period-month"
+                  class="text-input h-11 text-sm font-semibold"
+                  placeholder="e.g. October 2026"
+                  value={defaultRent.periodMonthYear}
+                  required
+                />
+              </div>
+
+              <div class="sm:col-span-1">
+                <label for="rent-amount" class="block text-xs font-semibold text-charcoal mb-1">
+                  Monthly Rent Amount <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="number"
+                  id="rent-amount"
+                  class="text-input h-11 text-sm font-mono text-right font-bold text-ink"
+                  value={defaultRent.rentAmount}
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div class="sm:col-span-1">
+                <label
+                  for="maintenance-amount"
+                  class="block text-xs font-semibold text-charcoal mb-1"
+                >
+                  Maintenance Fee <span class="text-mute font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="number"
+                  id="maintenance-amount"
+                  class="text-input h-11 text-sm font-mono text-right"
+                  value={defaultRent.maintenanceAmount}
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+            </div>
+
+            <!-- Payment Mode & Reference -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+              <div>
+                <label
+                  for="rent-payment-mode"
+                  class="block text-xs font-semibold text-charcoal mb-1"
+                >
+                  Payment Mode
+                </label>
+                <select id="rent-payment-mode" class="text-input h-11 text-sm">
+                  <option value="Bank Transfer" selected>
+                    Bank Transfer / NEFT / IMPS
+                  </option>
+                  <option value="UPI">UPI / Instant Pay</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Check">Check / Cheque</option>
+                  <option value="Online / Card">Online / Card Payment</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="rent-tx-ref" class="block text-xs font-semibold text-charcoal mb-1">
+                  UTR / Cheque / Transaction #
+                </label>
+                <input
+                  type="text"
+                  id="rent-tx-ref"
+                  class="text-input h-11 text-sm font-mono"
+                  placeholder="e.g. UTR-998811 or Cheque #10294"
+                  value={defaultRent.transactionReference}
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Calculation Display -->
+          <div class="flex justify-end pt-2" aria-live="polite" aria-atomic="true">
+            <div class="w-full max-w-xs space-y-1.5 text-xs">
+              <div class="flex justify-between text-gray-600">
+                <span>Rent Amount</span>
+                <span id="rent-base-disp" class="font-mono font-medium">
+                  $1,850.00
+                </span>
+              </div>
+              <div class="flex justify-between text-gray-600">
+                <span>Maintenance</span>
+                <span id="rent-maint-disp" class="font-mono font-medium">
+                  $150.00
+                </span>
+              </div>
+              <div class="flex justify-between items-center text-sm font-bold text-ink pt-2 border-t border-hairline">
+                <span>Total Amount Paid</span>
+                <span id="rent-total-disp" class="font-mono text-base text-primary">
+                  $2,000.00
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signatory & Declarations -->
+          <div class="space-y-4 pt-4 border-t border-hairline">
+            <div>
+              <label for="rent-notes" class="block text-xs font-semibold text-charcoal mb-1">
+                Receipt Remarks / Notes
+              </label>
+              <textarea
+                id="rent-notes"
+                class="text-input text-xs py-2 h-14 resize-y"
+              >{defaultRent.notes}</textarea>
+            </div>
+
+            <div>
+              <label
+                for="landlord-signature"
+                class="block text-xs font-semibold text-charcoal mb-1"
+              >
+                Landlord / Owner Digital Signature
+              </label>
+              <input
+                type="text"
+                id="landlord-signature"
+                class="text-input h-11 text-sm font-serif italic text-base"
+                value={defaultRent.landlordSignature}
+                placeholder="e.g. Robert Vance (Authorized Owner)"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Live Rent Receipt Preview (Sticky) -->
+    <div
+      id="rent-preview-column"
+      class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
+    >
+      <!-- Preview Controls Toolbar -->
+      <div class="flex items-center justify-between gap-3 p-3 bg-surface-card rounded-2xl border border-hairline mb-4 shadow-xs no-print">
+        <div class="flex items-center gap-1 text-xs">
+          <span class="text-mute font-medium mr-1">Style:</span>
+          <button
+            type="button"
+            class="btn-rent-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-primary text-white"
+            data-tmpl="modern"
+          >
+            Modern
+          </button>
+          <button
+            type="button"
+            class="btn-rent-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="classic"
+          >
+            Classic
+          </button>
+          <button
+            type="button"
+            class="btn-rent-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="minimal"
+          >
+            Minimal
+          </button>
+          <button
+            type="button"
+            class="btn-rent-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="compact"
+          >
+            Compact
+          </button>
+        </div>
+
+        <div class="flex items-center gap-1 text-xs">
+          <button
+            type="button"
+            class="btn-rent-format px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-primary text-white"
+            data-fmt="a4"
+          >
+            A4
+          </button>
+          <button
+            type="button"
+            class="btn-rent-format px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-fmt="letter"
+          >
+            Letter
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Rent Receipt Canvas -->
+      <div class="flex justify-center">
+        <article
+          id="rent-preview-document"
+          class="invoice-paper p-6 sm:p-10 relative"
+          data-template="modern"
+          data-format="a4"
+        >
+          <!-- Prominent PAID Stamp Badge -->
+          <div class="absolute top-8 right-8 pointer-events-none select-none">
+            <div class="px-3.5 py-1 rounded-xl border-2 border-emerald-500/80 bg-emerald-50 text-emerald-700 font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-2xs rotate-[-5deg]">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>RENT RECEIVED</span>
+            </div>
+          </div>
+
+          <!-- Header -->
+          <header class="pb-6 border-b border-hairline space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-ink font-display block">
+                  HOUSE RENT RECEIPT
+                </span>
+                <p class="text-xs font-medium text-gray-500 mt-1">
+                  Valid Proof for HRA & Housing Tax Exemption
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-mono font-bold text-gray-900" id="prev-rent-number">
+                  #{defaultRent.receiptNumber}
+                </p>
+                <p class="text-xs text-gray-500" id="prev-rent-date">
+                  Date: {defaultRent.paymentDate}
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <!-- Formal Legal Declaration Body -->
+          <section class="py-6 border-b border-hairline space-y-4">
+            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200/80 text-xs text-gray-800 leading-relaxed font-normal">
+              Received with thanks from{' '}
+              <strong id="prev-rent-tenant-name" class="font-bold text-gray-950">
+                {defaultRent.tenant.name}
+              </strong>{' '}
+              a sum of{' '}
+              <strong id="prev-rent-grandtotal-words" class="font-bold text-primary">
+                $2,000.00
+              </strong>{' '}
+              towards the house rent for the period{' '}
+              <strong id="prev-rent-period" class="font-bold text-gray-950">
+                {defaultRent.periodMonthYear}
+              </strong>{' '}
+              for the property situated at:
+              <div
+                class="mt-2 pl-3 border-l-2 border-primary/40 font-medium text-gray-900"
+                id="prev-rent-address"
+              >
+                {defaultRent.propertyAddress}
+              </div>
+            </div>
+
+            <!-- Financial Breakdown Table -->
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="border-b border-gray-200 text-gray-500 uppercase text-[10px] tracking-wider">
+                  <th class="py-2">Item</th>
+                  <th class="py-2">Period</th>
+                  <th class="py-2 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                <tr>
+                  <td class="py-2.5 font-medium text-gray-900">Monthly House Rent</td>
+                  <td class="py-2.5 text-gray-600" id="prev-rent-period-td">
+                    {defaultRent.periodMonthYear}
+                  </td>
+                  <td
+                    class="py-2.5 text-right font-mono font-medium text-gray-900"
+                    id="prev-rent-base-td"
+                  >
+                    $1,850.00
+                  </td>
+                </tr>
+                <tr id="prev-rent-maint-row">
+                  <td class="py-2.5 font-medium text-gray-900">Maintenance / Utility Charges</td>
+                  <td class="py-2.5 text-gray-600" id="prev-rent-maint-period-td">
+                    {defaultRent.periodMonthYear}
+                  </td>
+                  <td
+                    class="py-2.5 text-right font-mono font-medium text-gray-900"
+                    id="prev-rent-maint-td"
+                  >
+                    $150.00
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Payment Details & Landlord PAN Box -->
+          <section class="py-5 border-b border-hairline grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-500 uppercase tracking-wide text-[10px] block">
+                Payment Particulars
+              </span>
+              <p>
+                <span class="text-gray-500">Payment Mode:</span>{' '}
+                <strong id="prev-rent-mode" class="text-gray-900">
+                  {defaultRent.paymentMode}
+                </strong>
+              </p>
+              <p id="prev-rent-ref-row">
+                <span class="text-gray-500">Txn / Ref #:</span>{' '}
+                <span id="prev-rent-ref" class="font-mono text-gray-900">
+                  {defaultRent.transactionReference}
+                </span>
+              </p>
+              <p>
+                <span class="text-gray-500">Status:</span>{' '}
+                <span class="text-emerald-700 font-bold">Paid & Acknowledged</span>
+              </p>
+            </div>
+
+            <div class="space-y-1.5 bg-gray-50 p-3 rounded-xl border border-gray-100">
+              <span class="font-bold text-gray-500 uppercase tracking-wide text-[10px] block">
+                Landlord Details
+              </span>
+              <p>
+                <span class="text-gray-500">Owner:</span>{' '}
+                <strong id="prev-rent-landlord-name" class="text-gray-900">
+                  {defaultRent.landlord.name}
+                </strong>
+              </p>
+              <p id="prev-rent-pan-row" class="hidden">
+                <span class="text-gray-500">Landlord PAN:</span>{' '}
+                <strong id="prev-rent-pan" class="font-mono text-primary font-bold"></strong>
+              </p>
+              <p id="prev-rent-landlord-contact" class="text-gray-500 text-[11px] leading-relaxed">
+                {defaultRent.landlord.phone}{' '}
+                {defaultRent.landlord.email ? `· ${defaultRent.landlord.email}` : ''}
+              </p>
+            </div>
+          </section>
+
+          <!-- Grand Total Summary -->
+          <section class="pt-4 flex justify-end">
+            <div class="w-full max-w-xs space-y-1 text-xs">
+              <div class="flex justify-between items-center text-sm font-bold text-gray-900 pt-1">
+                <span>Total Received</span>
+                <span id="prev-rent-grandtotal" class="font-mono text-base text-primary">
+                  $2,000.00
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Signature & Legal Disclaimer -->
+          <footer class="pt-8 mt-6 border-t border-hairline space-y-5">
+            <div id="prev-rent-notes-block" class="text-xs text-gray-600 bg-gray-50 p-3 rounded-xl">
+              <p id="prev-rent-notes" class="leading-relaxed whitespace-pre-line">
+                {defaultRent.notes}
+              </p>
+            </div>
+
+            <div class="flex justify-between items-end pt-4">
+              <div class="text-[11px] text-gray-400 max-w-[240px]">
+                Official Rent Acknowledgment Receipt. Keep this document for your tax records.
+              </div>
+              <div class="text-right">
+                <p
+                  id="prev-rent-signature"
+                  class="font-serif italic text-sm text-gray-900 border-b border-gray-400 pb-1 min-w-[180px] inline-block text-center"
+                >
+                  {defaultRent.landlordSignature}
+                </p>
+                <span class="block text-[10px] text-gray-500 uppercase tracking-wide mt-1">
+                  Landlord / Owner Signature
+                </span>
+              </div>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div
+    id="rent-toast"
+    class="fixed bottom-6 right-6 z-50 max-w-md w-full px-4 py-3 rounded-2xl shadow-xl border transition-all duration-300 translate-y-24 opacity-0 pointer-events-none flex items-start gap-3 no-print"
+    role="status"
+    aria-live="polite"
+  >
+    <div id="rent-toast-icon" class="shrink-0 mt-0.5"></div>
+    <div class="flex-1 space-y-0.5">
+      <p id="rent-toast-title" class="text-xs font-bold"></p>
+      <p id="rent-toast-message" class="text-xs"></p>
+    </div>
+    <button
+      type="button"
+      id="btn-close-rent-toast"
+      class="text-gray-400 hover:text-gray-700 transition-colors p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md cursor-pointer"
+      aria-label="Close notification"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Load Client Script for Rent Receipt Generator -->
+<script src="../scripts/rent-receipt-client.ts"></script>

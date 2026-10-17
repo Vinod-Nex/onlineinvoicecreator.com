@@ -1,0 +1,178 @@
+{
+  "slug": "free-online-receipt-generator",
+  "metaTitle": "Free Online Receipt Generator - Cash & Itemized",
+  "metaDescription": "Create and download professional itemized, cash, and payment receipts online in seconds. 100% free, private, watermark-free, and no signup required.",
+  "canonical": "https://onlineinvoicecreator.com/free-online-receipt-generator",
+  "badge": "100% Free • Itemized, Cash & Payment Modes • Zero Watermarks",
+  "h1": "Free Online Receipt Generator",
+  "h1Highlight": "Receipt Generator",
+  "intro": "Generate official payment acknowledgments, itemized sales receipts, or instant cash slips in seconds with zero watermarks and no server uploads.",
+  "toolType": "receipt",
+  "trustBadges": [
+    "Itemized & Cash Modes",
+    "Paid in Full Stamp",
+    "Zero Watermarks",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Receipt Generator" }],
+  "howTo": {
+    "badge": "Simple 3-Step Process",
+    "title": "How to Create a Receipt Online",
+    "subtitle": "Issue professional receipts in seconds with our serverless generator.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Select Receipt Mode and Enter Details",
+        "description": "Choose between Itemized, Cash, or Payment receipt modes. Enter your business name and customer details.",
+        "tip": "Cash mode generates a rapid, simple cash payment voucher without line-item tables."
+      },
+      {
+        "step": 2,
+        "title": "Add Items and Record Payment Method",
+        "description": "Specify goods or services sold, tax rates, payment date, and transaction reference (such as UPI, Card, or Bank Transfer).",
+        "tip": "Payment receipts link directly to past invoice numbers for clean accounting reconciliation."
+      },
+      {
+        "step": 3,
+        "title": "Download Clean PDF or Print Instantly",
+        "description": "Export a crisp vector PDF, high-res PNG, or print directly to paper with an official green 'PAID IN FULL' stamp.",
+        "tip": "Receipts save locally in your browser so you never lose your draft."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Accounting Checklist",
+    "title": "What an Official Receipt Must Contain",
+    "subtitle": "Six essential components needed to make a receipt valid for accounting, tax filings, and audits.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Merchant Information and Tax ID",
+        "description": "Trading name, business address, email, phone number, and tax registration number (such as GSTIN, VAT, or EIN).",
+        "badge": "Required"
+      },
+      {
+        "title": "Buyer / Customer Name",
+        "description": "Full legal name or corporate entity name of the person or business who made the payment.",
+        "badge": "Required"
+      },
+      {
+        "title": "Unique Receipt Number and Date",
+        "description": "A sequential receipt number and the exact calendar date payment was received [Verify with official source: commercial bookkeeping record retention rules].",
+        "badge": "Required"
+      },
+      {
+        "title": "Clear Itemized Description",
+        "description": "Specific description of goods delivered or services rendered, including quantities and unit prices.",
+        "badge": "Required"
+      },
+      {
+        "title": "Payment Method and Reference ID",
+        "description": "Payment mode (Credit Card, Cash, Bank Transfer, or UPI) and any transaction authorization code.",
+        "badge": "Required"
+      },
+      {
+        "title": "Remaining Balance Paid ($0.00)",
+        "description": "Explicit confirmation that the bill has been settled in full with no outstanding balance remaining.",
+        "badge": "Standard"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Payment Receipt Breakdown",
+    "scenario": "Commercial Video Production Payment Settlement",
+    "sender": {
+      "name": "Apex Creative Production Studio",
+      "details": "1200 Avenue of the Americas, Suite 400\nNew York, NY 10036\ncontact@apexprostudio.com | Tax ID: 13-9821450"
+    },
+    "recipient": {
+      "name": "Beacon Media Ventures LLC",
+      "details": "Invoice Reference: INV-2026-089\nAttn: Accounts Payable\n350 5th Avenue, New York, NY 10118\npayable@beaconmedia.com"
+    },
+    "items": [
+      {
+        "description": "Commercial Video Production - Full Day Studio Shoot",
+        "quantity": 1,
+        "rate": "$3,500.00",
+        "amount": "$3,500.00"
+      },
+      {
+        "description": "Post-Production 4K Color Grading and Audio Master Mix",
+        "quantity": 1,
+        "rate": "$1,200.00",
+        "amount": "$1,200.00"
+      }
+    ],
+    "subtotal": "$4,700.00",
+    "discount": "$200.00",
+    "tax": "$393.75",
+    "total": "$4,893.75",
+    "notes": "Payment received in full via Corporate Wire Transfer (Ref #WIRE-829140). Remaining balance due: $0.00.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Receipt FAQs",
+    "title": "Receipt Generator FAQs",
+    "subtitle": "Common questions regarding receipt types, PDF exports, and data privacy.",
+    "items": [
+      {
+        "question": "What is the difference between an invoice and a receipt?",
+        "answer": "An invoice is a bill sent before payment to request money owed. A receipt is an acknowledgment issued after payment as proof that money was received."
+      },
+      {
+        "question": "Can I generate receipts on my mobile phone?",
+        "answer": "Yes. The interface is optimized for mobile phones with a quick toggle between editing your receipt and viewing the live preview."
+      },
+      {
+        "question": "Is my customer data stored on a remote server?",
+        "answer": "No. Online Invoice Creator is 100% serverless. All receipt calculations and PDF rendering take place directly inside your web browser."
+      },
+      {
+        "question": "Are there any watermarks on the receipts?",
+        "answer": "No. All PDF and PNG downloads are completely watermark-free and suitable for official commercial accounting."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Financial Document Tools",
+    "subtitle": "Explore our full range of free, serverless billing tools.",
+    "items": [
+      {
+        "title": "Rent Receipt Generator",
+        "href": "/free-rent-receipt-generator",
+        "badge": "Tenancy Proof",
+        "description": "Monthly rent receipts for landlords and tenants with optional Landlord PAN."
+      },
+      {
+        "title": "Itemized Receipt Maker",
+        "href": "/receipt-maker-with-items",
+        "badge": "Retail Receipts",
+        "description": "Point-of-sale itemized receipts with item details, rates, and discounts."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "Billing First",
+        "description": "Need to request payment before receiving money? Create a free invoice."
+      },
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "Hourly and project billing for solo freelancers and consultants."
+      },
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Labor, materials, and milestone invoicing for trade professionals."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Instant browser invoicing without corrupt spreadsheet formulas or macros."
+      }
+    ]
+  }
+}

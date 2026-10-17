@@ -1,0 +1,188 @@
+{
+  "slug": "tax-invoice-template-australia",
+  "metaTitle": "Tax Invoice Template Australia | ATO Compliant (GST)",
+  "metaDescription": "Free ATO-compliant Australian tax invoice template with 10% GST, ABN fields, and instant PDF download. Zero watermarks and no signup required.",
+  "canonical": "https://onlineinvoicecreator.com/tax-invoice-template-australia",
+  "badge": "100% Free • ATO Compliant • 10% GST Ready",
+  "h1": "Free Tax Invoice Template Australia",
+  "h1Highlight": "Tax Invoice Template Australia",
+  "intro": "Create ATO-compliant Australian tax invoices with 10% GST calculations and your ABN in seconds.",
+  "toolType": "invoice",
+  "trustBadges": [
+    "ATO GST Compliant",
+    "ABN Field Included",
+    "AUD Currency Preset",
+    "Zero Watermarks"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Invoice Generator", "href": "/" },
+    { "label": "Australia Tax Invoice" }
+  ],
+  "howTo": {
+    "badge": "ATO Guidelines",
+    "title": "How to Create an Australian Tax Invoice",
+    "subtitle": "Follow these three steps to issue a valid tax invoice under Australian tax law.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Add Your Business Name and ABN",
+        "description": "Enter your legal or trading name and your 11-digit Australian Business Number (ABN). The document must display the words 'Tax invoice' at the top.",
+        "tip": "Only businesses registered for GST may issue a document titled 'Tax invoice'."
+      },
+      {
+        "step": 2,
+        "title": "List Items and Client Information",
+        "description": "Describe each good or service clearly. If the sale is $1,000 or more (including GST), you must also include the buyer's name or ABN.",
+        "tip": "State whether prices include GST or add 10% GST to the taxable subtotal."
+      },
+      {
+        "step": 3,
+        "title": "Review the GST Amount and Download",
+        "description": "Check that the 10% GST amount is clearly visible. Download your free PDF or print a copy for your Business Activity Statement (BAS) records.",
+        "tip": "The ATO requires businesses to keep issued tax invoices for at least five years [Verify with official source: ATO record retention rules]."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "ATO Checklist",
+    "title": "What an Australian Tax Invoice Must Contain",
+    "subtitle": "The Australian Taxation Office (ATO) requires seven elements for a valid tax invoice.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "The Words 'Tax invoice'",
+        "description": "The title must state 'Tax invoice'. Do not use this title if your business is not registered for GST.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Seller Identity and ABN",
+        "description": "Your registered business name or trading name, plus your active 11-digit Australian Business Number (ABN).",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Date of Issue",
+        "description": "The date you issue the invoice. This sets the tax period for your quarterly or monthly BAS return.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Buyer Identity (Sales of $1,000+)",
+        "description": "If the total is $1,000 or more, you must include the buyer's name, trading name, address, or ABN [Verify with official source: ATO $1,000 threshold].",
+        "badge": "Mandatory $1,000+"
+      },
+      {
+        "title": "Clear Item Descriptions",
+        "description": "A clear description of the goods or services supplied, including unit quantities where applicable.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "GST Amount Shown Clearly",
+        "description": "Show the 10% GST amount separately, or state 'Total price includes GST' when every item includes GST [Verify with official source: ATO GST display rules].",
+        "badge": "Mandatory"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Australian Tax Invoice Breakdown",
+    "scenario": "Commercial Electrical Safety Inspection & Test (Melbourne VIC)",
+    "sender": {
+      "name": "Beacon Electrical Solutions Pty Ltd",
+      "details": "ABN: 51 829 304 912\nElectrical Contractor Licence: REC-28194\n42 Collins Street, Suite 901\nMelbourne VIC 3000\naccounts@beaconelectrical.com.au"
+    },
+    "recipient": {
+      "name": "Yarra Valley Hospitality Group Pty Ltd",
+      "details": "ABN: 88 192 837 465\nLevel 3, 180 Flinders Lane\nMelbourne VIC 3000\nAttn: Accounts Payable"
+    },
+    "items": [
+      {
+        "description": "Commercial Switchboard Thermal Imaging Inspection",
+        "quantity": 1,
+        "rate": "$650.00",
+        "amount": "$650.00"
+      },
+      {
+        "description": "Emergency Exit Light Battery Testing and Lamp Replacements",
+        "quantity": 14,
+        "rate": "$45.00",
+        "amount": "$630.00"
+      },
+      {
+        "description": "Safety Compliance Test Certificate and Lodgement",
+        "quantity": 1,
+        "rate": "$150.00",
+        "amount": "$150.00"
+      }
+    ],
+    "subtotal": "$1,430.00",
+    "discount": "$0.00",
+    "tax": "$143.00",
+    "total": "$1,573.00",
+    "notes": "Payment due within 14 days. EFT: BSB 083-004 Account 9283-7462. Total includes 10% GST ($143.00).",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "ATO Tax FAQs",
+    "title": "Australian Tax Invoicing FAQs",
+    "subtitle": "Direct answers to common questions about Australian GST and tax invoicing.",
+    "items": [
+      {
+        "question": "When must an Australian business register for GST?",
+        "answer": "You must register for GST when your business turnover reaches or is expected to reach $75,000 AUD per year ($150,000 for non-profit bodies). Taxi and ride-share drivers must register regardless of turnover [Verify with official source: ATO GST registration threshold]."
+      },
+      {
+        "question": "Can I issue a tax invoice if I am not registered for GST?",
+        "answer": "No. If you are not registered for GST, you cannot charge GST and your document must not include the words 'Tax invoice'. Issue a regular invoice showing the total amount without GST."
+      },
+      {
+        "question": "How do I calculate GST from a GST-inclusive total?",
+        "answer": "Divide the total GST-inclusive amount by 11. For example, if a bill is $1,100 including GST, the GST portion is $100 ($1,100 divided by 11 = $100)."
+      },
+      {
+        "question": "How long do I need to keep tax invoices in Australia?",
+        "answer": "The ATO requires businesses to keep records of all sales and purchases for at least five years from the date you lodge your tax return [Verify with official source: ATO record-keeping timeline]."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Tools for Australian Businesses",
+    "subtitle": "Free, browser-based financial generators built for Australian sole traders and companies.",
+    "items": [
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trade & Labor",
+        "description": "Itemize trade labor and building supplies with clear GST line items."
+      },
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Sole Traders",
+        "description": "Simple, professional billing for sole traders, designers, and consultants."
+      },
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Proof of Payment",
+        "description": "Issue payment receipts once client funds clear in your bank account."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Create invoices in your browser without spreadsheet formulas or macros."
+      },
+      {
+        "title": "Itemized Receipt Maker",
+        "href": "/receipt-maker-with-items",
+        "badge": "Retail Receipts",
+        "description": "Point-of-sale itemized receipts for retail products and cash transactions."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "General Tool",
+        "description": "Standard invoice creator with multi-currency support and zero watermarks."
+      }
+    ]
+  }
+}

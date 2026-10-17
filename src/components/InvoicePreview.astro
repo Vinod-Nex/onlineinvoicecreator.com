@@ -1,0 +1,437 @@
+---
+import { createDefaultInvoice, formatCurrency } from '../lib/invoice-calc';
+
+const defaultInvoice = createDefaultInvoice();
+---
+
+<div id="invoice-preview-container" class="w-full">
+  <!-- Template Switcher, Paper Format & Export Toolbar (Hidden in Print) -->
+  <div
+    id="preview-toolbar"
+    class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 mb-4 rounded-2xl bg-surface-card border border-hairline shadow-xs template-switcher"
+  >
+    <!-- Left: Template & Paper Format Controls -->
+    <div class="flex flex-wrap items-center gap-2">
+      <!-- Templates -->
+      <div class="flex items-center gap-1 overflow-x-auto py-0.5">
+        <span class="text-xs font-semibold text-mute px-1.5 shrink-0 hidden md:inline">Style:</span>
+        <button
+          type="button"
+          class="btn-template-select px-2.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer bg-primary text-white shadow-2xs"
+          data-template="modern"
+          aria-pressed="true"
+        >
+          Modern
+        </button>
+        <button
+          type="button"
+          class="btn-template-select px-2.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer text-charcoal hover:bg-surface-soft hover:text-ink"
+          data-template="classic"
+          aria-pressed="false"
+        >
+          Classic
+        </button>
+        <button
+          type="button"
+          class="btn-template-select px-2.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer text-charcoal hover:bg-surface-soft hover:text-ink"
+          data-template="minimal"
+          aria-pressed="false"
+        >
+          Minimal
+        </button>
+        <button
+          type="button"
+          class="btn-template-select px-2.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer text-charcoal hover:bg-surface-soft hover:text-ink"
+          data-template="compact"
+          aria-pressed="false"
+        >
+          Compact
+        </button>
+      </div>
+
+      <!-- Format: A4 vs US Letter -->
+      <div class="flex items-center gap-1 pl-1 border-l border-hairline">
+        <span class="text-xs font-semibold text-mute px-1.5 shrink-0 hidden md:inline">Size:</span>
+        <div class="inline-flex p-0.5 rounded-full bg-surface-soft border border-hairline text-xs font-semibold">
+          <button
+            type="button"
+            class="btn-format-select px-2.5 py-0.5 rounded-full transition-all cursor-pointer bg-white text-ink shadow-2xs font-semibold"
+            data-format="a4"
+            aria-pressed="true"
+            title="Standard A4 Paper (210 x 297 mm)"
+          >
+            A4
+          </button>
+          <button
+            type="button"
+            class="btn-format-select px-2.5 py-0.5 rounded-full transition-all cursor-pointer text-charcoal hover:text-ink font-semibold"
+            data-format="letter"
+            aria-pressed="false"
+            title="US Letter Paper (8.5 x 11 inches)"
+          >
+            Letter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Export Buttons -->
+    <div class="flex items-center gap-1.5 shrink-0 self-end sm:self-center">
+      <!-- Print Button -->
+      <button
+        type="button"
+        id="btn-print-preview"
+        class="h-9 px-3 rounded-full text-xs font-semibold text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+        title="Print or Browser Save as PDF"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>Print</span>
+      </button>
+
+      <!-- PNG Export Button -->
+      <button
+        type="button"
+        id="btn-download-png-preview"
+        class="h-9 px-3 rounded-full text-xs font-semibold text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+        title="Export High-Resolution Image (PNG)"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>PNG</span>
+      </button>
+
+      <!-- PDF Download Button (Primary) -->
+      <button
+        type="button"
+        id="btn-download-pdf-preview"
+        class="btn-cobalt h-9 px-4 text-xs font-semibold rounded-full flex items-center gap-1.5 shadow-2xs cursor-pointer"
+        title="Generate & Download PDF"
+      >
+        <svg
+          class="btn-pdf-icon h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span class="btn-pdf-text">Download PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- The Document Canvas (Rendered with 100% Print/PDF Fidelity) -->
+  <article
+    id="invoice-preview-document"
+    class="invoice-paper tmpl-pad-main p-6 sm:p-10 space-y-6 sm:space-y-8"
+    data-template="modern"
+  >
+    <!-- Document Header: Logo & Meta -->
+    <header class="tmpl-header-bar flex flex-col sm:flex-row items-start justify-between gap-6 pb-6 border-b border-gray-200">
+      <!-- Sender & Logo -->
+      <div class="space-y-3 max-w-sm">
+        <div id="preview-logo-wrapper" class="hidden">
+          <img
+            id="preview-logo-img"
+            src=""
+            alt="Business Logo"
+            width="200"
+            height="64"
+            loading="lazy"
+            decoding="async"
+            class="max-h-16 max-w-[200px] object-contain rounded"
+          />
+        </div>
+        <div>
+          <h2
+            id="preview-sender-name"
+            class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight"
+          >
+            {defaultInvoice.sender.name}
+          </h2>
+          <div class="text-xs sm:text-sm text-gray-600 space-y-0.5 mt-1">
+            <p id="preview-sender-address" class="whitespace-pre-line leading-relaxed">
+              {defaultInvoice.sender.address}
+            </p>
+            <p id="preview-sender-email" class="text-gray-600">
+              {defaultInvoice.sender.email}
+            </p>
+            <p id="preview-sender-phone" class="text-gray-600">
+              {defaultInvoice.sender.phone}
+            </p>
+            <p id="preview-sender-tax-id" class="text-xs text-gray-500 font-medium pt-0.5">
+              {defaultInvoice.sender.taxId ? `Tax ID: ${defaultInvoice.sender.taxId}` : ''}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Title & Meta Box -->
+      <div class="text-left sm:text-right space-y-2">
+        <div class="flex items-center sm:justify-end gap-2.5">
+          <h1 class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase">
+            INVOICE
+          </h1>
+          <span class="tmpl-badge-status px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
+            Issued
+          </span>
+        </div>
+
+        <div class="text-xs sm:text-sm text-gray-700 space-y-1">
+          <p>
+            <span class="text-gray-500 font-medium">Invoice #:</span>
+            <strong id="preview-invoice-number" class="text-gray-900 font-bold ml-1 tabular-nums">
+              {defaultInvoice.invoiceNumber}
+            </strong>
+          </p>
+          <p>
+            <span class="text-gray-500 font-medium">Issue Date:</span>
+            <span id="preview-issue-date" class="ml-1 tabular-nums">
+              {defaultInvoice.issueDate}
+            </span>
+          </p>
+          <p>
+            <span class="text-gray-500 font-medium">Due Date:</span>
+            <span id="preview-due-date" class="ml-1 font-semibold text-gray-900 tabular-nums">
+              {defaultInvoice.dueDate}
+            </span>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Bill To / Recipient Details -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-2">
+      <div class="space-y-1">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+          Billed To:
+        </span>
+        <h3 id="preview-client-name" class="text-base sm:text-lg font-bold text-gray-900">
+          {defaultInvoice.client.name}
+        </h3>
+        <p
+          id="preview-client-address"
+          class="text-xs sm:text-sm text-gray-600 whitespace-pre-line leading-relaxed"
+        >
+          {defaultInvoice.client.address}
+        </p>
+        <p id="preview-client-email" class="text-xs sm:text-sm text-gray-600">
+          {defaultInvoice.client.email}
+        </p>
+        <p id="preview-client-phone" class="text-xs sm:text-sm text-gray-600">
+          {defaultInvoice.client.phone}
+        </p>
+        <p id="preview-client-tax-id" class="text-xs text-gray-500 font-medium pt-0.5">
+          {defaultInvoice.client.taxId ? `Tax ID: ${defaultInvoice.client.taxId}` : ''}
+        </p>
+      </div>
+
+      <!-- Quick Payment Summary Callout -->
+      <div class="sm:text-right flex flex-col sm:items-end justify-start space-y-1">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+          Amount Due:
+        </span>
+        <span
+          id="preview-header-grand-total"
+          class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
+        >
+          {formatCurrency(0, 'USD')}
+        </span>
+        <span id="preview-terms-pill" class="text-xs text-gray-500 font-medium">
+          Due in 14 days
+        </span>
+      </div>
+    </section>
+
+    <!-- Line Items Table -->
+    <section class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead class="tmpl-table-head">
+          <tr>
+            <th class="py-2.5 px-3 text-left font-bold">Description</th>
+            <th class="py-2.5 px-3 text-center font-bold w-16">Qty</th>
+            <th class="py-2.5 px-3 text-right font-bold w-24">Rate</th>
+            <th class="py-2.5 px-3 text-right font-bold w-20">Tax</th>
+            <th class="py-2.5 px-3 text-right font-bold w-28">Amount</th>
+          </tr>
+        </thead>
+        <tbody
+          id="preview-line-items-tbody"
+          class="divide-y divide-gray-200 text-xs sm:text-sm text-gray-800"
+        >
+          <!-- Dynamically populated line items -->
+          <tr class="tmpl-table-row">
+            <td class="py-3 px-3 font-medium text-gray-900">Professional Services</td>
+            <td class="py-3 px-3 text-center tabular-nums">1</td>
+            <td class="py-3 px-3 text-right tabular-nums">$0.00</td>
+            <td class="py-3 px-3 text-right tabular-nums">0%</td>
+            <td class="py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">$0.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Summary & Notes Section -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start pt-2">
+      <!-- Notes & Terms on Left -->
+      <div class="md:col-span-7 space-y-4">
+        <div id="preview-notes-block" class="space-y-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+            Notes & Instructions
+          </span>
+          <p
+            id="preview-notes"
+            class="text-xs sm:text-sm text-gray-600 whitespace-pre-line leading-relaxed"
+          >
+            {defaultInvoice.notes}
+          </p>
+        </div>
+
+        <!-- Authorized Signature -->
+        <div id="preview-signature-block" class="tmpl-signature-container pt-4">
+          <div class="space-y-1">
+            <p
+              id="preview-signature"
+              class="font-serif italic text-base sm:text-lg text-gray-900 font-medium"
+            >
+              <!-- Digital signature text -->
+            </p>
+            <div class="tmpl-signature-line w-44 pt-1"></div>
+            <span class="text-[10px] uppercase tracking-wider text-gray-500 block">
+              Authorized Signature
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Totals on Right -->
+      <div class="md:col-span-5">
+        <div
+          class="tmpl-summary-card p-4 sm:p-5 space-y-2.5 text-xs sm:text-sm"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="flex items-center justify-between text-gray-600">
+            <span>Subtotal:</span>
+            <span id="preview-subtotal" class="font-medium text-gray-900 tabular-nums">
+              {formatCurrency(0, 'USD')}
+            </span>
+          </div>
+
+          <div
+            id="preview-row-discount"
+            class="hidden flex items-center justify-between text-emerald-600 font-medium"
+          >
+            <span id="preview-discount-label">Discount:</span>
+            <span id="preview-discount" class="tabular-nums">
+              -$0.00
+            </span>
+          </div>
+
+          <!-- Dynamic tax breakdown -->
+          <div id="preview-tax-breakdown" class="space-y-1">
+            <!-- Tax lines appended dynamically -->
+          </div>
+
+          <div
+            id="preview-row-shipping"
+            class="hidden flex items-center justify-between text-gray-600"
+          >
+            <span>Shipping:</span>
+            <span id="preview-shipping" class="font-medium text-gray-900 tabular-nums">
+              $0.00
+            </span>
+          </div>
+
+          <div class="tmpl-grand-total-row pt-3 border-t border-gray-300 flex items-baseline justify-between">
+            <span class="font-bold text-gray-900 text-sm sm:text-base">Grand Total:</span>
+            <span
+              id="preview-grand-total"
+              class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
+            >
+              {formatCurrency(0, 'USD')}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Details Tile -->
+    <footer
+      id="preview-payment-block"
+      class="tmpl-payment-tile p-4 sm:p-5 text-xs sm:text-sm space-y-2 border-t border-gray-200"
+    >
+      <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+        Payment Methods & Details
+      </span>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1.5 text-gray-700">
+        <p id="preview-bank-item" class="hidden">
+          <span class="text-gray-500">Bank:</span>{' '}
+          <strong id="preview-bank-name" class="font-semibold text-gray-900 ml-1"></strong>
+        </p>
+        <p id="preview-account-item" class="hidden">
+          <span class="text-gray-500">Account Name:</span>{' '}
+          <span id="preview-account-name" class="font-medium text-gray-900 ml-1"></span>
+        </p>
+        <p id="preview-acc-num-item" class="hidden">
+          <span class="text-gray-500">Account #:</span>{' '}
+          <span id="preview-account-number" class="font-mono text-gray-900 ml-1"></span>
+        </p>
+        <p id="preview-routing-item" class="hidden">
+          <span class="text-gray-500">Routing / BSB:</span>{' '}
+          <span id="preview-routing-number" class="font-mono text-gray-900 ml-1"></span>
+        </p>
+        <p id="preview-iban-item" class="hidden">
+          <span class="text-gray-500">IBAN:</span>{' '}
+          <span id="preview-iban" class="font-mono text-gray-900 ml-1"></span>
+        </p>
+        <p id="preview-swift-item" class="hidden">
+          <span class="text-gray-500">SWIFT / BIC:</span>{' '}
+          <span id="preview-swift-bic" class="font-mono text-gray-900 ml-1"></span>
+        </p>
+      </div>
+
+      <div id="preview-link-item" class="hidden pt-1">
+        <span class="text-gray-500">Pay Online:</span>
+        <a
+          id="preview-payment-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 underline font-medium ml-1"
+        ></a>
+      </div>
+
+      <div
+        id="preview-instructions-item"
+        class="hidden pt-1 text-gray-600 whitespace-pre-line text-xs"
+      >
+        <span class="text-gray-500 font-semibold">Instructions:</span>{' '}
+        <span id="preview-custom-instructions"></span>
+      </div>
+    </footer>
+  </article>
+</div>

@@ -1,0 +1,184 @@
+{
+  "slug": "index",
+  "metaTitle": "Free Online Invoice Generator | 100% Free & Private",
+  "metaDescription": "Create and download professional invoices and receipts online in seconds. 100% free, private, watermark-free, and no signup required.",
+  "canonical": "https://onlineinvoicecreator.com",
+  "badge": "100% Free • No Watermarks • No Signup Required",
+  "h1": "Free Online Invoice Generator",
+  "h1Highlight": "Invoice Generator",
+  "intro": "Create, customize, and download pristine professional invoices in seconds. 100% private and serverless — nothing is uploaded to a server.",
+  "toolType": "invoice",
+  "trustBadges": [
+    "Zero Watermarks",
+    "30 Global Currencies",
+    "Local Draft Auto-Save",
+    "Instant Print / PDF"
+  ],
+  "breadcrumbs": [{ "label": "Home" }],
+  "howTo": {
+    "badge": "Frictionless Billing",
+    "title": "How to Create an Invoice Online in 3 Steps",
+    "subtitle": "Create professional client invoices with no account signups or subscriptions.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Enter Your Business and Client Details",
+        "description": "Add your business name, company logo, contact information, and client billing address.",
+        "tip": "Upload your brand logo to automatically scale and center it on your invoice letterhead."
+      },
+      {
+        "step": 2,
+        "title": "Add Line Items, Discounts, and Taxes",
+        "description": "Itemize your products or services. Totals, tax rates, and discounts calculate automatically with exact two-decimal precision.",
+        "tip": "Set custom payment terms like Net 15, Net 30, or Due upon Receipt with one click."
+      },
+      {
+        "step": 3,
+        "title": "Download Clean PDF or Print",
+        "description": "Select from four clean visual templates and export a watermark-free A4 or US Letter PDF instantly.",
+        "tip": "Click 'Export PNG' to generate a high-resolution image ready to send via email or messaging apps."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Legal Essentials",
+    "title": "What an Official Invoice Must Contain",
+    "subtitle": "Essential fields required for commercial validity, clean bookkeeping, and tax compliance.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Business and Sender Identity",
+        "description": "Your registered business name or trading name, physical address, email, phone number, and tax registration ID [Verify with official source: commercial company invoicing statutes].",
+        "badge": "Required"
+      },
+      {
+        "title": "Client Invoicing Information",
+        "description": "Full name or corporate entity name of the client, accounts payable email, and physical billing address.",
+        "badge": "Required"
+      },
+      {
+        "title": "Unique Invoice Number and Date",
+        "description": "A sequential invoice identifier (for example, INV-001) and issue date for accounting and tax audit records.",
+        "badge": "Required"
+      },
+      {
+        "title": "Itemized Breakdown of Services",
+        "description": "Clear descriptions of deliverables, quantities, hourly rates or unit prices, and line subtotals.",
+        "badge": "Required"
+      },
+      {
+        "title": "Tax Rates and Applicable Discounts",
+        "description": "Separately itemized taxes (such as VAT, GST, or Sales Tax) and any promotional discounts or credits.",
+        "badge": "Required"
+      },
+      {
+        "title": "Payment Terms and Remittance Details",
+        "description": "An explicit due date, bank wire or ACH account numbers, PayPal, Stripe, or local transfer details.",
+        "badge": "Required"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Professional Invoice Breakdown",
+    "scenario": "Creative Digital Agency Retainer & Brand Identity Project",
+    "sender": {
+      "name": "Starlight Studio & Digital Agency",
+      "details": "100 Montgomery Street, Suite 1200\nSan Francisco, CA 94104\nhello@starlightstudio.com | Tax ID: 94-8172635"
+    },
+    "recipient": {
+      "name": "Quantum Leap Robotics Inc",
+      "details": "Attn: Finance Department\n2200 Mission College Blvd\nSanta Clara, CA 95054\nfinance@quantumleaprobotics.com"
+    },
+    "items": [
+      {
+        "description": "Brand Identity Design & Corporate Design System",
+        "quantity": 1,
+        "rate": "$4,500.00",
+        "amount": "$4,500.00"
+      },
+      {
+        "description": "Responsive Web Application UI/UX Design (40 Hours)",
+        "quantity": 40,
+        "rate": "$125.00/hr",
+        "amount": "$5,000.00"
+      },
+      {
+        "description": "Custom Iconography and Vector Asset Pack",
+        "quantity": 1,
+        "rate": "$1,250.00",
+        "amount": "$1,250.00"
+      }
+    ],
+    "subtotal": "$10,750.00",
+    "discount": "$500.00",
+    "tax": "$0.00",
+    "total": "$10,250.00",
+    "notes": "Payment due within 30 days via direct deposit or corporate wire transfer. Thank you for your partnership.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "General Invoicing FAQs",
+    "title": "Invoice Generator FAQs",
+    "subtitle": "Everything you need to know about creating, saving, and downloading invoices.",
+    "items": [
+      {
+        "question": "Is Online Invoice Creator really 100% free with no watermarks?",
+        "answer": "Yes. You can create, print, and download unlimited invoices and receipts in PDF or PNG format with zero watermarks and no mandatory signup."
+      },
+      {
+        "question": "Is my client and financial data kept private?",
+        "answer": "Yes. Our tool is 100% serverless and local-first. All calculations, logo uploads, and PDF rendering execute strictly within your browser. Nothing is uploaded to any remote server or database."
+      },
+      {
+        "question": "Can I save my business details for future invoices?",
+        "answer": "Yes. Your business info, currency, and logo are saved securely in your browser's local storage so you do not need to re-enter them on your next visit."
+      },
+      {
+        "question": "What happens if a client has already paid me?",
+        "answer": "If payment has already cleared, switch to our Free Online Receipt Generator to issue an official proof of payment or payment receipt."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Specialized Invoicing & Receipt Tools",
+    "subtitle": "Discover purpose-built templates and tools tailored for specific trades and professions.",
+    "items": [
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "Tailored for designers, developers, writers, and creative consultants."
+      },
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Labor, materials, and milestone invoicing for trade professionals."
+      },
+      {
+        "title": "Australia Tax Invoices",
+        "href": "/tax-invoice-template-australia",
+        "badge": "ATO Compliant",
+        "description": "ATO-compliant 10% GST breakdown and ABN registration fields."
+      },
+      {
+        "title": "Photography Invoices",
+        "href": "/photography-invoice-generator",
+        "badge": "Creative",
+        "description": "Studio sessions, licensing fees, usage rights, and print packages."
+      },
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Receipts",
+        "description": "Official proof of payment, itemized receipts, and cash slips."
+      },
+      {
+        "title": "Rent Receipt Generator",
+        "href": "/free-rent-receipt-generator",
+        "badge": "Real Estate",
+        "description": "Monthly rent receipts for landlords and tenants with optional Landlord PAN."
+      }
+    ]
+  }
+}

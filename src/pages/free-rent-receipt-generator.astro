@@ -1,0 +1,9 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import pageData from '../data/pages/free-rent-receipt-generator.json';
+import type { ToolPageData } from '../types/page';
+
+const data = pageData as ToolPageData;
+---
+
+<ToolPage data={data} />

@@ -1,0 +1,192 @@
+{
+  "slug": "free-rent-receipt-generator",
+  "metaTitle": "Free Rent Receipt Generator for Tenants & Landlords",
+  "metaDescription": "Generate official monthly rent receipts with landlord details, tenant name, rental address, and optional Landlord PAN for tax proof. Free PDF download.",
+  "canonical": "https://onlineinvoicecreator.com/free-rent-receipt-generator",
+  "badge": "100% Free • Landlord & Tenant Proof • Zero Watermarks",
+  "h1": "Free Rent Receipt Generator",
+  "h1Highlight": "Rent Receipt",
+  "intro": "Generate valid monthly rent receipts with property details, payment mode, and landlord signature in seconds.",
+  "toolType": "rent-receipt",
+  "trustBadges": [
+    "HRA Exemption Compliant",
+    "Optional Landlord PAN",
+    "Zero Server Uploads",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Receipt Generator", "href": "/free-online-receipt-generator" },
+    { "label": "Rent Receipt Generator" }
+  ],
+  "howTo": {
+    "badge": "Step-by-Step",
+    "title": "How to Create a Rent Receipt",
+    "subtitle": "Create an official rent receipt in three simple steps.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Enter Landlord and Tenant Details",
+        "description": "Add the property owner's full legal name, the tenant's full name, and the physical address of the rented home or commercial unit.",
+        "tip": "Match the tenant's name exactly with their employment or tax deduction records."
+      },
+      {
+        "step": 2,
+        "title": "Set the Rental Period and Amounts",
+        "description": "Select the rental month, year, payment method, and amount paid. Separate base rent from utility or maintenance charges.",
+        "tip": "Enter the landlord's PAN if annual rent exceeds ₹1,00,000 for HRA tax exemption claims in India [Verify with official source: Income Tax Act Section 10(13A)]."
+      },
+      {
+        "step": 3,
+        "title": "Download the PDF or Print",
+        "description": "Review the live preview and download a clean PDF or print a physical copy for the landlord to sign.",
+        "tip": "For cash payments exceeding ₹5,000 in India, affix a ₹1 revenue stamp across which the landlord signs [Verify with official source: Indian Stamp Act]."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Landlord Checklist",
+    "title": "What a Landlord Must Record on a Rent Receipt",
+    "subtitle": "A complete record protects both parties and ensures compliance with tax authorities.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Tenant Full Name",
+        "description": "The tenant's full legal name as it appears on the residential tenancy agreement.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Landlord Name and Contact",
+        "description": "The legal name of the property owner, contact phone number, and mailing address.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Rented Property Address",
+        "description": "The complete street address, unit number, city, and postal code of the rented property.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Rental Period (Month and Year)",
+        "description": "The exact calendar period the payment covers (for example, 1 October 2026 to 31 October 2026).",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Payment Date and Mode",
+        "description": "The date the payment cleared and the method used (Bank Transfer, UPI, Cheque, or Cash), with any reference number.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Rent and Maintenance Breakdown",
+        "description": "The net rent amount separated from society maintenance, parking, or utility charges.",
+        "badge": "Essential"
+      },
+      {
+        "title": "Landlord Signature",
+        "description": "The physical signature or verified digital sign-off of the landlord or authorized property manager.",
+        "badge": "Mandatory"
+      },
+      {
+        "title": "Landlord PAN (if rent > ₹1 Lakh/yr)",
+        "description": "Under Indian tax rules, the landlord's PAN is mandatory if annual rent exceeds ₹1,00,000 [Verify with official source: CBDT Circular No. 08/2013]. If under ₹1,00,000, it is optional.",
+        "badge": "Conditional"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Rent Receipt Breakdown",
+    "scenario": "Monthly Residential Tenancy Payment (Bengaluru)",
+    "sender": {
+      "name": "Rajesh V. Sharma (Property Landlord)",
+      "details": "Landlord PAN: ABCPS1234F\nPhone: +91 98201 54321 | rajesh.sharma@example.com\nAddress: 402 Palm Heights, Indiranagar, Bengaluru 560038"
+    },
+    "recipient": {
+      "name": "Ananya K. Desai (Tenant)",
+      "details": "Rented Premises: Flat 304, Green Meadows Apartments\nOuter Ring Road, Bellandur, Bengaluru, Karnataka 560103\nTenant Email: ananya.desai@example.com"
+    },
+    "items": [
+      {
+        "description": "Monthly Residential House Rent (Period: October 2026)",
+        "quantity": 1,
+        "rate": "₹32,000.00",
+        "amount": "₹32,000.00"
+      },
+      {
+        "description": "Society Maintenance and Common Amenities Charge",
+        "quantity": 1,
+        "rate": "₹3,500.00",
+        "amount": "₹3,500.00"
+      }
+    ],
+    "subtotal": "₹35,500.00",
+    "discount": "₹0.00",
+    "tax": "₹0.00",
+    "total": "₹35,500.00",
+    "notes": "Received in full via UPI (Ref #UPI/629103847291) on 2 October 2026. Zero balance remaining for October.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Rent FAQs",
+    "title": "Rent Receipt & Tax FAQs",
+    "subtitle": "Clear answers to common questions about rent receipts and tax claims.",
+    "items": [
+      {
+        "question": "When is a landlord's PAN mandatory on a rent receipt?",
+        "answer": "In India, an employee claiming House Rent Allowance (HRA) must provide the landlord's PAN if total rent paid exceeds ₹1,00,000 per financial year (about ₹8,333 per month) [Verify with official source: Indian Income Tax circulars]. If total annual rent is ₹1,00,000 or less, the PAN field is optional."
+      },
+      {
+        "question": "What if the landlord does not have a PAN?",
+        "answer": "If annual rent exceeds ₹1,00,000 and the landlord has no PAN, tax authorities generally require a signed Form 60 declaration from the landlord along with their full name and address [Verify with official source: Form 60 under Income Tax Rules]."
+      },
+      {
+        "question": "Is a revenue stamp required on rent receipts?",
+        "answer": "In India, a ₹1 revenue stamp is typically required only when rent is paid in cash exceeding ₹5,000 per receipt. For electronic transfers (NEFT, UPI, or cheque), bank statements serve as digital evidence, so a revenue stamp is generally not required [Verify with official source: Indian Stamp Act rules on receipts]."
+      },
+      {
+        "question": "Can a landlord issue one receipt for the whole year?",
+        "answer": "While employers often accept quarterly or annual consolidated receipts, monthly receipts with specific transaction dates provide the strongest audit trail for tax authorities."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Financial & Receipt Tools",
+    "subtitle": "Free, browser-based tools for landlords, tenants, and business owners.",
+    "items": [
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "General Receipts",
+        "description": "Itemized sales receipts, cash vouchers, and customer payment receipts."
+      },
+      {
+        "title": "Itemized Receipt Maker",
+        "href": "/receipt-maker-with-items",
+        "badge": "Retail Receipts",
+        "description": "Point-of-sale style receipts with item details, rates, and discounts."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "Commercial Billing",
+        "description": "Need to invoice clients or commercial lease tenants? Generate free invoices."
+      },
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Maintenance & Repairs",
+        "description": "Invoicing for property repairs, renovations, and trade services."
+      },
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "Hourly and project billing for solo freelancers and consultants."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Instant browser invoicing without corrupt spreadsheet formulas or macros."
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  className?: string;
+}
+
+const { items, className = '' } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.origin : 'https://onlineinvoicecreator.com';
+
+// Construct Schema.org BreadcrumbList structured data
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => {
+    const isLast = index === items.length - 1;
+    const itemUrl = item.href
+      ? item.href.startsWith('http')
+        ? item.href
+        : new URL(item.href, siteUrl).href
+      : isLast
+        ? new URL(Astro.url.pathname, siteUrl).href
+        : undefined;
+
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      ...(itemUrl ? { item: itemUrl } : {}),
+    };
+  }),
+};
+---
+
+<!-- Schema.org BreadcrumbList JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<!-- Accessible Breadcrumbs Navigation -->
+<nav aria-label="Breadcrumb" class={`flex items-center text-xs text-mute py-2 ${className}`}>
+  <ol class="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+
+      return (
+        <li class="inline-flex items-center gap-1.5">
+          {isLast || !item.href ? (
+            <span
+              class="font-semibold text-ink truncate max-w-[220px] sm:max-w-md"
+              aria-current="page"
+            >
+              {item.label}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class="font-medium text-mute hover:text-ink hover:underline decoration-hairline transition-colors"
+            >
+              {item.label}
+            </a>
+          )}
+
+          {!isLast && (
+            <span class="text-stone select-none" aria-hidden="true">
+              /
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>

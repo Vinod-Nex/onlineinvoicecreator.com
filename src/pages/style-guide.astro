@@ -1,0 +1,972 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const colors = [
+  {
+    name: 'Primary (Cobalt)',
+    var: '#494fdf',
+    class: 'bg-[#494fdf]',
+    text: 'text-white',
+    hex: '#494fdf',
+  },
+  {
+    name: 'Primary Bright',
+    var: '#4f55f1',
+    class: 'bg-[#4f55f1]',
+    text: 'text-white',
+    hex: '#4f55f1',
+  },
+  {
+    name: 'Primary Deep',
+    var: '#3a40c4',
+    class: 'bg-[#3a40c4]',
+    text: 'text-white',
+    hex: '#3a40c4',
+  },
+  { name: 'Canvas Dark', var: '#000000', class: 'bg-black', text: 'text-white', hex: '#000000' },
+  {
+    name: 'Surface Deep',
+    var: '#0a0a0a',
+    class: 'bg-[#0a0a0a]',
+    text: 'text-white',
+    hex: '#0a0a0a',
+  },
+  {
+    name: 'Surface Elevated',
+    var: '#16181a',
+    class: 'bg-[#16181a]',
+    text: 'text-white',
+    hex: '#16181a',
+  },
+  {
+    name: 'Surface Soft',
+    var: '#f4f4f4',
+    class: 'bg-[#f4f4f4]',
+    text: 'text-[#191c1f]',
+    hex: '#f4f4f4',
+  },
+  { name: 'Ink (Text)', var: '#191c1f', class: 'bg-[#191c1f]', text: 'text-white', hex: '#191c1f' },
+  { name: 'Mute', var: '#505a63', class: 'bg-[#505a63]', text: 'text-white', hex: '#505a63' },
+  { name: 'Stone', var: '#8d969e', class: 'bg-[#8d969e]', text: 'text-white', hex: '#8d969e' },
+  {
+    name: 'Accent Teal',
+    var: '#00a87e',
+    class: 'bg-[#00a87e]',
+    text: 'text-white',
+    hex: '#00a87e',
+  },
+  {
+    name: 'Accent Blue',
+    var: '#376cd5',
+    class: 'bg-[#376cd5]',
+    text: 'text-white',
+    hex: '#376cd5',
+  },
+  {
+    name: 'Accent Warning',
+    var: '#ec7e00',
+    class: 'bg-[#ec7e00]',
+    text: 'text-white',
+    hex: '#ec7e00',
+  },
+  {
+    name: 'Accent Danger',
+    var: '#e23b4a',
+    class: 'bg-[#e23b4a]',
+    text: 'text-white',
+    hex: '#e23b4a',
+  },
+];
+
+const typographyScale = [
+  { token: 'display-xxl', size: '136px / 1.0', sample: 'Aa', usage: 'Flagship hero headline' },
+  {
+    token: 'display-xl',
+    size: '80px / 1.0',
+    sample: 'Invoicing for teams',
+    usage: 'Section openers',
+  },
+  {
+    token: 'display-lg',
+    size: '48px / 1.21',
+    sample: 'Create in seconds',
+    usage: 'Sub-section titles',
+  },
+  {
+    token: 'display-md',
+    size: '40px / 1.2',
+    sample: '100% Free & Private',
+    usage: 'Feature card titles',
+  },
+  {
+    token: 'heading-lg',
+    size: '32px / 1.19',
+    sample: 'Professional PDF Generator',
+    usage: 'Plan titles & modals',
+  },
+  {
+    token: 'heading-md',
+    size: '24px / 1.33',
+    sample: 'Payment terms & methods',
+    usage: 'Card headers',
+  },
+  {
+    token: 'heading-sm',
+    size: '20px / 1.4',
+    sample: 'Client Information',
+    usage: 'Form section headers',
+  },
+  {
+    token: 'body-lg',
+    size: '18px / 1.56',
+    sample: 'Fast, secure, client-side only processing with zero data tracking.',
+    usage: 'Lead paragraphs',
+  },
+  {
+    token: 'body-md',
+    size: '16px / 1.5',
+    sample: 'Standard body text with high legibility across screens and devices.',
+    usage: 'Default copy & form inputs',
+  },
+  {
+    token: 'body-sm',
+    size: '14px / 1.43',
+    sample: 'Invoice #INV-2026-004 · Due on receipt · Tax calculated at 10%',
+    usage: 'Supporting metadata',
+  },
+  {
+    token: 'caption',
+    size: '13px / 1.4',
+    sample: 'All currency calculations conform to ISO 4217 standard precision.',
+    usage: 'Sub-captions & footnotes',
+  },
+];
+---
+
+<BaseLayout
+  title="Design Tokens & Style Guide | Online Invoice Creator"
+  description="Internal design system style guide implementing Revolut-inspired tokens, Tailwind 4 @theme, and self-hosted variable font."
+  noindex={true}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-16">
+    <!-- Breadcrumb Component Demo -->
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Design System', href: '/style-guide' },
+        { label: 'Tokens & Components' },
+      ]}
+    />
+    <!-- Hero / Intro -->
+    <section class="space-y-4 border-b border-hairline pb-10">
+      <div class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+        <span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+        Phase 4: Design Tokens & System
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-ink">
+        Design Tokens & Style Guide
+      </h1>
+      <p class="max-w-3xl text-lg text-mute">
+        Precision Revolut-inspired design tokens configured with Tailwind CSS v4{' '}
+        <code class="rounded bg-surface-soft px-1.5 py-0.5 text-xs text-ink font-mono border border-hairline">
+          @theme
+        </code>
+        , featuring a self-hosted <strong class="text-ink font-semibold">Inter Variable</strong>{' '}
+        font, light/dark modes driven by{' '}
+        <code class="rounded bg-surface-soft px-1.5 py-0.5 text-xs text-ink font-mono border border-hairline">
+          prefers-color-scheme
+        </code>{' '}
+        with manual{' '}
+        <code class="rounded bg-surface-soft px-1.5 py-0.5 text-xs text-ink font-mono border border-hairline">
+          localStorage
+        </code>{' '}
+        override, and production components.
+      </p>
+
+      <!-- Quick Jump Nav -->
+      <div class="flex flex-wrap gap-2 pt-2 text-xs">
+        <a
+          href="#tokens"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Colors & Theme
+        </a>
+        <a
+          href="#typography"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Typography Scale
+        </a>
+        <a
+          href="#buttons"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Buttons ({'{'}rounded.full{'}'})
+        </a>
+        <a
+          href="#inputs"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Inputs (56px)
+        </a>
+        <a
+          href="#cards"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Cards ({'{'}rounded.lg{'}'})
+        </a>
+        <a
+          href="#alerts"
+          class="rounded-full bg-surface-soft px-3 py-1.5 font-medium text-ink hover:bg-hairline transition-colors"
+        >
+          Alerts & Callouts
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Colors & Palettes -->
+    <section id="tokens" class="space-y-6 scroll-mt-20">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-ink">1. Color Palette Tokens</h2>
+          <p class="text-sm text-mute">
+            Defined in DESIGN.md, mapped to CSS custom variables in Tailwind 4.
+          </p>
+        </div>
+        <div class="hidden sm:block">
+          <ThemeToggle />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+        {colors.map((c) => (
+          <div class="rounded-xl border border-hairline bg-surface-card p-3 shadow-2xs hover:border-hairline-strong transition-all">
+            <div
+              class={`h-12 w-full rounded-lg ${c.class} border border-hairline/20 shadow-xs flex items-center justify-center font-mono text-[10px]`}
+            ></div>
+            <div class="mt-2.5">
+              <div class="text-xs font-semibold text-ink truncate">{c.name}</div>
+              <div class="text-[11px] font-mono text-mute">{c.hex}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Surface Contrast Matrix -->
+      <div class="rounded-2xl border border-hairline bg-surface-soft p-5">
+        <h3 class="text-sm font-semibold text-ink mb-3">Surface Contrast Architecture</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="rounded-xl border border-hairline bg-canvas p-4 text-ink">
+            <div class="font-bold text-sm mb-1">Canvas Surface</div>
+            <p class="text-mute">Light: #ffffff · Dark: #000000</p>
+            <p class="mt-2 text-[11px] text-mute">
+              Primary viewport background across landing and tool pages.
+            </p>
+          </div>
+          <div class="rounded-xl border border-hairline bg-surface-card p-4 text-ink">
+            <div class="font-bold text-sm mb-1">Surface Card</div>
+            <p class="text-mute">Light: #ffffff · Dark: #16181a</p>
+            <p class="mt-2 text-[11px] text-mute">
+              Elevated card background with 1px hairline border.
+            </p>
+          </div>
+          <div class="rounded-xl border border-hairline bg-surface-elevated p-4 text-ink">
+            <div class="font-bold text-sm mb-1">Surface Elevated</div>
+            <p class="text-mute">Light: #f0f2f5 · Dark: #1e2023</p>
+            <p class="mt-2 text-[11px] text-mute">
+              Floating modals, dropdowns, and deep section containers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Typography Scale -->
+    <section id="typography" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">
+          2. Typography Scale (Self-Hosted Inter Variable)
+        </h2>
+        <p class="text-sm text-mute">
+          Variable font weights from 100 to 900 with{' '}
+          <code class="rounded bg-surface-soft px-1 text-xs text-ink font-mono border border-hairline">
+            font-display: swap
+          </code>
+          , preloading weights 400, 500, 600 above the fold.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-hairline bg-surface-card">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-hairline bg-surface-soft text-xs text-mute font-semibold">
+              <th class="py-3 px-4">Token</th>
+              <th class="py-3 px-4">Size / Line-Height</th>
+              <th class="py-3 px-4">Sample Display</th>
+              <th class="py-3 px-4">Intended Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-hairline">
+            {typographyScale.map((t) => (
+              <tr class="hover:bg-surface-soft/50 transition-colors">
+                <td class="py-3 px-4 font-mono text-xs font-semibold text-primary">{t.token}</td>
+                <td class="py-3 px-4 text-xs text-mute font-mono">{t.size}</td>
+                <td class="py-3 px-4 text-ink font-medium">{t.sample}</td>
+                <td class="py-3 px-4 text-xs text-mute">{t.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Numerical Precision for Financial Invoices -->
+      <div class="rounded-2xl border border-hairline bg-surface-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-semibold text-ink">Tabular Numbers for Invoice Calculations</h3>
+          <span class="rounded bg-primary/10 px-2 py-0.5 text-[11px] font-mono font-medium text-primary">
+            .tabular-nums
+          </span>
+        </div>
+        <p class="text-xs text-mute">
+          Monospaced numbers ensure invoice column totals and decimals align vertically without
+          jitter.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="rounded-xl border border-hairline bg-surface-soft p-4">
+            <span class="text-[11px] font-semibold text-mute uppercase tracking-wider block mb-2">
+              Standard Numerics
+            </span>
+            <div class="space-y-1 font-mono text-sm text-ink">
+              <div>Invoice Subtotal: &nbsp; &nbsp;$12,450.00</div>
+              <div>VAT / GST (10%): &nbsp; &nbsp; &nbsp;$1,245.00</div>
+              <div class="font-bold pt-1 border-t border-hairline">
+                Total Due: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$13,695.00
+              </div>
+            </div>
+          </div>
+          <div class="rounded-xl border border-hairline bg-surface-soft p-4">
+            <span class="text-[11px] font-semibold text-mute uppercase tracking-wider block mb-2">
+              Tabular Numerics (Aligned)
+            </span>
+            <div class="space-y-1 tabular-nums text-sm text-ink font-semibold">
+              <div class="flex justify-between">
+                <span>Subtotal:</span>
+                <span>$12,450.00</span>
+              </div>
+              <div class="flex justify-between text-mute">
+                <span>Tax (10%):</span>
+                <span>$1,245.00</span>
+              </div>
+              <div class="flex justify-between pt-1 border-t border-hairline text-primary">
+                <span>Total Due:</span>
+                <span>$13,695.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Buttons -->
+    <section id="buttons" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">
+          3. Buttons (Pill Shapes: <span class="font-mono text-xl">rounded-full</span>)
+        </h2>
+        <p class="text-sm text-mute">
+          Following Revolut ergonomics: 48px standard height, 36px small pill, full rounded radius,
+          600 weight font.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-hairline bg-surface-card p-6 space-y-6">
+        <!-- Button Row 1: Primary Variants -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-mute mb-3">
+            Primary & Brand Variants
+          </h3>
+          <div class="flex flex-wrap items-center gap-4">
+            <button type="button" class="btn btn-primary">
+              <span>Primary Pill</span>
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+
+            <button type="button" class="btn btn-cobalt shadow-sm">
+              <span>Cobalt Brand CTA</span>
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+
+            <button type="button" class="btn btn-dark">
+              <span>Dark Button</span>
+            </button>
+
+            <button type="button" class="btn btn-soft">
+              <span>Soft Surface</span>
+            </button>
+
+            <button type="button" class="btn btn-outline">
+              <span>Outline Pill</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Button Row 2: Sizes and States -->
+        <div class="pt-4 border-t border-hairline">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-mute mb-3">
+            Sizes, Icons & States
+          </h3>
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Small Pill -->
+            <button type="button" class="btn btn-pill-sm">
+              <span>Pill Small (36px)</span>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-pill-sm bg-primary/10 text-primary hover:bg-primary/20"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span>Download PDF</span>
+            </button>
+
+            <!-- Disabled -->
+            <button type="button" class="btn btn-primary" disabled>
+              <span>Disabled State</span>
+            </button>
+
+            <!-- Loading Spinner Pill -->
+            <button type="button" class="btn btn-cobalt" aria-busy="true">
+              <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <span>Generating Invoice...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Inputs -->
+    <section id="inputs" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">
+          4. Form Inputs (56px Height · <span class="font-mono text-xl">rounded-md</span>)
+        </h2>
+        <p class="text-sm text-mute">
+          Designed for financial precision: 56px height, 12px radius, subtle border, cobalt focus
+          glow.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-hairline bg-surface-card p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Input 1: Standard Text -->
+          <div class="space-y-1.5">
+            <label for="input-client" class="text-xs font-semibold text-ink">
+              Client / Company Name
+            </label>
+            <input
+              type="text"
+              id="input-client"
+              placeholder="e.g. Acme Corporation Ltd"
+              class="text-input"
+            />
+            <p class="text-[11px] text-mute">The legal entity being billed.</p>
+          </div>
+
+          <!-- Input 2: Currency Prefix -->
+          <div class="space-y-1.5">
+            <label for="input-amount" class="text-xs font-semibold text-ink">
+              Amount Due
+            </label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-mute">
+                $
+              </span>
+              <input
+                type="number"
+                id="input-amount"
+                placeholder="0.00"
+                step="0.01"
+                class="text-input pl-8 tabular-nums font-medium"
+              />
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-mute">
+                USD
+              </span>
+            </div>
+            <p class="text-[11px] text-mute">Invoice total formatted in USD.</p>
+          </div>
+
+          <!-- Input 3: Date Picker -->
+          <div class="space-y-1.5">
+            <label for="input-date" class="text-xs font-semibold text-ink">
+              Invoice Due Date
+            </label>
+            <input type="date" id="input-date" value="2026-10-31" class="text-input font-medium" />
+            <p class="text-[11px] text-mute">Payment due within 14 days.</p>
+          </div>
+
+          <!-- Input 4: Error State -->
+          <div class="space-y-1.5">
+            <label
+              for="input-email-err"
+              class="text-xs font-semibold text-accent-danger flex items-center justify-between"
+            >
+              <span>Recipient Email</span>
+              <span class="text-[10px]">Required</span>
+            </label>
+            <input
+              type="email"
+              id="input-email-err"
+              value="invalid-email@"
+              class="text-input text-input-error"
+            />
+            <p class="text-[11px] text-accent-danger font-medium flex items-center gap-1">
+              <svg
+                class="h-3.5 w-3.5 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              Please enter a valid email address.
+            </p>
+          </div>
+
+          <!-- Input 5: Disabled State -->
+          <div class="space-y-1.5">
+            <label for="input-disabled" class="text-xs font-semibold text-stone">
+              System Invoice Number (Locked)
+            </label>
+            <input
+              type="text"
+              id="input-disabled"
+              value="INV-2026-0891"
+              disabled
+              class="text-input"
+            />
+            <p class="text-[11px] text-stone">Auto-generated consecutive sequence.</p>
+          </div>
+
+          <!-- Input 6: Select Dropdown -->
+          <div class="space-y-1.5">
+            <label for="select-currency" class="text-xs font-semibold text-ink">
+              Currency & Region
+            </label>
+            <select id="select-currency" class="text-input font-medium">
+              <option>USD ($) · United States Dollar</option>
+              <option>EUR (€) · Eurozone</option>
+              <option>GBP (£) · British Pound</option>
+              <option>AUD ($) · Australian Dollar</option>
+              <option>CAD ($) · Canadian Dollar</option>
+              <option>INR (₹) · Indian Rupee</option>
+            </select>
+            <p class="text-[11px] text-mute">Supports 160+ international currencies.</p>
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="pt-4 border-t border-hairline space-y-1.5">
+          <label for="input-notes" class="text-xs font-semibold text-ink">
+            Payment Terms & Notes
+          </label>
+          <textarea
+            id="input-notes"
+            rows="3"
+            placeholder="Thank you for your business. Please transfer payment to the account details provided within 14 business days."
+            class="w-full rounded-md border border-hairline bg-surface-card p-4 text-sm text-ink placeholder:text-stone focus:border-primary focus:outline-none focus:ring-3 focus:ring-primary/20 transition-all"
+          ></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Cards -->
+    <section id="cards" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">
+          5. Cards & Containers (<span class="font-mono text-xl">rounded-lg / 20px</span>)
+        </h2>
+        <p class="text-sm text-mute">
+          Container hierarchy defined in DESIGN.md: Feature Card Light, Surface Elevated Dark, and
+          Featured Plan in Cobalt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Feature Card Light -->
+        <div class="card-feature flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <div class="space-y-1">
+              <h3 class="text-xl font-bold tracking-tight text-ink">Free Invoicing</h3>
+              <p class="text-sm text-mute">
+                Instant PDF generation straight in your browser. No watermark, no signup, no account
+                required.
+              </p>
+            </div>
+            <ul class="space-y-2 text-xs text-mute pt-2 border-t border-hairline">
+              <li class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-accent-teal"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Client-side private processing</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-accent-teal"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Zero data stored on servers</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6">
+            <button type="button" class="btn btn-outline w-full">
+              Create Invoice
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Featured Plan Card (Cobalt Brand) -->
+        <div class="card-plan-featured flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+          <div class="space-y-4 relative z-10">
+            <div class="flex items-center justify-between">
+              <span class="rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+                Featured
+              </span>
+              <span class="text-xs text-white/80 font-mono">100% Free</span>
+            </div>
+            <div class="space-y-1 text-white">
+              <h3 class="text-2xl font-bold tracking-tight">Pro Freelancer</h3>
+              <p class="text-sm text-white/80">
+                Full-fidelity invoices, multi-currency support, custom tax rates, and PDF downloads.
+              </p>
+            </div>
+            <div class="pt-2 text-white tabular-nums">
+              <div class="text-4xl font-extrabold tracking-tight">
+                $0<span class="text-base font-normal opacity-80"> / forever</span>
+              </div>
+            </div>
+            <ul class="space-y-2 text-xs text-white/90 pt-3 border-t border-white/20">
+              <li class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Unlimited invoices & receipts</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Custom logo and currency formatting</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6 relative z-10">
+            <button
+              type="button"
+              class="btn bg-white text-ink hover:bg-surface-soft w-full shadow-md font-bold"
+            >
+              Get Started Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: Surface Elevated Dark Card -->
+        <div class="card-elevated flex flex-col justify-between bg-[#16181a] text-white">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="rounded-full bg-surface-deep px-3 py-1 text-[11px] font-medium text-stone border border-hairline/20">
+                Elevated Metric
+              </span>
+              <span class="h-2 w-2 rounded-full bg-accent-teal"></span>
+            </div>
+            <div class="space-y-1">
+              <div class="text-xs uppercase tracking-wider text-stone">Total Volume Created</div>
+              <div class="text-3xl font-extrabold tracking-tight tabular-nums">$1,894,250</div>
+              <p class="text-xs text-stone">Across 42,000+ invoices generated this month</p>
+            </div>
+            <div class="pt-4 border-t border-hairline/20 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-stone">Success Rate</span>
+                <span class="font-bold text-accent-teal">99.98%</span>
+              </div>
+              <div class="h-1.5 w-full bg-[#0a0a0a] rounded-full overflow-hidden">
+                <div class="h-full bg-accent-teal rounded-full" style="width: 99.98%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pt-6">
+            <button
+              type="button"
+              class="btn btn-outline border-white/20 text-white hover:bg-white/10 w-full"
+            >
+              Explore Templates
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Alerts & Callouts -->
+    <section id="alerts" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">6. Alerts & Notifications</h2>
+        <p class="text-sm text-mute">
+          High-contrast status alerts with clean semantic accents matching DESIGN.md color
+          specifications.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Info Alert -->
+        <div class="rounded-2xl border border-primary/20 bg-primary/5 p-4 text-ink flex items-start gap-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div class="space-y-1 flex-1">
+            <h4 class="text-sm font-semibold text-primary">Info Notice · Client-Side Execution</h4>
+            <p class="text-xs text-mute">
+              All invoice calculation and PDF compilation happens strictly in your browser. We never
+              log or transmit sensitive customer or financial data.
+            </p>
+          </div>
+        </div>
+
+        <!-- Success Alert -->
+        <div class="rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-4 text-ink flex items-start gap-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent-teal text-white">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div class="space-y-1 flex-1">
+            <h4 class="text-sm font-semibold text-accent-teal">
+              Success · Invoice #INV-2026-004 Generated
+            </h4>
+            <p class="text-xs text-mute">
+              Your high-resolution, print-ready PDF has been compiled successfully. Downloading
+              automatically to your device.
+            </p>
+          </div>
+        </div>
+
+        <!-- Warning Alert -->
+        <div class="rounded-2xl border border-accent-warning/20 bg-accent-warning/5 p-4 text-ink flex items-start gap-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent-warning text-white">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
+          <div class="space-y-1 flex-1">
+            <h4 class="text-sm font-semibold text-accent-warning">
+              Warning · Payment Due in 24 Hours
+            </h4>
+            <p class="text-xs text-mute">
+              Payment deadline is set for tomorrow. Make sure your client's wire transfer
+              instructions and bank codes are accurate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Danger / Error Alert -->
+        <div class="rounded-2xl border border-accent-danger/20 bg-accent-danger/5 p-4 text-ink flex items-start gap-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent-danger text-white">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <div class="space-y-1 flex-1">
+            <h4 class="text-sm font-semibold text-accent-danger">
+              Validation Error · Missing Required Fields
+            </h4>
+            <p class="text-xs text-mute">
+              Invoice line items require at least one description with quantity and unit price
+              greater than 0.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Breadcrumbs & Navigation System -->
+    <section id="navigation" class="space-y-6 scroll-mt-20">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">
+          7. Breadcrumbs & Landmark Navigation
+        </h2>
+        <p class="text-sm text-mute">
+          Accessible breadcrumb navigation with automatic Schema.org{' '}
+          <code class="rounded bg-surface-soft px-1.5 py-0.5 text-xs text-ink font-mono border border-hairline">
+            BreadcrumbList
+          </code>{' '}
+          JSON-LD generation and HTML5 landmark integration.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-hairline bg-surface-card p-6 space-y-6">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-mute">
+            Two-Level Breadcrumb (Pillars)
+          </h3>
+          <div class="rounded-xl border border-hairline bg-surface-soft p-3">
+            <Breadcrumbs
+              items={[{ label: 'Home', href: '/' }, { label: 'Free Online Receipt Generator' }]}
+            />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-mute">
+            Three-Level Breadcrumb (Persona Spokes)
+          </h3>
+          <div class="rounded-xl border border-hairline bg-surface-soft p-3">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Invoicing Templates', href: '/#templates' },
+                { label: 'Freelancer Invoice Generator' },
+              ]}
+            />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-mute">
+            Four-Level Regional Breadcrumb (ATO Compliance)
+          </h3>
+          <div class="rounded-xl border border-hairline bg-surface-soft p-3">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Templates', href: '/#templates' },
+                { label: 'Australia Tax Invoices', href: '/tax-invoice-template-australia' },
+                { label: 'ATO GST Calculator' },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

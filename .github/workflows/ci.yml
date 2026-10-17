@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Concurrency to cancel superseded runs for pull requests
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, Typecheck, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check code formatting (Prettier)
+        run: npm run format:check
+
+      - name: Lint source code (ESLint)
+        run: npm run lint
+
+      - name: Typecheck Astro application
+        run: npm run check
+
+      - name: Typecheck Cloudflare Worker
+        run: npx tsc --noEmit --project workers/api/tsconfig.json
+
+      - name: Run unit test suite (Vitest)
+        run: npm test
+
+      - name: Build static site & run build-time SEO audit
+        run: npm run build

@@ -1,0 +1,229 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>> | string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title = 'Free Online Invoice Generator - 100% Free & Watermark-Free',
+  description = 'Create and download professional invoices and receipts online in seconds. 100% free, private, watermark-free, and no signup required.',
+  canonical,
+  ogImage = '/og-image.png',
+  noindex = false,
+  schema,
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.origin : 'https://onlineinvoicecreator.com';
+
+// Normalize canonical URL without trailing slashes (enforcing canonical standard)
+const normalizedPath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, '') : '/';
+const canonicalUrl = canonical || new URL(normalizedPath, siteUrl).href;
+
+// Resolve absolute Open Graph image URL
+const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+
+// Default WebApplication & WebSite JSON-LD Schema
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Online Invoice Creator',
+      description: 'Free online invoice and receipt generator with instant PDF download.',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Online Invoice Creator',
+        url: siteUrl,
+        logo: `${siteUrl}/favicon.svg`,
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteUrl}/#webapp`,
+      name: title,
+      url: canonicalUrl,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'All',
+      browserRequirements: 'Requires JavaScript and HTML5 canvas/PDF support',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      description,
+    },
+  ],
+};
+
+const serializedSchema = schema
+  ? typeof schema === 'string'
+    ? schema
+    : JSON.stringify(schema)
+  : JSON.stringify(defaultSchema);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Character Encoding & Viewport -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Document Title & Meta Description -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Search Engine Indexing & Crawling -->
+    {noindex ? (
+      <>
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+      </>
+    ) : (
+      <>
+        <meta
+          name="robots"
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        />
+        <meta
+          name="googlebot"
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        />
+      </>
+    )}
+
+    <!-- Open Graph Protocol -->
+    <meta property="og:site_name" content="Online Invoice Creator" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Browser Theme Color -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+
+    <!-- Favicon Set & Web App Manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preload Self-Hosted Inter Variable Font for above-the-fold render -->
+    <link
+      rel="preload"
+      href="/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={serializedSchema} />
+    <slot name="schema" />
+
+    <!-- First-Party Anti-FOUC Theme Script (Strictly NO third-party scripts) -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const mediaDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored === 'dark' || (!stored && mediaDark) ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch {
+          // ignore localStorage access errors in private/restricted environments
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="bg-canvas text-body font-sans antialiased min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+    <!-- Accessible Skip to Main Content Link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2.5 focus:bg-primary focus:text-white focus:rounded-full focus:shadow-elevated focus:font-semibold focus:outline-none focus:ring-4 focus:ring-primary/40 focus:text-xs transition-transform"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Header Landmark (Sticky Brand & Tools Navigation) -->
+    {showHeader &&
+      (Astro.slots.has('header') ? (
+        <header role="banner">
+          <slot name="header" />
+        </header>
+      ) : (
+        <Header currentPath={normalizedPath} />
+      ))}
+
+    <!-- Main Landmark -->
+    <main id="main-content" role="main" tabindex="-1" class="focus:outline-none flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer Landmark (4-Column Links & Compliance Notice) -->
+    {showFooter &&
+      (Astro.slots.has('footer') ? (
+        <footer role="contentinfo">
+          <slot name="footer" />
+        </footer>
+      ) : (
+        <Footer />
+      ))}
+
+    <!-- First-party listener for system theme preference changes -->
+    <script is:inline>
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (!localStorage.getItem('theme')) {
+          const newTheme = e.matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          if (newTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+          window.dispatchEvent(
+            new CustomEvent('theme-changed', {
+              detail: { theme: newTheme, source: 'system' },
+            })
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

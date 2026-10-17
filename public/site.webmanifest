@@ -1,0 +1,22 @@
+{
+  "name": "Online Invoice Creator",
+  "short_name": "InvoiceCreator",
+  "description": "Free, private online invoice and receipt generator with instant PDF downloads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#494fdf",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

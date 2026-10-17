@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Invoice Preview & 4 Clean Template Variants
+   (Classic, Modern, Minimal, Compact)
+   ========================================================================== */
+
+/* Base Paper Geometry (Always white paper for 100% PDF & Print fidelity) */
+.invoice-paper {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.08),
+    0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease-in-out;
+  font-family:
+    'Inter Variable',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   1. MODERN TEMPLATE (Fintech / Revolut-inspired)
+   ========================================================================== */
+.invoice-paper[data-template='modern'] {
+  --tmpl-accent: #494fdf;
+  --tmpl-accent-bg: rgba(73, 79, 223, 0.08);
+  --tmpl-border: #e2e8f0;
+  --tmpl-surface: #f8fafc;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-header-bar {
+  border-left: 4px solid var(--tmpl-accent);
+  padding-left: 14px;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-doc-title {
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-badge-status {
+  background-color: var(--tmpl-accent-bg);
+  color: var(--tmpl-accent);
+  border: 1px solid rgba(73, 79, 223, 0.2);
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-table-head {
+  background-color: var(--tmpl-surface);
+  border-top: 1px solid var(--tmpl-border);
+  border-bottom: 1px solid var(--tmpl-border);
+  color: #475569;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-table-row {
+  border-bottom: 1px solid var(--tmpl-border);
+}
+
+.invoice-paper[data-template='modern'] .tmpl-summary-card {
+  background-color: var(--tmpl-surface);
+  border: 1px solid var(--tmpl-border);
+  border-radius: 14px;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-grand-total {
+  color: var(--tmpl-accent);
+  font-weight: 800;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-payment-tile {
+  background-color: var(--tmpl-surface);
+  border: 1px solid var(--tmpl-border);
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   2. CLASSIC TEMPLATE (Formal Business / Executive Letterhead)
+   ========================================================================== */
+.invoice-paper[data-template='classic'] {
+  --tmpl-accent: #0f172a;
+  --tmpl-border: #cbd5e1;
+  --tmpl-surface: #ffffff;
+}
+
+.invoice-paper[data-template='classic'] {
+  border-top: 5px solid var(--tmpl-accent);
+  border-radius: 4px;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-header-bar {
+  border-bottom: 2px solid var(--tmpl-accent);
+  padding-bottom: 16px;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-doc-title {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #0f172a;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-badge-status {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #94a3b8;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-table-head {
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-table-head th {
+  color: #ffffff !important;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-table-row {
+  border-bottom: 1px solid var(--tmpl-border);
+}
+
+.invoice-paper[data-template='classic'] .tmpl-table-row:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-summary-card {
+  background-color: #ffffff;
+  border: 1px solid var(--tmpl-border);
+  border-radius: 2px;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-grand-total-row {
+  border-top: 2px solid #0f172a;
+  border-bottom: 4px double #0f172a;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-grand-total {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.invoice-paper[data-template='classic'] .tmpl-signature-line {
+  border-bottom: 1px solid #475569;
+  display: inline-block;
+  min-width: 180px;
+}
+
+/* ==========================================================================
+   3. MINIMAL TEMPLATE (Scandinavian / Editorial Whitespace)
+   ========================================================================== */
+.invoice-paper[data-template='minimal'] {
+  --tmpl-accent: #111827;
+  --tmpl-border: #e5e7eb;
+  --tmpl-surface: #ffffff;
+  border-radius: 0px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-header-bar {
+  border: none;
+  padding-bottom: 8px;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-doc-title {
+  color: #111827;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 20px;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-badge-status {
+  background-color: transparent;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 0px;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-table-head {
+  background-color: transparent;
+  border-bottom: 1px solid #111827;
+  color: #111827;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-table-row {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-summary-card {
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid #111827;
+  border-radius: 0px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-grand-total {
+  color: #111827;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+/* ==========================================================================
+   4. COMPACT TEMPLATE (High Data-Density / Multi-Row)
+   ========================================================================== */
+.invoice-paper[data-template='compact'] {
+  --tmpl-accent: #334155;
+  --tmpl-border: #e2e8f0;
+  --tmpl-surface: #f8fafc;
+  border-radius: 8px;
+}
+
+.invoice-paper[data-template='compact'].tmpl-pad-main,
+.invoice-paper[data-template='compact'] {
+  padding: 16px 20px !important;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.invoice-paper[data-template='compact'] > * + * {
+  margin-top: 14px !important;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-doc-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-table-head {
+  background-color: #f1f5f9;
+  border-top: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+  font-size: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: 700;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-table-row td {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  font-size: 12px;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-summary-card {
+  padding: 10px 14px !important;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-grand-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   PRINT / PDF MEDIA STYLES (Exact 1:1 Match)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 12pt;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide entire page layout chrome */
+  header,
+  footer,
+  nav,
+  form,
+  #hero,
+  #top-utility-bar,
+  #mobile-view-toggle,
+  #preview-toolbar,
+  #invoice-form-column,
+  .no-print,
+  button,
+  .template-switcher {
+    display: none !important;
+  }
+
+  /* Unconstrain preview wrapper */
+  main,
+  #invoice-workspace,
+  #invoice-preview-column,
+  #invoice-preview-container {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  /* Pure paper canvas in print */
+  #invoice-preview-document {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Page break rules */
+  .tmpl-table-row {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .tmpl-summary-card,
+  .tmpl-payment-tile,
+  .tmpl-signature-container {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

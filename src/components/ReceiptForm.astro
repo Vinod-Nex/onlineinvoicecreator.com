@@ -1,0 +1,683 @@
+---
+import { TOP_30_CURRENCIES } from '../data/currencies';
+import { createDefaultReceipt } from '../lib/receipt';
+
+const defaultReceipt = createDefaultReceipt();
+---
+
+<div
+  id="receipt-workspace"
+  class="w-full max-w-[1560px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10"
+>
+  <!-- Privacy & Serverless Guarantee Banner -->
+  <aside
+    class="mb-6 rounded-3xl bg-surface-card border border-hairline p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4 no-print"
+    aria-label="Privacy guarantee"
+  >
+    <div class="flex items-start sm:items-center gap-3.5">
+      <div class="h-10 w-10 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center shrink-0 text-accent-teal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h2 class="text-xs sm:text-sm font-bold text-ink">
+            100% Private & Serverless Receipt Maker
+          </h2>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse"></span>
+            <span>Local Processing Only</span>
+          </span>
+        </div>
+        <p class="text-xs text-mute mt-0.5 leading-relaxed">
+          Nothing is uploaded to any server. Your sales receipts, customer records, and payment
+          confirmations are generated strictly within your browser.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="btn-clear-receipt-data"
+        class="h-9 px-3.5 text-xs font-semibold rounded-full text-accent-danger bg-accent-danger/10 hover:bg-accent-danger/20 border border-accent-danger/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        <span>Clear Receipt Data</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Segmented Form / Preview Toggle -->
+  <div
+    id="receipt-mobile-view-toggle"
+    class="lg:hidden sticky top-18 z-30 mb-5 bg-surface-card/95 backdrop-blur-md p-1.5 rounded-2xl border border-hairline shadow-card flex items-center gap-1.5 no-print"
+  >
+    <button
+      type="button"
+      id="btn-toggle-receipt-form"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer"
+      aria-pressed="true"
+    >
+      <span>Edit Receipt</span>
+    </button>
+    <button
+      type="button"
+      id="btn-toggle-receipt-preview"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer"
+      aria-pressed="false"
+    >
+      <span>Live Preview</span>
+    </button>
+  </div>
+
+  <!-- 2-Column Responsive Workspace -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Left Column: Receipt Form -->
+    <div id="receipt-form-column" class="lg:col-span-6 xl:col-span-6 w-full">
+      <form id="receipt-form" class="space-y-6 sm:space-y-8" novalidate onsubmit="return false;">
+        <!-- Top Action & Export Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-hairline">
+          <div class="flex items-center gap-2">
+            <!-- Receipt Type Selector -->
+            <div class="inline-flex p-1 rounded-full bg-surface-soft border border-hairline text-xs font-semibold">
+              <button
+                type="button"
+                class="btn-receipt-type px-3 py-1 rounded-full bg-primary text-white shadow-2xs cursor-pointer transition-all"
+                data-type="itemized"
+              >
+                Itemized
+              </button>
+              <button
+                type="button"
+                class="btn-receipt-type px-3 py-1 rounded-full text-charcoal hover:text-ink cursor-pointer transition-all"
+                data-type="cash"
+              >
+                Cash
+              </button>
+              <button
+                type="button"
+                class="btn-receipt-type px-3 py-1 rounded-full text-charcoal hover:text-ink cursor-pointer transition-all"
+                data-type="payment"
+              >
+                Payment
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button
+              type="button"
+              id="btn-reset-receipt"
+              class="btn-outline h-9 px-3 text-xs font-semibold rounded-full hover:bg-surface-soft hover:text-accent-danger transition-colors cursor-pointer"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              id="btn-print-receipt"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span>Print</span>
+            </button>
+            <button
+              type="button"
+              id="btn-png-receipt"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>PNG</span>
+            </button>
+            <button
+              type="button"
+              id="btn-pdf-receipt"
+              class="btn-cobalt h-9 px-3.5 text-xs font-semibold rounded-full shadow-xs cursor-pointer flex items-center gap-1.5"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Form Body -->
+        <div class="bg-surface-card border border-hairline rounded-3xl p-4 sm:p-8 shadow-card space-y-6">
+          <!-- Receipt Header & Meta -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-hairline">
+            <div>
+              <label for="receipt-number" class="block text-xs font-semibold text-charcoal mb-1">
+                Receipt Number <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="text"
+                id="receipt-number"
+                class="text-input h-11 text-sm font-mono font-medium"
+                value={defaultReceipt.receiptNumber}
+                required
+              />
+            </div>
+
+            <div>
+              <label for="receipt-date" class="block text-xs font-semibold text-charcoal mb-1">
+                Payment Date <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="date"
+                id="receipt-date"
+                class="text-input h-11 text-sm"
+                value={defaultReceipt.paymentDate}
+                required
+              />
+            </div>
+
+            <div>
+              <label for="receipt-currency" class="block text-xs font-semibold text-charcoal mb-1">
+                Currency
+              </label>
+              <select id="receipt-currency" class="text-input h-11 text-sm">
+                {TOP_30_CURRENCIES.map((c) => (
+                  <option value={c.code} selected={c.code === defaultReceipt.currency}>
+                    {c.code} ({c.symbol}) - {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <!-- Merchant & Customer Details Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-6 border-b border-hairline">
+            <!-- Merchant (Issued By) -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Issued By (Merchant / Business)
+              </h3>
+              <input
+                type="text"
+                id="merchant-name"
+                class="text-input h-11 text-sm font-semibold"
+                placeholder="Business / Seller Name *"
+                aria-label="Business or Seller Name"
+                value={defaultReceipt.merchant.name}
+                required
+              />
+              <input
+                type="email"
+                id="merchant-email"
+                class="text-input h-10 text-xs"
+                placeholder="Merchant Email"
+                aria-label="Merchant Email"
+                value={defaultReceipt.merchant.email}
+              />
+              <input
+                type="tel"
+                id="merchant-phone"
+                class="text-input h-10 text-xs"
+                placeholder="Merchant Phone"
+                aria-label="Merchant Phone"
+                value={defaultReceipt.merchant.phone}
+              />
+              <textarea
+                id="merchant-address"
+                class="text-input text-xs py-2 h-16 resize-y"
+                placeholder="Merchant Address"
+                aria-label="Merchant Address"
+              >{defaultReceipt.merchant.address}</textarea>
+              <input
+                type="text"
+                id="merchant-tax-id"
+                class="text-input h-10 text-xs"
+                placeholder="Tax ID / VAT / GST / ABN"
+                aria-label="Merchant Tax ID / VAT / GST"
+                value={defaultReceipt.merchant.taxId}
+              />
+            </div>
+
+            <!-- Customer (Received From) -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Received From (Customer / Payer)
+              </h3>
+              <input
+                type="text"
+                id="customer-name"
+                class="text-input h-11 text-sm font-semibold"
+                placeholder="Customer or Client Name *"
+                aria-label="Customer or Client Name"
+                value={defaultReceipt.customer.name}
+                required
+              />
+              <input
+                type="email"
+                id="customer-email"
+                class="text-input h-10 text-xs"
+                placeholder="Customer Email"
+                aria-label="Customer Email"
+                value={defaultReceipt.customer.email}
+              />
+              <input
+                type="tel"
+                id="customer-phone"
+                class="text-input h-10 text-xs"
+                placeholder="Customer Phone"
+                aria-label="Customer Phone"
+                value={defaultReceipt.customer.phone}
+              />
+              <textarea
+                id="customer-address"
+                class="text-input text-xs py-2 h-16 resize-y"
+                placeholder="Customer Address"
+                aria-label="Customer Address"
+              >{defaultReceipt.customer.address}</textarea>
+            </div>
+          </div>
+
+          <!-- Payment Details Box -->
+          <div class="bg-surface-soft p-4 rounded-2xl border border-hairline space-y-3">
+            <h4 class="text-xs font-bold text-ink uppercase tracking-wide">
+              Payment & Transaction Info
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="receipt-payment-method"
+                  class="block text-xs font-semibold text-charcoal mb-1"
+                >
+                  Payment Method
+                </label>
+                <select id="receipt-payment-method" class="text-input h-11 text-sm">
+                  <option value="Credit Card" selected>
+                    Credit Card
+                  </option>
+                  <option value="Cash">Cash</option>
+                  <option value="Bank Transfer">Bank Transfer / Wire</option>
+                  <option value="Debit Card">Debit Card</option>
+                  <option value="PayPal">PayPal</option>
+                  <option value="Stripe">Stripe</option>
+                  <option value="UPI">UPI / Instant Pay</option>
+                  <option value="Check">Check / Cheque</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="receipt-tx-ref" class="block text-xs font-semibold text-charcoal mb-1">
+                  Transaction / Auth / Ref #
+                </label>
+                <input
+                  type="text"
+                  id="receipt-tx-ref"
+                  class="text-input h-11 text-sm font-mono"
+                  placeholder="e.g. TXN-9988221 or Check #402"
+                  value={defaultReceipt.transactionReference}
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Line Items Section -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-ink font-display">Receipt Items & Charges</h3>
+              <button
+                type="button"
+                id="btn-add-receipt-item"
+                class="text-xs font-semibold text-primary hover:text-primary-dark transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                + Add Item
+              </button>
+            </div>
+
+            <div id="receipt-items-container" class="space-y-2.5">
+              <!-- Rendered dynamically by script -->
+            </div>
+          </div>
+
+          <!-- Summary & Totals -->
+          <div class="flex justify-end pt-4 border-t border-hairline">
+            <div class="w-full max-w-xs space-y-2 text-xs">
+              <div class="flex justify-between text-mute">
+                <span>Subtotal</span>
+                <span id="receipt-subtotal-disp" class="font-mono font-medium text-ink">
+                  $0.00
+                </span>
+              </div>
+              <div class="flex justify-between items-center text-sm font-bold text-ink pt-2 border-t border-hairline">
+                <span>Total Paid</span>
+                <span id="receipt-grandtotal-disp" class="font-mono text-base text-primary">
+                  $0.00
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes & Sign-off -->
+          <div class="space-y-4 pt-4 border-t border-hairline">
+            <div>
+              <label for="receipt-notes" class="block text-xs font-semibold text-charcoal mb-1">
+                Receipt Notes / Return Policy / Guarantee
+              </label>
+              <textarea
+                id="receipt-notes"
+                class="text-input text-xs py-2 h-16 resize-y"
+                placeholder="e.g. All sales final. Return within 30 days with original receipt."
+              >{defaultReceipt.notes}</textarea>
+            </div>
+            <div>
+              <label for="receipt-signature" class="block text-xs font-semibold text-charcoal mb-1">
+                Authorized Signatory / Cashier Name
+              </label>
+              <input
+                type="text"
+                id="receipt-signature"
+                class="text-input h-11 text-sm font-serif italic"
+                value={defaultReceipt.signature}
+                placeholder="Cashier or Manager Name"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Live Receipt Preview (Sticky) -->
+    <div
+      id="receipt-preview-column"
+      class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
+    >
+      <!-- Preview Controls Toolbar -->
+      <div class="flex items-center justify-between gap-3 p-3 bg-surface-card rounded-2xl border border-hairline mb-4 shadow-xs no-print">
+        <div class="flex items-center gap-1 text-xs">
+          <span class="text-mute font-medium mr-1">Style:</span>
+          <button
+            type="button"
+            class="btn-rec-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-primary text-white"
+            data-tmpl="modern"
+          >
+            Modern
+          </button>
+          <button
+            type="button"
+            class="btn-rec-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="classic"
+          >
+            Classic
+          </button>
+          <button
+            type="button"
+            class="btn-rec-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="minimal"
+          >
+            Minimal
+          </button>
+          <button
+            type="button"
+            class="btn-rec-tmpl px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-tmpl="compact"
+          >
+            Compact
+          </button>
+        </div>
+
+        <div class="flex items-center gap-1 text-xs">
+          <button
+            type="button"
+            class="btn-rec-format px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-primary text-white"
+            data-fmt="a4"
+          >
+            A4
+          </button>
+          <button
+            type="button"
+            class="btn-rec-format px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-charcoal hover:bg-surface-soft"
+            data-fmt="letter"
+          >
+            Letter
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Receipt Document Canvas -->
+      <div class="flex justify-center">
+        <article
+          id="receipt-preview-document"
+          class="invoice-paper p-6 sm:p-10 relative"
+          data-template="modern"
+          data-format="a4"
+        >
+          <!-- Prominent PAID IN FULL Watermark Badge -->
+          <div class="absolute top-8 right-8 pointer-events-none select-none">
+            <div class="px-3.5 py-1 rounded-xl border-2 border-emerald-500/80 bg-emerald-50 text-emerald-700 font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-2xs rotate-[-6deg]">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>PAID IN FULL</span>
+            </div>
+          </div>
+
+          <!-- Document Header -->
+          <header class="pb-6 border-b border-hairline space-y-4">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h2
+                  id="prev-rec-merchant-name"
+                  class="text-xl sm:text-2xl font-extrabold text-ink font-display"
+                >
+                  {defaultReceipt.merchant.name}
+                </h2>
+                <div
+                  id="prev-rec-merchant-contact"
+                  class="text-xs text-mute mt-1 space-y-0.5 leading-relaxed"
+                >
+                  <p id="prev-rec-merchant-address">{defaultReceipt.merchant.address}</p>
+                  <p id="prev-rec-merchant-email-phone">
+                    {defaultReceipt.merchant.email} · {defaultReceipt.merchant.phone}
+                  </p>
+                  <p id="prev-rec-merchant-tax">{defaultReceipt.merchant.taxId}</p>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <span
+                  id="prev-rec-title"
+                  class="text-2xl sm:text-3xl font-extrabold tracking-tight text-ink font-display block"
+                >
+                  RECEIPT
+                </span>
+                <p class="text-xs font-mono font-bold text-mute mt-1" id="prev-rec-number">
+                  #{defaultReceipt.receiptNumber}
+                </p>
+                <p class="text-xs text-mute" id="prev-rec-date">
+                  Date: {defaultReceipt.paymentDate}
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <!-- Customer & Payment Summary -->
+          <section class="py-5 border-b border-hairline grid grid-cols-2 gap-4 text-xs">
+            <div>
+              <span class="font-bold text-gray-500 uppercase tracking-wide text-[10px] block mb-1">
+                Received From
+              </span>
+              <p id="prev-rec-customer-name" class="font-bold text-ink text-sm">
+                {defaultReceipt.customer.name}
+              </p>
+              <p id="prev-rec-customer-email" class="text-mute">
+                {defaultReceipt.customer.email}
+              </p>
+              <p id="prev-rec-customer-phone" class="text-mute">
+                {defaultReceipt.customer.phone}
+              </p>
+              <p id="prev-rec-customer-address" class="text-mute mt-0.5">
+                {defaultReceipt.customer.address}
+              </p>
+            </div>
+
+            <div class="bg-gray-50 p-3 rounded-xl space-y-1">
+              <span class="font-bold text-gray-500 uppercase tracking-wide text-[10px] block mb-0.5">
+                Payment Details
+              </span>
+              <p>
+                <span class="text-gray-500">Method:</span>{' '}
+                <strong id="prev-rec-method" class="text-gray-900">
+                  {defaultReceipt.paymentMethod}
+                </strong>
+              </p>
+              <p id="prev-rec-ref-row">
+                <span class="text-gray-500">Ref / Txn #:</span>{' '}
+                <span id="prev-rec-ref" class="font-mono text-gray-900">
+                  {defaultReceipt.transactionReference}
+                </span>
+              </p>
+              <p>
+                <span class="text-gray-500">Status:</span>{' '}
+                <span class="text-emerald-700 font-bold">Settled / Complete</span>
+              </p>
+            </div>
+          </section>
+
+          <!-- Line Items Table -->
+          <section class="py-5">
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="border-b border-gray-200 text-gray-500 uppercase text-[10px] tracking-wider">
+                  <th class="py-2">Description</th>
+                  <th class="py-2 text-right">Qty</th>
+                  <th class="py-2 text-right">Unit Price</th>
+                  <th class="py-2 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="prev-rec-items-body" class="divide-y divide-gray-100">
+                <!-- Items populated dynamically -->
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Totals Breakdown -->
+          <section
+            class="pt-4 border-t border-hairline flex justify-end"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <div class="w-full max-w-xs space-y-1.5 text-xs">
+              <div class="flex justify-between text-gray-600">
+                <span>Subtotal</span>
+                <span id="prev-rec-subtotal" class="font-mono font-medium">
+                  $0.00
+                </span>
+              </div>
+              <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-gray-200">
+                <span>Amount Paid</span>
+                <span id="prev-rec-grandtotal" class="font-mono text-base text-primary">
+                  $0.00
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Receipt Footer: Notes & Signatory -->
+          <footer class="pt-8 mt-6 border-t border-hairline space-y-4">
+            <div id="prev-rec-notes-block" class="text-xs text-gray-600 bg-gray-50 p-3 rounded-xl">
+              <p id="prev-rec-notes" class="leading-relaxed whitespace-pre-line">
+                {defaultReceipt.notes}
+              </p>
+            </div>
+
+            <div class="flex justify-between items-end pt-4">
+              <div class="text-[11px] text-gray-400">Official Computer-Generated Receipt</div>
+              <div class="text-right">
+                <p
+                  id="prev-rec-signature"
+                  class="font-serif italic text-sm text-gray-900 border-b border-gray-400 pb-1 min-w-[160px] inline-block text-center"
+                >
+                  {defaultReceipt.signature}
+                </p>
+                <span class="block text-[10px] text-gray-500 uppercase tracking-wide mt-1">
+                  Authorized Signature
+                </span>
+              </div>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div
+    id="receipt-toast"
+    class="fixed bottom-6 right-6 z-50 max-w-md w-full px-4 py-3 rounded-2xl shadow-xl border transition-all duration-300 translate-y-24 opacity-0 pointer-events-none flex items-start gap-3 no-print"
+    role="status"
+    aria-live="polite"
+  >
+    <div id="receipt-toast-icon" class="shrink-0 mt-0.5"></div>
+    <div class="flex-1 space-y-0.5">
+      <p id="receipt-toast-title" class="text-xs font-bold"></p>
+      <p id="receipt-toast-message" class="text-xs"></p>
+    </div>
+    <button
+      type="button"
+      id="btn-close-receipt-toast"
+      class="text-gray-400 hover:text-gray-700 transition-colors p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md cursor-pointer"
+      aria-label="Close notification"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Load Client Script for Receipt Generator -->
+<script src="../scripts/receipt-form-client.ts"></script>

@@ -1,0 +1,188 @@
+{
+  "slug": "contractor-invoice-template",
+  "metaTitle": "Free Contractor Invoice Template - Construction & Trades",
+  "metaDescription": "Free contractor invoice template for construction, trade pros, and subcontractors. Itemize labor, materials, and milestones with zero watermarks.",
+  "canonical": "https://onlineinvoicecreator.com/contractor-invoice-template",
+  "badge": "100% Free • Construction & Trades • Zero Watermarks",
+  "h1": "Free Contractor Invoice Template",
+  "h1Highlight": "Contractor Invoice",
+  "intro": "Generate professional contractor invoices itemizing labor hours, materials, and project milestones in seconds with zero watermarks.",
+  "toolType": "invoice",
+  "trustBadges": [
+    "Labor & Materials Itemization",
+    "Zero Watermarks",
+    "Local Draft Auto-Save",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Invoice Generator", "href": "/" },
+    { "label": "Contractor Invoice Template" }
+  ],
+  "howTo": {
+    "badge": "Trade Invoicing Process",
+    "title": "How to Create a Contractor Invoice",
+    "subtitle": "Clear, dispute-proof contractor invoices in three simple steps.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Enter Contractor and Jobsite Details",
+        "description": "Add your trade business name, state licence number, client billing address, and the physical jobsite address where work took place.",
+        "tip": "Always record the jobsite address separately from the client's office address."
+      },
+      {
+        "step": 2,
+        "title": "Itemize Labor, Supplies, and Permits",
+        "description": "Separate skilled labor hours from materials, building fixtures, and permit fees for complete billing transparency.",
+        "tip": "Include the client's work order or purchase order (PO) number to avoid billing delays."
+      },
+      {
+        "step": 3,
+        "title": "Download the PDF or Print on the Jobsite",
+        "description": "Generate an instant vector PDF to email from your phone or print a hard copy directly for on-site sign-off.",
+        "tip": "State payment milestones clearly (for example: 50% deposit, 50% on final inspection)."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Trade Billing Requirements",
+    "title": "What a Contractor Invoice Must Contain",
+    "subtitle": "Key elements needed for construction, electrical, plumbing, and trade contracting compliance.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Contractor Identity and Licence",
+        "description": "Your registered business name, contact details, and state or municipal contractor licence number [Verify with official source: state contractor licensing regulations].",
+        "badge": "Required"
+      },
+      {
+        "title": "Client and Jobsite Physical Address",
+        "description": "The client's billing information plus the exact physical address where the construction or trade work was performed.",
+        "badge": "Required"
+      },
+      {
+        "title": "Contract or PO Reference Number",
+        "description": "The original estimate number, client purchase order, or change-order identifier for clear cross-referencing.",
+        "badge": "Recommended"
+      },
+      {
+        "title": "Separated Labor and Materials",
+        "description": "An itemized breakdown distinguishing hourly labor from raw building materials, fixtures, and equipment rentals.",
+        "badge": "Required"
+      },
+      {
+        "title": "Deposits and Milestone Credits",
+        "description": "Clear accounting of deposits already received, progress draws, and any agreed retainage holdback amount.",
+        "badge": "Trade Standard"
+      },
+      {
+        "title": "Payment Terms and Remittance Details",
+        "description": "Direct bank transfer details (ACH or wire), check mailing instructions, and due dates [Verify with official source: statutory mechanics lien notice deadlines].",
+        "badge": "Required"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Contractor Invoice Breakdown",
+    "scenario": "Commercial Plumbing Renovation & Fixture Rough-in",
+    "sender": {
+      "name": "Apex Commercial Mechanical Services LLC",
+      "details": "Contractor Licence #CMC-104928\n1204 Industrial Parkway, Unit 8\nDenver, CO 80216\nbilling@apexmechanical.com"
+    },
+    "recipient": {
+      "name": "Summit Property Management Corp",
+      "details": "Project: Westgate Plaza Renovation (Unit 204)\n450 17th Street, Suite 500\nDenver, CO 80202\nAttn: Mark Reynolds (Project Mgr)"
+    },
+    "items": [
+      {
+        "description": "Rough-in Plumbing Labor (Master Plumber + Journeyman)",
+        "quantity": 36,
+        "rate": "$95.00/hr",
+        "amount": "$3,420.00"
+      },
+      {
+        "description": "Commercial Grade PEX-A Piping & Copper Manifold Fittings",
+        "quantity": 1,
+        "rate": "$1,450.00",
+        "amount": "$1,450.00"
+      },
+      {
+        "description": "Municipal Building Inspection Fee and Pressure Test Sign-off",
+        "quantity": 1,
+        "rate": "$275.00",
+        "amount": "$275.00"
+      }
+    ],
+    "subtotal": "$5,145.00",
+    "discount": "$0.00",
+    "tax": "$124.50",
+    "total": "$5,269.50",
+    "notes": "Payment terms: Net 30 from completion of inspection sign-off. Wire transfer preferred.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Trade Invoicing FAQs",
+    "title": "Contractor Invoicing FAQs",
+    "subtitle": "Answers to common questions about trade billing, materials tax, and milestone payments.",
+    "items": [
+      {
+        "question": "Why should contractors separate labor and materials on invoices?",
+        "answer": "Separating labor and materials provides full transparency to the client and simplifies sales tax reporting. In many jurisdictions, sales tax applies to physical building materials but not to labor [Verify with official source: state sales tax rules on contractor labor]."
+      },
+      {
+        "question": "Can I record milestone deposits or retainage?",
+        "answer": "Yes. Add an item with a negative amount or use the discount field to record previous deposits, showing the exact remaining balance due."
+      },
+      {
+        "question": "Can I generate contractor invoices on my phone at the jobsite?",
+        "answer": "Yes. The editor switches to a touch-friendly card view on mobile screens, letting you create and download clean PDF invoices right from your truck or jobsite."
+      },
+      {
+        "question": "What happens if a client disputes a contractor invoice?",
+        "answer": "Having itemized work orders, jobsite addresses, and written change orders on your invoice provides the legal documentation needed to resolve disputes quickly."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Tools for Trade & Contracting Professionals",
+    "subtitle": "Streamline your contracting paperwork with our free browser-based tools.",
+    "items": [
+      {
+        "title": "Itemized Receipt Maker",
+        "href": "/receipt-maker-with-items",
+        "badge": "Retail & Trade",
+        "description": "Issue itemized receipts for progress payments, deposits, and materials."
+      },
+      {
+        "title": "Australia Tax Invoices",
+        "href": "/tax-invoice-template-australia",
+        "badge": "ATO Compliant",
+        "description": "Operating in Australia? Generate ATO-compliant GST tax invoices with ABN."
+      },
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "Invoicing for designers, developers, and creative consultants."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "In-browser invoicing without corrupt spreadsheet formulas or macros."
+      },
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Payment Proof",
+        "description": "Issue instant payment receipts when a client pays via cash or transfer."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "General Tool",
+        "description": "Standard free invoice creator with multi-currency and zero watermarks."
+      }
+    ]
+  }
+}

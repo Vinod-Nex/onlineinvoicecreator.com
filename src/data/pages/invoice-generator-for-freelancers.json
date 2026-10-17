@@ -1,0 +1,192 @@
+{
+  "slug": "invoice-generator-for-freelancers",
+  "metaTitle": "Invoice Generator for Freelancers | Free & Private",
+  "metaDescription": "Create professional freelancer invoices in seconds. 100% free, private, watermark-free, and no signup required. Download PDF or print instantly.",
+  "canonical": "https://onlineinvoicecreator.com/invoice-generator-for-freelancers",
+  "badge": "100% Free • Freelancer Invoicing • Zero Watermarks",
+  "h1": "Invoice Generator for Freelancers",
+  "h1Highlight": "Freelancers",
+  "intro": "Create, customize, and download clean freelancer invoices in seconds with zero watermarks and no signup required.",
+  "toolType": "invoice",
+  "trustBadges": [
+    "Zero Watermarks",
+    "Hourly & Flat Rates",
+    "Local Draft Auto-Save",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Invoice Generator", "href": "/" },
+    { "label": "Freelancers" }
+  ],
+  "howTo": {
+    "badge": "Freelance Workflow",
+    "title": "How to Create a Freelancer Invoice",
+    "subtitle": "Send client-ready invoices in three straightforward steps.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Add Your Brand and Client Information",
+        "description": "Enter your trading name, email address, and client billing contact. Upload your logo to brand your invoice.",
+        "tip": "Save your details in your browser to auto-fill them on your next invoice."
+      },
+      {
+        "step": 2,
+        "title": "Itemize Deliverables and Billable Hours",
+        "description": "List each project milestone or billable hour with its unit rate. Add any agreed discount or tax percentage.",
+        "tip": "Break large projects into clear phases so clients understand what they are paying for."
+      },
+      {
+        "step": 3,
+        "title": "Download the PDF and Send to Your Client",
+        "description": "Choose between Classic, Modern, Minimal, or Compact templates. Download a clean vector PDF or export a high-resolution PNG.",
+        "tip": "State clear payment terms such as 'Net 14' or 'Due upon receipt' to avoid payment delays."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Compliance Checklist",
+    "title": "What a Freelancer Invoice Must Contain",
+    "subtitle": "Every professional freelance invoice needs these six core elements to ensure timely payment.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Your Contact Details and Tax ID",
+        "description": "Your full legal name, business trading name, email, address, and local tax identifier (such as an EIN, SSN, or VAT registration number).",
+        "badge": "Required"
+      },
+      {
+        "title": "Client Billing Information",
+        "description": "The client's company name, accounts payable contact person, email, and physical office address.",
+        "badge": "Required"
+      },
+      {
+        "title": "Unique Invoice Number and Date",
+        "description": "A sequential invoice number (like INV-0042) and the exact issue date for accounting tracking and tax reporting.",
+        "badge": "Required"
+      },
+      {
+        "title": "Itemized Scope of Work",
+        "description": "Specific descriptions of tasks performed, hours worked, unit rates, and project milestone deliverables.",
+        "badge": "Required"
+      },
+      {
+        "title": "Payment Terms and Due Date",
+        "description": "An exact calendar due date and terms (such as Net 14 or Net 30) to establish clear expectations.",
+        "badge": "Recommended"
+      },
+      {
+        "title": "Bank Details and Payment Methods",
+        "description": "Direct bank transfer information (IBAN, BSB, or routing numbers), PayPal, Stripe, or wire instructions.",
+        "badge": "Required"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Freelancer Invoice Breakdown",
+    "scenario": "UI/UX Product Design & Frontend Prototype Milestone",
+    "sender": {
+      "name": "Alex Morgan Design Studio",
+      "details": "742 Evergreen Terrace, Suite 3B\nPortland, OR 97201\nalex@morganstudio.design | Tax ID: 93-8472910"
+    },
+    "recipient": {
+      "name": "Horizon Digital Media LLC",
+      "details": "Attn: Accounts Payable\n100 Market Street, 14th Floor\nSan Francisco, CA 94105\nap@horizondigital.com"
+    },
+    "items": [
+      {
+        "description": "Mobile App UI Design System (Figma Component Library)",
+        "quantity": 20,
+        "rate": "$85.00/hr",
+        "amount": "$1,700.00"
+      },
+      {
+        "description": "Interactive Frontend Prototype and Developer Handoff",
+        "quantity": 1,
+        "rate": "$950.00",
+        "amount": "$950.00"
+      },
+      {
+        "description": "Client Usability Testing Session and Design Revisions",
+        "quantity": 5,
+        "rate": "$85.00/hr",
+        "amount": "$425.00"
+      }
+    ],
+    "subtotal": "$3,075.00",
+    "discount": "$150.00",
+    "tax": "$0.00",
+    "total": "$2,925.00",
+    "notes": "Payment due within 14 days via direct bank transfer or ACH. Thank you for your business.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Frequently Asked Questions",
+    "title": "Freelancer Invoicing FAQs",
+    "subtitle": "Clear answers to common questions about billing clients and managing freelance cash flow.",
+    "items": [
+      {
+        "question": "When should a freelancer send an invoice?",
+        "answer": "Send your invoice as soon as you complete the work or reach an agreed project milestone. For ongoing hourly contracts, sending an invoice at the end of every week or month keeps payments regular."
+      },
+      {
+        "question": "What payment terms work best for freelancers?",
+        "answer": "Net 14 or 'Due upon receipt' is best for solo freelancers. Shorter terms keep cash flowing and reduce late payment risks. Avoid Net 60 or Net 90 unless required by large corporate clients."
+      },
+      {
+        "question": "Are invoices downloaded here watermark-free?",
+        "answer": "Yes. Every PDF and PNG generated on Online Invoice Creator is 100% free and free of watermarks."
+      },
+      {
+        "question": "Does my invoice data get saved on a server?",
+        "answer": "No. Online Invoice Creator runs entirely in your web browser. Your business data is stored locally on your device and never uploaded to a remote server."
+      },
+      {
+        "question": "How should I follow up on an unpaid freelance invoice?",
+        "answer": "Send a polite email reminder three days before the due date, on the due date, and one week after the due date. Reattach the PDF invoice to every reminder."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Tools for Freelancers & Solo Creators",
+    "subtitle": "Free, browser-based tools to simplify your business paperwork.",
+    "items": [
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Labor, materials, and milestone invoicing for trade professionals."
+      },
+      {
+        "title": "Photography Invoices",
+        "href": "/photography-invoice-generator",
+        "badge": "Creative",
+        "description": "Studio sessions, licensing fees, usage rights, and print orders."
+      },
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Proof of Payment",
+        "description": "Issue an official payment receipt once your client settles their bill."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Fast browser invoicing without broken spreadsheet formulas or macros."
+      },
+      {
+        "title": "Australia Tax Invoices",
+        "href": "/tax-invoice-template-australia",
+        "badge": "ATO Compliant",
+        "description": "ATO-compliant 10% GST breakdown and ABN registration fields."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "General Tool",
+        "description": "Standard invoice creator supporting multiple currencies and instant PDF export."
+      }
+    ]
+  }
+}

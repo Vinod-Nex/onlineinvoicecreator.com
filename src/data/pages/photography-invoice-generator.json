@@ -1,0 +1,194 @@
+{
+  "slug": "photography-invoice-generator",
+  "metaTitle": "Photography Invoice Generator - Studio & Commercial",
+  "metaDescription": "Free photography invoice generator for wedding and commercial photographers. Itemize shoot hours, usage rights, and packages with zero watermarks.",
+  "canonical": "https://onlineinvoicecreator.com/photography-invoice-generator",
+  "badge": "100% Free • Photography & Creative • Zero Watermarks",
+  "h1": "Photography Invoice Generator",
+  "h1Highlight": "Photography Invoice",
+  "intro": "Create elegant, high-impact invoices for wedding shoots, portrait sessions, and commercial image licensing in seconds.",
+  "toolType": "invoice",
+  "trustBadges": [
+    "Licensing & Rights Breakdown",
+    "Deposit & Balance Split",
+    "Zero Watermarks",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Invoice Generator", "href": "/" },
+    { "label": "Photography Invoice" }
+  ],
+  "howTo": {
+    "badge": "Studio Invoicing Guide",
+    "title": "How to Create a Photography Invoice",
+    "subtitle": "Professional invoices for photo sessions, licensing, and print delivery in three simple steps.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Add Studio Branding and Shoot Information",
+        "description": "Enter your photography business name, studio logo, contact email, client name, and event or shoot location.",
+        "tip": "Adding your visual studio logo creates immediate trust with commercial and wedding clients."
+      },
+      {
+        "step": 2,
+        "title": "Itemize Session Time, Edits, and Usage Rights",
+        "description": "Break down coverage hours, second-shooter fees, retouching time, and commercial licensing rights.",
+        "tip": "Clearly separate creative labor fees from commercial image licensing rights."
+      },
+      {
+        "step": 3,
+        "title": "Download the PDF or Export a PNG",
+        "description": "Choose from four clean templates and export an unwatermarked vector PDF or high-resolution PNG image.",
+        "tip": "State your booking retainer policy clearly (such as a 50% non-refundable booking deposit)."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Creative Invoicing Checklist",
+    "title": "What a Photography Invoice Must Contain",
+    "subtitle": "Essential items every professional photographer must document to protect creative rights and avoid disputes.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Studio Identity and Contact Details",
+        "description": "Your registered photography business name, studio address, tax ID, and contact phone number.",
+        "badge": "Required"
+      },
+      {
+        "title": "Shoot Date, Duration, and Venue",
+        "description": "The exact calendar date, hours of coverage, and physical shoot venue or studio address.",
+        "badge": "Essential"
+      },
+      {
+        "title": "Itemized Creative Services",
+        "description": "Session hours, assistant photographer fees, lighting gear rentals, and post-production color grading.",
+        "badge": "Required"
+      },
+      {
+        "title": "Image Usage Rights and Licensing",
+        "description": "Specific declaration of personal vs commercial usage, media territory (for example, North America or Worldwide), and license duration (such as 1 Year or Perpetual).",
+        "badge": "Legal Critical"
+      },
+      {
+        "title": "Deliverables and File Formats",
+        "description": "Number of edited high-resolution digital images, gallery delivery method, and included print dimensions.",
+        "badge": "Recommended"
+      },
+      {
+        "title": "Payment Schedule and Retainer Policy",
+        "description": "Non-refundable booking retainer amount and due date for the remaining balance before gallery handover [Verify with official source: state sales tax rules on digital photography deliverables vs tangible prints].",
+        "badge": "Required"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Photography Invoice Breakdown",
+    "scenario": "Commercial Studio Fashion Shoot & Editorial Image Licensing",
+    "sender": {
+      "name": "Lumière Creative Photography Studio",
+      "details": "Studio: 504 Broadway, Loft 4A\nNew York, NY 10012\ncontact@lumierephoto.com | Tax ID: 14-9283741"
+    },
+    "recipient": {
+      "name": "Vogue Nouveau Apparel Group",
+      "details": "Attn: Creative Director (Autumn Campaign)\n75 Rockefeller Plaza, 8th Floor\nNew York, NY 10019\nbilling@voguenouveau.com"
+    },
+    "items": [
+      {
+        "description": "Full-Day Commercial Studio Fashion Shoot (8 Hours)",
+        "quantity": 1,
+        "rate": "$2,800.00",
+        "amount": "$2,800.00"
+      },
+      {
+        "description": "Assistant Photographer and Digital Technician Fee",
+        "quantity": 1,
+        "rate": "$650.00",
+        "amount": "$650.00"
+      },
+      {
+        "description": "Master Color Grading & High-End Beauty Retouching (20 Images)",
+        "quantity": 20,
+        "rate": "$65.00",
+        "amount": "$1,300.00"
+      },
+      {
+        "description": "North America Digital and Print Editorial Usage License (1 Year)",
+        "quantity": 1,
+        "rate": "$1,500.00",
+        "amount": "$1,500.00"
+      }
+    ],
+    "subtotal": "$6,250.00",
+    "discount": "$250.00",
+    "tax": "$0.00",
+    "total": "$6,000.00",
+    "notes": "Booking retainer ($3,000) received. Balance due prior to unwatermarked gallery handoff via ACH or wire.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Photographer FAQs",
+    "title": "Photography Invoicing FAQs",
+    "subtitle": "Frequently asked questions regarding photo retainers, licensing fees, and print taxes.",
+    "items": [
+      {
+        "question": "When should wedding and portrait photographers collect payment?",
+        "answer": "Standard industry practice is collecting a 30% to 50% non-refundable booking deposit to reserve the calendar date, with the remaining balance due 14 to 30 days before the event or prior to final image delivery."
+      },
+      {
+        "question": "How do I specify photo usage rights on an invoice?",
+        "answer": "Add a dedicated line item or note defining the exact scope: media type (Web, Social Media, Print, Broadcast), geographic region (Local, National, Worldwide), and duration (1 Year, Perpetual)."
+      },
+      {
+        "question": "Should sales tax be charged on photography services?",
+        "answer": "Tax regulations vary by jurisdiction. In many US states, digital-only image delivery is non-taxable, while delivering tangible prints or flash drives makes the entire transaction subject to sales tax [Verify with official source: state sales tax department on photography]."
+      },
+      {
+        "question": "Can I export an image version of my invoice for clients on messaging apps?",
+        "answer": "Yes. In addition to high-resolution vector PDF downloads, you can click 'Export PNG' to save a clean image ready to text or send via WhatsApp."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Tools for Photographers & Creative Artists",
+    "subtitle": "Free, private tools tailored for creative studios and visual artists.",
+    "items": [
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "General freelance invoicing for solo creators and digital consultants."
+      },
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Proof of Deposit",
+        "description": "Issue official deposit and session payment receipts when clients pay."
+      },
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Labor, materials, and milestone invoicing for trade professionals."
+      },
+      {
+        "title": "Itemized Receipt Maker",
+        "href": "/receipt-maker-with-items",
+        "badge": "Itemized Sales",
+        "description": "Line-by-line itemized receipts for print orders, frames, and albums."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Instant browser invoicing without corrupt spreadsheet formulas or macros."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "General Tool",
+        "description": "Standard free invoice creator with multi-currency and zero watermarks."
+      }
+    ]
+  }
+}

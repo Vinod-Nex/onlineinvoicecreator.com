@@ -1,0 +1,1347 @@
+---
+import { TOP_30_CURRENCIES } from '../data/currencies';
+import { createDefaultInvoice, formatCurrency } from '../lib/invoice';
+import InvoicePreview from './InvoicePreview.astro';
+
+const defaultInvoice = createDefaultInvoice();
+---
+
+<div
+  id="invoice-workspace"
+  class="w-full max-w-[1560px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10"
+>
+  <!-- Mobile Segmented Form / Preview Toggle (Hidden on desktop) -->
+  <div
+    id="mobile-view-toggle"
+    class="lg:hidden sticky top-18 z-30 mb-5 bg-surface-card/95 backdrop-blur-md p-1.5 rounded-2xl border border-hairline shadow-card flex items-center gap-1.5 no-print"
+  >
+    <button
+      type="button"
+      id="btn-toggle-form"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer"
+      aria-pressed="true"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      </svg>
+      <span>Edit Form</span>
+    </button>
+    <button
+      type="button"
+      id="btn-toggle-preview"
+      class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer"
+      aria-pressed="false"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>Live Preview</span>
+    </button>
+  </div>
+
+  <!-- Privacy & Serverless Guarantee Banner -->
+  <aside
+    id="privacy-guarantee-banner"
+    class="mb-6 rounded-3xl bg-surface-card border border-hairline p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4 no-print"
+    aria-label="Privacy guarantee"
+  >
+    <div class="flex items-start sm:items-center gap-3.5">
+      <div class="h-10 w-10 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center shrink-0 text-accent-teal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h2 class="text-xs sm:text-sm font-bold text-ink">
+            100% Private & Serverless — Nothing is uploaded to a server
+          </h2>
+          <span
+            id="storage-status-pill"
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse"></span>
+            <span id="storage-status-text">Local Storage Active</span>
+          </span>
+        </div>
+        <p class="text-xs text-mute mt-0.5 leading-relaxed">
+          Your business details, client records, and invoices are saved solely inside your browser's
+          private local storage. No data is ever transmitted to an external server.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 self-end md:self-auto shrink-0 flex-wrap">
+      <button
+        type="button"
+        id="btn-clear-my-data"
+        class="h-9 px-3.5 text-xs font-semibold rounded-full text-accent-danger bg-accent-danger/10 hover:bg-accent-danger/20 border border-accent-danger/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+        title="Permanently remove all saved details and drafts from this browser"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        <span>Clear my data</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 2-Column Responsive Workspace: Side-by-side on desktop, stacked on mobile -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Left Column: Invoice Form -->
+    <div id="invoice-form-column" class="lg:col-span-6 xl:col-span-6 w-full">
+      <form id="invoice-form" class="space-y-6 sm:space-y-8" novalidate onsubmit="return false;">
+        <!-- Top Utility & Auto-Save Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-hairline">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+              Live Editor
+            </span>
+            <span
+              id="save-status-indicator"
+              class="text-xs text-mute font-medium transition-opacity duration-300 opacity-0 flex items-center gap-1"
+            >
+              <svg class="h-3.5 w-3.5 text-accent-teal" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Saved locally
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <!-- Custom Templates Selector (populated dynamically) -->
+            <select
+              id="select-custom-template"
+              class="hidden h-9 px-3 text-xs font-medium rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated border border-hairline cursor-pointer"
+              aria-label="Load a saved custom template"
+            >
+              <option value="">My Templates (0)</option>
+            </select>
+
+            <!-- Save as Template Button -->
+            <button
+              type="button"
+              id="btn-save-as-template"
+              class="h-9 px-3 text-xs font-medium rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              title="Save current layout & details as a reusable template"
+            >
+              <svg
+                class="h-3.5 w-3.5 text-amber-500"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span class="hidden sm:inline">Save Template</span>
+            </button>
+
+            <!-- Duplicate Invoice Button -->
+            <button
+              type="button"
+              id="btn-duplicate-invoice"
+              class="h-9 px-3 text-xs font-medium rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              title="Duplicate this invoice with next invoice number and today's date"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Duplicate</span>
+            </button>
+
+            <!-- Export JSON -->
+            <button
+              type="button"
+              id="btn-export-json"
+              class="h-9 px-3 text-xs font-medium rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
+              title="Download invoice data as JSON backup"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>JSON</span>
+            </button>
+
+            <!-- Import JSON Button & Hidden File Input -->
+            <input
+              type="file"
+              id="input-import-json"
+              accept=".json,application/json"
+              aria-label="Import invoice JSON file"
+              class="hidden"
+            />
+            <button
+              type="button"
+              id="btn-import-json"
+              class="h-9 px-3 text-xs font-medium rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
+              title="Import previously saved invoice JSON"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span class="hidden xs:inline">Import</span>
+            </button>
+
+            <!-- Reset Button -->
+            <button
+              type="button"
+              id="btn-reset-form"
+              class="btn-outline h-9 px-3 text-xs font-semibold rounded-full hover:bg-surface-soft hover:text-accent-danger transition-colors cursor-pointer"
+              title="Clear all fields and reset form"
+            >
+              Reset
+            </button>
+
+            <!-- Print Button -->
+            <button
+              type="button"
+              id="btn-print-invoice"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              title="Print invoice"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span class="hidden sm:inline">Print</span>
+            </button>
+
+            <!-- PNG Button -->
+            <button
+              type="button"
+              id="btn-download-png-form"
+              class="h-9 px-3 text-xs font-semibold rounded-full text-charcoal bg-surface-soft hover:bg-surface-elevated hover:text-ink border border-hairline flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              title="Export as PNG image"
+            >
+              <svg
+                class="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span>PNG</span>
+            </button>
+
+            <!-- Download PDF Button -->
+            <button
+              type="button"
+              id="btn-download-pdf-form"
+              class="btn-cobalt h-9 px-3.5 text-xs font-semibold rounded-full shadow-xs cursor-pointer flex items-center gap-1.5"
+              title="Generate & Download PDF"
+            >
+              <svg
+                class="btn-pdf-icon h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span class="btn-pdf-text">PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Invoice Card Canvas -->
+        <div class="bg-surface-card border border-hairline rounded-3xl p-4 sm:p-8 lg:p-10 shadow-card">
+          <!-- ====================================================================
+           HEADER: Brand Logo + Document Meta (Invoice #, Dates, Currency)
+           ==================================================================== -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pb-8 border-b border-hairline items-start">
+            <!-- Left: Logo Upload & Document Title -->
+            <div class="lg:col-span-6 space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+                  INVOICE
+                </span>
+                <span class="text-xs uppercase px-2.5 py-1 rounded-md bg-surface-soft text-mute font-semibold">
+                  Tax Compliant
+                </span>
+              </div>
+
+              <!-- Logo Upload Box -->
+              <div class="max-w-xs">
+                <label class="block text-xs font-semibold text-charcoal mb-1.5">
+                  Business Logo
+                </label>
+                <div class="relative group border-2 border-dashed border-hairline hover:border-primary/60 rounded-2xl p-4 transition-colors bg-surface-soft/40 flex flex-col items-center justify-center min-h-[110px] text-center">
+                  <input
+                    type="file"
+                    id="field-logo-file"
+                    accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                    aria-label="Upload business logo"
+                  />
+
+                  <div
+                    id="logo-placeholder"
+                    class="flex flex-col items-center gap-1.5 text-stone group-hover:text-primary transition-colors"
+                  >
+                    <svg
+                      class="h-7 w-7"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span class="text-xs font-medium">Click or drag logo here</span>
+                    <span class="text-[11px] text-mute">PNG, JPG, SVG (Max 5MB)</span>
+                  </div>
+
+                  <img
+                    id="logo-preview-img"
+                    src=""
+                    alt="Logo preview"
+                    width="160"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
+                    class="hidden max-h-20 max-w-full object-contain rounded-lg shadow-2xs z-0"
+                  />
+                </div>
+                <p
+                  id="err-logo-file"
+                  class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                ></p>
+                <button
+                  type="button"
+                  id="btn-remove-logo"
+                  class="hidden text-xs text-accent-danger font-medium mt-1.5 hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Remove Logo
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Invoice Number, Dates, Currency -->
+            <div class="lg:col-span-6 space-y-4">
+              <!-- Invoice Number + Auto-increment -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label
+                    for="field-invoice-number"
+                    class="text-xs sm:text-sm font-semibold text-charcoal"
+                  >
+                    Invoice Number <span class="text-accent-danger">*</span>
+                  </label>
+                  <span
+                    id="auto-increment-badge"
+                    class="text-xs text-primary font-medium opacity-0 -translate-y-1 transition-all"
+                  >
+                    Auto-incremented!
+                  </span>
+                </div>
+
+                <div class="relative flex items-center gap-2">
+                  <input
+                    type="text"
+                    id="field-invoice-number"
+                    class="text-input h-14 font-semibold text-base sm:text-lg tabular-nums tracking-wide flex-1"
+                    placeholder="INV-001"
+                    value={defaultInvoice.invoiceNumber}
+                    required
+                    aria-required="true"
+                  />
+                  <button
+                    type="button"
+                    id="btn-auto-increment"
+                    class="h-14 px-3 sm:px-4 rounded-xl bg-surface-soft hover:bg-surface-elevated text-ink border border-hairline font-semibold text-xs sm:text-sm flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer shrink-0 shadow-2xs"
+                    title="Auto-increment invoice number"
+                    aria-label="Auto-increment invoice number"
+                  >
+                    <svg
+                      class="h-4 w-4 text-primary"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>+1 Step</span>
+                  </button>
+                </div>
+                <p
+                  id="err-invoice-number"
+                  class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                >
+                  <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>Invoice number is required</span>
+                </p>
+              </div>
+
+              <!-- Dates Grid: Issue Date & Due Date -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label
+                    for="field-issue-date"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Issue Date <span class="text-accent-danger">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="field-issue-date"
+                    class="text-input h-14 text-sm"
+                    value={defaultInvoice.issueDate}
+                    required
+                    aria-required="true"
+                  />
+                  <p
+                    id="err-issue-date"
+                    class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                  >
+                    <span>Issue date is required</span>
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    for="field-due-date"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Due Date <span class="text-accent-danger">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="field-due-date"
+                    class="text-input h-14 text-sm"
+                    value={defaultInvoice.dueDate}
+                    required
+                    aria-required="true"
+                  />
+                  <p
+                    id="err-due-date"
+                    class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                  >
+                    <span>Due date is required</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Quick Due Date Presets -->
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-medium text-mute mr-1">Quick Presets:</span>
+                <button
+                  type="button"
+                  class="btn-date-preset px-2.5 py-1 text-xs font-medium rounded-full bg-surface-soft hover:bg-surface-elevated text-charcoal transition-colors cursor-pointer"
+                  data-days="0"
+                >
+                  Today
+                </button>
+                <button
+                  type="button"
+                  class="btn-date-preset px-2.5 py-1 text-xs font-medium rounded-full bg-surface-soft hover:bg-surface-elevated text-charcoal transition-colors cursor-pointer"
+                  data-days="7"
+                >
+                  +7 Days
+                </button>
+                <button
+                  type="button"
+                  class="btn-date-preset px-2.5 py-1 text-xs font-medium rounded-full bg-primary text-white transition-colors cursor-pointer"
+                  data-days="14"
+                >
+                  +14 Days
+                </button>
+                <button
+                  type="button"
+                  class="btn-date-preset px-2.5 py-1 text-xs font-medium rounded-full bg-surface-soft hover:bg-surface-elevated text-charcoal transition-colors cursor-pointer"
+                  data-days="30"
+                >
+                  +30 Days
+                </button>
+              </div>
+
+              <!-- Currency Picker (Top 30 Currencies) -->
+              <div>
+                <label
+                  for="field-currency"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Currency (30 Global Currencies) <span class="text-accent-danger">*</span>
+                </label>
+                <div class="relative">
+                  <select
+                    id="field-currency"
+                    class="text-input h-14 text-sm font-medium pr-10 appearance-none bg-surface-card cursor-pointer"
+                  >
+                    {TOP_30_CURRENCIES.map((curr) => (
+                      <option value={curr.code} selected={curr.code === 'USD'}>
+                        {curr.code} ({curr.symbol}) — {curr.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-mute">
+                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+           SECTION 1 & 2: Your Details (Sender) & Client Details (Recipient)
+           ==================================================================== -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 py-8 border-b border-hairline">
+            <!-- Section 1: Your Details -->
+            <fieldset class="space-y-4">
+              <legend class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2 mb-2">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                  1
+                </span>
+                Your Details (From)
+              </legend>
+
+              <div>
+                <label
+                  for="field-sender-name"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Business or Full Name <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-sender-name"
+                  class="text-input h-14"
+                  placeholder="e.g. Acme Creative Studio"
+                  value={defaultInvoice.sender.name}
+                  required
+                  aria-required="true"
+                />
+                <p
+                  id="err-sender-name"
+                  class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                >
+                  <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>Business or sender name is required</span>
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label
+                    for="field-sender-email"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="field-sender-email"
+                    class="text-input h-14 text-sm"
+                    placeholder="billing@yourbiz.com"
+                    value={defaultInvoice.sender.email}
+                  />
+                  <p
+                    id="err-sender-email"
+                    class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                  >
+                    <span>Please enter a valid email</span>
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    for="field-sender-phone"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="field-sender-phone"
+                    class="text-input h-14 text-sm"
+                    placeholder="+1 (555) 000-0000"
+                    value={defaultInvoice.sender.phone}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="field-sender-address"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Address / Location
+                </label>
+                <textarea
+                  id="field-sender-address"
+                  rows="3"
+                  class="text-input min-h-[88px] h-auto py-3 text-sm resize-y"
+                  placeholder="123 Business St&#10;Suite 400&#10;New York, NY 10001"
+                >{defaultInvoice.sender.address}</textarea>
+              </div>
+
+              <div>
+                <label
+                  for="field-sender-tax-id"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Tax ID / VAT / GST / ABN
+                </label>
+                <input
+                  type="text"
+                  id="field-sender-tax-id"
+                  class="text-input h-14 text-sm"
+                  placeholder="e.g. VAT GB123456789 or ABN 12 345 678"
+                  value={defaultInvoice.sender.taxId}
+                />
+              </div>
+            </fieldset>
+
+            <!-- Section 2: Client Details -->
+            <fieldset class="space-y-4">
+              <div class="flex items-center justify-between gap-2 flex-wrap mb-2">
+                <legend class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2 mb-0">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                    2
+                  </span>
+                  Client Details (Bill To)
+                </legend>
+
+                <!-- Quick Saved Client Directory Picker -->
+                <div
+                  id="saved-clients-container"
+                  class="hidden items-center gap-2 bg-surface-soft px-3 py-1.5 rounded-full border border-hairline text-xs"
+                >
+                  <label
+                    for="select-saved-client"
+                    class="text-mute font-medium text-[11px] shrink-0"
+                  >
+                    Saved:
+                  </label>
+                  <select
+                    id="select-saved-client"
+                    class="h-7 px-2 text-xs rounded-md border border-hairline bg-surface-card text-charcoal font-medium hover:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer max-w-[160px] truncate"
+                    aria-label="Select a previously saved client"
+                  >
+                    <option value="">Select client...</option>
+                  </select>
+                  <button
+                    type="button"
+                    id="btn-delete-saved-client"
+                    class="hidden text-mute hover:text-accent-danger p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded transition-colors cursor-pointer"
+                    title="Remove selected client from saved directory"
+                    aria-label="Remove selected client from saved directory"
+                  >
+                    <svg
+                      class="h-3 w-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="field-client-name"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Client or Company Name <span class="text-accent-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-client-name"
+                  class="text-input h-14"
+                  placeholder="e.g. Globex Corporation"
+                  value={defaultInvoice.client.name}
+                  required
+                  aria-required="true"
+                />
+                <p
+                  id="err-client-name"
+                  class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                >
+                  <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>Client name is required</span>
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label
+                    for="field-client-email"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Client Email
+                  </label>
+                  <input
+                    type="email"
+                    id="field-client-email"
+                    class="text-input h-14 text-sm"
+                    placeholder="accounts@globex.com"
+                    value={defaultInvoice.client.email}
+                  />
+                  <p
+                    id="err-client-email"
+                    class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                  >
+                    <span>Please enter a valid email</span>
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    for="field-client-phone"
+                    class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                  >
+                    Client Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="field-client-phone"
+                    class="text-input h-14 text-sm"
+                    placeholder="+1 (555) 999-8888"
+                    value={defaultInvoice.client.phone}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="field-client-address"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Client Address
+                </label>
+                <textarea
+                  id="field-client-address"
+                  rows="3"
+                  class="text-input min-h-[88px] h-auto py-3 text-sm resize-y"
+                  placeholder="742 Evergreen Terrace&#10;Springfield, OR 97477"
+                >{defaultInvoice.client.address}</textarea>
+              </div>
+
+              <div>
+                <label
+                  for="field-client-tax-id"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Client Tax ID / VAT
+                </label>
+                <input
+                  type="text"
+                  id="field-client-tax-id"
+                  class="text-input h-14 text-sm"
+                  placeholder="e.g. EU37200888"
+                  value={defaultInvoice.client.taxId}
+                />
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- ====================================================================
+           SECTION 3: Line Items (Itemized Products & Services)
+           ==================================================================== -->
+          <div class="py-8 border-b border-hairline space-y-4">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                  3
+                </span>
+                Line Items
+              </h2>
+              <span class="text-xs text-mute hidden sm:inline">
+                Tab or click "+ Add Item" to append rows
+              </span>
+            </div>
+
+            <!-- Line items container: populated and managed by Vanilla TS island -->
+            <div id="line-items-container" class="space-y-3.5">
+              <!-- Dynamically populated rows -->
+            </div>
+
+            <!-- Add Row Button with min 48px touch target -->
+            <div>
+              <button
+                type="button"
+                id="btn-add-item"
+                class="w-full sm:w-auto h-12 px-6 rounded-full border-2 border-dashed border-hairline hover:border-primary text-charcoal hover:text-primary font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer bg-surface-soft/60 hover:bg-surface-soft"
+              >
+                <svg
+                  class="h-4 w-4 text-primary"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Add Line Item</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+           SECTION 4: Tax, Discount, Shipping & Live Totals Summary
+           ==================================================================== -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 py-8 border-b border-hairline items-start">
+            <!-- Left: Tax & Discount Controls -->
+            <div class="lg:col-span-6 space-y-4">
+              <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                  4
+                </span>
+                Discount & Shipping
+              </h3>
+
+              <!-- Discount: Type Switcher + Value -->
+              <div>
+                <label class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5">
+                  Discount
+                </label>
+                <div class="grid grid-cols-12 gap-2">
+                  <div class="col-span-5 sm:col-span-4">
+                    <select
+                      id="field-discount-type"
+                      aria-label="Discount type"
+                      class="text-input h-14 text-sm font-medium appearance-none pr-8 cursor-pointer bg-surface-card"
+                    >
+                      <option value="percentage">Percent (%)</option>
+                      <option value="fixed">Fixed ($)</option>
+                    </select>
+                  </div>
+                  <div class="col-span-7 sm:col-span-8">
+                    <input
+                      type="number"
+                      id="field-discount-value"
+                      aria-label="Discount value"
+                      class="text-input h-14 text-sm tabular-nums"
+                      placeholder="0.00"
+                      min="0"
+                      step="any"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shipping Fee -->
+              <div>
+                <label
+                  for="field-shipping"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Shipping / Handling Fee
+                </label>
+                <input
+                  type="number"
+                  id="field-shipping"
+                  class="text-input h-14 text-sm tabular-nums"
+                  placeholder="0.00"
+                  min="0"
+                  step="any"
+                />
+              </div>
+            </div>
+
+            <!-- Right: Totals Card (Fintech Elevated Surface) -->
+            <div class="lg:col-span-6">
+              <div
+                class="rounded-3xl bg-surface-elevated/70 border border-hairline p-5 sm:p-6 space-y-3.5"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <h4 class="text-xs uppercase tracking-wider font-bold text-mute pb-2 border-b border-hairline">
+                  Invoice Summary
+                </h4>
+
+                <div class="flex items-center justify-between text-sm text-charcoal">
+                  <span>Subtotal:</span>
+                  <span id="display-subtotal" class="font-semibold text-ink tabular-nums">
+                    {formatCurrency(0, 'USD')}
+                  </span>
+                </div>
+
+                <div
+                  id="row-discount"
+                  class="hidden flex items-center justify-between text-sm text-accent-teal font-medium"
+                >
+                  <span>Discount Applied:</span>
+                  <span id="display-discount" class="tabular-nums">
+                    -$0.00
+                  </span>
+                </div>
+
+                <!-- Tax breakdown by rate -->
+                <div id="tax-breakdown-container" class="space-y-1">
+                  <!-- Dynamically populated tax rates -->
+                </div>
+
+                <div
+                  id="row-shipping"
+                  class="hidden flex items-center justify-between text-sm text-charcoal"
+                >
+                  <span>Shipping & Handling:</span>
+                  <span id="display-shipping" class="font-semibold text-ink tabular-nums">
+                    $0.00
+                  </span>
+                </div>
+
+                <div class="pt-3 border-t-2 border-hairline flex items-baseline justify-between">
+                  <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-mute block">
+                      Total Due
+                    </span>
+                    <span class="text-xl sm:text-2xl font-bold text-ink font-display">
+                      Grand Total
+                    </span>
+                  </div>
+                  <span
+                    id="display-grand-total"
+                    class="text-2xl sm:text-3xl font-extrabold text-primary tabular-nums tracking-tight font-display"
+                  >
+                    {formatCurrency(0, 'USD')}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+           SECTION 5: Payment Details
+           ==================================================================== -->
+          <div class="py-8 border-b border-hairline space-y-4">
+            <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                5
+              </span>
+              Payment Details
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div>
+                <label
+                  for="field-bank-name"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Bank Name
+                </label>
+                <input
+                  type="text"
+                  id="field-bank-name"
+                  class="text-input h-14 text-sm"
+                  placeholder="e.g. Chase Bank, Barclays, Wise"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="field-account-name"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Account Holder Name
+                </label>
+                <input
+                  type="text"
+                  id="field-account-name"
+                  class="text-input h-14 text-sm"
+                  placeholder="Acme Studio LLC"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="field-account-number"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Account Number
+                </label>
+                <input
+                  type="text"
+                  id="field-account-number"
+                  class="text-input h-14 text-sm tabular-nums"
+                  placeholder="123456789"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="field-routing-number"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Routing Number / BSB / Sort Code
+                </label>
+                <input
+                  type="text"
+                  id="field-routing-number"
+                  class="text-input h-14 text-sm tabular-nums"
+                  placeholder="021000021"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="field-iban"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  IBAN
+                </label>
+                <input
+                  type="text"
+                  id="field-iban"
+                  class="text-input h-14 text-sm tabular-nums"
+                  placeholder="GB29 NWBK 6016 1331 9268 19"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="field-swift-bic"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  SWIFT / BIC Code
+                </label>
+                <input
+                  type="text"
+                  id="field-swift-bic"
+                  class="text-input h-14 text-sm uppercase"
+                  placeholder="CHASUS33"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label
+                  for="field-payment-link"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Online Payment Link (Stripe, PayPal, Revolut)
+                </label>
+                <input
+                  type="url"
+                  id="field-payment-link"
+                  class="text-input h-14 text-sm"
+                  placeholder="https://paypal.me/yourusername"
+                />
+                <p
+                  id="err-payment-link"
+                  class="hidden text-xs text-accent-danger mt-1.5 items-center gap-1 font-medium"
+                >
+                  <span>Please enter a valid URL (e.g. https://...)</span>
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="field-payment-terms"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Payment Terms
+                </label>
+                <input
+                  type="text"
+                  id="field-payment-terms"
+                  class="text-input h-14 text-sm"
+                  placeholder="Payment due within 14 days of invoice date"
+                  value={defaultInvoice.paymentDetails?.terms}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="field-custom-instructions"
+                class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+              >
+                Custom Transfer Instructions
+              </label>
+              <textarea
+                id="field-custom-instructions"
+                rows="2"
+                class="text-input min-h-[72px] h-auto py-3 text-sm resize-y"
+                placeholder="Please include invoice number in the bank reference field."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+           SECTION 6: Notes & Signature
+           ==================================================================== -->
+          <div class="pt-8 space-y-4">
+            <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                6
+              </span>
+              Notes & Sign-off
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="field-notes"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Client Note & Thank You
+                </label>
+                <textarea
+                  id="field-notes"
+                  rows="3"
+                  class="text-input min-h-[96px] h-auto py-3 text-sm resize-y"
+                  placeholder="Thank you for your business. We appreciate working with you!"
+                >{defaultInvoice.notes}</textarea>
+              </div>
+
+              <div>
+                <label
+                  for="field-signature"
+                  class="block text-xs sm:text-sm font-semibold text-charcoal mb-1.5"
+                >
+                  Authorized Signature / Sign-off Name
+                </label>
+                <input
+                  type="text"
+                  id="field-signature"
+                  class="text-input h-14 text-sm font-serif italic text-base"
+                  placeholder="Type your name as digital signature"
+                />
+                <p class="text-[11px] text-mute mt-1.5">
+                  Typing your name acts as an authorized digital signatory representation on
+                  exported documents.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Live Invoice Preview (Next to form on desktop, toggled/below on mobile) -->
+    <div
+      id="invoice-preview-column"
+      class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
+    >
+      <InvoicePreview />
+    </div>
+  </div>
+
+  <!-- Clear Data Confirmation Modal -->
+  <div
+    id="modal-clear-data"
+    class="fixed inset-0 z-50 bg-ink/60 backdrop-blur-xs flex items-center justify-center p-4 transition-all duration-200 opacity-0 pointer-events-none no-print"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-clear-data-title"
+  >
+    <div class="bg-surface-card border border-hairline rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-4 scale-95 transition-transform duration-200">
+      <div class="h-12 w-12 rounded-2xl bg-accent-danger/10 text-accent-danger flex items-center justify-center">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          <line x1="10" y1="11" x2="10" y2="17"></line>
+          <line x1="14" y1="11" x2="14" y2="17"></line>
+        </svg>
+      </div>
+      <div>
+        <h3 id="modal-clear-data-title" class="text-lg font-bold text-ink font-display">
+          Clear All Stored Data?
+        </h3>
+        <p class="text-xs text-mute mt-1 leading-relaxed">
+          This will permanently delete your saved business details, client list, custom templates,
+          and invoice drafts from this browser. This action cannot be undone.
+        </p>
+      </div>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button
+          type="button"
+          id="btn-cancel-clear-data"
+          class="btn-outline h-10 px-4 text-xs font-semibold rounded-full cursor-pointer hover:bg-surface-soft"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          id="btn-confirm-clear-data"
+          class="h-10 px-4 text-xs font-semibold rounded-full bg-accent-danger text-white hover:bg-accent-danger/90 transition-colors shadow-xs cursor-pointer flex items-center gap-1.5"
+        >
+          <span>Yes, Clear Everything</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Custom Template Modal -->
+  <div
+    id="modal-save-template"
+    class="fixed inset-0 z-50 bg-ink/60 backdrop-blur-xs flex items-center justify-center p-4 transition-all duration-200 opacity-0 pointer-events-none no-print"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-save-template-title"
+  >
+    <div class="bg-surface-card border border-hairline rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-4 scale-95 transition-transform duration-200">
+      <div class="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      </div>
+      <div>
+        <h3 id="modal-save-template-title" class="text-lg font-bold text-ink font-display">
+          Save as Template
+        </h3>
+        <p class="text-xs text-mute mt-1 leading-relaxed">
+          Save your current layout, business profile, line items structure, and terms as a named
+          template for instant re-use.
+        </p>
+      </div>
+      <div>
+        <label for="input-template-name" class="block text-xs font-semibold text-charcoal mb-1">
+          Template Name
+        </label>
+        <input
+          type="text"
+          id="input-template-name"
+          class="text-input h-12 text-sm"
+          placeholder="e.g. Monthly Retainer, Consulting Standard"
+          maxlength="50"
+        />
+      </div>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button
+          type="button"
+          id="btn-cancel-save-template"
+          class="btn-outline h-10 px-4 text-xs font-semibold rounded-full cursor-pointer hover:bg-surface-soft"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          id="btn-confirm-save-template"
+          class="btn-cobalt h-10 px-4 text-xs font-semibold rounded-full shadow-xs cursor-pointer"
+        >
+          <span>Save Template</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Notification Toast (Success & Error feedback, never losing form data) -->
+  <div
+    id="export-toast"
+    class="fixed bottom-6 right-6 z-50 max-w-md w-full px-4 py-3 rounded-2xl shadow-xl border transition-all duration-300 translate-y-24 opacity-0 pointer-events-none flex items-start gap-3 no-print"
+    role="status"
+    aria-live="polite"
+  >
+    <div id="export-toast-icon" class="shrink-0 mt-0.5"></div>
+    <div class="flex-1 space-y-0.5">
+      <p id="export-toast-title" class="text-xs font-bold"></p>
+      <p id="export-toast-message" class="text-xs"></p>
+    </div>
+    <button
+      type="button"
+      id="btn-close-toast"
+      class="text-gray-400 hover:text-gray-700 transition-colors p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md cursor-pointer"
+      aria-label="Close notification"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Load Client Island Controller (Vanilla TS with zero framework runtime overhead) -->
+<script src="../scripts/invoice-form-client.ts"></script>

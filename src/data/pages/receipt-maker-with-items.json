@@ -1,0 +1,188 @@
+{
+  "slug": "receipt-maker-with-items",
+  "metaTitle": "Online Receipt Maker with Items - Free Sales Receipts",
+  "metaDescription": "Free online receipt maker with line items. Create itemized sales receipts, retail cash vouchers, and customer payment receipts with zero watermarks.",
+  "canonical": "https://onlineinvoicecreator.com/receipt-maker-with-items",
+  "badge": "100% Free • Line-by-Line Itemization • Zero Watermarks",
+  "h1": "Online Receipt Maker with Itemized Products",
+  "h1Highlight": "Itemized Products",
+  "intro": "Generate clear, itemized sales receipts with quantities, discounts, and tax breakdowns in seconds. 100% private and watermark-free.",
+  "toolType": "receipt",
+  "trustBadges": [
+    "Itemized Line Items",
+    "Paid in Full Stamp",
+    "Zero Watermarks",
+    "Instant PDF & Print"
+  ],
+  "breadcrumbs": [
+    { "label": "Home", "href": "/" },
+    { "label": "Receipt Generator", "href": "/free-online-receipt-generator" },
+    { "label": "Itemized Receipt Maker" }
+  ],
+  "howTo": {
+    "badge": "Sales Receipt Workflow",
+    "title": "How to Create an Itemized Receipt",
+    "subtitle": "Generate professional itemized receipts for customers in three easy steps.",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Enter Merchant and Customer Details",
+        "description": "Add your store or business name, contact details, transaction date, and customer name or account number.",
+        "tip": "Include your sales tax or business registration number so business customers can claim tax deductions."
+      },
+      {
+        "step": 2,
+        "title": "Add Products and Itemized Services",
+        "description": "Itemize goods sold, quantities, unit prices, discounts, and applicable sales tax rates.",
+        "tip": "Toggle between Itemized, Cash, or Payment receipt modes depending on the transaction type."
+      },
+      {
+        "step": 3,
+        "title": "Download Receipt or Print Thermal Slip",
+        "description": "Download a clean PDF or click Print for an immediate paper receipt slip with an official 'PAID IN FULL' stamp.",
+        "tip": "Save receipts locally or email the downloaded PDF or PNG directly to your customer."
+      }
+    ]
+  },
+  "whatItMustContain": {
+    "badge": "Receipt Compliance",
+    "title": "What an Itemized Receipt Must Contain",
+    "subtitle": "Key elements required for valid expense reimbursement, retail accounting, and tax audits.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules.",
+    "items": [
+      {
+        "title": "Merchant Business Name & Address",
+        "description": "Clear identification of the seller or store, including physical location and contact phone or email.",
+        "badge": "Required"
+      },
+      {
+        "title": "Transaction Date & Receipt Number",
+        "description": "Exact calendar date of payment and a unique sequential receipt number for bookkeeping reconciliation.",
+        "badge": "Required"
+      },
+      {
+        "title": "Line-by-Line Item Breakdown",
+        "description": "Specific names of items or services purchased, individual quantities, and unit prices [Verify with official source: tax authority expense reimbursement documentation rules].",
+        "badge": "Essential"
+      },
+      {
+        "title": "Taxes and Discounts Separated",
+        "description": "Itemized tax rates (such as VAT or state sales tax) and any discounts subtracted from the subtotal.",
+        "badge": "Required"
+      },
+      {
+        "title": "Payment Method and Amount Received",
+        "description": "Notation of the payment mode (Cash, Credit Card, Bank Transfer, or UPI) and confirmation of the total amount received.",
+        "badge": "Required"
+      },
+      {
+        "title": "Proof of Settlement Stamp",
+        "description": "Official confirmation that the transaction is paid in full with zero remaining balance.",
+        "badge": "Standard"
+      }
+    ]
+  },
+  "example": {
+    "title": "Sample Itemized Receipt Breakdown",
+    "scenario": "Boutique Retail Electronics & Audio Gear Sale",
+    "sender": {
+      "name": "SoundWave Audio & Tech Lab",
+      "details": "Store #104 - Market Plaza\n312 Pine Street, Suite 100\nSeattle, WA 98101\nsupport@soundwavetech.com"
+    },
+    "recipient": {
+      "name": "Sarah Jenkins (Walk-in Customer)",
+      "details": "Customer ID: CUST-9182\nPayment Method: Visa Debit (Auth #938210)\nsarah.jenkins@example.com"
+    },
+    "items": [
+      {
+        "description": "Professional Wireless Studio Headphones (Model X-500)",
+        "quantity": 1,
+        "rate": "$249.99",
+        "amount": "$249.99"
+      },
+      {
+        "description": "Gold-Plated 3.5mm to 1/4\" Balanced Audio Cable (3m)",
+        "quantity": 2,
+        "rate": "$24.50",
+        "amount": "$49.00"
+      },
+      {
+        "description": "Extended 2-Year Equipment Protection Plan",
+        "quantity": 1,
+        "rate": "$39.99",
+        "amount": "$39.99"
+      }
+    ],
+    "subtotal": "$338.98",
+    "discount": "$20.00",
+    "tax": "$28.71",
+    "total": "$347.69",
+    "notes": "Thank you for shopping at SoundWave! 30-day return policy with original receipt.",
+    "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "faq": {
+    "badge": "Receipt FAQs",
+    "title": "Itemized Receipt FAQs",
+    "subtitle": "Common questions regarding receipt itemization, tax proofs, and POS formatting.",
+    "items": [
+      {
+        "question": "Why is an itemized receipt better than a credit card slip?",
+        "answer": "A standard card slip only shows a total charged amount. An itemized receipt lists every product, quantity, and tax rate. Employers and tax authorities require itemized receipts to approve business expense reimbursements."
+      },
+      {
+        "question": "Can I use this tool for cash transactions?",
+        "answer": "Yes. Switch to 'Cash' receipt mode to issue a clean payment voucher acknowledging cash received in hand without requiring detailed line items."
+      },
+      {
+        "question": "Is there a watermark on downloaded receipts?",
+        "answer": "No. Online Invoice Creator generates 100% watermark-free documents on all downloads and prints."
+      },
+      {
+        "question": "Can I print receipts directly to a desktop or POS receipt printer?",
+        "answer": "Yes. Click 'Print' to open your browser's native print dialog. You can print to standard desktop printers, thermal slip printers, or save directly as a PDF."
+      }
+    ]
+  },
+  "relatedTools": {
+    "title": "Related Receipt & Invoicing Tools",
+    "subtitle": "Discover our complete range of free billing and payment tools.",
+    "items": [
+      {
+        "title": "Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "General Receipts",
+        "description": "Standard receipt maker supporting Itemized, Cash, and Payment modes."
+      },
+      {
+        "title": "Rent Receipt Generator",
+        "href": "/free-rent-receipt-generator",
+        "badge": "Tenancy Proof",
+        "description": "Monthly rent receipts for landlords and tenants with optional Landlord PAN."
+      },
+      {
+        "title": "Free Online Invoice Generator",
+        "href": "/",
+        "badge": "Bill First",
+        "description": "Need to request payment before receiving money? Create a free invoice."
+      },
+      {
+        "title": "Contractor Invoices",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Labor and materials breakdown for trade and contracting professionals."
+      },
+      {
+        "title": "Freelancer Invoices",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Creators",
+        "description": "Hourly and project billing for freelance designers, developers, and writers."
+      },
+      {
+        "title": "Excel Invoice Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheets",
+        "description": "Instant browser invoicing without corrupt spreadsheet formulas or macros."
+      }
+    ]
+  }
+}

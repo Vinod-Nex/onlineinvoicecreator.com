@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Contact' }];
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Support - Online Invoice Creator',
+  description:
+    'Contact the Online Invoice Creator team for support, feature feedback, partnership inquiries, and bug reports.',
+  url: 'https://onlineinvoicecreator.com/contact',
+};
+---
+
+<BaseLayout
+  title="Contact Support & Feedback | Online Invoice Creator"
+  description="Contact the Online Invoice Creator team. Send feedback, suggest templates, report bugs, or reach us directly via email."
+  canonical="https://onlineinvoicecreator.com/contact"
+  schema={contactSchema}
+>
+  <!-- Breadcrumb Navigation -->
+  <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+    <!-- Header -->
+    <header class="space-y-4 text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary">
+        <span class="flex h-2 w-2 rounded-full bg-primary"></span>
+        <span>Support & Feedback</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display leading-[1.1]">
+        Contact Support & <span class="text-primary">Feedback</span>
+      </h1>
+      <p class="text-base sm:text-lg text-mute max-w-2xl leading-relaxed">
+        Have a feature suggestion, template request, or bug report? We read and reply to every
+        message.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left Column: Interactive Contact Form -->
+      <div class="lg:col-span-7">
+        <div class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-card space-y-6">
+          <form id="contact-form" action="/api/contact" method="POST" class="space-y-4" novalidate>
+            <!-- Honeypot anti-spam field (hidden from genuine users) -->
+            <div class="hidden" aria-hidden="true">
+              <label for="contact-hp">Leave this field empty</label>
+              <input type="text" id="contact-hp" name="_gotcha" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <!-- Name Field -->
+            <div class="space-y-1.5">
+              <label for="contact-name" class="block text-xs font-bold text-ink">
+                Your Name <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                required
+                placeholder="Jane Doe"
+                class="w-full h-11 px-3.5 rounded-xl bg-canvas border border-hairline text-ink text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-hidden"
+              />
+            </div>
+
+            <!-- Email Field -->
+            <div class="space-y-1.5">
+              <label for="contact-email" class="block text-xs font-bold text-ink">
+                Email Address <span class="text-accent-danger">*</span>
+              </label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                required
+                placeholder="jane@example.com"
+                class="w-full h-11 px-3.5 rounded-xl bg-canvas border border-hairline text-ink text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-hidden"
+              />
+            </div>
+
+            <!-- Subject Field -->
+            <div class="space-y-1.5">
+              <label for="contact-subject" class="block text-xs font-bold text-ink">
+                Subject <span class="text-accent-danger">*</span>
+              </label>
+              <select
+                id="contact-subject"
+                name="subject"
+                required
+                class="w-full h-11 px-3.5 rounded-xl bg-canvas border border-hairline text-ink text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-hidden"
+              >
+                <option value="General Feedback">General Feedback & Ideas</option>
+                <option value="Template Request">Request a New Template or Region</option>
+                <option value="Bug Report">Report a Bug or Calculation Issue</option>
+                <option value="Privacy Inquiry">Privacy & Data Question</option>
+                <option value="Partnership">Commercial Partnership Inquiry</option>
+              </select>
+            </div>
+
+            <!-- Message Field -->
+            <div class="space-y-1.5">
+              <label for="contact-message" class="block text-xs font-bold text-ink">
+                Message <span class="text-accent-danger">*</span>
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                required
+                placeholder="Write your message here..."
+                class="w-full p-3.5 rounded-xl bg-canvas border border-hairline text-ink text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-hidden leading-relaxed resize-y"
+              ></textarea>
+            </div>
+
+            <!-- Cloudflare Turnstile Spam Protection Widget Container -->
+            <div class="space-y-1">
+              <div
+                class="cf-turnstile"
+                id="cf-turnstile-container"
+                data-sitekey="1x00000000000000000000AA"
+                data-theme="auto"
+              ></div>
+              <p class="text-[11px] text-mute">
+                Protected by Cloudflare Turnstile against automated spam.
+              </p>
+            </div>
+
+            <!-- Submission Status Alerts -->
+            <div
+              id="contact-alert-success"
+              class="hidden p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs space-y-1"
+            >
+              <p class="font-bold flex items-center gap-1.5">
+                <svg
+                  class="h-4 w-4 shrink-0 text-emerald-600"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Message Sent Successfully</span>
+              </p>
+              <p>
+                Thank you for reaching out! We will review your message and reply as soon as
+                possible.
+              </p>
+            </div>
+
+            <div
+              id="contact-alert-error"
+              class="hidden p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-700 dark:text-red-300 text-xs space-y-2"
+            >
+              <p class="font-bold" id="contact-error-message">
+                Unable to send message via the serverless endpoint.
+              </p>
+              <p>You can send your message directly via email using our fallback link below.</p>
+              <a
+                id="btn-mailto-fallback"
+                href="mailto:support@onlineinvoicecreator.com"
+                class="inline-flex items-center gap-1.5 font-bold underline hover:text-red-900 dark:hover:text-red-100"
+              >
+                Send via Email Client &rarr;
+              </a>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              id="btn-submit-contact"
+              class="w-full h-12 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary-hover active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <span id="btn-submit-text">Send Message</span>
+              <svg id="btn-submit-icon" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right Column: Direct Mailto & Help Info -->
+      <div class="lg:col-span-5 space-y-6">
+        <!-- Direct Email Card (Mailto Fallback) -->
+        <div class="p-6 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-3">
+          <div class="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-bold">
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <h2 class="text-lg font-bold text-ink">Prefer to Email Directly?</h2>
+          <p class="text-xs sm:text-sm text-mute leading-relaxed">
+            If you prefer not using the contact form or have an email attachment to send, write
+            directly to our support desk:
+          </p>
+          <div class="pt-1">
+            <a
+              href="mailto:support@onlineinvoicecreator.com"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-soft hover:bg-surface-soft/80 border border-hairline text-sm font-semibold text-primary transition-all shadow-2xs"
+            >
+              <span>support@onlineinvoicecreator.com</span>
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+              </svg>
+            </a>
+          </div>
+          <p class="text-[11px] text-mute pt-1">
+            We typically respond within 24–48 business hours.
+          </p>
+        </div>
+
+        <!-- Privacy & Local Data Note -->
+        <div class="p-6 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-2">
+          <h3 class="text-sm font-bold text-ink flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-accent-teal" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>Confidentiality Guarantee</span>
+          </h3>
+          <p class="text-xs text-mute leading-relaxed">
+            Your contact details are used solely to reply to your inquiry. We never share or sell
+            contact details to marketing lists or third parties. Read our{' '}
+            <a href="/privacy" class="text-primary underline">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="p-6 rounded-3xl bg-surface-soft border border-hairline space-y-2 text-xs">
+          <h4 class="font-bold text-ink">Need a Document Immediately?</h4>
+          <ul class="space-y-1.5 text-mute">
+            <li>
+              &bull;{' '}
+              <a href="/" class="text-primary hover:underline">
+                Create a Free Invoice
+              </a>
+            </li>
+            <li>
+              &bull;{' '}
+              <a href="/free-online-receipt-generator" class="text-primary hover:underline">
+                Generate a Payment Receipt
+              </a>
+            </li>
+            <li>
+              &bull;{' '}
+              <a href="/free-rent-receipt-generator" class="text-primary hover:underline">
+                Generate an HRA Rent Receipt
+              </a>
+            </li>
+            <li>
+              &bull;{' '}
+              <a href="/about" class="text-primary hover:underline">
+                About Online Invoice Creator
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Turnstile Script Loading & Form Handling Script -->
+<script>
+  // Dynamically load Cloudflare Turnstile script
+  (function loadTurnstile() {
+    if (!document.querySelector('script[src*="turnstile"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=true';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  })();
+
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+  const btnSubmit = document.getElementById('btn-submit-contact') as HTMLButtonElement | null;
+  const btnSubmitText = document.getElementById('btn-submit-text');
+  const alertSuccess = document.getElementById('contact-alert-success');
+  const alertError = document.getElementById('contact-alert-error');
+  const errorMsg = document.getElementById('contact-error-message');
+  const mailtoFallback = document.getElementById('btn-mailto-fallback') as HTMLAnchorElement | null;
+
+  if (contactForm && btnSubmit) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Check honeypot anti-spam
+      const hp = (document.getElementById('contact-hp') as HTMLInputElement)?.value;
+      if (hp) {
+        // Silently reject bots
+        if (alertSuccess) alertSuccess.classList.remove('hidden');
+        contactForm.reset();
+        return;
+      }
+
+      const name = (document.getElementById('contact-name') as HTMLInputElement)?.value.trim();
+      const email = (document.getElementById('contact-email') as HTMLInputElement)?.value.trim();
+      const subject = (document.getElementById('contact-subject') as HTMLSelectElement)?.value;
+      const message = (
+        document.getElementById('contact-message') as HTMLTextAreaElement
+      )?.value.trim();
+
+      if (!name || !email || !message) {
+        if (alertError && errorMsg) {
+          alertError.classList.remove('hidden');
+          errorMsg.textContent = 'Please fill in all required fields.';
+        }
+        return;
+      }
+
+      // Prepare mailto fallback link with prefilled subject and body
+      const mailtoUrl = `mailto:support@onlineinvoicecreator.com?subject=${encodeURIComponent(
+        `[Online Invoice Creator] ${subject} - ${name}`
+      )}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+      if (mailtoFallback) {
+        mailtoFallback.href = mailtoUrl;
+      }
+
+      // Hide prior alerts and set loading state
+      if (alertSuccess) alertSuccess.classList.add('hidden');
+      if (alertError) alertError.classList.add('hidden');
+      btnSubmit.disabled = true;
+      if (btnSubmitText) btnSubmitText.textContent = 'Sending Message...';
+
+      try {
+        // Collect form data including Turnstile response token if present
+        const formData = new FormData(contactForm);
+        const payload: Record<string, string> = {};
+        formData.forEach((val, key) => {
+          if (typeof val === 'string') payload[key] = val;
+        });
+
+        // Post to Cloudflare Worker endpoint (built in Phase 18)
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+          if (alertSuccess) alertSuccess.classList.remove('hidden');
+          contactForm.reset();
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          const messageText =
+            errData.error ||
+            'Serverless contact service unavailable. Please use the direct email link below.';
+          if (alertError && errorMsg) {
+            alertError.classList.remove('hidden');
+            errorMsg.textContent = messageText;
+          }
+        }
+      } catch (err) {
+        console.warn('Contact form worker fetch error, presenting mailto fallback:', err);
+        if (alertError && errorMsg) {
+          alertError.classList.remove('hidden');
+          errorMsg.textContent =
+            'Could not connect to the contact endpoint. Please click the direct email link below to send your message.';
+        }
+      } finally {
+        btnSubmit.disabled = false;
+        if (btnSubmitText) btnSubmitText.textContent = 'Send Message';
+      }
+    });
+  }
+</script>

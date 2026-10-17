@@ -1,0 +1,15 @@
+dist/
+.astro/
+node_modules/
+.git/
+.agents/
+.claude/
+.crush/
+.aider-desk/
+.qwen/
+package-lock.json
+*.md
+docs/
+test-results/
+playwright-report/
+

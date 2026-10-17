@@ -1,0 +1,30 @@
+# Cloudflare Workers configuration for onlineinvoicecreator-api
+name = "onlineinvoicecreator-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Public environment variables (non-sensitive)
+[vars]
+DOMAIN = "onlineinvoicecreator.com"
+ENVIRONMENT = "production"
+RATE_LIMIT_CONTACT_MAX = "5"
+RATE_LIMIT_CONTACT_WINDOW_SEC = "600"
+RATE_LIMIT_INDEXNOW_MAX = "20"
+RATE_LIMIT_INDEXNOW_WINDOW_SEC = "60"
+EMAIL_PROVIDER = "resend"
+CONTACT_EMAIL_TO = "support@onlineinvoicecreator.com"
+CONTACT_EMAIL_FROM = "contact@onlineinvoicecreator.com"
+
+# Sensitive secrets managed via wrangler secret (Do NOT put plaintext values here):
+#
+# Run the following commands to provision production secrets:
+#   npx wrangler secret put TURNSTILE_SECRET_KEY --config workers/api/wrangler.toml
+#   npx wrangler secret put INDEXNOW_KEY --config workers/api/wrangler.toml
+#   npx wrangler secret put INDEXNOW_ADMIN_SECRET --config workers/api/wrangler.toml
+#   npx wrangler secret put RESEND_API_KEY --config workers/api/wrangler.toml
+#
+# Optional provider alternatives:
+#   npx wrangler secret put POSTMARK_SERVER_TOKEN --config workers/api/wrangler.toml
+#   npx wrangler secret put SENDGRID_API_KEY --config workers/api/wrangler.toml
+#   npx wrangler secret put EMAIL_WEBHOOK_URL --config workers/api/wrangler.toml
