@@ -1,0 +1,21 @@
+# Cloudflare Pages Redirect Rules
+
+# 1. Force HTTPS and redirect www to canonical apex domain
+https://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!
+http://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!
+http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!
+
+# 2. Canonical trailing slash normalization (enforce trailingSlash: 'never')
+/about/ /about 301
+/contact/ /contact 301
+/privacy/ /privacy 301
+/terms/ /terms 301
+/contractor-invoice-template/ /contractor-invoice-template 301
+/free-online-receipt-generator/ /free-online-receipt-generator 301
+/free-rent-receipt-generator/ /free-rent-receipt-generator 301
+/invoice-generator-excel/ /invoice-generator-excel 301
+/invoice-generator-for-freelancers/ /invoice-generator-for-freelancers 301
+/photography-invoice-generator/ /photography-invoice-generator 301
+/receipt-maker-with-items/ /receipt-maker-with-items 301
+/tax-invoice-template-australia/ /tax-invoice-template-australia 301
+/style-guide/ /style-guide 301
