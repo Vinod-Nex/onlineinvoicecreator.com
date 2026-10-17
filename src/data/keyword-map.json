@@ -1,0 +1,2868 @@
+{
+  "$schema": "./keyword-map.schema.json",
+  "meta": {
+    "description": "Targeted SEO keyword map and search volume cluster registry",
+    "totalKeywordsProcessed": 1285,
+    "totalClustersDetected": 164,
+    "totalPagesMapped": 13,
+    "totalUniqueKeywordsAssigned": 150,
+    "uniquenessCheck": "Passed - 0 duplicate keyword assignments"
+  },
+  "pages": {
+    "/": {
+      "path": "/",
+      "pageTitle": "Free Online Invoice Generator | 100% Free & Private",
+      "primaryKeyword": "invoice generator",
+      "targetVolume": 500000,
+      "competitionIndex": 14,
+      "competition": "Low",
+      "clusterKey": "500000_14",
+      "h2Phrases": [
+        {
+          "phrase": "free invoice generator",
+          "volume": 50000,
+          "competitionIndex": 32,
+          "competition": "Low"
+        },
+        {
+          "phrase": "create invoice free",
+          "volume": 50000,
+          "competitionIndex": 32,
+          "competition": "Low"
+        },
+        {
+          "phrase": "free online invoice generator",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice maker",
+          "volume": 50000,
+          "competitionIndex": 75,
+          "competition": "High"
+        },
+        {
+          "phrase": "invoice builder",
+          "volume": 50000,
+          "competitionIndex": 75,
+          "competition": "High"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "online bill generator free",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice generator with logo",
+          "volume": 50000,
+          "competitionIndex": 75,
+          "competition": "High"
+        },
+        {
+          "phrase": "create online invoice for free",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "free online bill generator",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "invoice generator tool",
+          "volume": 500000,
+          "competitionIndex": 14,
+          "competition": "Low"
+        },
+        {
+          "phrase": "free bill generator",
+          "volume": 50000,
+          "competitionIndex": 32,
+          "competition": "Low"
+        },
+        {
+          "phrase": "freeinvoice generator",
+          "volume": 50000,
+          "competitionIndex": 32,
+          "competition": "Low"
+        },
+        {
+          "phrase": "create a invoice online free",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice creator free online",
+          "volume": 5000,
+          "competitionIndex": 41,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "online invoice generator",
+          "volume": 5000,
+          "competitionIndex": 58,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "online invoice maker",
+          "volume": 5000,
+          "competitionIndex": 58,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "online bill generator",
+          "volume": 5000,
+          "competitionIndex": 58,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/free-online-receipt-generator": {
+      "path": "/free-online-receipt-generator",
+      "pageTitle": "Free Online Receipt Generator - Cash & Itemized",
+      "primaryKeyword": "online receipt generator",
+      "targetVolume": 5000,
+      "competitionIndex": 45,
+      "competition": "Medium",
+      "clusterKey": "5000_45",
+      "h2Phrases": [
+        {
+          "phrase": "receipt generator",
+          "volume": 5000,
+          "competitionIndex": 55,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "online receipt maker",
+          "volume": 5000,
+          "competitionIndex": 59,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "free receipt maker",
+          "volume": 5000,
+          "competitionIndex": 67,
+          "competition": "High"
+        },
+        {
+          "phrase": "receipt generator free",
+          "volume": 5000,
+          "competitionIndex": 67,
+          "competition": "High"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "generate a receipt online",
+          "volume": 5000,
+          "competitionIndex": 45,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "receipt maker online free",
+          "volume": 5000,
+          "competitionIndex": 62,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "receipt creator free",
+          "volume": 5000,
+          "competitionIndex": 67,
+          "competition": "High"
+        },
+        {
+          "phrase": "cash receipt generator",
+          "volume": 500,
+          "competitionIndex": 55,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "generator receipt",
+          "volume": 5000,
+          "competitionIndex": 55,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "online receipt creator",
+          "volume": 5000,
+          "competitionIndex": 59,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "receipts generator free",
+          "volume": 5000,
+          "competitionIndex": 67,
+          "competition": "High"
+        },
+        {
+          "phrase": "simple receipt generator",
+          "volume": 500,
+          "competitionIndex": 55,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "custom receipt generator",
+          "volume": 500,
+          "competitionIndex": 36,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "custom receipt maker",
+          "volume": 500,
+          "competitionIndex": 36,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/free-rent-receipt-generator": {
+      "path": "/free-rent-receipt-generator",
+      "pageTitle": "Free Rent Receipt Generator for Tenants & Landlords",
+      "primaryKeyword": "free rent receipt generator",
+      "targetVolume": 500,
+      "competitionIndex": 3,
+      "competition": "Low",
+      "clusterKey": "500_3",
+      "h2Phrases": [
+        {
+          "phrase": "free rent receipt maker",
+          "volume": 500,
+          "competitionIndex": 3,
+          "competition": "Low"
+        },
+        {
+          "phrase": "rental receipt generator online",
+          "volume": 50,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "rent receipt generator for hra",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "house rent receipt generator online",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "hra rent receipt generator",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "rent receipt format generator",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "online rent receipt without watermark",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "rent receipt generator monthly",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "generate rent receipt for hra",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "online rent slip generator",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "rent receipt generator yearly",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "home rent receipt generator",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "house rent slip generator",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        },
+        {
+          "phrase": "create rent slip online",
+          "volume": 0,
+          "competitionIndex": 0,
+          "competition": "Unknown"
+        }
+      ]
+    },
+    "/receipt-maker-with-items": {
+      "path": "/receipt-maker-with-items",
+      "pageTitle": "Online Receipt Maker with Items - Free Sales Receipts",
+      "primaryKeyword": "receipt maker",
+      "targetVolume": 50000,
+      "competitionIndex": 59,
+      "competition": "Medium",
+      "clusterKey": "50000_59",
+      "h2Phrases": [
+        {
+          "phrase": "itemized receipt maker",
+          "volume": 50,
+          "competitionIndex": 73,
+          "competition": "High"
+        },
+        {
+          "phrase": "sales receipt maker",
+          "volume": 50,
+          "competitionIndex": 67,
+          "competition": "High"
+        },
+        {
+          "phrase": "retail receipt generator",
+          "volume": 50,
+          "competitionIndex": 42,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "itemized receipt generator",
+          "volume": 50,
+          "competitionIndex": 61,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "receipt maker with items",
+          "volume": 50,
+          "competitionIndex": 19,
+          "competition": "Low"
+        },
+        {
+          "phrase": "create receipt with items",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "pos receipt maker",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "itemized sales receipt",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "receipt editor",
+          "volume": 500,
+          "competitionIndex": 50,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "create receipt",
+          "volume": 500,
+          "competitionIndex": 54,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "receipt maker app",
+          "volume": 500,
+          "competitionIndex": 56,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "receipt creator app",
+          "volume": 500,
+          "competitionIndex": 56,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "email receipt generator",
+          "volume": 500,
+          "competitionIndex": 56,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/invoice-generator-for-freelancers": {
+      "path": "/invoice-generator-for-freelancers",
+      "pageTitle": "Invoice Generator for Freelancers | Free & Private",
+      "primaryKeyword": "invoice generator for freelancers",
+      "targetVolume": 500,
+      "competitionIndex": 46,
+      "competition": "Medium",
+      "clusterKey": "500_46",
+      "h2Phrases": [
+        {
+          "phrase": "freelance invoice",
+          "volume": 500,
+          "competitionIndex": 39,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "freelance invoice generator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "freelance invoice template",
+          "volume": 5000,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "freelancer billing template",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "invoice for freelance work",
+          "volume": 500,
+          "competitionIndex": 77,
+          "competition": "High"
+        },
+        {
+          "phrase": "freelancer invoice maker",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice template for freelancers",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "billing for freelancers",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "freelance design invoice",
+          "volume": 50,
+          "competitionIndex": 100,
+          "competition": "High"
+        },
+        {
+          "phrase": "freelance contractor billing",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "freelancer hourly billing",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "consultant invoice template",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/invoice-generator-excel": {
+      "path": "/invoice-generator-excel",
+      "pageTitle": "Excel Invoice Generator Alternative - Free PDF Creator",
+      "primaryKeyword": "invoice generator excel",
+      "targetVolume": 500,
+      "competitionIndex": 43,
+      "competition": "Medium",
+      "clusterKey": "500_43",
+      "h2Phrases": [
+        {
+          "phrase": "generate an invoice from excel",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice maker excel",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "excel invoice maker",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "generate invoice in excel",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "invoice creator excel",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "bill generator excel",
+          "volume": 500,
+          "competitionIndex": 43,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "excel invoice generator template",
+          "volume": 50,
+          "competitionIndex": 0,
+          "competition": "Low"
+        },
+        {
+          "phrase": "excel receipt generator",
+          "volume": 50,
+          "competitionIndex": 0,
+          "competition": "Low"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "self employed invoice template excel",
+          "volume": 50,
+          "competitionIndex": 0,
+          "competition": "Low"
+        }
+      ]
+    },
+    "/contractor-invoice-template": {
+      "path": "/contractor-invoice-template",
+      "pageTitle": "Free Contractor Invoice Template - Construction & Trades",
+      "primaryKeyword": "contractor invoice template",
+      "targetVolume": 5000,
+      "competitionIndex": 96,
+      "competition": "High",
+      "clusterKey": "5000_96",
+      "h2Phrases": [
+        {
+          "phrase": "contractor invoice example",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "invoice forms for contractors",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "sample contractor invoice",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "contractor billing template",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "contractor bill template",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "contractor bill format",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "invoice for contractor template",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "contractor billing invoice template",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "format of contractor bill",
+          "volume": 5000,
+          "competitionIndex": 96,
+          "competition": "High"
+        },
+        {
+          "phrase": "independent contractor invoice template",
+          "volume": 500,
+          "competitionIndex": 99,
+          "competition": "High"
+        },
+        {
+          "phrase": "subcontractor invoice template",
+          "volume": 500,
+          "competitionIndex": 79,
+          "competition": "High"
+        }
+      ]
+    },
+    "/photography-invoice-generator": {
+      "path": "/photography-invoice-generator",
+      "pageTitle": "Photography Invoice Generator - Studio & Commercial",
+      "primaryKeyword": "photography invoice",
+      "targetVolume": 500,
+      "competitionIndex": 86,
+      "competition": "High",
+      "clusterKey": "500_86",
+      "h2Phrases": [
+        {
+          "phrase": "photographer invoice template",
+          "volume": 500,
+          "competitionIndex": 92,
+          "competition": "High"
+        },
+        {
+          "phrase": "photographer invoice example",
+          "volume": 500,
+          "competitionIndex": 92,
+          "competition": "High"
+        },
+        {
+          "phrase": "photography invoice template",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "photography invoice example",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "photography invoice sample",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "photography bill format",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "photography invoice format",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "bill format for photography",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "photography invoice template word",
+          "volume": 500,
+          "competitionIndex": 95,
+          "competition": "High"
+        },
+        {
+          "phrase": "freelance photography invoice",
+          "volume": 50,
+          "competitionIndex": 100,
+          "competition": "High"
+        },
+        {
+          "phrase": "wedding photography invoice template",
+          "volume": 50,
+          "competitionIndex": 81,
+          "competition": "High"
+        }
+      ]
+    },
+    "/tax-invoice-template-australia": {
+      "path": "/tax-invoice-template-australia",
+      "pageTitle": "Tax Invoice Template Australia | ATO Compliant (GST)",
+      "primaryKeyword": "invoice template australia",
+      "targetVolume": 5000,
+      "competitionIndex": 72,
+      "competition": "High",
+      "clusterKey": "5000_72",
+      "h2Phrases": [
+        {
+          "phrase": "tax invoice template australia ato",
+          "volume": 500,
+          "competitionIndex": 25,
+          "competition": "Low"
+        },
+        {
+          "phrase": "free tax invoice template australia",
+          "volume": 500,
+          "competitionIndex": 58,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "australian tax invoice template word",
+          "volume": 500,
+          "competitionIndex": 65,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "australian invoice generator",
+          "volume": 500,
+          "competitionIndex": 67,
+          "competition": "High"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "invoice template australia no gst",
+          "volume": 500,
+          "competitionIndex": 49,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "free invoice template australia",
+          "volume": 500,
+          "competitionIndex": 61,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "tax invoice format australia",
+          "volume": 500,
+          "competitionIndex": 76,
+          "competition": "High"
+        },
+        {
+          "phrase": "simple tax invoice template australia",
+          "volume": 50,
+          "competitionIndex": 0,
+          "competition": "Low"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "australian invoice example",
+          "volume": 5000,
+          "competitionIndex": 72,
+          "competition": "High"
+        },
+        {
+          "phrase": "sample invoice template australia",
+          "volume": 5000,
+          "competitionIndex": 72,
+          "competition": "High"
+        },
+        {
+          "phrase": "australian invoice sample",
+          "volume": 5000,
+          "competitionIndex": 72,
+          "competition": "High"
+        },
+        {
+          "phrase": "tax invoice template australia",
+          "volume": 500,
+          "competitionIndex": 76,
+          "competition": "High"
+        }
+      ]
+    },
+    "/about": {
+      "path": "/about",
+      "pageTitle": "About Us | Online Invoice Creator",
+      "primaryKeyword": "about online invoice creator",
+      "targetVolume": 100,
+      "competitionIndex": 10,
+      "competition": "Low",
+      "clusterKey": "100_10",
+      "h2Phrases": [
+        {
+          "phrase": "free private invoice generator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "client side invoice creator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "no server invoice generator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "watermark free invoice builder",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "browser based invoice creator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "secure invoice generator tool",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/contact": {
+      "path": "/contact",
+      "pageTitle": "Contact Support & Feedback | Online Invoice Creator",
+      "primaryKeyword": "contact online invoice creator",
+      "targetVolume": 100,
+      "competitionIndex": 10,
+      "competition": "Low",
+      "clusterKey": "100_10",
+      "h2Phrases": [
+        {
+          "phrase": "invoice generator support",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "template feedback",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "report calculation issue",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "invoice tool feedback",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "invoice creator customer service",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "billing software help desk",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/privacy": {
+      "path": "/privacy",
+      "pageTitle": "Privacy Policy | Online Invoice Creator",
+      "primaryKeyword": "invoice generator privacy policy",
+      "targetVolume": 100,
+      "competitionIndex": 10,
+      "competition": "Low",
+      "clusterKey": "100_10",
+      "h2Phrases": [
+        {
+          "phrase": "local first invoice generator privacy",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "browser data storage invoicing",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "secure invoice generation",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "zero server data storage",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "client confidentiality invoice maker",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "gdpr compliant invoice creator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ]
+    },
+    "/terms": {
+      "path": "/terms",
+      "pageTitle": "Terms of Service | Online Invoice Creator",
+      "primaryKeyword": "invoice generator terms of service",
+      "targetVolume": 100,
+      "competitionIndex": 10,
+      "competition": "Low",
+      "clusterKey": "100_10",
+      "h2Phrases": [
+        {
+          "phrase": "invoice maker terms of use",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "commercial invoice usage guidelines",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "faqPhrases": [
+        {
+          "phrase": "document generation legal disclaimer",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "acceptable invoicing practices",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ],
+      "supportingPhrases": [
+        {
+          "phrase": "legal terms online invoice creator",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        },
+        {
+          "phrase": "commercial document generator policy",
+          "volume": 500,
+          "competitionIndex": 40,
+          "competition": "Medium"
+        }
+      ]
+    }
+  },
+  "clusters": [
+    {
+      "clusterKey": "500000_14",
+      "volume": 500000,
+      "competitionIndex": 14,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["invoice generator", "invoice generator tool"]
+    },
+    {
+      "clusterKey": "50000_32",
+      "volume": 50000,
+      "competitionIndex": 32,
+      "competition": "Low",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "free invoice generator",
+        "create invoice free",
+        "free bill generator",
+        "freeinvoice generator"
+      ]
+    },
+    {
+      "clusterKey": "50000_59",
+      "volume": 50000,
+      "competitionIndex": 59,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt maker"]
+    },
+    {
+      "clusterKey": "50000_75",
+      "volume": 50000,
+      "competitionIndex": 75,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": ["invoice maker", "invoice builder", "invoice generator with logo"]
+    },
+    {
+      "clusterKey": "5000_41",
+      "volume": 5000,
+      "competitionIndex": 41,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "free online invoice generator",
+        "online bill generator free",
+        "create a invoice online free",
+        "free online bill generator",
+        "invoice creator free online"
+      ]
+    },
+    {
+      "clusterKey": "5000_45",
+      "volume": 5000,
+      "competitionIndex": 45,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["online receipt generator", "generate a receipt online"]
+    },
+    {
+      "clusterKey": "5000_55",
+      "volume": 5000,
+      "competitionIndex": 55,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["receipt generator", "generator receipt"]
+    },
+    {
+      "clusterKey": "5000_58",
+      "volume": 5000,
+      "competitionIndex": 58,
+      "competition": "Medium",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "online invoice generator",
+        "online invoice maker",
+        "online bill generator",
+        "online invoice builder",
+        "invoice generate online"
+      ]
+    },
+    {
+      "clusterKey": "5000_59",
+      "volume": 5000,
+      "competitionIndex": 59,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["online receipt maker", "online receipt creator"]
+    },
+    {
+      "clusterKey": "5000_62",
+      "volume": 5000,
+      "competitionIndex": 62,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt maker online free"]
+    },
+    {
+      "clusterKey": "5000_63",
+      "volume": 5000,
+      "competitionIndex": 63,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "invoice template generator",
+        "invoice template maker",
+        "invoice template creator"
+      ]
+    },
+    {
+      "clusterKey": "5000_67",
+      "volume": 5000,
+      "competitionIndex": 67,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "free receipt maker",
+        "receipt generator free",
+        "receipt creator free",
+        "receipts generator free"
+      ]
+    },
+    {
+      "clusterKey": "5000_72",
+      "volume": 5000,
+      "competitionIndex": 72,
+      "competition": "High",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "free invoice maker",
+        "free invoice builder",
+        "free bill maker",
+        "freeinvoice maker",
+        "invoice template australia"
+      ]
+    },
+    {
+      "clusterKey": "5000_78",
+      "volume": 5000,
+      "competitionIndex": 78,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice creator"]
+    },
+    {
+      "clusterKey": "5000_95",
+      "volume": 5000,
+      "competitionIndex": 95,
+      "competition": "High",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "freelance invoice template",
+        "freelance writer invoice template",
+        "freelance invoice example",
+        "freelance billing template",
+        "freelance bill template"
+      ]
+    },
+    {
+      "clusterKey": "5000_96",
+      "volume": 5000,
+      "competitionIndex": 96,
+      "competition": "High",
+      "keywordCount": 10,
+      "sampleKeywords": [
+        "contractor invoice template",
+        "contractor invoice example",
+        "invoice forms for contractors",
+        "sample contractor invoice",
+        "contractor billing template"
+      ]
+    },
+    {
+      "clusterKey": "5000_97",
+      "volume": 5000,
+      "competitionIndex": 97,
+      "competition": "High",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "construction invoice template",
+        "sample construction invoice",
+        "construction invoice template word",
+        "construction billing format",
+        "construction billing invoice template"
+      ]
+    },
+    {
+      "clusterKey": "500_1",
+      "volume": 500,
+      "competitionIndex": 1,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice simple estimate maker"]
+    },
+    {
+      "clusterKey": "500_3",
+      "volume": 500,
+      "competitionIndex": 3,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["free rent receipt generator", "free rent receipt maker"]
+    },
+    {
+      "clusterKey": "500_7",
+      "volume": 500,
+      "competitionIndex": 7,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["online invoice tool"]
+    },
+    {
+      "clusterKey": "500_14",
+      "volume": 500,
+      "competitionIndex": 14,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice software for freelancers"]
+    },
+    {
+      "clusterKey": "500_15",
+      "volume": 500,
+      "competitionIndex": 15,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["contractor invoicing software"]
+    },
+    {
+      "clusterKey": "500_18",
+      "volume": 500,
+      "competitionIndex": 18,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["online invoice creator"]
+    },
+    {
+      "clusterKey": "500_25",
+      "volume": 500,
+      "competitionIndex": 25,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["cab receipt generator", "tax invoice template australia ato"]
+    },
+    {
+      "clusterKey": "500_27",
+      "volume": 500,
+      "competitionIndex": 27,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["free invoice tool"]
+    },
+    {
+      "clusterKey": "500_29",
+      "volume": 500,
+      "competitionIndex": 29,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["invoice generator app", "bill generator app"]
+    },
+    {
+      "clusterKey": "500_31",
+      "volume": 500,
+      "competitionIndex": 31,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["gerador de recibo"]
+    },
+    {
+      "clusterKey": "500_36",
+      "volume": 500,
+      "competitionIndex": 36,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "free online receipt generator",
+        "custom receipt generator",
+        "custom receipt maker"
+      ]
+    },
+    {
+      "clusterKey": "500_39",
+      "volume": 500,
+      "competitionIndex": 39,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["freelance invoice", "gerador de recibo online"]
+    },
+    {
+      "clusterKey": "500_43",
+      "volume": 500,
+      "competitionIndex": 43,
+      "competition": "Medium",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "invoice generator excel",
+        "generate an invoice from excel",
+        "invoice maker excel",
+        "excel invoice maker",
+        "invoice creator excel"
+      ]
+    },
+    {
+      "clusterKey": "500_45",
+      "volume": 500,
+      "competitionIndex": 45,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["construction invoice software", "generador de recibos"]
+    },
+    {
+      "clusterKey": "500_46",
+      "volume": 500,
+      "competitionIndex": 46,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice generator for freelancers"]
+    },
+    {
+      "clusterKey": "500_47",
+      "volume": 500,
+      "competitionIndex": 47,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["gerador recibo de pagamento"]
+    },
+    {
+      "clusterKey": "500_49",
+      "volume": 500,
+      "competitionIndex": 49,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "invoice generator software",
+        "invoice generator program",
+        "bill generator software",
+        "invoice template australia no gst"
+      ]
+    },
+    {
+      "clusterKey": "500_50",
+      "volume": 500,
+      "competitionIndex": 50,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt editor"]
+    },
+    {
+      "clusterKey": "500_52",
+      "volume": 500,
+      "competitionIndex": 52,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice generator com"]
+    },
+    {
+      "clusterKey": "500_54",
+      "volume": 500,
+      "competitionIndex": 54,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": ["create receipt", "1099 invoice template", "sample 1099 invoice"]
+    },
+    {
+      "clusterKey": "500_55",
+      "volume": 500,
+      "competitionIndex": 55,
+      "competition": "Medium",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "invoice maker software",
+        "invoice creator software",
+        "bill maker software",
+        "simple receipt generator",
+        "cash receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "500_56",
+      "volume": 500,
+      "competitionIndex": 56,
+      "competition": "Medium",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "pdf invoice generator",
+        "receipt maker app",
+        "pdf invoice maker",
+        "receipt creator app",
+        "invoice creator pdf"
+      ]
+    },
+    {
+      "clusterKey": "500_57",
+      "volume": 500,
+      "competitionIndex": 57,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["hotel receipt generator"]
+    },
+    {
+      "clusterKey": "500_58",
+      "volume": 500,
+      "competitionIndex": 58,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["free tax invoice template australia", "generador de recibos de pago"]
+    },
+    {
+      "clusterKey": "500_60",
+      "volume": 500,
+      "competitionIndex": 60,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["paid receipt generator", "payment receipt generator"]
+    },
+    {
+      "clusterKey": "500_61",
+      "volume": 500,
+      "competitionIndex": 61,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "free invoice template generator",
+        "free invoice maker template",
+        "free invoice template maker",
+        "free invoice template australia"
+      ]
+    },
+    {
+      "clusterKey": "500_63",
+      "volume": 500,
+      "competitionIndex": 63,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["google invoice maker"]
+    },
+    {
+      "clusterKey": "500_64",
+      "volume": 500,
+      "competitionIndex": 64,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["best free invoice generator", "best free invoice generators"]
+    },
+    {
+      "clusterKey": "500_65",
+      "volume": 500,
+      "competitionIndex": 65,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["create receipt online", "australian tax invoice template word"]
+    },
+    {
+      "clusterKey": "500_66",
+      "volume": 500,
+      "competitionIndex": 66,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "free receipt maker app",
+        "free invoice pdf generator",
+        "create free invoice pdf",
+        "free pdf invoice maker"
+      ]
+    },
+    {
+      "clusterKey": "500_67",
+      "volume": 500,
+      "competitionIndex": 67,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "australian invoice generator",
+        "free construction invoice template",
+        "free construction invoice template word"
+      ]
+    },
+    {
+      "clusterKey": "500_69",
+      "volume": 500,
+      "competitionIndex": 69,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "bill generator",
+        "bill invoice generator",
+        "freelancer invoice template",
+        "generador de facturas"
+      ]
+    },
+    {
+      "clusterKey": "500_70",
+      "volume": 500,
+      "competitionIndex": 70,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["invoice generator google", "générateur de facture gratuit"]
+    },
+    {
+      "clusterKey": "500_71",
+      "volume": 500,
+      "competitionIndex": 71,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "simple invoice maker",
+        "digital receipt maker",
+        "invoice gen",
+        "e receipt maker",
+        "electronic receipt maker"
+      ]
+    },
+    {
+      "clusterKey": "500_72",
+      "volume": 500,
+      "competitionIndex": 72,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["bill creator app"]
+    },
+    {
+      "clusterKey": "500_73",
+      "volume": 500,
+      "competitionIndex": 73,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "best invoice generator",
+        "create free invoice template",
+        "free invoice generator no sign up",
+        "create an invoice template free"
+      ]
+    },
+    {
+      "clusterKey": "500_74",
+      "volume": 500,
+      "competitionIndex": 74,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "free invoice maker app",
+        "create receipt online free",
+        "free invoice creator app"
+      ]
+    },
+    {
+      "clusterKey": "500_75",
+      "volume": 500,
+      "competitionIndex": 75,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "free invoice online",
+        "quick invoice generator",
+        "quick invoice maker",
+        "quick invoice creator",
+        "generador de facturas gratis"
+      ]
+    },
+    {
+      "clusterKey": "500_76",
+      "volume": 500,
+      "competitionIndex": 76,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "make an invoice online free",
+        "tax invoice template australia",
+        "tax invoice format australia",
+        "générateur de facture",
+        "générateur de factures"
+      ]
+    },
+    {
+      "clusterKey": "500_77",
+      "volume": 500,
+      "competitionIndex": 77,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["easy invoice maker", "invoice for freelance work"]
+    },
+    {
+      "clusterKey": "500_78",
+      "volume": 500,
+      "competitionIndex": 78,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "best free invoice maker",
+        "online bill maker free",
+        "best free invoice creator",
+        "create a receipt free"
+      ]
+    },
+    {
+      "clusterKey": "500_79",
+      "volume": 500,
+      "competitionIndex": 79,
+      "competition": "High",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "create invoice online free",
+        "subcontractor invoice template",
+        "sub contractor invoice template",
+        "subcontractor billing template",
+        "subcontractor invoice form"
+      ]
+    },
+    {
+      "clusterKey": "500_81",
+      "volume": 500,
+      "competitionIndex": 81,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["best invoice maker", "simple invoice generator"]
+    },
+    {
+      "clusterKey": "500_82",
+      "volume": 500,
+      "competitionIndex": 82,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice template australia word"]
+    },
+    {
+      "clusterKey": "500_86",
+      "volume": 500,
+      "competitionIndex": 86,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["photography invoice"]
+    },
+    {
+      "clusterKey": "500_87",
+      "volume": 500,
+      "competitionIndex": 87,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["roofer invoice template"]
+    },
+    {
+      "clusterKey": "500_89",
+      "volume": 500,
+      "competitionIndex": 89,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "self employed invoice template",
+        "self employed invoice template word",
+        "sample invoice for self employed",
+        "self employed bill template"
+      ]
+    },
+    {
+      "clusterKey": "500_92",
+      "volume": 500,
+      "competitionIndex": 92,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["photographer invoice template", "photographer invoice example"]
+    },
+    {
+      "clusterKey": "500_93",
+      "volume": 500,
+      "competitionIndex": 93,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["rent receipt maker"]
+    },
+    {
+      "clusterKey": "500_95",
+      "volume": 500,
+      "competitionIndex": 95,
+      "competition": "High",
+      "keywordCount": 13,
+      "sampleKeywords": [
+        "construction quotation template",
+        "invoice for contract work template",
+        "sample invoice for contract work",
+        "construction quotation template word",
+        "photography invoice template"
+      ]
+    },
+    {
+      "clusterKey": "500_97",
+      "volume": 500,
+      "competitionIndex": 97,
+      "competition": "High",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "invoice template for freelance work",
+        "sample invoice for freelance work",
+        "contractor invoice",
+        "construction invoice",
+        "invoice for construction work"
+      ]
+    },
+    {
+      "clusterKey": "500_99",
+      "volume": 500,
+      "competitionIndex": 99,
+      "competition": "High",
+      "keywordCount": 10,
+      "sampleKeywords": [
+        "independent contractor invoice template",
+        "construction invoice example",
+        "contractor receipt template",
+        "independent contractor billing template",
+        "independent contractor invoice template word"
+      ]
+    },
+    {
+      "clusterKey": "500_100",
+      "volume": 500,
+      "competitionIndex": 100,
+      "competition": "High",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "create your own invoice",
+        "self employed contractor invoice template",
+        "independent contractor invoice",
+        "roofing invoice",
+        "labour invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_0",
+      "volume": 50,
+      "competitionIndex": 0,
+      "competition": "Low",
+      "keywordCount": 298,
+      "sampleKeywords": [
+        "make your own invoice template",
+        "self employed invoice generator",
+        "online invoice generator for freelancers",
+        "free online invoice generator with logo",
+        "best online receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_2",
+      "volume": 50,
+      "competitionIndex": 2,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["invoice simple generator", "credit card receipt generator"]
+    },
+    {
+      "clusterKey": "50_5",
+      "volume": 50,
+      "competitionIndex": 5,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["phone bill generator"]
+    },
+    {
+      "clusterKey": "50_6",
+      "volume": 50,
+      "competitionIndex": 6,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["best invoice generator app", "photography invoice generator"]
+    },
+    {
+      "clusterKey": "50_7",
+      "volume": 50,
+      "competitionIndex": 7,
+      "competition": "Low",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "german freelance invoice template",
+        "self employed invoice template google docs",
+        "excel invoice template australia gst",
+        "australia tax invoice template word"
+      ]
+    },
+    {
+      "clusterKey": "50_9",
+      "volume": 50,
+      "competitionIndex": 9,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice generator free invoice"]
+    },
+    {
+      "clusterKey": "50_10",
+      "volume": 50,
+      "competitionIndex": 10,
+      "competition": "Low",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "digital invoice generator",
+        "gst tax invoice template australia",
+        "gerador de recibo simples"
+      ]
+    },
+    {
+      "clusterKey": "50_11",
+      "volume": 50,
+      "competitionIndex": 11,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["venmo receipt generator"]
+    },
+    {
+      "clusterKey": "50_12",
+      "volume": 50,
+      "competitionIndex": 12,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt maker software free download"]
+    },
+    {
+      "clusterKey": "50_13",
+      "volume": 50,
+      "competitionIndex": 13,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["free invoice generator for freelancers"]
+    },
+    {
+      "clusterKey": "50_14",
+      "volume": 50,
+      "competitionIndex": 14,
+      "competition": "Low",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "service invoice generator",
+        "free receipt generator software",
+        "receipt generator php",
+        "freelance invoice design",
+        "generate rent slip"
+      ]
+    },
+    {
+      "clusterKey": "50_15",
+      "volume": 50,
+      "competitionIndex": 15,
+      "competition": "Low",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "receipt generator software",
+        "receipt generator program",
+        "standard invoice template australia"
+      ]
+    },
+    {
+      "clusterKey": "50_17",
+      "volume": 50,
+      "competitionIndex": 17,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["basic invoice generator", "random receipt generator"]
+    },
+    {
+      "clusterKey": "50_18",
+      "volume": 50,
+      "competitionIndex": 18,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["invoice template australia gst"]
+    },
+    {
+      "clusterKey": "50_19",
+      "volume": 50,
+      "competitionIndex": 19,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt maker with items"]
+    },
+    {
+      "clusterKey": "50_21",
+      "volume": 50,
+      "competitionIndex": 21,
+      "competition": "Low",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "receipt maker itemized",
+        "personal invoice template australia",
+        "simple photography invoice"
+      ]
+    },
+    {
+      "clusterKey": "50_23",
+      "volume": 50,
+      "competitionIndex": 23,
+      "competition": "Low",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "ebay receipt generator",
+        "receipt template generator",
+        "1099 invoice example"
+      ]
+    },
+    {
+      "clusterKey": "50_24",
+      "volume": 50,
+      "competitionIndex": 24,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["simple receipt maker", "sample invoice generator"]
+    },
+    {
+      "clusterKey": "50_25",
+      "volume": 50,
+      "competitionIndex": 25,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["free invoice template for freelancers"]
+    },
+    {
+      "clusterKey": "50_26",
+      "volume": 50,
+      "competitionIndex": 26,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["make an invoice template free", "simple invoice template australia"]
+    },
+    {
+      "clusterKey": "50_27",
+      "volume": 50,
+      "competitionIndex": 27,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["free invoice generator tool", "gerador de recibo online grátis"]
+    },
+    {
+      "clusterKey": "50_28",
+      "volume": 50,
+      "competitionIndex": 28,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["receipt maker software"]
+    },
+    {
+      "clusterKey": "50_29",
+      "volume": 50,
+      "competitionIndex": 29,
+      "competition": "Low",
+      "keywordCount": 11,
+      "sampleKeywords": [
+        "invoice generator for small business",
+        "invoice generator free app",
+        "invoice generator download for pc",
+        "hiveage invoice generator",
+        "bill generator in"
+      ]
+    },
+    {
+      "clusterKey": "50_30",
+      "volume": 50,
+      "competitionIndex": 30,
+      "competition": "Low",
+      "keywordCount": 2,
+      "sampleKeywords": ["shopify free invoice generator", "invoice generator login"]
+    },
+    {
+      "clusterKey": "50_31",
+      "volume": 50,
+      "competitionIndex": 31,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["freelance invoice template google docs"]
+    },
+    {
+      "clusterKey": "50_32",
+      "volume": 50,
+      "competitionIndex": 32,
+      "competition": "Low",
+      "keywordCount": 1,
+      "sampleKeywords": ["google sheets contractor invoice template"]
+    },
+    {
+      "clusterKey": "50_33",
+      "volume": 50,
+      "competitionIndex": 33,
+      "competition": "Low",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "bank receipt generator",
+        "free itemized receipt generator",
+        "freelance artist invoice",
+        "tax invoice example australia",
+        "independent contractor invoice template google docs"
+      ]
+    },
+    {
+      "clusterKey": "50_34",
+      "volume": 50,
+      "competitionIndex": 34,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "create invoice online pdf free",
+        "free online pdf invoice generator",
+        "freelance journalist invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_35",
+      "volume": 50,
+      "competitionIndex": 35,
+      "competition": "Medium",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "custom receipt maker free",
+        "store receipt generator",
+        "receipt maker no watermark",
+        "receipt gen",
+        "tax invoice template australia word"
+      ]
+    },
+    {
+      "clusterKey": "50_36",
+      "volume": 50,
+      "competitionIndex": 36,
+      "competition": "Medium",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "invoice generator website",
+        "payment receipt maker",
+        "freelance invoice template google sheets",
+        "free online rent receipt generator",
+        "free contractor invoice template excel"
+      ]
+    },
+    {
+      "clusterKey": "50_37",
+      "volume": 50,
+      "competitionIndex": 37,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["shopping receipt generator", "credit card receipt maker"]
+    },
+    {
+      "clusterKey": "50_38",
+      "volume": 50,
+      "competitionIndex": 38,
+      "competition": "Medium",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "digital receipt generator",
+        "receipt maker template",
+        "free generator invoice",
+        "receipt template maker",
+        "creating an invoice for contract work"
+      ]
+    },
+    {
+      "clusterKey": "50_39",
+      "volume": 50,
+      "competitionIndex": 39,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "tax invoice template australia free download",
+        "free word invoice template australia",
+        "electrical contractor invoice template free"
+      ]
+    },
+    {
+      "clusterKey": "50_40",
+      "volume": 50,
+      "competitionIndex": 40,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["receipt generator app", "free contractor receipt template"]
+    },
+    {
+      "clusterKey": "50_41",
+      "volume": 50,
+      "competitionIndex": 41,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["free invoice generator com", "freelancer invoice template google docs"]
+    },
+    {
+      "clusterKey": "50_42",
+      "volume": 50,
+      "competitionIndex": 42,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "expense receipt maker",
+        "store receipt maker",
+        "retail receipt generator",
+        "create invoice for freelance work",
+        "making an invoice for freelance work"
+      ]
+    },
+    {
+      "clusterKey": "50_43",
+      "volume": 50,
+      "competitionIndex": 43,
+      "competition": "Medium",
+      "keywordCount": 29,
+      "sampleKeywords": [
+        "personal invoice generator",
+        "invoice generator for hours worked",
+        "invoice maker com",
+        "mobile bill generator",
+        "mobile invoice generator"
+      ]
+    },
+    {
+      "clusterKey": "50_44",
+      "volume": 50,
+      "competitionIndex": 44,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "small business invoice generator",
+        "estimate and invoice maker",
+        "freelance writer invoice",
+        "google docs freelance invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_45",
+      "volume": 50,
+      "competitionIndex": 45,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "invoice generator free template",
+        "my invoice generator",
+        "create excel invoice template",
+        "online payment receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_46",
+      "volume": 50,
+      "competitionIndex": 46,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "shipping receipt generator",
+        "auto generate receipt",
+        "invoice freelance designer",
+        "free invoice template australia no gst",
+        "1099 contractor invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_47",
+      "volume": 50,
+      "competitionIndex": 47,
+      "competition": "Medium",
+      "keywordCount": 1,
+      "sampleKeywords": ["photography invoice template excel"]
+    },
+    {
+      "clusterKey": "50_48",
+      "volume": 50,
+      "competitionIndex": 48,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "receipt maker website",
+        "delivery receipt maker",
+        "freelance hourly invoice template",
+        "sole trader tax invoice template australia",
+        "software contractor invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_49",
+      "volume": 50,
+      "competitionIndex": 49,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "money receipt maker",
+        "receipt maker generator",
+        "cash receipt maker",
+        "freelance consultant invoice template",
+        "rent bill generator"
+      ]
+    },
+    {
+      "clusterKey": "50_50",
+      "volume": 50,
+      "competitionIndex": 50,
+      "competition": "Medium",
+      "keywordCount": 10,
+      "sampleKeywords": [
+        "invoice generator google sheets",
+        "create professional invoices free",
+        "receipt for generator",
+        "freelance invoice template pdf",
+        "web designer invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_51",
+      "volume": 50,
+      "competitionIndex": 51,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["freelancer invoice template word", "photo invoice template"]
+    },
+    {
+      "clusterKey": "50_52",
+      "volume": 50,
+      "competitionIndex": 52,
+      "competition": "Medium",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "online receipt editor",
+        "medical receipt generator",
+        "real receipt maker",
+        "purchase receipt generator",
+        "abn invoice template australia"
+      ]
+    },
+    {
+      "clusterKey": "50_53",
+      "volume": 50,
+      "competitionIndex": 53,
+      "competition": "Medium",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "best receipt maker",
+        "real receipt generator",
+        "freelance quotation template",
+        "free invoice template for independent contractor",
+        "photography invoice template free"
+      ]
+    },
+    {
+      "clusterKey": "50_54",
+      "volume": 50,
+      "competitionIndex": 54,
+      "competition": "Medium",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "hotel receipt maker",
+        "best free online invoice generator",
+        "free payment receipt generator",
+        "freelance editor invoice template",
+        "sample invoice for freelance writing"
+      ]
+    },
+    {
+      "clusterKey": "50_55",
+      "volume": 50,
+      "competitionIndex": 55,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["free 1099 invoice template", "generador de recibo"]
+    },
+    {
+      "clusterKey": "50_56",
+      "volume": 50,
+      "competitionIndex": 56,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": ["free invoice home", "create hotel receipt", "builders invoice template"]
+    },
+    {
+      "clusterKey": "50_57",
+      "volume": 50,
+      "competitionIndex": 57,
+      "competition": "Medium",
+      "keywordCount": 20,
+      "sampleKeywords": [
+        "contractor invoice generator",
+        "free invoice maker app for pc",
+        "generic receipt generator",
+        "generate invoices from google sheets",
+        "free invoice generate"
+      ]
+    },
+    {
+      "clusterKey": "50_58",
+      "volume": 50,
+      "competitionIndex": 58,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "pdf receipt maker",
+        "employment invoice template",
+        "tax invoice sample australia",
+        "fillable contractor invoice",
+        "photography invoice template free download"
+      ]
+    },
+    {
+      "clusterKey": "50_59",
+      "volume": 50,
+      "competitionIndex": 59,
+      "competition": "Medium",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "free invoice generator software",
+        "best free receipt maker app",
+        "free software for invoice generation",
+        "free invoice maker software",
+        "expenses receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_60",
+      "volume": 50,
+      "competitionIndex": 60,
+      "competition": "Medium",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "google invoice creator",
+        "best free receipt maker",
+        "sole trader invoice template australia no gst"
+      ]
+    },
+    {
+      "clusterKey": "50_61",
+      "volume": 50,
+      "competitionIndex": 61,
+      "competition": "Medium",
+      "keywordCount": 6,
+      "sampleKeywords": [
+        "sales receipt generator",
+        "free unlimited invoice generator",
+        "free invoice generator invoice template online",
+        "https invoice generator com",
+        "itemized receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_62",
+      "volume": 50,
+      "competitionIndex": 62,
+      "competition": "Medium",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "best invoice generator for small business",
+        "receipt maker app free",
+        "invoice maker pro",
+        "free receipt maker template",
+        "online invoice template australia"
+      ]
+    },
+    {
+      "clusterKey": "50_63",
+      "volume": 50,
+      "competitionIndex": 63,
+      "competition": "Medium",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "create sales receipt online free",
+        "free app for creating invoices",
+        "google receipt generator",
+        "invoice template 1099 contractor"
+      ]
+    },
+    {
+      "clusterKey": "50_64",
+      "volume": 50,
+      "competitionIndex": 64,
+      "competition": "Medium",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "hourly invoice generator",
+        "invoice number generator free",
+        "invoice generator google docs",
+        "excel invoice creator",
+        "subcontractor invoice example"
+      ]
+    },
+    {
+      "clusterKey": "50_65",
+      "volume": 50,
+      "competitionIndex": 65,
+      "competition": "Medium",
+      "keywordCount": 2,
+      "sampleKeywords": ["google sheet invoice generator", "free invoice template australia word"]
+    },
+    {
+      "clusterKey": "50_66",
+      "volume": 50,
+      "competitionIndex": 66,
+      "competition": "Medium",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "free invoice maker pdf",
+        "invoice maker simple",
+        "construction invoice template free download",
+        "free construction invoice template pdf",
+        "receipt template for contractor"
+      ]
+    },
+    {
+      "clusterKey": "50_67",
+      "volume": 50,
+      "competitionIndex": 67,
+      "competition": "High",
+      "keywordCount": 11,
+      "sampleKeywords": [
+        "professional invoice generator",
+        "payment invoice generator",
+        "invoice generator app free",
+        "sales receipt maker",
+        "best receipt maker app"
+      ]
+    },
+    {
+      "clusterKey": "50_68",
+      "volume": 50,
+      "competitionIndex": 68,
+      "competition": "High",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "automatic invoice generator",
+        "invoice maker free download",
+        "best invoice generator software",
+        "free invoice and receipt generator",
+        "invoice generator free download"
+      ]
+    },
+    {
+      "clusterKey": "50_69",
+      "volume": 50,
+      "competitionIndex": 69,
+      "competition": "High",
+      "keywordCount": 14,
+      "sampleKeywords": [
+        "free invoice generator app",
+        "free invoice maker app for iphone",
+        "construction invoice generator",
+        "make your own invoice template free",
+        "free invoice maker for pc"
+      ]
+    },
+    {
+      "clusterKey": "50_70",
+      "volume": 50,
+      "competitionIndex": 70,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["invoice quote generator", "invoice maker app download"]
+    },
+    {
+      "clusterKey": "50_71",
+      "volume": 50,
+      "competitionIndex": 71,
+      "competition": "High",
+      "keywordCount": 26,
+      "sampleKeywords": [
+        "easy invoice maker app",
+        "create invoice template online free",
+        "invoice creator app free",
+        "invoice maker app for pc",
+        "invoice bill generator"
+      ]
+    },
+    {
+      "clusterKey": "50_72",
+      "volume": 50,
+      "competitionIndex": 72,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "e receipt generator",
+        "easy invoice generator",
+        "easy invoice creator",
+        "generate e receipt",
+        "contractor invoice template word"
+      ]
+    },
+    {
+      "clusterKey": "50_73",
+      "volume": 50,
+      "competitionIndex": 73,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "itemized receipt maker",
+        "create itemized receipt",
+        "create sales receipts",
+        "freelance photography invoice template",
+        "contractor invoice template excel"
+      ]
+    },
+    {
+      "clusterKey": "50_74",
+      "volume": 50,
+      "competitionIndex": 74,
+      "competition": "High",
+      "keywordCount": 7,
+      "sampleKeywords": [
+        "free printable invoice maker",
+        "free printable invoice generator",
+        "online bill maker pdf",
+        "electrical contractor invoice template",
+        "itemized construction invoice"
+      ]
+    },
+    {
+      "clusterKey": "50_75",
+      "volume": 50,
+      "competitionIndex": 75,
+      "competition": "High",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "online bill maker",
+        "pdf receipt generator",
+        "invoice free maker",
+        "online bill creator",
+        "free hotel receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_76",
+      "volume": 50,
+      "competitionIndex": 76,
+      "competition": "High",
+      "keywordCount": 10,
+      "sampleKeywords": [
+        "professional invoice maker",
+        "invoice receipt generator",
+        "invoice and receipt generator",
+        "receipt invoice maker",
+        "online invoice receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_77",
+      "volume": 50,
+      "competitionIndex": 77,
+      "competition": "High",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "paid invoice generator",
+        "best app to create invoices",
+        "create paid invoice",
+        "business invoice generator",
+        "simple online invoice generator"
+      ]
+    },
+    {
+      "clusterKey": "50_78",
+      "volume": 50,
+      "competitionIndex": 78,
+      "competition": "High",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "create simple invoice",
+        "create and invoice for free",
+        "business invoice maker",
+        "free easy invoice maker",
+        "receipt creator online free"
+      ]
+    },
+    {
+      "clusterKey": "50_79",
+      "volume": 50,
+      "competitionIndex": 79,
+      "competition": "High",
+      "keywordCount": 15,
+      "sampleKeywords": [
+        "generate an invoice free",
+        "create an invoice for free online",
+        "invoice template builder",
+        "free invoice generator software for pc",
+        "invoice creator google"
+      ]
+    },
+    {
+      "clusterKey": "50_80",
+      "volume": 50,
+      "competitionIndex": 80,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "free app to make invoices",
+        "free invoice maker app for android",
+        "freelance designer invoice example",
+        "construction invoice maker",
+        "photography business invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_81",
+      "volume": 50,
+      "competitionIndex": 81,
+      "competition": "High",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "free app to create invoices",
+        "fast invoice maker",
+        "free program to create invoices",
+        "best receipt generator app",
+        "free sales receipt generator"
+      ]
+    },
+    {
+      "clusterKey": "50_82",
+      "volume": 50,
+      "competitionIndex": 82,
+      "competition": "High",
+      "keywordCount": 15,
+      "sampleKeywords": [
+        "best online invoice generator",
+        "custom invoice generator",
+        "free invoice generator google",
+        "invoice create free",
+        "invoice maker free app"
+      ]
+    },
+    {
+      "clusterKey": "50_83",
+      "volume": 50,
+      "competitionIndex": 83,
+      "competition": "High",
+      "keywordCount": 10,
+      "sampleKeywords": [
+        "app to create invoices free",
+        "best invoice maker app",
+        "free simple invoice generator",
+        "invoice maker with logo",
+        "creator invoice"
+      ]
+    },
+    {
+      "clusterKey": "50_84",
+      "volume": 50,
+      "competitionIndex": 84,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "invoice maker for free",
+        "best invoice creator",
+        "free invoice generator template"
+      ]
+    },
+    {
+      "clusterKey": "50_85",
+      "volume": 50,
+      "competitionIndex": 85,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "invoice creation free",
+        "australian tax invoice template excel",
+        "contract labor invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_86",
+      "volume": 50,
+      "competitionIndex": 86,
+      "competition": "High",
+      "keywordCount": 110,
+      "sampleKeywords": [
+        "invoice generator with bank details",
+        "invoice creator for free",
+        "download invoice maker",
+        "invoice generator software free download",
+        "bill maker free"
+      ]
+    },
+    {
+      "clusterKey": "50_87",
+      "volume": 50,
+      "competitionIndex": 87,
+      "competition": "High",
+      "keywordCount": 1,
+      "sampleKeywords": ["create my own invoice template"]
+    },
+    {
+      "clusterKey": "50_88",
+      "volume": 50,
+      "competitionIndex": 88,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "make your own invoice free",
+        "generate free invoice online",
+        "example invoice for freelance work",
+        "invoice sample for freelance work",
+        "create free rent receipt"
+      ]
+    },
+    {
+      "clusterKey": "50_89",
+      "volume": 50,
+      "competitionIndex": 89,
+      "competition": "High",
+      "keywordCount": 8,
+      "sampleKeywords": [
+        "invoice maker template",
+        "invoice builder template",
+        "generator bill format",
+        "self employed invoice",
+        "day rate invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_90",
+      "volume": 50,
+      "competitionIndex": 90,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "invoice maker for pc",
+        "custom invoice maker",
+        "custom invoice creator",
+        "invoice maker software for pc",
+        "invoice with pictures template"
+      ]
+    },
+    {
+      "clusterKey": "50_91",
+      "volume": 50,
+      "competitionIndex": 91,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "self employed freelance invoice template",
+        "freelance graphic design invoice example",
+        "it contractor invoice template",
+        "photography services invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_92",
+      "volume": 50,
+      "competitionIndex": 92,
+      "competition": "High",
+      "keywordCount": 5,
+      "sampleKeywords": [
+        "self employed hourly invoice template",
+        "invoice template for contractor hours",
+        "subcontractor invoice template excel",
+        "contractor hours invoice template",
+        "wedding photography invoice"
+      ]
+    },
+    {
+      "clusterKey": "50_93",
+      "volume": 50,
+      "competitionIndex": 93,
+      "competition": "High",
+      "keywordCount": 3,
+      "sampleKeywords": [
+        "proforma invoice maker",
+        "free sales receipt maker",
+        "sample construction invoice word format"
+      ]
+    },
+    {
+      "clusterKey": "50_95",
+      "volume": 50,
+      "competitionIndex": 95,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": [
+        "invoice template for freelance artist",
+        "hourly contractor invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_96",
+      "volume": 50,
+      "competitionIndex": 96,
+      "competition": "High",
+      "keywordCount": 2,
+      "sampleKeywords": ["generic contractor invoice", "professional contractor invoice"]
+    },
+    {
+      "clusterKey": "50_97",
+      "volume": 50,
+      "competitionIndex": 97,
+      "competition": "High",
+      "keywordCount": 9,
+      "sampleKeywords": [
+        "create own invoice",
+        "make own invoice",
+        "general contractor invoice template",
+        "contract employee invoice template",
+        "construction contractor invoice template"
+      ]
+    },
+    {
+      "clusterKey": "50_98",
+      "volume": 50,
+      "competitionIndex": 98,
+      "competition": "High",
+      "keywordCount": 12,
+      "sampleKeywords": [
+        "simple freelance invoice template",
+        "invoice example for freelancer",
+        "basic freelance invoice template",
+        "freelance contractor invoice template",
+        "invoice template nsw"
+      ]
+    },
+    {
+      "clusterKey": "50_99",
+      "volume": 50,
+      "competitionIndex": 99,
+      "competition": "High",
+      "keywordCount": 4,
+      "sampleKeywords": [
+        "receipt maker machine",
+        "freelance designer invoice template",
+        "sample freelance invoice",
+        "freelance writer invoice example"
+      ]
+    },
+    {
+      "clusterKey": "50_100",
+      "volume": 50,
+      "competitionIndex": 100,
+      "competition": "High",
+      "keywordCount": 56,
+      "sampleKeywords": [
+        "freelance artist invoice template",
+        "self employed invoice template pdf",
+        "writing invoices self employed",
+        "freelance graphic designer invoice template",
+        "graphic design freelance invoice"
+      ]
+    },
+    {
+      "clusterKey": "0_0",
+      "volume": 0,
+      "competitionIndex": 0,
+      "competition": "Unknown",
+      "keywordCount": 85,
+      "sampleKeywords": [
+        "hotel bill online maker",
+        "online restaurant bill generator free",
+        "online shop bill maker",
+        "online sales invoice maker",
+        "free online hotel bill generator"
+      ]
+    }
+  ]
+}
