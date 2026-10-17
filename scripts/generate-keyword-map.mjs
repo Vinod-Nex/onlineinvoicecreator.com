@@ -205,7 +205,7 @@ const pagesData = {};
 
   pagesData['/'] = {
     path: '/',
-    pageTitle: 'Free Online Invoice Generator | 100% Free & Private',
+    pageTitle: 'Invoice Generator: Free Online PDF Invoices (No Signup)',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -243,7 +243,7 @@ const pagesData = {};
 
   pagesData['/free-online-receipt-generator'] = {
     path: '/free-online-receipt-generator',
-    pageTitle: 'Free Online Receipt Generator - Cash & Itemized',
+    pageTitle: 'Online Receipt Generator: Free Cash & Payment Slips',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -318,7 +318,7 @@ const pagesData = {};
 
   pagesData['/receipt-maker-with-items'] = {
     path: '/receipt-maker-with-items',
-    pageTitle: 'Online Receipt Maker with Items - Free Sales Receipts',
+    pageTitle: 'Receipt Maker with Items: Itemized Sales & POS Slips',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -354,7 +354,7 @@ const pagesData = {};
 
   pagesData['/invoice-generator-for-freelancers'] = {
     path: '/invoice-generator-for-freelancers',
-    pageTitle: 'Invoice Generator for Freelancers | Free & Private',
+    pageTitle: 'Invoice Generator for Freelancers | Fast & Free PDF',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -387,7 +387,7 @@ const pagesData = {};
 
   pagesData['/invoice-generator-excel'] = {
     path: '/invoice-generator-excel',
-    pageTitle: 'Excel Invoice Generator Alternative - Free PDF Creator',
+    pageTitle: 'Invoice Generator Excel Alternative | Free PDF Creator',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -422,7 +422,7 @@ const pagesData = {};
 
   pagesData['/contractor-invoice-template'] = {
     path: '/contractor-invoice-template',
-    pageTitle: 'Free Contractor Invoice Template - Construction & Trades',
+    pageTitle: 'Contractor Invoice Template: Free Trades & Labor Bills',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -457,7 +457,7 @@ const pagesData = {};
 
   pagesData['/photography-invoice-generator'] = {
     path: '/photography-invoice-generator',
-    pageTitle: 'Photography Invoice Generator - Studio & Commercial',
+    pageTitle: 'Photography Invoice Generator: Studio & Event Bills',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
@@ -493,7 +493,7 @@ const pagesData = {};
 
   pagesData['/tax-invoice-template-australia'] = {
     path: '/tax-invoice-template-australia',
-    pageTitle: 'Tax Invoice Template Australia | ATO Compliant (GST)',
+    pageTitle: 'Invoice Template Australia: ATO Tax & 10% GST Compliant',
     primaryKeyword: primary.keyword,
     targetVolume: primary.volume,
     competitionIndex: primary.competitionIndex,
