@@ -62,11 +62,11 @@ const trustBadges = data.trustBadges || [
       <!-- Primary H1 Target -->
       <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink font-display leading-[1.08]">
         {data.h1Highlight && data.h1.includes(data.h1Highlight) ? (
-          <>
+          <Fragment>
             {data.h1.split(data.h1Highlight)[0]}
             <span class="text-primary">{data.h1Highlight}</span>
             {data.h1.split(data.h1Highlight)[1]}
-          </>
+          </Fragment>
         ) : (
           data.h1
         )}
@@ -228,7 +228,7 @@ const trustBadges = data.trustBadges || [
               <span class="text-[11px] font-bold uppercase tracking-wider text-mute">
                 From / Issuer
               </span>
-              <h4 class="font-bold text-ink text-base">{data.example.sender.name}</h4>
+              <p class="font-bold text-ink text-base">{data.example.sender.name}</p>
               <p class="text-xs text-mute leading-relaxed whitespace-pre-line">
                 {data.example.sender.details}
               </p>
@@ -237,7 +237,7 @@ const trustBadges = data.trustBadges || [
               <span class="text-[11px] font-bold uppercase tracking-wider text-mute">
                 To / Billed Client
               </span>
-              <h4 class="font-bold text-ink text-base">{data.example.recipient.name}</h4>
+              <p class="font-bold text-ink text-base">{data.example.recipient.name}</p>
               <p class="text-xs text-mute leading-relaxed whitespace-pre-line">
                 {data.example.recipient.details}
               </p>

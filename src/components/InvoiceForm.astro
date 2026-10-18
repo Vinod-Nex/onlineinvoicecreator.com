@@ -56,9 +56,9 @@ const defaultInvoice = createDefaultInvoice();
       </div>
       <div>
         <div class="flex items-center gap-2 flex-wrap">
-          <h2 class="text-xs sm:text-sm font-bold text-ink">
+          <p class="text-xs sm:text-sm font-bold text-ink">
             100% Private & Serverless — Nothing is uploaded to a server
-          </h2>
+          </p>
           <span
             id="storage-status-pill"
             class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20"
@@ -832,12 +832,12 @@ const defaultInvoice = createDefaultInvoice();
            ==================================================================== -->
           <div class="py-8 border-b border-hairline space-y-4">
             <div class="flex items-center justify-between">
-              <h2 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+              <div class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
                 <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
                   3
                 </span>
                 Line Items
-              </h2>
+              </div>
               <span class="text-xs text-mute hidden sm:inline">
                 Tab or click "+ Add Item" to append rows
               </span>
@@ -878,12 +878,12 @@ const defaultInvoice = createDefaultInvoice();
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 py-8 border-b border-hairline items-start">
             <!-- Left: Tax & Discount Controls -->
             <div class="lg:col-span-6 space-y-4">
-              <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+              <div class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
                 <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
                   4
                 </span>
                 Discount & Shipping
-              </h3>
+              </div>
 
               <!-- Discount: Type Switcher + Value -->
               <div>
@@ -941,9 +941,9 @@ const defaultInvoice = createDefaultInvoice();
                 aria-live="polite"
                 aria-atomic="true"
               >
-                <h4 class="text-xs uppercase tracking-wider font-bold text-mute pb-2 border-b border-hairline">
+                <p class="text-xs uppercase tracking-wider font-bold text-mute pb-2 border-b border-hairline">
                   Invoice Summary
-                </h4>
+                </p>
 
                 <div class="flex items-center justify-between text-sm text-charcoal">
                   <span>Subtotal:</span>
@@ -1001,12 +1001,12 @@ const defaultInvoice = createDefaultInvoice();
            SECTION 5: Payment Details
            ==================================================================== -->
           <div class="py-8 border-b border-hairline space-y-4">
-            <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+            <div class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
               <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
                 5
               </span>
               Payment Details
-            </h3>
+            </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
@@ -1159,12 +1159,12 @@ const defaultInvoice = createDefaultInvoice();
            SECTION 6: Notes & Signature
            ==================================================================== -->
           <div class="pt-8 space-y-4">
-            <h3 class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
+            <div class="text-base sm:text-lg font-bold text-ink font-display flex items-center gap-2">
               <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
                 6
               </span>
               Notes & Sign-off
-            </h3>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -1233,9 +1233,9 @@ const defaultInvoice = createDefaultInvoice();
         </svg>
       </div>
       <div>
-        <h3 id="modal-clear-data-title" class="text-lg font-bold text-ink font-display">
+        <p id="modal-clear-data-title" class="text-lg font-bold text-ink font-display">
           Clear All Stored Data?
-        </h3>
+        </p>
         <p class="text-xs text-mute mt-1 leading-relaxed">
           This will permanently delete your saved business details, client list, custom templates,
           and invoice drafts from this browser. This action cannot be undone.
@@ -1275,9 +1275,9 @@ const defaultInvoice = createDefaultInvoice();
         </svg>
       </div>
       <div>
-        <h3 id="modal-save-template-title" class="text-lg font-bold text-ink font-display">
+        <p id="modal-save-template-title" class="text-lg font-bold text-ink font-display">
           Save as Template
-        </h3>
+        </p>
         <p class="text-xs text-mute mt-1 leading-relaxed">
           Save your current layout, business profile, line items structure, and terms as a named
           template for instant re-use.

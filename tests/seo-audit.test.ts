@@ -80,11 +80,63 @@ describe('Build-Time SEO & Metadata Audit', () => {
           expect(match![1]).toMatch(/^https:\/\/onlineinvoicecreator\.com/);
         });
 
-        it('contains at least one <h1> heading', () => {
-          const match = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-          expect(match, `Page ${pageRoute} is missing an <h1> heading`).toBeTruthy();
-          const h1Text = decodeEntities(match![1].replace(/<[^>]+>/g, ''));
+        it('contains exactly one <h1> heading', () => {
+          const headingRegex = /<h1\b[^>]*>([\s\S]*?)<\/h1>/gi;
+          const matches = [...content.matchAll(headingRegex)];
+          expect(matches.length, `Page ${pageRoute} must have exactly one <h1> heading`).toBe(1);
+          const h1Text = decodeEntities(matches[0][1].replace(/<[^>]+>/g, '').trim());
           expect(h1Text.length).toBeGreaterThan(0);
+        });
+
+        it('contains primary keyword in <h1> heading (if mapped)', () => {
+          const keywordMapPath = path.resolve(__dirname, '../src/data/keyword-map.json');
+          if (!fs.existsSync(keywordMapPath)) return;
+          const keywordMap = JSON.parse(fs.readFileSync(keywordMapPath, 'utf8'));
+          const route = pageRoute.replace(/\/index\.html$/, '').replace(/\/$/, '') || '/';
+          const mappedPage = keywordMap.pages && keywordMap.pages[route];
+          if (!mappedPage || !mappedPage.primaryKeyword) return;
+
+          const match = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+          expect(match).toBeTruthy();
+          const h1Text = decodeEntities(
+            match![1]
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim()
+          ).toLowerCase();
+          const expectedKw = mappedPage.primaryKeyword.toLowerCase().trim();
+          expect(
+            h1Text.includes(expectedKw),
+            `Page ${route} <h1> "${h1Text}" must contain primary keyword "${expectedKw}"`
+          ).toBe(true);
+        });
+
+        it('enforces strict heading hierarchy without skipped levels', () => {
+          const headingRegex = /<(h[1-6])\b[^>]*>([\s\S]*?)<\/\1>/gi;
+          const headings: { level: number; text: string }[] = [];
+          let match;
+          while ((match = headingRegex.exec(content)) !== null) {
+            headings.push({
+              level: parseInt(match[1][1], 10),
+              text: decodeEntities(
+                match[2]
+                  .replace(/<[^>]+>/g, ' ')
+                  .replace(/\s+/g, ' ')
+                  .trim()
+              ),
+            });
+          }
+
+          let prevLevel = 0;
+          for (const h of headings) {
+            if (prevLevel > 0) {
+              expect(
+                h.level,
+                `Page ${pageRoute} jumped from <h${prevLevel}> directly to <h${h.level}> at "${h.text}"`
+              ).toBeLessThanOrEqual(prevLevel + 1);
+            }
+            prevLevel = h.level;
+          }
         });
       });
     }

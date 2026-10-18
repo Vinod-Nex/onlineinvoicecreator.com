@@ -165,12 +165,12 @@ const defaultInvoice = createDefaultInvoice();
           />
         </div>
         <div>
-          <h2
+          <div
             id="preview-sender-name"
             class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight"
           >
             {defaultInvoice.sender.name}
-          </h2>
+          </div>
           <div class="text-xs sm:text-sm text-gray-600 space-y-0.5 mt-1">
             <p id="preview-sender-address" class="whitespace-pre-line leading-relaxed">
               {defaultInvoice.sender.address}
@@ -191,9 +191,12 @@ const defaultInvoice = createDefaultInvoice();
       <!-- Document Title & Meta Box -->
       <div class="text-left sm:text-right space-y-2">
         <div class="flex items-center sm:justify-end gap-2.5">
-          <h1 class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase">
+          <div
+            class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase"
+            role="doc-subtitle"
+          >
             INVOICE
-          </h1>
+          </div>
           <span class="tmpl-badge-status px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
             Issued
           </span>
@@ -228,9 +231,9 @@ const defaultInvoice = createDefaultInvoice();
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
           Billed To:
         </span>
-        <h3 id="preview-client-name" class="text-base sm:text-lg font-bold text-gray-900">
+        <div id="preview-client-name" class="text-base sm:text-lg font-bold text-gray-900">
           {defaultInvoice.client.name}
-        </h3>
+        </div>
         <p
           id="preview-client-address"
           class="text-xs sm:text-sm text-gray-600 whitespace-pre-line leading-relaxed"

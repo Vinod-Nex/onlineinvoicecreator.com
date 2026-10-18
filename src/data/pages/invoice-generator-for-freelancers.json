@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "Freelance Workflow",
-    "title": "How to Create a Freelancer Invoice",
+    "title": "How to Create a Freelance Invoice in 3 Steps",
     "subtitle": "Send client-ready invoices in three straightforward steps.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "Compliance Checklist",
-    "title": "What a Freelancer Invoice Must Contain",
+    "title": "What a Freelancer Billing Template Must Contain",
     "subtitle": "Every professional freelance invoice needs these six core elements to ensure timely payment.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Freelancer Invoice Breakdown",
+    "title": "Sample Freelance Invoice Template Breakdown",
     "scenario": "UI/UX Product Design & Frontend Prototype Milestone",
     "sender": {
       "name": "Alex Morgan Design Studio",
@@ -122,7 +122,7 @@
   },
   "faq": {
     "badge": "Frequently Asked Questions",
-    "title": "Freelancer Invoicing FAQs",
+    "title": "Freelance Invoice Generator FAQs",
     "subtitle": "Clear answers to common questions about billing clients and managing freelance cash flow.",
     "items": [
       {
@@ -148,7 +148,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Tools for Freelancers & Solo Creators",
+    "title": "Related Invoicing Tools for Freelance Contractors",
     "subtitle": "Free, browser-based tools to simplify your business paperwork.",
     "items": [
       {

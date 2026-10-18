@@ -4,8 +4,8 @@
   "metaDescription": "Skip broken formulas with our online invoice generator excel alternative. Auto-calculate totals, format clean tables, and export pristine client PDFs.",
   "canonical": "https://onlineinvoicecreator.com/invoice-generator-excel",
   "badge": "100% Free • Modern Excel Alternative • Zero Watermarks",
-  "h1": "Free Online Invoice Generator to Excel & PDF",
-  "h1Highlight": "Excel & PDF",
+  "h1": "Free Online Invoice Generator Excel & PDF",
+  "h1Highlight": "Invoice Generator Excel",
   "intro": "Create, customize, and export professional invoices directly in your browser without Excel formulas, macro bugs, or spreadsheet formatting headaches.",
   "toolType": "invoice",
   "trustBadges": [
@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "No-Code Invoicing",
-    "title": "How to Create an Invoice Without Excel",
+    "title": "How to Generate an Invoice from Excel Alternative",
     "subtitle": "Stop fighting spreadsheet cell formatting. Generate polished invoices in three easy steps.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "Spreadsheet vs Web Tool",
-    "title": "Why Switch from Excel Invoicing to Browser Invoicing?",
+    "title": "Why Choose an Online Invoice Maker Excel Alternative?",
     "subtitle": "Common pitfalls of Excel invoice templates and how our web engine solves them.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Invoice Generated Without Spreadsheets",
+    "title": "Sample Excel Invoice Maker Alternative Breakdown",
     "scenario": "B2B Software Consulting & Cloud Migration Retainer",
     "sender": {
       "name": "CloudStack Systems Consulting LLC",
@@ -122,7 +122,7 @@
   },
   "faq": {
     "badge": "Excel vs Web FAQs",
-    "title": "Excel Invoicing FAQs",
+    "title": "Invoice Generator Excel Alternative FAQs",
     "subtitle": "Frequently asked questions about moving away from spreadsheet invoicing.",
     "items": [
       {
@@ -144,7 +144,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Invoicing Tools & Templates",
+    "title": "Related Tools to Generate Invoice in Excel or PDF",
     "subtitle": "Explore our full suite of free browser-based financial generators.",
     "items": [
       {

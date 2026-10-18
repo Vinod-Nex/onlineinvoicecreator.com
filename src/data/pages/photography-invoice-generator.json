@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "Studio Invoicing Guide",
-    "title": "How to Create a Photography Invoice",
+    "title": "How to Create a Photography Invoice in 3 Steps",
     "subtitle": "Professional invoices for photo sessions, licensing, and print delivery in three simple steps.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "Creative Invoicing Checklist",
-    "title": "What a Photography Invoice Must Contain",
+    "title": "What a Photographer Invoice Template Must Contain",
     "subtitle": "Essential items every professional photographer must document to protect creative rights and avoid disputes.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Photography Invoice Breakdown",
+    "title": "Sample Photographer Invoice Example Breakdown",
     "scenario": "Commercial Studio Fashion Shoot & Editorial Image Licensing",
     "sender": {
       "name": "Lumière Creative Photography Studio",
@@ -128,7 +128,7 @@
   },
   "faq": {
     "badge": "Photographer FAQs",
-    "title": "Photography Invoicing FAQs",
+    "title": "Photography Invoice Template FAQs",
     "subtitle": "Frequently asked questions regarding photo retainers, licensing fees, and print taxes.",
     "items": [
       {
@@ -150,7 +150,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Tools for Photographers & Creative Artists",
+    "title": "Related Photography Invoice & Creative Tools",
     "subtitle": "Free, private tools tailored for creative studios and visual artists.",
     "items": [
       {

@@ -4,8 +4,8 @@
   "metaDescription": "ATO-compliant invoice template for Australia. Calculate 10% GST automatically, include your ABN, and download clean, watermark-free tax invoices in PDF.",
   "canonical": "https://onlineinvoicecreator.com/tax-invoice-template-australia",
   "badge": "100% Free • ATO Compliant • 10% GST Ready",
-  "h1": "Free Tax Invoice Template Australia",
-  "h1Highlight": "Tax Invoice Template Australia",
+  "h1": "Free Invoice Template Australia: ATO Tax & GST Compliant",
+  "h1Highlight": "Invoice Template Australia",
   "intro": "Create ATO-compliant Australian tax invoices with 10% GST calculations and your ABN in seconds.",
   "toolType": "invoice",
   "trustBadges": [
@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "ATO Guidelines",
-    "title": "How to Create an Australian Tax Invoice",
+    "title": "How to Create an Australian Tax Invoice with ATO Compliance",
     "subtitle": "Follow these three steps to issue a valid tax invoice under Australian tax law.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "ATO Checklist",
-    "title": "What an Australian Tax Invoice Must Contain",
+    "title": "What a Free Tax Invoice Template Australia Must Contain",
     "subtitle": "The Australian Taxation Office (ATO) requires seven elements for a valid tax invoice.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Australian Tax Invoice Breakdown",
+    "title": "Sample Australian Invoice Generator Breakdown",
     "scenario": "Commercial Electrical Safety Inspection & Test (Melbourne VIC)",
     "sender": {
       "name": "Beacon Electrical Solutions Pty Ltd",
@@ -122,7 +122,7 @@
   },
   "faq": {
     "badge": "ATO Tax FAQs",
-    "title": "Australian Tax Invoicing FAQs",
+    "title": "Invoice Template Australia & ATO GST FAQs",
     "subtitle": "Direct answers to common questions about Australian GST and tax invoicing.",
     "items": [
       {
@@ -144,7 +144,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Tools for Australian Businesses",
+    "title": "Related Australian Invoice Generator & Tax Tools",
     "subtitle": "Free, browser-based financial generators built for Australian sole traders and companies.",
     "items": [
       {

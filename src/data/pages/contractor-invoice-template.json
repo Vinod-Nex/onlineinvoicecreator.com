@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "Trade Invoicing Process",
-    "title": "How to Create a Contractor Invoice",
+    "title": "How to Fill a Contractor Billing Template",
     "subtitle": "Clear, dispute-proof contractor invoices in three simple steps.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "Trade Billing Requirements",
-    "title": "What a Contractor Invoice Must Contain",
+    "title": "What Invoice Forms for Contractors Must Contain",
     "subtitle": "Key elements needed for construction, electrical, plumbing, and trade contracting compliance.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Contractor Invoice Breakdown",
+    "title": "Sample Contractor Invoice Example Breakdown",
     "scenario": "Commercial Plumbing Renovation & Fixture Rough-in",
     "sender": {
       "name": "Apex Commercial Mechanical Services LLC",
@@ -122,7 +122,7 @@
   },
   "faq": {
     "badge": "Trade Invoicing FAQs",
-    "title": "Contractor Invoicing FAQs",
+    "title": "Contractor Invoice Template FAQs",
     "subtitle": "Answers to common questions about trade billing, materials tax, and milestone payments.",
     "items": [
       {
@@ -144,7 +144,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Tools for Trade & Contracting Professionals",
+    "title": "Related Contractor Billing & Trade Tools",
     "subtitle": "Streamline your contracting paperwork with our free browser-based tools.",
     "items": [
       {

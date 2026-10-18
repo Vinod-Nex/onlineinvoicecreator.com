@@ -17,7 +17,7 @@
   "breadcrumbs": [{ "label": "Home" }],
   "howTo": {
     "badge": "Frictionless Billing",
-    "title": "How to Create an Invoice Online in 3 Steps",
+    "title": "How to Create Invoice Free Online in 3 Steps",
     "subtitle": "Create professional client invoices with no account signups or subscriptions.",
     "steps": [
       {
@@ -42,7 +42,7 @@
   },
   "whatItMustContain": {
     "badge": "Legal Essentials",
-    "title": "What an Official Invoice Must Contain",
+    "title": "What a Free Online Invoice Generator Document Must Contain",
     "subtitle": "Essential fields required for commercial validity, clean bookkeeping, and tax compliance.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -79,7 +79,7 @@
     ]
   },
   "example": {
-    "title": "Sample Professional Invoice Breakdown",
+    "title": "Sample Free Invoice Generator Breakdown",
     "scenario": "Creative Digital Agency Retainer & Brand Identity Project",
     "sender": {
       "name": "Starlight Studio & Digital Agency",
@@ -118,7 +118,7 @@
   },
   "faq": {
     "badge": "General Invoicing FAQs",
-    "title": "Invoice Generator FAQs",
+    "title": "Free Online Invoice Generator & Maker FAQs",
     "subtitle": "Everything you need to know about creating, saving, and downloading invoices.",
     "items": [
       {
@@ -140,7 +140,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Specialized Invoicing & Receipt Tools",
+    "title": "Specialized Invoice Builder & Receipt Tools",
     "subtitle": "Discover purpose-built templates and tools tailored for specific trades and professions.",
     "items": [
       {

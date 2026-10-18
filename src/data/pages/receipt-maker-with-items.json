@@ -21,7 +21,7 @@
   ],
   "howTo": {
     "badge": "Sales Receipt Workflow",
-    "title": "How to Create an Itemized Receipt",
+    "title": "How to Create an Itemized Receipt with Our Receipt Maker",
     "subtitle": "Generate professional itemized receipts for customers in three easy steps.",
     "steps": [
       {
@@ -46,7 +46,7 @@
   },
   "whatItMustContain": {
     "badge": "Receipt Compliance",
-    "title": "What an Itemized Receipt Must Contain",
+    "title": "What a Sales Receipt Maker Document Must Contain",
     "subtitle": "Key elements required for valid expense reimbursement, retail accounting, and tax audits.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -83,7 +83,7 @@
     ]
   },
   "example": {
-    "title": "Sample Itemized Receipt Breakdown",
+    "title": "Sample Itemized Receipt Generator Breakdown",
     "scenario": "Boutique Retail Electronics & Audio Gear Sale",
     "sender": {
       "name": "SoundWave Audio & Tech Lab",
@@ -122,7 +122,7 @@
   },
   "faq": {
     "badge": "Receipt FAQs",
-    "title": "Itemized Receipt FAQs",
+    "title": "Itemized Receipt Maker & Retail Slip FAQs",
     "subtitle": "Common questions regarding receipt itemization, tax proofs, and POS formatting.",
     "items": [
       {
@@ -144,7 +144,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Receipt & Invoicing Tools",
+    "title": "Related Retail Receipt Generator & Invoicing Tools",
     "subtitle": "Discover our complete range of free billing and payment tools.",
     "items": [
       {

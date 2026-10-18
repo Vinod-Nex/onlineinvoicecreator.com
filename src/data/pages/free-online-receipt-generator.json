@@ -17,7 +17,7 @@
   "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Receipt Generator" }],
   "howTo": {
     "badge": "Simple 3-Step Process",
-    "title": "How to Create a Receipt Online",
+    "title": "How to Create a Receipt with Our Online Receipt Maker",
     "subtitle": "Issue professional receipts in seconds with our serverless generator.",
     "steps": [
       {
@@ -42,7 +42,7 @@
   },
   "whatItMustContain": {
     "badge": "Accounting Checklist",
-    "title": "What an Official Receipt Must Contain",
+    "title": "What a Free Receipt Maker Slip Must Contain",
     "subtitle": "Six essential components needed to make a receipt valid for accounting, tax filings, and audits.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules.",
     "items": [
@@ -79,7 +79,7 @@
     ]
   },
   "example": {
-    "title": "Sample Payment Receipt Breakdown",
+    "title": "Sample Receipt Generator Free Slip Breakdown",
     "scenario": "Commercial Video Production Payment Settlement",
     "sender": {
       "name": "Apex Creative Production Studio",
@@ -112,7 +112,7 @@
   },
   "faq": {
     "badge": "Receipt FAQs",
-    "title": "Receipt Generator FAQs",
+    "title": "Online Receipt Generator FAQs",
     "subtitle": "Common questions regarding receipt types, PDF exports, and data privacy.",
     "items": [
       {
@@ -134,7 +134,7 @@
     ]
   },
   "relatedTools": {
-    "title": "Related Financial Document Tools",
+    "title": "Related Financial Document & Receipt Tools",
     "subtitle": "Explore our full range of free, serverless billing tools.",
     "items": [
       {
