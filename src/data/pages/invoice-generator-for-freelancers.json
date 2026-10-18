@@ -125,24 +125,28 @@
     "subtitle": "Clear answers to common questions about billing clients and managing freelance cash flow.",
     "items": [
       {
-        "question": "When should a freelancer send an invoice?",
-        "answer": "Send your invoice as soon as you complete the work or reach an agreed project milestone. For ongoing hourly contracts, sending an invoice at the end of every week or month keeps payments regular."
+        "question": "What must a freelance invoice include to guarantee prompt client payment?",
+        "answer": "A professional freelance invoice must include your business name, contact info, client billing details, unique invoice number, issue date, payment due date, itemized project deliverables, and total fee. Clearly stating your payment terms like Net 15 or Due on Receipt, along with bank transfer or digital payout links, eliminates billing confusion and helps freelancers get paid on time."
       },
       {
-        "question": "What payment terms work best for freelancers?",
-        "answer": "Net 14 or 'Due upon receipt' is best for solo freelancers. Shorter terms keep cash flowing and reduce late payment risks. Avoid Net 60 or Net 90 unless required by large corporate clients."
+        "question": "Is this freelancer invoice maker 100% free with no watermarks?",
+        "answer": "Yes, our invoice generator for freelancers is completely free and never places watermarks or branding on your client invoices. Freelancers can create invoice for freelance work documents, generate unlimited PDFs, and customize payment terms without paying monthly software fees or registering mandatory accounts that spam your inbox."
       },
       {
-        "question": "Are invoices downloaded here watermark-free?",
-        "answer": "Yes. Every PDF and PNG generated on Online Invoice Creator is 100% free and free of watermarks."
+        "question": "Are invoices created with this freelancer tool legally valid?",
+        "answer": "Yes, invoices generated with our freelance invoice template are legally valid commercial billing instruments worldwide. When populated with your tax identification number, correct client corporate entities, agreed project milestones, and clear contractual payment terms, they provide court-admissible documentation supporting your freelance service agreements and tax returns."
       },
       {
-        "question": "Does my invoice data get saved on a server?",
-        "answer": "No. Online Invoice Creator runs entirely in your web browser. Your business data is stored locally on your device and never uploaded to a remote server."
+        "question": "Can freelancers add custom logos and personal branding?",
+        "answer": "Yes, you can upload your personal studio logo, custom monogram, or freelance agency branding directly to the invoice header. The editor automatically renders your high-resolution graphic cleanly on the PDF letterhead. Professional visual presentation reinforces your credibility and demonstrates polish to corporate clients and agency partners."
       },
       {
-        "question": "How should I follow up on an unpaid freelance invoice?",
-        "answer": "Send a polite email reminder three days before the due date, on the due date, and one week after the due date. Reattach the PDF invoice to every reminder."
+        "question": "What is the difference between an invoice and a receipt for freelance work?",
+        "answer": "An invoice requests payment for completed freelance services, while a receipt proves that the client payment has cleared. Issue an invoice upon project handover to initiate billing terms. Once the client deposits funds via wire or card, switch to our receipt maker to provide formal acknowledgment for their accounting files."
+      },
+      {
+        "question": "Do you store my freelance rates, client contacts, or billing history?",
+        "answer": "No, we never store or inspect your freelance hourly rates, project balances, or client contact details. All billing for freelancers calculations run strictly in your web browser. Your client roster and financial records remain completely private in local browser storage, protected from external tracking or data mining."
       }
     ]
   },

@@ -5,6 +5,34 @@ import { buildPageSchemaGraph } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Terms of Service' }];
 
+const termsFaqs = [
+  {
+    question: 'Are invoices created on Online Invoice Creator legally valid business documents?',
+    answer:
+      'Yes, invoices generated through our platform are legally valid business documents when filled with authentic commercial transaction details. They include all essential accounting fields required by commercial law, including invoice dates, unique numbers, seller and buyer details, itemized goods, and taxes. Users are solely responsible for ensuring accuracy under local tax legislation.',
+  },
+  {
+    question: 'What are the acceptable invoicing practices under these terms?',
+    answer:
+      'Our acceptable invoicing practices require that all generated documents represent genuine, lawful commercial transactions between consenting parties. You agree never to use our service to generate fraudulent invoices, fictitious receipts for tax evasion, misleading billing statements, or unauthorized impersonations. Any abusive or unlawful document generation violates our terms of service.',
+  },
+  {
+    question: 'Is there any warranty or financial liability provided with these free tools?',
+    answer:
+      'No, our software is provided on an as-is basis without express or implied financial or legal warranties. While our calculation engines are designed for precision, users must verify that figures, currency rates, and tax percentages match their local regulatory requirements. Online Invoice Creator assumes no liability for billing disputes.',
+  },
+  {
+    question: 'Can I use Online Invoice Creator for commercial business billing without an account?',
+    answer:
+      'Yes, you are fully authorized to use our tools for commercial business billing without creating an account or paying fees. Freelancers, contractors, agencies, and small enterprises may generate unlimited invoices and receipts for daily business operations, client billing, and tax bookkeeping under our permissive terms of service.',
+  },
+  {
+    question: 'Can access to the invoice creator be restricted or terminated?',
+    answer:
+      'We reserve the right to restrict or terminate access to users who attempt automated scraping, DDoS attacks, or exploit the service for fraud. Lawful users may use the platform freely and indefinitely for genuine business paperwork without fear of sudden account locking or paywall restrictions.',
+  },
+];
+
 const termsSchema = {
   '@type': 'WebPage',
   name: 'Terms of Service - Online Invoice Creator',
@@ -19,6 +47,7 @@ const pageSchema = buildPageSchemaGraph({
   description:
     'Terms of service and acceptable use policy for Online Invoice Creator. Our free tools are provided strictly for genuine, lawful business documents.',
   breadcrumbs: breadcrumbItems,
+  faqItems: termsFaqs,
   customSchemas: [termsSchema],
 });
 ---
@@ -218,6 +247,37 @@ const pageSchema = buildPageSchemaGraph({
         effective immediately upon being posted to this page. Your continued use of the website
         following any changes constitutes acceptance of the revised terms.
       </p>
+    </section>
+
+    <!-- Frequently Asked Questions (FAQ) Section -->
+    <section class="space-y-6 pt-6 border-t border-hairline" aria-labelledby="terms-faq-heading">
+      <div class="text-center sm:text-left">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
+          Terms FAQs
+        </span>
+        <h2
+          id="terms-faq-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
+          Frequently Asked Questions About Terms & Acceptable Use
+        </h2>
+        <p class="text-sm text-mute mt-1.5">
+          Common legal and operational questions regarding legitimate billing, liability, and ownership.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        {termsFaqs.map((faq) => (
+          <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
+              {faq.question}
+            </h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">
+              {faq.answer}
+            </p>
+          </article>
+        ))}
+      </div>
     </section>
 
     <!-- Institutional Cross-Links Banner -->

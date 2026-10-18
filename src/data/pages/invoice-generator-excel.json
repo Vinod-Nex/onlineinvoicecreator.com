@@ -125,20 +125,28 @@
     "subtitle": "Frequently asked questions about moving away from spreadsheet invoicing.",
     "items": [
       {
-        "question": "Why shouldn't I just use Microsoft Excel or Google Sheets for invoices?",
-        "answer": "Spreadsheets are prone to hidden formula errors, accidentally deleted calculation cells, awkward page breaks when exported to PDF, and lack responsive mobile editing. Our dedicated tool automates math and formatting cleanly."
+        "question": "How does this free online tool compare to traditional Excel invoice templates?",
+        "answer": "Our web-based invoice creator excel replaces manual spreadsheet formulas with automated real-time calculations and instant, flawless PDF exports. Unlike traditional spreadsheets that suffer from broken sum formulas, cell formatting glitches, and awkward page breaks during printing, our tool ensures perfect layout geometry, currency rounding, and tax accuracy without opening Microsoft Office."
       },
       {
-        "question": "Can I export my invoice data as JSON for backup?",
-        "answer": "Yes. You can export and import your full invoice details as structured JSON with a single click, providing portable data backups without spreadsheets."
+        "question": "What must an invoice include when generated online instead of Excel?",
+        "answer": "An invoice generated online must contain the exact same essential fields as a spreadsheet invoice: business details, client address, unique invoice number, issue date, payment due date, itemized items, and total due. Our bill generator excel template incorporates all required legal and bookkeeping fields automatically, eliminating the risk of accidental cell deletion or missing compliance disclosures."
       },
       {
-        "question": "Can I use this tool completely offline?",
-        "answer": "Yes. Because the calculation and PDF engine run client-side in your browser, once loaded you can generate and print invoices even without an active internet connection."
+        "question": "Is this Excel invoice generator template free to use?",
+        "answer": "Yes, our excel invoice generator template alternative is 100% free with no subscription paywalls, watermarks, or user limits. You can generate unlimited client invoices, export high-resolution PDFs, and save recurring business profiles without purchasing software licenses or downloading third-party spreadsheet add-ons."
       },
       {
-        "question": "Does this tool support multiple currencies and international taxes?",
-        "answer": "Yes. Switch easily between 30+ major world currencies and configure custom percentage or flat tax rates (GST, VAT, Sales Tax) without writing spreadsheet formulas."
+        "question": "Are invoices exported here legally valid for business accounting?",
+        "answer": "Yes, invoices generated through this tool are fully legally valid for business accounting, tax audits, and financial reporting. Because every total, tax subtotal, and discount is computed with exact two-decimal precision, the resulting PDF document satisfies tax authorities and commercial bookkeeping requirements worldwide just like a spreadsheet."
+      },
+      {
+        "question": "Can I add a business logo to my invoice draft?",
+        "answer": "Yes, you can easily upload your corporate logo onto the invoice header before downloading your final document. Unlike Excel spreadsheets where resizing image shapes can distort document margins, our generator automatically scales, aligns, and embeds your logo with crisp vector clarity directly into the exported document."
+      },
+      {
+        "question": "What is the difference between an invoice and an Excel receipt generator document?",
+        "answer": "An invoice requests payment for products or services rendered, while an excel receipt generator document confirms payment receipt. Use the invoice editor to establish payment terms and collect outstanding receivables. When client funds clear your account, switch to our receipt maker to generate formal proof of settlement."
       }
     ]
   },

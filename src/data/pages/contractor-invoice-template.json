@@ -125,20 +125,28 @@
     "subtitle": "Answers to common questions about trade billing, materials tax, and milestone payments.",
     "items": [
       {
-        "question": "Why should contractors separate labor and materials on invoices?",
-        "answer": "Separating labor and materials provides full transparency to the client and simplifies sales tax reporting. In many jurisdictions, sales tax applies to physical building materials but not to labor [Verify with official source: state sales tax rules on contractor labor]."
+        "question": "What must a contractor invoice include to prevent client payment disputes?",
+        "answer": "A contractor invoice must include your contracting license number, business address, client details, jobsite physical location, unique invoice number, dates of work, itemized labor and materials, and payment terms. Separating labor hours from materials cost and documenting approved change orders provides the legal transparency necessary to protect mechanic lien rights and accelerate invoice sign-off."
       },
       {
-        "question": "Can I record milestone deposits or retainage?",
-        "answer": "Yes. Add an item with a negative amount or use the discount field to record previous deposits, showing the exact remaining balance due."
+        "question": "Why should contractors separate labor and materials on billing templates?",
+        "answer": "Separating labor and materials clarifies project billing and simplifies statutory sales tax reporting across trade jurisdictions. In many regions, sales tax applies strictly to physical building materials while specialized contractor labor remains tax-exempt. Clear itemization prevents client overcharging, facilitates job costing, and simplifies year-end construction tax accounting."
       },
       {
-        "question": "Can I generate contractor invoices on my phone at the jobsite?",
-        "answer": "Yes. The editor switches to a touch-friendly card view on mobile screens, letting you create and download clean PDF invoices right from your truck or jobsite."
+        "question": "Is this contractor billing invoice template free to download without watermarks?",
+        "answer": "Yes, our contractor billing invoice template is 100% free and prints clean, professional bills with zero watermarks. Builders, plumbers, electricians, and general contractors can create unlimited invoices on site, download watermark-free PDFs, and bill clients without paying monthly software subscriptions or setup charges."
       },
       {
-        "question": "What happens if a client disputes a contractor invoice?",
-        "answer": "Having itemized work orders, jobsite addresses, and written change orders on your invoice provides the legal documentation needed to resolve disputes quickly."
+        "question": "Are invoices created with this contractor bill format legally valid?",
+        "answer": "Yes, contractor bills generated here are legally valid commercial documents suitable for trade contracts and construction accounting. When paired with signed work authorizations, itemized receipts, and formal change order documentation, these invoices provide complete, dispute-proof legal evidence for client billing, insurance claims, and commercial litigation."
+      },
+      {
+        "question": "Can contractors add a company logo and license badge?",
+        "answer": "Yes, you can upload your trade business logo, state license badge, or guild credential directly onto the invoice letterhead. Displaying your professional branding and state licensing details builds immediate trust with commercial property owners and general contractors reviewing your billing packet."
+      },
+      {
+        "question": "What is the difference between a contractor invoice and a receipt?",
+        "answer": "A contractor invoice bills for labor hours and jobsite materials due, whereas a contractor receipt confirms payment has been received. Issue a contractor invoice upon hitting project milestones to request progress payments. Once your client pays by cheque or wire, issue an official receipt to acknowledge settled accounts."
       }
     ]
   },

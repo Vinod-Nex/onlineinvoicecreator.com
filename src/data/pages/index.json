@@ -122,20 +122,28 @@
     "subtitle": "Everything you need to know about creating, saving, and downloading invoices.",
     "items": [
       {
-        "question": "Is Online Invoice Creator really 100% free with no watermarks?",
-        "answer": "Yes. You can create, print, and download unlimited invoices and receipts in PDF or PNG format with zero watermarks and no mandatory signup."
+        "question": "What must an invoice include to be legally complete?",
+        "answer": "A professional invoice must include a unique invoice number, issue date, payment due date, seller and buyer contact details, an itemized description of goods or services, and the total amount due. You should also clearly specify accepted payment methods, currency, applicable sales taxes, and bank account details for direct transfer. Clear payment terms prevent billing disputes and accelerate client remittance."
       },
       {
-        "question": "Is my client and financial data kept private?",
-        "answer": "Yes. Our tool is 100% serverless and local-first. All calculations, logo uploads, and PDF rendering execute strictly within your browser. Nothing is uploaded to any remote server or database."
+        "question": "Is this invoice generator really 100% free with no watermarks?",
+        "answer": "Yes, Online Invoice Creator is a completely free invoice generator with zero hidden fees, premium tiers, or intrusive watermarks. You can create invoice free drafts, generate unlimited documents, and download high-resolution PDF or PNG files without paying anything. We do not require account signups, credit cards, or trial subscriptions to unlock export features."
       },
       {
-        "question": "Can I save my business details for future invoices?",
-        "answer": "Yes. Your business info, currency, and logo are saved securely in your browser's local storage so you do not need to re-enter them on your next visit."
+        "question": "Are invoices created with this free online invoice generator legally valid?",
+        "answer": "Yes, invoices generated through our tool are fully legally valid commercial billing documents across standard commercial jurisdictions. As long as you provide genuine seller details, client identification, an itemized transaction breakdown, and appropriate tax identifiers, your downloaded invoice meets standard bookkeeping and commercial accounting requirements worldwide. Always check local tax rules for specific mandatory disclosures."
       },
       {
-        "question": "What happens if a client has already paid me?",
-        "answer": "If payment has already cleared, switch to our Free Online Receipt Generator to issue an official proof of payment or payment receipt."
+        "question": "Do you store my data or uploaded invoice details?",
+        "answer": "No, we never store, inspect, or transmit your invoice data, client names, or financial amounts to any remote database. Our free online bill generator operates 100% client-side inside your web browser. All calculations, draft auto-saves, and PDF conversions occur entirely on your local machine using private browser storage that you can clear whenever you want."
+      },
+      {
+        "question": "Can I add a business logo to my invoice?",
+        "answer": "Yes, our invoice generator with logo allows you to upload custom branding directly onto your document header. Supported formats include PNG, JPG, and SVG images. Once selected, your logo is automatically scaled, sharpened, and embedded client-side into your PDF download without ever uploading your private brand graphics to external third-party servers."
+      },
+      {
+        "question": "What is the difference between an invoice and a receipt?",
+        "answer": "An invoice is a formal payment request issued before payment, whereas a receipt is proof of payment issued after funds clear. Use this invoice builder to bill clients for completed work, establish Net 30 terms, and itemize owed balances. Once your customer pays in full, issue an official receipt to confirm payment receipt for tax records."
       }
     ]
   },

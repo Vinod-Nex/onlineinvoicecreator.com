@@ -117,19 +117,27 @@
     "items": [
       {
         "question": "What is the difference between an invoice and a receipt?",
-        "answer": "An invoice is a bill sent before payment to request money owed. A receipt is an acknowledgment issued after payment as proof that money was received."
+        "answer": "An invoice requests payment for pending goods or services, while a receipt provides formal proof that payment has already been received. You send an invoice prior to settlement with agreed credit terms like Net 15 or Net 30. Conversely, you issue a receipt through our online receipt generator immediately after funds clear to verify transaction settlement."
       },
       {
-        "question": "Can I generate receipts on my mobile phone?",
-        "answer": "Yes. The interface is optimized for mobile phones with a quick toggle between editing your receipt and viewing the live preview."
+        "question": "What must an official receipt include to serve as valid proof of payment?",
+        "answer": "An official receipt must clearly state the business name, transaction date, unique receipt number, itemized goods or services, payment method, and total amount paid. It should also indicate any sales tax collected, the payment status as paid in full, and reference the original invoice number if applicable. This ensures seamless bookkeeping and expense deduction compliance for your customer."
       },
       {
-        "question": "Is my customer data stored on a remote server?",
-        "answer": "No. Online Invoice Creator is 100% serverless. All receipt calculations and PDF rendering take place directly inside your web browser."
+        "question": "Is this online receipt generator completely free with no watermarks?",
+        "answer": "Yes, our receipt maker online free is 100% free with absolutely no watermarks, hidden paywalls, or account registrations required. You can generate a receipt online in seconds, itemize retail purchases or client payments, and export crisp, professional PDF receipts without subscription fees. All features remain unrestricted and private for all business types."
       },
       {
-        "question": "Are there any watermarks on the receipts?",
-        "answer": "No. All PDF and PNG downloads are completely watermark-free and suitable for official commercial accounting."
+        "question": "Can I generate a cash receipt with custom business details?",
+        "answer": "Yes, our cash receipt generator lets you document cash, cheque, bank transfer, card, and digital wallet payments with ease. You can specify the exact payment method received, date of tender, customer name, and itemized subtotal. The tool formats your receipt cleanly for immediate printout or digital PDF distribution to your customer."
+      },
+      {
+        "question": "Can I add my company logo to the receipts I create?",
+        "answer": "Yes, our receipt creator free includes built-in logo uploading so you can customize every receipt with your corporate brand. Simply upload your PNG or JPEG logo file from your computer or phone. Your graphic is processed locally in memory and rendered sharply on the receipt letterhead without leaving your device."
+      },
+      {
+        "question": "Do you store my customer transaction details or receipt drafts?",
+        "answer": "No, we never store or track customer receipts, transaction records, or payment details on any remote server. All processing runs locally in your web browser. Receipt drafts remain saved strictly in your device local browser memory for convenience, ensuring complete confidentiality for your accounting data and client interactions."
       }
     ]
   },

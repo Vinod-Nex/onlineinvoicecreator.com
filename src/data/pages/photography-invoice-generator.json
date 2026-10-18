@@ -131,20 +131,28 @@
     "subtitle": "Frequently asked questions regarding photo retainers, licensing fees, and print taxes.",
     "items": [
       {
-        "question": "When should wedding and portrait photographers collect payment?",
-        "answer": "Standard industry practice is collecting a 30% to 50% non-refundable booking deposit to reserve the calendar date, with the remaining balance due 14 to 30 days before the event or prior to final image delivery."
+        "question": "What must a professional photography invoice include?",
+        "answer": "A professional photography invoice must include your studio name, photographer contact details, client name, event date, session location, itemized shoot fees, licensing terms, and total amount due. Itemizing creative fees, equipment rental, travel expenses, post-processing retouching, and commercial image licensing rights ensures clients understand all billing components and safeguards intellectual property ownership."
       },
       {
-        "question": "How do I specify photo usage rights on an invoice?",
-        "answer": "Add a dedicated line item or note defining the exact scope: media type (Web, Social Media, Print, Broadcast), geographic region (Local, National, Worldwide), and duration (1 Year, Perpetual)."
+        "question": "Is this photography invoice generator free with zero watermarks?",
+        "answer": "Yes, our photography billing invoice generator is 100% free and never adds watermarks or third-party ads to your documents. Professional photographers can generate clean, editorial-grade PDF invoices for wedding shoots, portrait sessions, and commercial campaigns without paying subscription fees or surrendering client contact lists."
       },
       {
-        "question": "Should sales tax be charged on photography services?",
-        "answer": "Tax regulations vary by jurisdiction. In many US states, digital-only image delivery is non-taxable, while delivering tangible prints or flash drives makes the entire transaction subject to sales tax [Verify with official source: state sales tax department on photography]."
+        "question": "Are photography invoices created here legally valid?",
+        "answer": "Yes, photography invoices created with our tool are legally valid commercial billing records. When accompanied by your signed client photography contract, written delivery receipts, and copyright licensing schedules, these documents establish binding legal proof of agreed creative fees, payment deadlines, and client balances."
       },
       {
-        "question": "Can I export an image version of my invoice for clients on messaging apps?",
-        "answer": "Yes. In addition to high-resolution vector PDF downloads, you can click 'Export PNG' to save a clean image ready to text or send via WhatsApp."
+        "question": "Can photographers add custom studio logos and brand styling?",
+        "answer": "Yes, you can upload your custom photography watermark, studio logo, or signature mark directly to the invoice header. The generator renders your branding with high-resolution clarity, creating a premium letterhead that matches the sophisticated visual aesthetic of your editorial or commercial photography portfolio."
+      },
+      {
+        "question": "What is the difference between a photography invoice and a receipt?",
+        "answer": "A photography invoice requests payment for upcoming shoots or delivered photo galleries, while a receipt proves funds have been settled. Send an invoice to collect session booking retainers or milestone fees before shoot day. Once your client remits payment, provide an official receipt to acknowledge full payment for tax records."
+      },
+      {
+        "question": "Do you store my photography rates, client details, or shoot bookings?",
+        "answer": "No, we never store or monitor your photography rates, client shoot details, or studio financial earnings on our servers. All document generation occurs privately inside your web browser. Your client names, licensing terms, and session pricing remain strictly confidential on your local device."
       }
     ]
   },

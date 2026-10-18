@@ -130,20 +130,28 @@
     "subtitle": "Clear answers to common questions about rent receipts and tax claims.",
     "items": [
       {
-        "question": "When is a landlord's PAN mandatory on a rent receipt?",
-        "answer": "In India, an employee claiming House Rent Allowance (HRA) must provide the landlord's PAN if total rent paid exceeds ₹1,00,000 per financial year (about ₹8,333 per month) [Verify with official source: Indian Income Tax circulars]. If total annual rent is ₹1,00,000 or less, the PAN field is optional."
+        "question": "What must a rent receipt include for tax deductions and HRA claims?",
+        "answer": "A valid rent receipt must include the tenant name, landlord name, rental property address, payment date, rental period covered, and payment amount. To satisfy tax authorities and HRA exemption audits, it should also record the landlord tax identification number or PAN if annual rent exceeds statutory thresholds, alongside an authorized landlord signature confirming payment."
       },
       {
-        "question": "What if the landlord does not have a PAN?",
-        "answer": "If annual rent exceeds ₹1,00,000 and the landlord has no PAN, tax authorities generally require a signed Form 60 declaration from the landlord along with their full name and address [Verify with official source: Form 60 under Income Tax Rules]."
+        "question": "Is this rent receipt generator free with no watermarks?",
+        "answer": "Yes, our online rent receipt without watermark is 100% free and never stamps logos or branding onto your legal documents. Tenants and landlords can generate unlimited rent receipts without paywalls, subscriptions, or credit card requirements. You receive pristine PDF documents ready for immediate employer submission, tax filings, or personal tenancy archives."
       },
       {
-        "question": "Is a revenue stamp required on rent receipts?",
-        "answer": "In India, a ₹1 revenue stamp is typically required only when rent is paid in cash exceeding ₹5,000 per receipt. For electronic transfers (NEFT, UPI, or cheque), bank statements serve as digital evidence, so a revenue stamp is generally not required [Verify with official source: Indian Stamp Act rules on receipts]."
+        "question": "Can I use this tool as an HRA rent receipt generator for multiple months?",
+        "answer": "Yes, our HRA rent receipt generator format lets you issue monthly rent receipts or customize quarterly and annual rental intervals. You can quickly duplicate recurring rental payments, adjust dates for each monthly cycle, and generate a consistent rent receipt format generator document package that simplifies employee tax declaration audits with your finance department."
       },
       {
-        "question": "Can a landlord issue one receipt for the whole year?",
-        "answer": "While employers often accept quarterly or annual consolidated receipts, monthly receipts with specific transaction dates provide the strongest audit trail for tax authorities."
+        "question": "Are rent receipts generated here legally valid?",
+        "answer": "Yes, rent receipts generated through this platform are legally valid records of residential or commercial tenancy payments. When accurately filled with genuine landlord and tenant particulars, correct rental periods, and verified payment modes, they serve as authentic proof of rent paid for tenancy disputes, tax exemptions, and formal lease agreements."
+      },
+      {
+        "question": "Can landlords add a digital signature or property management logo?",
+        "answer": "Yes, you can upload your landlord signature image or property management company logo directly onto the rent receipt header. The document editor automatically scales and positions your graphic on the printed receipt. This adds professional polish and satisfies payroll compliance officers who require signed verification for corporate housing allowances."
+      },
+      {
+        "question": "Do you store tenant names, rental addresses, or payment amounts?",
+        "answer": "No, we never store or monitor rental transaction details, tenant identities, or landlord bank details on our servers. All rent receipt calculations and PDF compilations execute 100% client-side in your local browser window. Your sensitive lease figures and housing data remain completely confidential on your personal device at all times."
       }
     ]
   },

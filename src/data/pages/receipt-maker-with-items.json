@@ -126,20 +126,28 @@
     "subtitle": "Common questions regarding receipt itemization, tax proofs, and POS formatting.",
     "items": [
       {
-        "question": "Why is an itemized receipt better than a credit card slip?",
-        "answer": "A standard card slip only shows a total charged amount. An itemized receipt lists every product, quantity, and tax rate. Employers and tax authorities require itemized receipts to approve business expense reimbursements."
+        "question": "What must an itemized sales receipt include to be complete?",
+        "answer": "An itemized sales receipt must include the business name, transaction date, individual product or service descriptions, unit quantities, unit prices, subtotal, taxes, and total paid. Itemization provides buyers with item-level proof of purchase required for warranty claims, business expense reimbursements, and return policies, ensuring full transparency between merchant and consumer."
       },
       {
-        "question": "Can I use this tool for cash transactions?",
-        "answer": "Yes. Switch to 'Cash' receipt mode to issue a clean payment voucher acknowledging cash received in hand without requiring detailed line items."
+        "question": "Is this receipt maker with items completely free to use?",
+        "answer": "Yes, our itemized receipt generator is 100% free with no monthly subscriptions, usage quotas, or watermark restrictions. You can itemize dozens of products or labor rates, apply individual discounts, calculate multi-rate sales taxes, and export unlimited PDF receipts without signing up for an account or entering credit card details."
       },
       {
-        "question": "Is there a watermark on downloaded receipts?",
-        "answer": "No. Online Invoice Creator generates 100% watermark-free documents on all downloads and prints."
+        "question": "What is the difference between an itemized invoice and an itemized receipt?",
+        "answer": "An itemized invoice details charges requested before payment, whereas an itemized receipt confirms exact products paid for after transaction completion. Invoices establish payment deadlines and credit terms for outstanding balances. Receipts verify immediate settlement, documenting the date, payment channel, and item-by-item breakdown of funds received by the merchant."
       },
       {
-        "question": "Can I print receipts directly to a desktop or POS receipt printer?",
-        "answer": "Yes. Click 'Print' to open your browser's native print dialog. You can print to standard desktop printers, thermal slip printers, or save directly as a PDF."
+        "question": "Can I use this tool as a POS receipt maker for retail sales?",
+        "answer": "Yes, our POS receipt maker layout is designed specifically for retail shops, market stalls, and point-of-sale customer transactions. You can add line items swiftly, enter SKU numbers or product titles, apply exact local sales tax percentages, and print standard receipt layouts instantly from counter tablets, desktop computers, or mobile phones."
+      },
+      {
+        "question": "Can I add a store logo and custom return policy notes to the receipt?",
+        "answer": "Yes, you can upload a store logo and add custom return terms or warranty policies directly to every itemized sales receipt. The editor lets you configure custom footer notes for return windows, exchange rules, and customer support contact details, producing a professional receipt tailored to your store brand identity."
+      },
+      {
+        "question": "Do you store my product catalog, pricing, or customer sales records?",
+        "answer": "No, we never save or upload your itemized product lists, pricing data, or customer transactions to remote servers. All line-item calculations, sales tax summaries, and PDF renders take place locally within your browser private memory. Your sales margins and customer billing records remain entirely confidential and secure."
       }
     ]
   },

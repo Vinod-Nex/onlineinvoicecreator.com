@@ -13,12 +13,36 @@ const contactSchema = {
   url: 'https://onlineinvoicecreator.com/contact',
 };
 
+const contactFaqs = [
+  {
+    question: 'How do I report a calculation issue or software bug?',
+    answer: 'You can report a calculation issue or software bug directly using our contact form or by emailing our technical support team. Please describe the calculation discrepancy, the currency or tax settings you used, and your device browser type. Our engineering team investigates and resolves calculation and layout reports promptly.'
+  },
+  {
+    question: 'How can I submit invoice tool feedback or suggest new features?',
+    answer: 'We welcome user invoice tool feedback and template suggestions through our contact message form. Let us know what regional tax templates, payment methods, or currency formats would improve your business workflow. We actively prioritize user requests in our continuous product update roadmap to better support small businesses.'
+  },
+  {
+    question: 'Do you offer phone or live chat customer support?',
+    answer: 'No, we do not currently offer phone or live chat support because Online Invoice Creator is a free, serverless utility. All customer support, feature suggestions, and bug inquiries are handled efficiently via email and our contact form. We aim to reply to all business inquiries within one business day.'
+  },
+  {
+    question: 'How does Cloudflare Turnstile protect the contact form?',
+    answer: 'Cloudflare Turnstile provides privacy-preserving spam protection on our contact form without forcing users to solve frustrating image puzzles. It verifies human interaction cryptographically in the background without collecting invasive personal tracking data or cookies, keeping our support channels open and spam-free for genuine users.'
+  },
+  {
+    question: 'Is my message kept private when I submit the contact form?',
+    answer: 'Yes, your contact submission is transmitted securely over HTTPS directly to our private Cloudflare Worker API. We use your provided name, email address, and message content solely to investigate your inquiry and reply to your feedback. We never sell, share, or monetize contact communications with third-party advertisers.'
+  }
+];
+
 const pageSchema = buildPageSchemaGraph({
   canonicalUrl: 'https://onlineinvoicecreator.com/contact',
   title: 'Contact Support & Feedback | Online Invoice Creator',
   description:
     'Contact the Online Invoice Creator team. Send feedback, suggest templates, report bugs, or reach us directly via email.',
   breadcrumbs: breadcrumbItems,
+  faqItems: contactFaqs,
   customSchemas: [contactSchema],
 });
 ---
@@ -292,6 +316,37 @@ const pageSchema = buildPageSchemaGraph({
         </div>
       </div>
     </div>
+
+    <!-- Frequently Asked Questions (FAQ) Section -->
+    <section class="space-y-6 pt-8 border-t border-hairline" aria-labelledby="contact-faq-heading">
+      <div class="text-center sm:text-left">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
+          Support FAQs
+        </span>
+        <h2
+          id="contact-faq-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
+          Frequently Asked Questions About Contact & Support
+        </h2>
+        <p class="text-sm text-mute mt-1.5">
+          Quick answers about bug reports, support response times, and feature suggestions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        {contactFaqs.map((faq) => (
+          <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
+              {faq.question}
+            </h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">
+              {faq.answer}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
