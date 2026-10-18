@@ -1,24 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { buildPageSchemaGraph } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Contact' }];
 
 const contactSchema = {
-  '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Contact Support - Online Invoice Creator',
   description:
     'Contact the Online Invoice Creator team for support, feature feedback, partnership inquiries, and bug reports.',
   url: 'https://onlineinvoicecreator.com/contact',
 };
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: 'https://onlineinvoicecreator.com/contact',
+  title: 'Contact Support & Feedback | Online Invoice Creator',
+  description:
+    'Contact the Online Invoice Creator team. Send feedback, suggest templates, report bugs, or reach us directly via email.',
+  breadcrumbs: breadcrumbItems,
+  customSchemas: [contactSchema],
+});
 ---
 
 <BaseLayout
   title="Contact Support & Feedback | Online Invoice Creator"
   description="Contact the Online Invoice Creator team. Send feedback, suggest templates, report bugs, or reach us directly via email."
   canonical="https://onlineinvoicecreator.com/contact"
-  schema={contactSchema}
+  schema={pageSchema}
 >
   <!-- Breadcrumb Navigation -->
   <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">

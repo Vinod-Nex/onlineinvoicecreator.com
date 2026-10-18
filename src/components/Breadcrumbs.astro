@@ -7,38 +7,42 @@ export interface BreadcrumbItem {
 interface Props {
   items: BreadcrumbItem[];
   className?: string;
+  renderSchema?: boolean;
 }
 
-const { items, className = '' } = Astro.props;
+const { items, className = '', renderSchema = false } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.origin : 'https://onlineinvoicecreator.com';
 
-// Construct Schema.org BreadcrumbList structured data
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: items.map((item, index) => {
-    const isLast = index === items.length - 1;
-    const itemUrl = item.href
-      ? item.href.startsWith('http')
-        ? item.href
-        : new URL(item.href, siteUrl).href
-      : isLast
-        ? new URL(Astro.url.pathname, siteUrl).href
-        : undefined;
+// Standalone Schema.org BreadcrumbList structured data (disabled by default to prevent duplicate tags when BaseLayout head graph is active)
+const breadcrumbSchema = renderSchema
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        const itemUrl = item.href
+          ? item.href.startsWith('http')
+            ? item.href
+            : new URL(item.href, siteUrl).href
+          : isLast
+            ? new URL(Astro.url.pathname, siteUrl).href
+            : undefined;
 
-    return {
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.label,
-      ...(itemUrl ? { item: itemUrl } : {}),
-    };
-  }),
-};
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.label,
+          ...(itemUrl ? { item: itemUrl } : {}),
+        };
+      }),
+    }
+  : null;
 ---
 
-<!-- Schema.org BreadcrumbList JSON-LD -->
-<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+{renderSchema && breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}
 <!-- Accessible Breadcrumbs Navigation -->
 <nav aria-label="Breadcrumb" class={`flex items-center text-xs text-mute py-2 ${className}`}>
   <ol class="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">

@@ -151,6 +151,96 @@ function auditHtmlFile(filePath) {
     prevLevel = h.level;
   }
 
+  // 5. Structured Data (JSON-LD) Audit
+  const jsonLdMatches = [
+    ...content.matchAll(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi),
+  ];
+
+  let hasBreadcrumbs = false;
+  let hasOrg = false;
+  let hasWebSite = false;
+  let hasWebApp = false;
+  let hasFaq = false;
+
+  if (jsonLdMatches.length === 0) {
+    errors.push('Missing <script type="application/ld+json"> tag');
+  } else {
+    const entities = [];
+    for (const match of jsonLdMatches) {
+      try {
+        const parsed = JSON.parse(match[1].trim());
+        if (parsed['@graph'] && Array.isArray(parsed['@graph'])) {
+          entities.push(...parsed['@graph']);
+        } else {
+          entities.push(parsed);
+        }
+      } catch (e) {
+        errors.push(`Invalid JSON-LD syntax: ${e.message}`);
+      }
+    }
+
+    const types = entities.map((e) => e['@type']);
+    hasBreadcrumbs = types.includes('BreadcrumbList');
+    hasOrg = types.includes('Organization');
+    hasWebSite = types.includes('WebSite');
+    hasWebApp = types.includes('WebApplication');
+    hasFaq = types.includes('FAQPage');
+
+    // BreadcrumbList everywhere
+    if (!hasBreadcrumbs) {
+      errors.push('Missing BreadcrumbList in structured data graph');
+    }
+
+    // Home page checks
+    const isHomePage = relativePath === 'index.html';
+    if (isHomePage) {
+      if (!hasOrg) {
+        errors.push('Missing Organization in home page structured data');
+      }
+      if (!hasWebSite) {
+        errors.push('Missing WebSite in home page structured data');
+      }
+    }
+
+    // Tool pages checks
+    const isToolPage = [
+      'index.html',
+      'contractor-invoice-template/index.html',
+      'free-online-receipt-generator/index.html',
+      'free-rent-receipt-generator/index.html',
+      'invoice-generator-excel/index.html',
+      'invoice-generator-for-freelancers/index.html',
+      'photography-invoice-generator/index.html',
+      'receipt-maker-with-items/index.html',
+      'tax-invoice-template-australia/index.html',
+    ].includes(relativePath);
+
+    if (isToolPage) {
+      const webApp = entities.find((e) => e['@type'] === 'WebApplication');
+      if (!webApp) {
+        errors.push('Missing WebApplication in tool page structured data');
+      } else {
+        if (webApp.applicationCategory !== 'BusinessApplication') {
+          errors.push(
+            `WebApplication applicationCategory must be "BusinessApplication", found "${webApp.applicationCategory}"`
+          );
+        }
+        if (webApp.operatingSystem !== 'Any') {
+          errors.push(
+            `WebApplication operatingSystem must be "Any", found "${webApp.operatingSystem}"`
+          );
+        }
+        if (!webApp.offers || webApp.offers.price !== '0') {
+          errors.push('WebApplication must offer free price "0"');
+        }
+      }
+
+      if (!hasFaq) {
+        errors.push('Missing FAQPage in tool page structured data');
+      }
+    }
+  }
+
   return {
     relativePath,
     title,
@@ -160,6 +250,11 @@ function auditHtmlFile(filePath) {
     canonical,
     h1Text,
     headingCount: headings.length,
+    hasBreadcrumbs,
+    hasOrg,
+    hasWebSite,
+    hasWebApp,
+    hasFaq,
     errors,
   };
 }
@@ -187,7 +282,7 @@ for (const file of htmlFiles) {
     }
   } else {
     console.log(
-      `✅ /${result.relativePath.padEnd(40)} | Title: ${String(result.titleLen).padStart(2)}/60 | Desc: ${String(result.descLen).padStart(3)}/155 | H1: ✓ | Headings: ✓ | Canonical: ✓`
+      `✅ /${result.relativePath.padEnd(40)} | Title: ${String(result.titleLen).padStart(2)}/60 | Desc: ${String(result.descLen).padStart(3)}/155 | H1: ✓ | Headings: ✓ | Schema: ✓`
     );
   }
 }
@@ -200,7 +295,7 @@ if (totalViolations > 0) {
   process.exit(1);
 } else {
   console.log(
-    `🎉 SEO Audit Passed: All ${htmlFiles.length} pages satisfy title (<=60), description (<=155), single H1 with primary keyword, strict heading hierarchy, and canonical rules.`
+    `🎉 SEO & Structured Data Audit Passed: All ${htmlFiles.length} pages satisfy title (<=60), description (<=155), single H1 with primary keyword, strict heading hierarchy, canonical, and Schema.org JSON-LD requirements.`
   );
   process.exit(0);
 }

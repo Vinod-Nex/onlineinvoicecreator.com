@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+import { buildPageSchemaGraph, type BreadcrumbItem } from '../lib/schema';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -10,6 +12,7 @@ export interface Props {
   ogImage?: string;
   noindex?: boolean;
   schema?: Record<string, unknown> | Array<Record<string, unknown>> | string;
+  breadcrumbs?: BreadcrumbItem[];
   showHeader?: boolean;
   showFooter?: boolean;
 }
@@ -21,6 +24,7 @@ const {
   ogImage = '/og-image.png',
   noindex = false,
   schema,
+  breadcrumbs,
   showHeader = true,
   showFooter = true,
 } = Astro.props;
@@ -34,47 +38,39 @@ const canonicalUrl = canonical || new URL(normalizedPath, siteUrl).href;
 // Resolve absolute Open Graph image URL
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 
-// Default WebApplication & WebSite JSON-LD Schema
-const defaultSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
-      url: siteUrl,
-      name: 'Online Invoice Creator',
-      description: 'Free online invoice and receipt generator with instant PDF download.',
-      publisher: {
-        '@type': 'Organization',
-        name: 'Online Invoice Creator',
-        url: siteUrl,
-        logo: `${siteUrl}/favicon.svg`,
-      },
-      inLanguage: 'en-US',
-    },
-    {
-      '@type': 'WebApplication',
-      '@id': `${siteUrl}/#webapp`,
-      name: title,
-      url: canonicalUrl,
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'All',
-      browserRequirements: 'Requires JavaScript and HTML5 canvas/PDF support',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD',
-      },
-      description,
-    },
-  ],
-};
+// Build fallback schema graph if not explicitly provided
+const defaultSchema = buildPageSchemaGraph({
+  canonicalUrl,
+  siteUrl,
+  title,
+  description,
+  isHomePage: normalizedPath === '/',
+  isToolPage: false,
+  breadcrumbs,
+});
 
-const serializedSchema = schema
-  ? typeof schema === 'string'
-    ? schema
-    : JSON.stringify(schema)
-  : JSON.stringify(defaultSchema);
+let serializedSchema = '';
+if (schema) {
+  if (typeof schema === 'string') {
+    serializedSchema = schema;
+  } else if (typeof schema === 'object' && schema !== null) {
+    if ('@context' in schema) {
+      serializedSchema = JSON.stringify(schema);
+    } else if (Array.isArray(schema)) {
+      serializedSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': schema,
+      });
+    } else {
+      serializedSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [schema],
+      });
+    }
+  }
+} else {
+  serializedSchema = JSON.stringify(defaultSchema);
+}
 ---
 
 <!doctype html>

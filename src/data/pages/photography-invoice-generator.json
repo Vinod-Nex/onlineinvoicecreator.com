@@ -16,8 +16,7 @@
   ],
   "breadcrumbs": [
     { "label": "Home", "href": "/" },
-    { "label": "Invoice Generator", "href": "/" },
-    { "label": "Photography Invoice" }
+    { "label": "Photography Invoice Generator" }
   ],
   "howTo": {
     "badge": "Studio Invoicing Guide",

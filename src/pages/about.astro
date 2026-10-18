@@ -3,24 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { Picture } from 'astro:assets';
 import editorPreview from '../assets/invoice-generator-preview.png';
+import { buildPageSchemaGraph } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'About Us' }];
 
 const aboutSchema = {
-  '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: 'About Online Invoice Creator',
   description:
     'Online Invoice Creator provides free, private, watermark-free invoicing and receipt generation running 100% client-side in the browser.',
   url: 'https://onlineinvoicecreator.com/about',
 };
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: 'https://onlineinvoicecreator.com/about',
+  title: 'About Us | Online Invoice Creator',
+  description:
+    'Learn why Online Invoice Creator was built: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses.',
+  breadcrumbs: breadcrumbItems,
+  customSchemas: [aboutSchema],
+});
 ---
 
 <BaseLayout
   title="About Us | Online Invoice Creator"
   description="Learn why Online Invoice Creator was built: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses."
   canonical="https://onlineinvoicecreator.com/about"
-  schema={aboutSchema}
+  schema={pageSchema}
 >
   <!-- Breadcrumb Navigation -->
   <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">

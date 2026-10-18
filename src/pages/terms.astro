@@ -1,24 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { buildPageSchemaGraph } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Terms of Service' }];
 
 const termsSchema = {
-  '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Terms of Service - Online Invoice Creator',
   description:
     'Terms of Service for Online Invoice Creator: Authorized usage for genuine business documents, prohibited activities, and user responsibilities.',
   url: 'https://onlineinvoicecreator.com/terms',
 };
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: 'https://onlineinvoicecreator.com/terms',
+  title: 'Terms of Service | Online Invoice Creator',
+  description:
+    'Terms of service and acceptable use policy for Online Invoice Creator. Our free tools are provided strictly for genuine, lawful business documents.',
+  breadcrumbs: breadcrumbItems,
+  customSchemas: [termsSchema],
+});
 ---
 
 <BaseLayout
   title="Terms of Service | Online Invoice Creator"
   description="Terms of service and acceptable use policy for Online Invoice Creator. Our free tools are provided strictly for genuine, lawful business documents."
   canonical="https://onlineinvoicecreator.com/terms"
-  schema={termsSchema}
+  schema={pageSchema}
 >
   <!-- Breadcrumb Navigation -->
   <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">

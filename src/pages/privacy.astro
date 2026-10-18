@@ -1,24 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { buildPageSchemaGraph } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }];
 
 const privacySchema = {
-  '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Privacy Policy - Online Invoice Creator',
   description:
     'Privacy Policy for Online Invoice Creator: 100% in-browser processing, zero server uploads, what localStorage holds, analytics, and cookie policy.',
   url: 'https://onlineinvoicecreator.com/privacy',
 };
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: 'https://onlineinvoicecreator.com/privacy',
+  title: 'Privacy Policy | Online Invoice Creator',
+  description:
+    'Read our plain-English privacy policy: 100% in-browser document processing, zero server uploads, what localStorage stores, and cookie usage.',
+  breadcrumbs: breadcrumbItems,
+  customSchemas: [privacySchema],
+});
 ---
 
 <BaseLayout
   title="Privacy Policy | Online Invoice Creator"
   description="Read our plain-English privacy policy: 100% in-browser document processing, zero server uploads, what localStorage stores, and cookie usage."
   canonical="https://onlineinvoicecreator.com/privacy"
-  schema={privacySchema}
+  schema={pageSchema}
 >
   <!-- Breadcrumb Navigation -->
   <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">

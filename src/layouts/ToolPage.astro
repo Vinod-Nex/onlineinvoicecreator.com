@@ -5,6 +5,7 @@ import InvoiceForm from '../components/InvoiceForm.astro';
 import ReceiptForm from '../components/ReceiptForm.astro';
 import RentReceiptForm from '../components/RentReceiptForm.astro';
 import type { ToolPageData } from '../types/page';
+import { buildPageSchemaGraph } from '../lib/schema';
 
 interface Props {
   data: ToolPageData;
@@ -12,22 +13,29 @@ interface Props {
 
 const { data } = Astro.props;
 
-// Build Schema.org FAQPage structured data for Google Rich Results
-const faqSchema =
-  data.faq && data.faq.items && data.faq.items.length > 0
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: data.faq.items.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer,
-          },
-        })),
-      }
-    : undefined;
+const isHomePage = data.slug === 'index';
+
+// Construct complete Schema.org JSON-LD graph matching visible content:
+// - Organization & WebSite (on home page)
+// - WebApplication (free offer, applicationCategory BusinessApplication, operatingSystem Any)
+// - FAQPage (from visible FAQ items)
+// - BreadcrumbList (from visible breadcrumbs)
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: data.canonical || 'https://onlineinvoicecreator.com',
+  title: data.h1,
+  description: data.metaDescription,
+  isHomePage,
+  isToolPage: true,
+  breadcrumbs: data.breadcrumbs,
+  faqItems: data.faq?.items || [],
+  webAppOptions: {
+    name: data.h1,
+    description: data.metaDescription,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    features: data.trustBadges,
+  },
+});
 
 const trustBadges = data.trustBadges || [
   'Zero Watermarks',
@@ -41,7 +49,7 @@ const trustBadges = data.trustBadges || [
   title={data.metaTitle}
   description={data.metaDescription}
   canonical={data.canonical}
-  schema={faqSchema}
+  schema={pageSchema}
 >
   <!-- Accessible Breadcrumb Navigation Bar -->
   <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">

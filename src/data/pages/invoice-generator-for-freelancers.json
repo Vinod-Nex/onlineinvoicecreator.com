@@ -16,8 +16,7 @@
   ],
   "breadcrumbs": [
     { "label": "Home", "href": "/" },
-    { "label": "Invoice Generator", "href": "/" },
-    { "label": "Freelancers" }
+    { "label": "Freelancer Invoice Generator" }
   ],
   "howTo": {
     "badge": "Freelance Workflow",
