@@ -27,7 +27,7 @@
         "step": 1,
         "title": "Add Your Business Name and ABN",
         "description": "Enter your legal or trading name and your 11-digit Australian Business Number (ABN). The document must display the words 'Tax invoice' at the top.",
-        "tip": "Only businesses registered for GST may issue a document titled 'Tax invoice'."
+        "tip": "Only businesses registered for GST may issue a document titled 'Tax invoice'. For international clients without Australian GST, use our standard <a href=\"/\" class=\"text-primary font-semibold hover:underline\">Free Online Invoice Generator</a>."
       },
       {
         "step": 2,
@@ -147,6 +147,34 @@
       {
         "question": "What is the difference between an Australian tax invoice and a receipt?",
         "answer": "An Australian tax invoice requests payment and details GST owed, while a payment receipt confirms that funds have cleared. Use a tax invoice to bill customers and outline GST liabilities before settlement. After the customer pays via EFT or PayID, issue an official receipt to confirm finalized transaction payment."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Australian Compliance Workflows",
+    "title": "Complete Your Australian Business Invoicing Stack",
+    "subtitle": "Seamlessly connect Australian tax invoicing, receipt issuance, contractor billing, and global sales.",
+    "items": [
+      {
+        "prompt": "Australian customer has completed payment?",
+        "text": "Generate an Australian Payment Receipt",
+        "href": "/free-online-receipt-generator",
+        "badge": "Payment Proof",
+        "description": "Issue a formal payment receipt confirming invoice settlement for Australian bookkeeping."
+      },
+      {
+        "prompt": "Australian trade contractor or subcontractor?",
+        "text": "Use Contractor Invoice Template",
+        "href": "/contractor-invoice-template",
+        "badge": "Subcontractor",
+        "description": "Designed for construction milestones, trade equipment, and subcontractor labor billing."
+      },
+      {
+        "prompt": "Billing international clients outside Australia?",
+        "text": "Use Global Free Invoice Generator",
+        "href": "/",
+        "badge": "Zero GST",
+        "description": "Standard worldwide billing template for export sales and cross-border clients with no Australian GST."
       }
     ]
   },

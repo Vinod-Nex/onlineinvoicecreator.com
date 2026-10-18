@@ -24,13 +24,13 @@
         "step": 1,
         "title": "Select Receipt Mode and Enter Details",
         "description": "Choose between Itemized, Cash, or Payment receipt modes. Enter your business name and customer details.",
-        "tip": "Cash mode generates a rapid, simple cash payment voucher without line-item tables."
+        "tip": "If you are requesting payment upfront before goods are supplied, switch to our <a href=\"/\" class=\"text-primary font-semibold hover:underline\">Free Online Invoice Generator</a>."
       },
       {
         "step": 2,
         "title": "Add Items and Record Payment Method",
         "description": "Specify goods or services sold, tax rates, payment date, and transaction reference (such as UPI, Card, or Bank Transfer).",
-        "tip": "Payment receipts link directly to past invoice numbers for clean accounting reconciliation."
+        "tip": "For residential rental payments with landlord verification, use our dedicated <a href=\"/free-rent-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Rent Receipt Generator</a>."
       },
       {
         "step": 3,
@@ -138,6 +138,41 @@
       {
         "question": "Do you store my customer transaction details or receipt drafts?",
         "answer": "No, we never store or track customer receipts, transaction records, or payment details on any remote server. All processing runs locally in your web browser. Receipt drafts remain saved strictly in your device local browser memory for convenience, ensuring complete confidentiality for your accounting data and client interactions."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Receipt Workflows",
+    "title": "Complete Your Payment & Invoicing Lifecycle",
+    "subtitle": "Easily transition between general proof of payment, itemized retail slips, and commercial upfront invoicing.",
+    "items": [
+      {
+        "prompt": "Need to request payment upfront?",
+        "text": "Create a Free Online Invoice",
+        "href": "/",
+        "badge": "Bill First",
+        "description": "If payment has not been received yet, send a formal commercial invoice to your client first."
+      },
+      {
+        "prompt": "Landlord or tenant rent verification?",
+        "text": "Switch to Free Rent Receipt Generator",
+        "href": "/free-rent-receipt-generator",
+        "badge": "Housing",
+        "description": "Generate monthly rent proofs with landlord PAN, rental property address, and tax deduction claims."
+      },
+      {
+        "prompt": "Selling multiple products or retail items?",
+        "text": "Use Online Receipt Maker with Items",
+        "href": "/receipt-maker-with-items",
+        "badge": "Itemized",
+        "description": "Detailed line-by-line itemization for unit quantities, retail pricing, discounts, and item tax rates."
+      },
+      {
+        "prompt": "Freelancer billing clients for digital work?",
+        "text": "Explore Freelancer Invoicing Options",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Consultants",
+        "description": "Prepare hourly or project-based billing statements before issuing payment receipts."
       }
     ]
   },

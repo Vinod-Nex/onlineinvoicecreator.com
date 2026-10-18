@@ -39,7 +39,7 @@
         "step": 3,
         "title": "Download the PDF or Print on the Jobsite",
         "description": "Generate an instant vector PDF to email from your phone or print a hard copy directly for on-site sign-off.",
-        "tip": "State payment milestones clearly (for example: 50% deposit, 50% on final inspection)."
+        "tip": "State payment milestones clearly (e.g., 50% deposit). When deposit funds are paid, issue an itemized receipt using our <a href=\"/receipt-maker-with-items\" class=\"text-primary font-semibold hover:underline\">Online Receipt Maker with Items</a>."
       }
     ]
   },
@@ -147,6 +147,41 @@
       {
         "question": "What is the difference between a contractor invoice and a receipt?",
         "answer": "A contractor invoice bills for labor hours and jobsite materials due, whereas a contractor receipt confirms payment has been received. Issue a contractor invoice upon hitting project milestones to request progress payments. Once your client pays by cheque or wire, issue an official receipt to acknowledge settled accounts."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Contractor Workflows",
+    "title": "Complete Your Trade Billing & Deposit System",
+    "subtitle": "Easily link progress milestone billing, deposit receipts, regional tax compliance, and solo consulting.",
+    "items": [
+      {
+        "prompt": "Received milestone deposit or materials payment?",
+        "text": "Create an Itemized Receipt",
+        "href": "/receipt-maker-with-items",
+        "badge": "Deposit Proof",
+        "description": "Provide an itemized receipt for materials delivered, equipment hire, and progress deposits."
+      },
+      {
+        "prompt": "Contracting in Australia under ATO rules?",
+        "text": "Switch to Australia Tax Invoice Template",
+        "href": "/tax-invoice-template-australia",
+        "badge": "ATO GST",
+        "description": "Includes mandatory Australian Business Number (ABN) fields and 10% GST calculations."
+      },
+      {
+        "prompt": "Providing solo digital consulting or remote work?",
+        "text": "Use Invoice Generator for Freelancers",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Consulting",
+        "description": "Optimized for billable hours, software development, and remote digital services."
+      },
+      {
+        "prompt": "Need general commercial invoicing?",
+        "text": "Return to Free Online Invoice Generator",
+        "href": "/",
+        "badge": "General",
+        "description": "Standard business invoice generator with clean PDF export and custom line items."
       }
     ]
   },

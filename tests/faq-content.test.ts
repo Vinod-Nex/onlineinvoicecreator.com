@@ -32,7 +32,7 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
     'tax-invoice-template-australia',
   ];
 
-  const utilityPages = ['about.astro', 'contact.astro', 'privacy.astro', 'terms.astro'];
+  const utilityPages = ['about.astro', 'contact.astro', 'privacy.astro', 'terms.astro', 'blog.astro'];
 
   describe('Tool Page FAQs (src/data/pages/*.json)', () => {
     toolSlugs.forEach((slug) => {

@@ -39,7 +39,7 @@
         "step": 3,
         "title": "Download the PDF and Send to Your Client",
         "description": "Choose between Classic, Modern, Minimal, or Compact templates. Download a clean vector PDF or export a high-resolution PNG.",
-        "tip": "State clear payment terms such as 'Net 14' or 'Due upon receipt' to avoid payment delays."
+        "tip": "State clear payment terms like 'Net 14'. Once settled, generate an official payment acknowledgment using our <a href=\"/free-online-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Online Receipt Generator</a>."
       }
     ]
   },
@@ -147,6 +147,48 @@
       {
         "question": "Do you store my freelance rates, client contacts, or billing history?",
         "answer": "No, we never store or inspect your freelance hourly rates, project balances, or client contact details. All billing for freelancers calculations run strictly in your web browser. Your client roster and financial records remain completely private in local browser storage, protected from external tracking or data mining."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Freelancer Workflows",
+    "title": "Complete Your Solo Business Billing Pipeline",
+    "subtitle": "Connect freelance invoicing, payment receipts, trade templates, and spreadsheet alternatives seamlessly.",
+    "items": [
+      {
+        "prompt": "Freelance invoice settled by client?",
+        "text": "Generate an Instant Payment Receipt",
+        "href": "/free-online-receipt-generator",
+        "badge": "Payment Received",
+        "description": "Issue an immediate payment acknowledgment once client project funds clear your bank account."
+      },
+      {
+        "prompt": "Managing trade work or subcontractors?",
+        "text": "Try Contractor Invoice Template",
+        "href": "/contractor-invoice-template",
+        "badge": "Trade Work",
+        "description": "Dedicated billing structure for physical labor, materials reimbursement, and subcontractor phases."
+      },
+      {
+        "prompt": "Studio photography or licensing?",
+        "text": "Switch to Photography Invoice Generator",
+        "href": "/photography-invoice-generator",
+        "badge": "Creative",
+        "description": "Itemize shoot day session fees, image licensing terms, usage rights, and print production."
+      },
+      {
+        "prompt": "Prefer managing records in spreadsheets?",
+        "text": "Check Excel Invoice Generator Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Spreadsheet",
+        "description": "Compare spreadsheet bookkeeping templates with our zero-install browser invoicing tool."
+      },
+      {
+        "prompt": "Need a standard corporate billing layout?",
+        "text": "Use Standard Free Invoice Generator",
+        "href": "/",
+        "badge": "General",
+        "description": "Return to our general invoice creator with flexible fields for all business types."
       }
     ]
   },

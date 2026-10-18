@@ -40,7 +40,7 @@
         "step": 3,
         "title": "Download Receipt or Print Thermal Slip",
         "description": "Download a clean PDF or click Print for an immediate paper receipt slip with an official 'PAID IN FULL' stamp.",
-        "tip": "Save receipts locally or email the downloaded PDF or PNG directly to your customer."
+        "tip": "Save receipts locally or email the downloaded PDF. If your customer requires upfront billing rather than a receipt, create an invoice with our <a href=\"/\" class=\"text-primary font-semibold hover:underline\">Free Online Invoice Generator</a>."
       }
     ]
   },
@@ -148,6 +148,34 @@
       {
         "question": "Do you store my product catalog, pricing, or customer sales records?",
         "answer": "No, we never save or upload your itemized product lists, pricing data, or customer transactions to remote servers. All line-item calculations, sales tax summaries, and PDF renders take place locally within your browser private memory. Your sales margins and customer billing records remain entirely confidential and secure."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Receipt Workflows",
+    "title": "Complete Your Point-of-Sale & Invoicing Stack",
+    "subtitle": "Easily navigate between itemized retail slips, rent documentation, and standard commercial invoices.",
+    "items": [
+      {
+        "prompt": "Need to bill customers before receiving payment?",
+        "text": "Create a Free Online Invoice",
+        "href": "/",
+        "badge": "Upfront Bill",
+        "description": "Issue a professional billing invoice before funds are received so clients can initiate payment."
+      },
+      {
+        "prompt": "Need simple monthly rent proofs for tenancy?",
+        "text": "Use Free Rent Receipt Generator",
+        "href": "/free-rent-receipt-generator",
+        "badge": "Rent & PAN",
+        "description": "Generate monthly tenancy receipts for HRA claims with landlord verification details."
+      },
+      {
+        "prompt": "Need single-total or non-itemized receipts?",
+        "text": "Return to Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "Simple Receipt",
+        "description": "Standard receipt maker supporting fast cash vouchers and payment acknowledgments."
       }
     ]
   },

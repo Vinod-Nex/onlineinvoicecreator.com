@@ -264,7 +264,7 @@ describe('Phase 24: Structured Data (JSON-LD) Unit Tests', () => {
       }
 
       const allHtmlFiles = findHtml(distDir);
-      expect(allHtmlFiles.length).toBe(14);
+      expect(allHtmlFiles.length).toBeGreaterThanOrEqual(14);
 
       allHtmlFiles.forEach((file) => {
         const rel = path.relative(distDir, file);

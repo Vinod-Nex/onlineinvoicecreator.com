@@ -55,6 +55,21 @@ export interface RelatedTool {
   description: string;
 }
 
+export interface ContextualLinkItem {
+  prompt: string;
+  text: string;
+  href: string;
+  badge?: string;
+  description: string;
+}
+
+export interface ContextualLinksBlock {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  items: ContextualLinkItem[];
+}
+
 export interface ToolPageData {
   slug: string;
   metaTitle: string;
@@ -93,4 +108,5 @@ export interface ToolPageData {
     subtitle?: string;
     items: RelatedTool[];
   };
+  contextualLinks?: ContextualLinksBlock;
 }

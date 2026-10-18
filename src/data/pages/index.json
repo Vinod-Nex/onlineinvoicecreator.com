@@ -36,7 +36,7 @@
         "step": 3,
         "title": "Download Clean PDF or Print",
         "description": "Select from four clean visual templates and export a watermark-free A4 or US Letter PDF instantly.",
-        "tip": "Click 'Export PNG' to generate a high-resolution image ready to send via email or messaging apps."
+        "tip": "If your client has already transferred funds and needs proof of payment, use our <a href=\"/free-online-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Online Receipt Generator</a> to issue an instant payment receipt."
       }
     ]
   },
@@ -144,6 +144,55 @@
       {
         "question": "What is the difference between an invoice and a receipt?",
         "answer": "An invoice is a formal payment request issued before payment, whereas a receipt is proof of payment issued after funds clear. Use this invoice builder to bill clients for completed work, establish Net 30 terms, and itemize owed balances. Once your customer pays in full, issue an official receipt to confirm payment receipt for tax records."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Connected Workflows",
+    "title": "Complete Your Billing & Invoicing Workflow",
+    "subtitle": "Seamlessly navigate between payment requests, proof of payment, and industry-specific billing templates.",
+    "items": [
+      {
+        "prompt": "Payment already received?",
+        "text": "Generate an Instant Payment Receipt",
+        "href": "/free-online-receipt-generator",
+        "badge": "Next Step",
+        "description": "Once your client settles this invoice, issue an official payment confirmation with proof of payment."
+      },
+      {
+        "prompt": "Freelancer or creative consultant?",
+        "text": "Use Invoice Generator for Freelancers",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Solo Billing",
+        "description": "Calculates hourly billable rates, project retainers, and digital services with clean itemization."
+      },
+      {
+        "prompt": "Trade or construction contractor?",
+        "text": "Switch to Contractor Invoice Template",
+        "href": "/contractor-invoice-template",
+        "badge": "Trades",
+        "description": "Specialized fields for physical labor, building materials, equipment hire, and milestone progress."
+      },
+      {
+        "prompt": "Billing Australian businesses?",
+        "text": "Use Australia Tax Invoice Template",
+        "href": "/tax-invoice-template-australia",
+        "badge": "ATO Compliant",
+        "description": "Meets Australian Taxation Office requirements with explicit ABN display and 10% GST breakdown."
+      },
+      {
+        "prompt": "Moving away from spreadsheet templates?",
+        "text": "Explore Excel Invoice Generator Alternative",
+        "href": "/invoice-generator-excel",
+        "badge": "Fast Export",
+        "description": "Avoid broken formulas and spreadsheet formatting errors with our direct in-browser generator."
+      },
+      {
+        "prompt": "Photographer or visual studio?",
+        "text": "Try Photography Invoice Generator",
+        "href": "/photography-invoice-generator",
+        "badge": "Licensing",
+        "description": "Itemize shoot day fees, image licensing terms, equipment rentals, and studio bookings."
       }
     ]
   },

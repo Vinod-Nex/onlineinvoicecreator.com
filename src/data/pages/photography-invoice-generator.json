@@ -39,7 +39,7 @@
         "step": 3,
         "title": "Download the PDF or Export a PNG",
         "description": "Choose from four clean templates and export an unwatermarked vector PDF or high-resolution PNG image.",
-        "tip": "State your booking retainer policy clearly (such as a 50% non-refundable booking deposit)."
+        "tip": "State your booking retainer policy clearly (e.g., 50% retainer). When receiving retainer deposits, issue an official receipt with our <a href=\"/free-online-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Online Receipt Generator</a>."
       }
     ]
   },
@@ -153,6 +153,34 @@
       {
         "question": "Do you store my photography rates, client details, or shoot bookings?",
         "answer": "No, we never store or monitor your photography rates, client shoot details, or studio financial earnings on our servers. All document generation occurs privately inside your web browser. Your client names, licensing terms, and session pricing remain strictly confidential on your local device."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Studio Workflows",
+    "title": "Complete Your Photography Invoicing & Booking Pipeline",
+    "subtitle": "Seamlessly connect session deposit receipts, freelance contracts, and commercial shoot billing.",
+    "items": [
+      {
+        "prompt": "Client paid session booking retainer?",
+        "text": "Generate Client Deposit Receipt",
+        "href": "/free-online-receipt-generator",
+        "badge": "Deposit Proof",
+        "description": "Issue an immediate deposit receipt acknowledging shoot booking fees or advance retainers."
+      },
+      {
+        "prompt": "Offering wider digital creative services?",
+        "text": "Try Invoice Generator for Freelancers",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Creative",
+        "description": "Tailored for graphic designers, video editors, and multi-disciplinary creative freelancers."
+      },
+      {
+        "prompt": "Need a general commercial invoice?",
+        "text": "Use Free Online Invoice Generator",
+        "href": "/",
+        "badge": "Standard",
+        "description": "Universal billing template for commercial services, product sales, and consulting."
       }
     ]
   },

@@ -27,7 +27,7 @@
         "step": 1,
         "title": "Fill Details in Interactive Web Fields",
         "description": "Enter your company and client information into guided input boxes with zero risk of accidentally deleting table formulas.",
-        "tip": "Form values auto-save in your browser so you never lose work on a sudden reboot."
+        "tip": "Form values auto-save in your browser. For standard universal billing, explore our <a href=\"/\" class=\"text-primary font-semibold hover:underline\">Free Online Invoice Generator</a>."
       },
       {
         "step": 2,
@@ -147,6 +147,34 @@
       {
         "question": "What is the difference between an invoice and an Excel receipt generator document?",
         "answer": "An invoice requests payment for products or services rendered, while an excel receipt generator document confirms payment receipt. Use the invoice editor to establish payment terms and collect outstanding receivables. When client funds clear your account, switch to our receipt maker to generate formal proof of settlement."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Modern Billing Options",
+    "title": "Upgrade from Spreadsheets to Native Web Billing",
+    "subtitle": "Discover modern browser workflows that replace complex spreadsheet formulas with automated calculations.",
+    "items": [
+      {
+        "prompt": "Want faster billing without spreadsheet software?",
+        "text": "Create Invoice in Browser (No Excel Required)",
+        "href": "/",
+        "badge": "Browser Tool",
+        "description": "Create and download clean PDF invoices directly in your browser without Excel macros or software installs."
+      },
+      {
+        "prompt": "Freelancer calculating hourly client rates?",
+        "text": "Use Invoice Generator for Freelancers",
+        "href": "/invoice-generator-for-freelancers",
+        "badge": "Hourly Billing",
+        "description": "Track hours, consulting days, and creative project milestones with automatic total calculation."
+      },
+      {
+        "prompt": "Contractor billing for physical materials?",
+        "text": "Switch to Contractor Invoice Template",
+        "href": "/contractor-invoice-template",
+        "badge": "Materials & Labor",
+        "description": "Itemize trade labor, subcontractor expenses, and building materials without complex spreadsheets."
       }
     ]
   },

@@ -34,7 +34,7 @@
         "step": 2,
         "title": "Set the Rental Period and Amounts",
         "description": "Select the rental month, year, payment method, and amount paid. Separate base rent from utility or maintenance charges.",
-        "tip": "Enter the landlord's PAN if annual rent exceeds ₹1,00,000 for HRA tax exemption claims in India [Verify with official source: Income Tax Act Section 10(13A)]."
+        "tip": "Enter the landlord's PAN if annual rent exceeds ₹1,00,000 for HRA tax exemption claims in India [Verify with official source: Income Tax Act Section 10(13A)]. For multi-item utility breakdowns, use our <a href=\"/receipt-maker-with-items\" class=\"text-primary font-semibold hover:underline\">Online Receipt Maker with Items</a>."
       },
       {
         "step": 3,
@@ -152,6 +152,34 @@
       {
         "question": "Do you store tenant names, rental addresses, or payment amounts?",
         "answer": "No, we never store or monitor rental transaction details, tenant identities, or landlord bank details on our servers. All rent receipt calculations and PDF compilations execute 100% client-side in your local browser window. Your sensitive lease figures and housing data remain completely confidential on your personal device at all times."
+      }
+    ]
+  },
+  "contextualLinks": {
+    "badge": "Tenancy Workflows",
+    "title": "Complete Your Property & Rent Management Tools",
+    "subtitle": "Easily transition between general receipts, itemized maintenance billing, and commercial property invoicing.",
+    "items": [
+      {
+        "prompt": "Need a general payment receipt?",
+        "text": "Return to Free Online Receipt Generator",
+        "href": "/free-online-receipt-generator",
+        "badge": "General",
+        "description": "Create universal business and personal receipts for non-tenancy transactions and sales."
+      },
+      {
+        "prompt": "Itemizing maintenance or utility charges?",
+        "text": "Use Online Receipt Maker with Items",
+        "href": "/receipt-maker-with-items",
+        "badge": "Itemized",
+        "description": "Itemize electricity, building maintenance, parking, and security deposits on individual line items."
+      },
+      {
+        "prompt": "Commercial lease requiring upfront billing?",
+        "text": "Generate a Commercial Rent Invoice",
+        "href": "/",
+        "badge": "Invoicing",
+        "description": "Issue formal monthly tax invoices for commercial office space and warehouse tenancy."
       }
     ]
   },
