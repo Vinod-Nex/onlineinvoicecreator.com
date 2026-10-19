@@ -375,15 +375,75 @@ for (const file of htmlFiles) {
   }
 }
 
+// 9. Robots.txt Audit
+const robotsPath = path.join(DIST_DIR, 'robots.txt');
+if (!fs.existsSync(robotsPath)) {
+  totalViolations++;
+  console.error('❌ Missing robots.txt in dist/');
+} else {
+  const robotsTxt = fs.readFileSync(robotsPath, 'utf8');
+  if (!robotsTxt.includes('User-agent: *')) {
+    totalViolations++;
+    console.error('❌ robots.txt missing "User-agent: *" directive');
+  }
+  if (!robotsTxt.includes('Allow: /')) {
+    totalViolations++;
+    console.error('❌ robots.txt missing "Allow: /" directive');
+  }
+  if (!robotsTxt.includes('Disallow: /api/')) {
+    totalViolations++;
+    console.error('❌ robots.txt missing "Disallow: /api/" directive');
+  }
+  if (!robotsTxt.includes('Disallow: /style-guide')) {
+    totalViolations++;
+    console.error('❌ robots.txt missing "Disallow: /style-guide" directive');
+  }
+  if (!robotsTxt.includes('Sitemap: https://onlineinvoicecreator.com/sitemap-index.xml')) {
+    totalViolations++;
+    console.error('❌ robots.txt missing or incorrect Sitemap pointer');
+  }
+}
+
+// 10. Sitemap Index & Sitemap XML Audit
+const sitemapIndexPath = path.join(DIST_DIR, 'sitemap-index.xml');
+const sitemap0Path = path.join(DIST_DIR, 'sitemap-0.xml');
+
+if (!fs.existsSync(sitemapIndexPath)) {
+  totalViolations++;
+  console.error('❌ Missing sitemap-index.xml in dist/');
+}
+if (!fs.existsSync(sitemap0Path)) {
+  totalViolations++;
+  console.error('❌ Missing sitemap-0.xml in dist/');
+} else {
+  const sitemap0 = fs.readFileSync(sitemap0Path, 'utf8');
+  if (sitemap0.includes('/style-guide')) {
+    totalViolations++;
+    console.error('❌ sitemap-0.xml must NOT include noindex page /style-guide');
+  }
+  if (!sitemap0.includes('<lastmod>')) {
+    totalViolations++;
+    console.error('❌ sitemap-0.xml missing <lastmod> timestamps');
+  }
+  if (
+    !sitemap0.includes('hreflang="en"') ||
+    !sitemap0.includes('hreflang="es"') ||
+    !sitemap0.includes('hreflang="pt"')
+  ) {
+    totalViolations++;
+    console.error('❌ sitemap-0.xml missing hreflang-ready alternates for en, es, pt');
+  }
+}
+
 console.log('\n--------------------------------------------------------------');
 if (totalViolations > 0) {
   console.error(
-    `💥 SEO Audit Failed: ${totalViolations} violation(s) found across ${htmlFiles.length} pages.`
+    `💥 SEO Audit Failed: ${totalViolations} violation(s) found across ${htmlFiles.length} pages and sitemap/robots assets.`
   );
   process.exit(1);
 } else {
   console.log(
-    `🎉 SEO & Structured Data Audit Passed: All ${htmlFiles.length} pages satisfy title (<=60), description (<=155), single H1 with primary keyword, strict heading hierarchy, canonical, and Schema.org JSON-LD requirements.`
+    `🎉 SEO, Sitemap & Metadata Audit Passed: All ${htmlFiles.length} pages satisfy title (<=60), description (<=155), single H1 with primary keyword, strict heading hierarchy, canonical, Schema.org JSON-LD, robots.txt, and hreflang-ready sitemap requirements.`
   );
   process.exit(0);
 }
