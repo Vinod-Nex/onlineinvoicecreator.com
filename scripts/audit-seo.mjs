@@ -241,6 +241,94 @@ function auditHtmlFile(filePath) {
     }
   }
 
+  // 6. Open Graph & Social Cards Audit
+  const ogImageMatch =
+    content.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
+  const ogWidthMatch =
+    content.match(/<meta[^>]*property=["']og:image:width["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image:width["']/i);
+  const ogHeightMatch =
+    content.match(/<meta[^>]*property=["']og:image:height["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image:height["']/i);
+  const ogAltMatch =
+    content.match(/<meta[^>]*property=["']og:image:alt["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image:alt["']/i);
+  const twitterCardMatch =
+    content.match(/<meta[^>]*name=["']twitter:card["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:card["']/i);
+  const twitterImageMatch =
+    content.match(/<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i) ||
+    content.match(/<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:image["']/i);
+
+  if (!ogImageMatch) {
+    errors.push('Missing <meta property="og:image"> tag');
+  } else {
+    const ogImgUrl = ogImageMatch[1];
+    if (ogWidthMatch && ogWidthMatch[1] !== '1200') {
+      errors.push(`og:image:width expected 1200, found "${ogWidthMatch[1]}"`);
+    }
+    if (ogHeightMatch && ogHeightMatch[1] !== '630') {
+      errors.push(`og:image:height expected 630, found "${ogHeightMatch[1]}"`);
+    }
+    if (!ogAltMatch || !ogAltMatch[1].trim()) {
+      errors.push('Missing descriptive <meta property="og:image:alt">');
+    }
+
+    // Verify image file exists in dist
+    try {
+      const parsedUrl = new URL(ogImgUrl, 'https://onlineinvoicecreator.com');
+      const localImagePath = path.join(DIST_DIR, parsedUrl.pathname.replace(/^\//, ''));
+      if (!fs.existsSync(localImagePath)) {
+        errors.push(`Referenced Open Graph image does not exist on disk: ${localImagePath}`);
+      }
+    } catch {
+      // ignore URL parsing errors
+    }
+  }
+
+  if (!twitterCardMatch || twitterCardMatch[1] !== 'summary_large_image') {
+    errors.push('Missing or invalid <meta name="twitter:card" content="summary_large_image">');
+  }
+  if (!twitterImageMatch) {
+    errors.push('Missing <meta name="twitter:image"> tag');
+  }
+
+  // 7. Favicon & Web Manifest Audit
+  const hasIcon = /<link[^>]*rel=["'](?:shortcut )?icon["']/i.test(content);
+  const hasManifest = /<link[^>]*rel=["']manifest["']/i.test(content);
+
+  if (!hasIcon) {
+    errors.push('Missing favicon <link rel="icon">');
+  }
+  if (!hasManifest) {
+    errors.push('Missing web manifest <link rel="manifest">');
+  }
+
+  // 8. Image Alt Text & Dimension Audit
+  const imgMatches = [...content.matchAll(/<img\b([^>]*)>/gi)];
+  for (const imgMatch of imgMatches) {
+    const attrs = imgMatch[1];
+    const altMatch = attrs.match(/\balt=["']([^"']*)["']/i);
+    const widthMatch = attrs.match(/\bwidth=["']?(\d+)["']?/i);
+    const heightMatch = attrs.match(/\bheight=["']?(\d+)["']?/i);
+
+    if (!altMatch) {
+      errors.push(`Found <img> missing alt attribute: ${imgMatch[0]}`);
+    } else {
+      const altValue = altMatch[1].trim().toLowerCase();
+      const genericTerms = ['image', 'img', 'photo', 'picture', 'pic', 'logo'];
+      // alt shouldn't be only a generic word
+      if (genericTerms.includes(altValue)) {
+        errors.push(`<img> alt text is too generic ("${altMatch[1]}"). Use descriptive alt text.`);
+      }
+    }
+
+    if (!widthMatch || !heightMatch) {
+      errors.push(`Found <img> missing explicit width or height attributes: ${imgMatch[0]}`);
+    }
+  }
+
   return {
     relativePath,
     title,

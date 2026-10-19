@@ -10,6 +10,7 @@ export interface Props {
   description?: string;
   canonical?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   noindex?: boolean;
   schema?: Record<string, unknown> | Array<Record<string, unknown>> | string;
   breadcrumbs?: BreadcrumbItem[];
@@ -22,6 +23,7 @@ const {
   description = 'Create and download professional invoices and receipts online in seconds. 100% free, private, watermark-free, and no signup required.',
   canonical,
   ogImage = '/og-image.png',
+  ogImageAlt,
   noindex = false,
   schema,
   breadcrumbs,
@@ -113,9 +115,11 @@ if (schema) {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:secure_url" content={resolvedOgImage} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={ogImageAlt || title} />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter / X Cards -->
@@ -123,7 +127,7 @@ if (schema) {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
-    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:image:alt" content={ogImageAlt || title} />
 
     <!-- Browser Theme Color -->
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
@@ -131,7 +135,9 @@ if (schema) {
 
     <!-- Favicon Set & Web App Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 

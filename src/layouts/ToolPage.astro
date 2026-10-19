@@ -43,12 +43,18 @@ const trustBadges = data.trustBadges || [
   'Local Draft Auto-Save',
   'Instant Print / PDF',
 ];
+
+const ogFilename = isHomePage ? 'og-invoice-generator.png' : `og-${data.slug}.png`;
+const ogImageUrl = `/og/${ogFilename}`;
+const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side tool`;
 ---
 
 <BaseLayout
   title={data.metaTitle}
   description={data.metaDescription}
   canonical={data.canonical}
+  ogImage={ogImageUrl}
+  ogImageAlt={ogImageAltText}
   schema={pageSchema}
 >
   <!-- Accessible Breadcrumb Navigation Bar -->
