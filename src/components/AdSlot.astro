@@ -1,0 +1,96 @@
+---
+/**
+ * AdSlot Component with Zero-CLS Reserved Space
+ *
+ * Implements strict Core Web Vitals guarantees:
+ * 1. Reserved Space: Explicit min-height and containment ensures CLS = 0.00
+ * 2. Deferred Hydration: Ad scripts only execute AFTER the document is interactive
+ * 3. Non-Intrusive: Positioned below primary above-the-fold generator canvas
+ */
+
+interface Props {
+  slotId?: string;
+  format?: 'banner' | 'rectangle' | 'responsive';
+  class?: string;
+}
+
+const {
+  slotId = 'ad-slot-default',
+  format = 'responsive',
+  class: className = '',
+} = Astro.props;
+
+// Standard format dimensions to prevent any layout shifts
+const formatDimensions = {
+  banner: 'min-h-[90px] max-w-[728px]',
+  rectangle: 'min-h-[250px] max-w-[300px]',
+  responsive: 'min-h-[100px] sm:min-h-[120px] max-w-4xl',
+};
+
+const dimensionClass = formatDimensions[format] || formatDimensions.responsive;
+---
+
+<div
+  class={`ad-slot-container mx-auto my-8 w-full ${dimensionClass} ${className} relative overflow-hidden rounded-2xl border border-hairline/60 bg-surface-soft/40 p-4 transition-all no-print`}
+  id={`container-${slotId}`}
+  data-ad-slot={slotId}
+  style="contain: layout paint style;"
+>
+  <!-- Ad Disclosure Label -->
+  <div class="flex items-center justify-between text-[11px] font-medium text-mute pb-2 border-b border-hairline/40">
+    <span class="tracking-wider uppercase">Advertisement</span>
+    <span class="text-[10px] text-mute/80">Zero-Tracking • Reserved Space</span>
+  </div>
+
+  <!-- Ad Placeholder / Insertion Zone -->
+  <div
+    id={slotId}
+    class="ad-content-target flex items-center justify-center min-h-[60px] sm:min-h-[80px] w-full text-xs text-mute/60 italic"
+    aria-label="Sponsored placement"
+  >
+    <slot>
+      <div class="flex items-center gap-2">
+        <svg class="h-4 w-4 text-mute/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span>Reserved Ad Space (Loaded after tool interactivity)</span>
+      </div>
+    </slot>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    // Core Web Vitals Protection:
+    // Only schedule ad loading AFTER the main thread is idle and the invoice tool is interactive
+    function initializeAdSlot() {
+      if (document.readyState === 'complete') {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadAdScripts, { timeout: 3000 });
+        } else {
+          setTimeout(loadAdScripts, 1000);
+        }
+      } else {
+        window.addEventListener('load', function () {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadAdScripts, { timeout: 3000 });
+          } else {
+            setTimeout(loadAdScripts, 1000);
+          }
+        });
+      }
+    }
+
+    function loadAdScripts() {
+      // Custom ad provider initialization hook (when ad network is configured)
+      const event = new CustomEvent('oic:ad-slot-ready', {
+        detail: { timestamp: performance.now() },
+      });
+      window.dispatchEvent(event);
+    }
+
+    initializeAdSlot();
+  })();
+</script>

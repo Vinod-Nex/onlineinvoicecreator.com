@@ -27,6 +27,7 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
     'og-privacy',
     'og-terms',
     'og-style-guide',
+    'og-404',
   ];
 
   beforeAll(() => {
@@ -98,7 +99,7 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
   describe('Page Open Graph and Social Card Meta Tags', () => {
     it('ensures every built HTML page contains full Open Graph and Twitter Card tags', () => {
       const htmlFiles = getAllHtmlFiles(distDir);
-      expect(htmlFiles.length).toBe(15);
+      expect(htmlFiles.length).toBe(16);
 
       for (const file of htmlFiles) {
         const content = fs.readFileSync(file, 'utf8');
@@ -143,8 +144,8 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
         usedOgImages.add(ogImageUrl);
       }
 
-      // 15 distinct pages must map to 15 unique OG images
-      expect(usedOgImages.size).toBe(15);
+      // 16 distinct pages must map to 16 unique OG images
+      expect(usedOgImages.size).toBe(16);
     });
   });
 

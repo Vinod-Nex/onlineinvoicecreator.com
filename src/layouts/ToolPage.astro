@@ -4,6 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import InvoiceForm from '../components/InvoiceForm.astro';
 import ReceiptForm from '../components/ReceiptForm.astro';
 import RentReceiptForm from '../components/RentReceiptForm.astro';
+import AdSlot from '../components/AdSlot.astro';
 import type { ToolPageData } from '../types/page';
 import { buildPageSchemaGraph } from '../lib/schema';
 
@@ -166,6 +167,9 @@ const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side too
           ))}
         </div>
       </section>
+
+      <!-- Reserved Space Ad Unit (Zero CLS, Loads after Tool Interactivity) -->
+      <AdSlot slotId={`ad-${data.slug}-content`} format="responsive" />
 
       <!-- Contextual Workflow & Cross-Tool Links Section -->
       {data.contextualLinks && data.contextualLinks.items && data.contextualLinks.items.length > 0 && (

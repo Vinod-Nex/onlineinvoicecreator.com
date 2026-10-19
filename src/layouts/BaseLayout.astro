@@ -33,9 +33,14 @@ const {
 
 const siteUrl = Astro.site ? Astro.site.origin : 'https://onlineinvoicecreator.com';
 
-// Normalize canonical URL without trailing slashes (enforcing canonical standard)
+// Normalize canonical URL: absolute, self-referencing, root slash for home, no trailing slash for subpages
 const normalizedPath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, '') : '/';
-const canonicalUrl = canonical || new URL(normalizedPath, siteUrl).href;
+let canonicalUrl = canonical || new URL(normalizedPath, siteUrl).href;
+if (normalizedPath === '/' && !canonicalUrl.endsWith('/')) {
+  canonicalUrl += '/';
+} else if (normalizedPath !== '/' && canonicalUrl.endsWith('/')) {
+  canonicalUrl = canonicalUrl.replace(/\/$/, '');
+}
 
 // Resolve absolute Open Graph image URL
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;

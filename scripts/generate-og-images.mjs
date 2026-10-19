@@ -96,6 +96,14 @@ const staticPages = [
       'Interactive design tokens, color swatches, typography hierarchy, and UI component specifications.',
     tags: ['Design Tokens', 'Typography Specs', 'WCAG AAA Contrast'],
   },
+  {
+    slug: 'og-404',
+    title: '404: Page Not Found',
+    badge: 'Page Not Found',
+    description:
+      'The requested page could not be found. Explore our 100% free, private online tools to generate invoices and receipts instantly.',
+    tags: ['Free Invoices', 'Instant PDF Export', 'Zero Watermarks'],
+  },
 ];
 
 // Read tool page JSON files

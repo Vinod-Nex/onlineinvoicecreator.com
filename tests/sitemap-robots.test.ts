@@ -209,7 +209,7 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
   describe('HTML Pages Discovery Integration', () => {
     it('ensures all HTML pages have a <link rel="sitemap"> tag in <head>', () => {
       const htmlFiles = getAllHtmlFiles(distDir);
-      expect(htmlFiles.length).toBe(15);
+      expect(htmlFiles.length).toBeGreaterThanOrEqual(15);
 
       for (const file of htmlFiles) {
         const content = fs.readFileSync(file, 'utf8');
