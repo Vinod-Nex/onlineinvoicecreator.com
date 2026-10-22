@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-10-22T20:22:32.566Z",
+  "thresholds": {
+    "maxLcpMs": 2000,
+    "maxCls": 0.05,
+    "maxTbtMs": 150
+  },
+  "results": [
+    {
+      "path": "/",
+      "label": "Home (Invoice Generator)",
+      "perfScore": 100,
+      "lcp": 1454,
+      "cls": 0,
+      "tbt": 7,
+      "fcp": 1026,
+      "speedIndex": 1026,
+      "inp": 7,
+      "lcpPass": true,
+      "clsPass": true,
+      "tbtPass": true,
+      "pagePass": true
+    },
+    {
+      "path": "/contractor-invoice-template",
+      "label": "Contractor Invoice",
+      "perfScore": 100,
+      "lcp": 1579,
+      "cls": 0,
+      "tbt": 15,
+      "fcp": 1011,
+      "speedIndex": 1011,
+      "inp": 15,
+      "lcpPass": true,
+      "clsPass": true,
+      "tbtPass": true,
+      "pagePass": true
+    },
+    {
+      "path": "/free-online-receipt-generator",
+      "label": "Online Receipt Generator",
+      "perfScore": 100,
+      "lcp": 1503,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 979,
+      "speedIndex": 979,
+      "inp": 0,
+      "lcpPass": true,
+      "clsPass": true,
+      "tbtPass": true,
+      "pagePass": true
+    },
+    {
+      "path": "/free-rent-receipt-generator",
+      "label": "Rent Receipt Generator",
+      "perfScore": 100,
+      "lcp": 1432,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 982,
+      "speedIndex": 982,
+      "inp": 0,
+      "lcpPass": true,
+      "clsPass": true,
+      "tbtPass": true,
+      "pagePass": true
+    },
+    {
+      "path": "/invoice-generator-for-freelancers",
+      "label": "Freelancer Invoice",
+      "perfScore": 100,
+      "lcp": 1504,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 978,
+      "speedIndex": 978,
+      "inp": 0,
+      "lcpPass": true,
+      "clsPass": true,
+      "tbtPass": true,
+      "pagePass": true
+    }
+  ],
+  "allPassed": true
+}

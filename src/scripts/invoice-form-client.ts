@@ -2058,16 +2058,26 @@ export function setupInvoiceForm() {
     });
   }
 
-  // Initialize view
-  updateStorageStatus();
+  // Initialize primary interactive view
   populateFormInputs();
   renderLineItems();
-  refreshSavedClientsDropdown();
-  refreshCustomTemplatesDropdown();
-  setupTemplateSwitcher();
-  setupFormatSelector();
-  setupMobileViewToggle();
   updateLivePreview();
+
+  // Yield secondary non-blocking controls to keep main thread tasks under 50ms
+  const completeInit = () => {
+    updateStorageStatus();
+    refreshSavedClientsDropdown();
+    refreshCustomTemplatesDropdown();
+    setupTemplateSwitcher();
+    setupFormatSelector();
+    setupMobileViewToggle();
+  };
+
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(completeInit, { timeout: 1000 });
+  } else {
+    setTimeout(completeInit, 0);
+  }
 }
 
 // Auto-run if DOM is ready, or on DOMContentLoaded

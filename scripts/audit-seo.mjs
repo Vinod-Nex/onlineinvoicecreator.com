@@ -329,6 +329,40 @@ function auditHtmlFile(filePath) {
     }
   }
 
+  // 9. Multilingual Hreflang Alternates Audit (for indexable pages)
+  const isNoIndex = content.includes('noindex');
+  const hreflangMatches = [
+    ...content.matchAll(/<link[^>]*\brel=["']alternate["'][^>]*\bhreflang=["']([^"']*)["'][^>]*>/gi),
+  ];
+  const hreflangs = hreflangMatches.map((m) => m[1]);
+  if (!isNoIndex) {
+    const requiredLangs = ['en', 'es', 'pt', 'x-default'];
+    for (const lang of requiredLangs) {
+      if (!hreflangs.includes(lang)) {
+        errors.push(`Missing <link rel="alternate" hreflang="${lang}"> tag in <head>`);
+      }
+    }
+  }
+
+  // 10. Insecure Mixed Content Audit (http:// references)
+  const mixedMatches = [
+    ...content.matchAll(/\b(src|href|action)=["'](http:\/\/[^"']+)["']/gi),
+  ];
+  for (const match of mixedMatches) {
+    const url = match[2];
+    if (!url.includes('schema.org') && !url.includes('w3.org')) {
+      errors.push(`Insecure mixed content reference found: ${url}`);
+    }
+  }
+
+  // 11. HTML Page Weight Budget Audit (raw <= 250KB)
+  const stat = fs.statSync(filePath);
+  if (stat.size > 250 * 1024) {
+    errors.push(
+      `HTML file size exceeds budget: ${(stat.size / 1024).toFixed(1)} KB (budget: <= 250 KB)`
+    );
+  }
+
   return {
     relativePath,
     title,
@@ -343,6 +377,7 @@ function auditHtmlFile(filePath) {
     hasWebSite,
     hasWebApp,
     hasFaq,
+    isNoIndex,
     errors,
   };
 }
@@ -372,6 +407,80 @@ for (const file of htmlFiles) {
     console.log(
       `✅ /${result.relativePath.padEnd(40)} | Title: ${String(result.titleLen).padStart(2)}/60 | Desc: ${String(result.descLen).padStart(3)}/155 | H1: ✓ | Headings: ✓ | Schema: ✓`
     );
+  }
+}
+
+// 12. Duplicate Titles & Meta Descriptions Audit (Indexable Pages)
+const titleMap = new Map();
+const descMap = new Map();
+
+for (const p of auditedPages) {
+  if (p.isNoIndex) continue;
+  if (p.title) {
+    if (!titleMap.has(p.title)) titleMap.set(p.title, []);
+    titleMap.get(p.title).push(p.relativePath);
+  }
+  if (p.desc) {
+    if (!descMap.has(p.desc)) descMap.set(p.desc, []);
+    descMap.get(p.desc).push(p.relativePath);
+  }
+}
+
+for (const [title, pages] of titleMap.entries()) {
+  if (pages.length > 1) {
+    totalViolations++;
+    console.error(`❌ Duplicate title "${title}" found across pages: ${pages.join(', ')}`);
+  }
+}
+
+for (const [desc, pages] of descMap.entries()) {
+  if (pages.length > 1) {
+    totalViolations++;
+    console.error(`❌ Duplicate meta description "${desc}" found across pages: ${pages.join(', ')}`);
+  }
+}
+
+// 13. Broken Internal Links & Trailing Slash Redirect Audit
+const knownRoutes = new Set();
+for (const p of auditedPages) {
+  const route = '/' + p.relativePath.replace(/index\.html$/, '').replace(/\/$/, '');
+  knownRoutes.add(route === '' ? '/' : route);
+}
+
+for (const file of htmlFiles) {
+  const content = fs.readFileSync(file, 'utf8');
+  const sourceRel = path.relative(DIST_DIR, file);
+  const linkMatches = [...content.matchAll(/<a\b[^>]*\bhref=["']([^"']*)["'][^>]*>/gi)];
+  for (const m of linkMatches) {
+    const href = m[1].trim();
+    if (
+      !href ||
+      href === '#' ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      href.startsWith('http://') ||
+      href.startsWith('https://')
+    ) {
+      continue;
+    }
+    if (href.startsWith('#')) {
+      const id = href.slice(1);
+      if (!content.includes(`id="${id}"`) && !content.includes(`id='${id}'`)) {
+        totalViolations++;
+        console.error(`❌ /${sourceRel}: In-page anchor target #${id} not found`);
+      }
+      continue;
+    }
+    const targetPath = href.split('#')[0];
+    if (targetPath.length > 1 && targetPath.endsWith('/')) {
+      totalViolations++;
+      console.error(`❌ /${sourceRel}: Internal link "${href}" has a trailing slash, causing a 301 redirect`);
+    }
+    const cleanPath = targetPath === '/' ? '/' : targetPath.replace(/\/$/, '');
+    if (!knownRoutes.has(cleanPath)) {
+      totalViolations++;
+      console.error(`❌ /${sourceRel}: Broken internal link to "${targetPath}"`);
+    }
   }
 }
 

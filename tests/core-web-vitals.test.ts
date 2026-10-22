@@ -5,7 +5,9 @@ import path from 'node:path';
 describe('Phase 30: Core Web Vitals & Ad Space Containment', () => {
   const adSlotPath = path.resolve(__dirname, '../src/components/AdSlot.astro');
   const toolPagePath = path.resolve(__dirname, '../src/layouts/ToolPage.astro');
-  const cwvReportPath = path.resolve(__dirname, '../dist/cwv-audit-report.json');
+  const docsReportPath = path.resolve(__dirname, '../docs/cwv-audit-report.json');
+  const distReportPath = path.resolve(__dirname, '../dist/cwv-audit-report.json');
+  const cwvReportPath = fs.existsSync(docsReportPath) ? docsReportPath : distReportPath;
 
   it('AdSlot component exists and enforces strict CSS layout containment to prevent CLS', () => {
     expect(fs.existsSync(adSlotPath)).toBe(true);

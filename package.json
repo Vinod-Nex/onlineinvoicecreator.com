@@ -13,6 +13,7 @@
     "build": "node scripts/generate-favicons.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/audit-seo.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "audit:cwv": "node scripts/audit-cwv.mjs",
+    "audit:crawl": "node scripts/crawl-technical-seo.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",

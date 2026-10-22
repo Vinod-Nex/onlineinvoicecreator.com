@@ -280,21 +280,21 @@ async function runMobileAudit() {
   console.log('   ✓ Ad elements contribute 0.00 to Cumulative Layout Shift (CLS)\n');
 
   // Write audit results JSON for reference and testing
-  const reportPath = path.resolve(__dirname, '../dist/cwv-audit-report.json');
-  fs.writeFileSync(
-    reportPath,
-    JSON.stringify(
-      {
-        timestamp: new Date().toISOString(),
-        thresholds: THRESHOLDS,
-        results,
-        allPassed,
-      },
-      null,
-      2
-    )
+  const distReportPath = path.resolve(__dirname, '../dist/cwv-audit-report.json');
+  const docsReportPath = path.resolve(__dirname, '../docs/cwv-audit-report.json');
+  const reportData = JSON.stringify(
+    {
+      timestamp: new Date().toISOString(),
+      thresholds: THRESHOLDS,
+      results,
+      allPassed,
+    },
+    null,
+    2
   );
-  console.log(`📝 Full audit report saved to: ${path.relative(process.cwd(), reportPath)}`);
+  fs.writeFileSync(distReportPath, reportData);
+  fs.writeFileSync(docsReportPath, reportData);
+  console.log(`📝 Full audit report saved to: ${path.relative(process.cwd(), distReportPath)} and ${path.relative(process.cwd(), docsReportPath)}`);
 
   if (!allPassed) {
     console.error('\n❌ Core Web Vitals audit failed. Some metrics exceed required thresholds.');

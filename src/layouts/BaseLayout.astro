@@ -42,6 +42,13 @@ if (normalizedPath === '/' && !canonicalUrl.endsWith('/')) {
   canonicalUrl = canonicalUrl.replace(/\/$/, '');
 }
 
+// Construct multilingual hreflang alternates (en, es, pt, x-default) matching XML sitemap
+const cleanRoutePath = normalizedPath === '/' ? '' : normalizedPath;
+const hreflangEn = canonicalUrl;
+const hreflangEs = `${siteUrl}/es${cleanRoutePath}`;
+const hreflangPt = `${siteUrl}/pt${cleanRoutePath}`;
+const hreflangXDefault = canonicalUrl;
+
 // Resolve absolute Open Graph image URL
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 
@@ -91,8 +98,16 @@ if (schema) {
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Canonical URL -->
+    <!-- Canonical URL & Multilingual Hreflang Alternates -->
     <link rel="canonical" href={canonicalUrl} />
+    {!noindex && (
+      <>
+        <link rel="alternate" hreflang="en" href={hreflangEn} />
+        <link rel="alternate" hreflang="es" href={hreflangEs} />
+        <link rel="alternate" hreflang="pt" href={hreflangPt} />
+        <link rel="alternate" hreflang="x-default" href={hreflangXDefault} />
+      </>
+    )}
 
     <!-- Search Engine Indexing & Crawling -->
     {noindex ? (
