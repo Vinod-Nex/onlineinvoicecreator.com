@@ -14,10 +14,7 @@
     "Zero Watermarks",
     "Instant PDF & Print"
   ],
-  "breadcrumbs": [
-    { "label": "Home", "href": "/" },
-    { "label": "Photography Invoice Generator" }
-  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Photography Invoice Generator" }],
   "howTo": {
     "badge": "Studio Invoicing Guide",
     "title": "How to Create a Photography Invoice in 3 Steps",

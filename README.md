@@ -43,6 +43,8 @@ npx astro dev --background
 | `npm run lint:fix` | Automatically fix ESLint issues |
 | `npm run format` | Format the entire codebase using Prettier with Astro plugin |
 | `npm run format:check` | Check code formatting compliance without modifying files |
+| `npm test` | Run complete unit & integration test suite with Vitest |
+| `npm run indexnow` | Submit new/changed URLs to IndexNow protocol via Cloudflare Worker |
 
 ---
 
@@ -114,7 +116,9 @@ onlineinvoicecreator.com/
 │   └── styles/            # Global styles and design system tokens (global.css)
 ├── docs/
 │   ├── competitor-notes.md# Phase 1: Benchmark teardown & 15 ranked features
-│   └── site-map.md        # Phase 2: Single source of truth for IA & link topology
+│   ├── site-map.md        # Phase 2: Single source of truth for IA & link topology
+│   ├── search-console-analytics.md # Phase 32: DNS verification & analytics guide
+│   └── indexnow-and-fast-indexing.md # Phase 33: IndexNow & fast indexing automation guide
 ├── astro.config.mjs       # Astro configuration (static, trailingSlash: 'never', sitemap)
 ├── tsconfig.json          # TypeScript strict mode with @aliases
 ├── eslint.config.mjs      # ESLint flat configuration (Astro & TS)

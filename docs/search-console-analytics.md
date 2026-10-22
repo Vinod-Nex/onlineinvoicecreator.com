@@ -156,3 +156,9 @@ Alternatively, in your Cloudflare Pages dashboard under **Settings** &rarr; **We
 `public/_headers` has been configured to allow Cloudflare Web Analytics:
 - `script-src`: allows `https://static.cloudflareinsights.com`
 - `connect-src`: allows `https://cloudflareinsights.com`
+
+---
+
+## 5. Fast Indexing & IndexNow Protocol
+For real-time search engine notification upon deployment and manual priority submission steps for the first nine URLs in Google Search Console, see the [IndexNow & Fast Indexing Automation Guide](file:///Users/vinodkumar/Desktop/playground/invoice%20generator/onlineinvoicecreator.com/docs/indexnow-and-fast-indexing.md).
+

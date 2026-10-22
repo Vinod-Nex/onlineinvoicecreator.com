@@ -21,6 +21,7 @@ import {
   clearAllStoredData,
 } from '../src/lib/invoice-storage';
 import { createDefaultInvoice } from '../src/lib/invoice-calc';
+import { formatDateForInput } from '../src/lib/invoice-form';
 
 class MockLocalStorage {
   store = new Map<string, string>();
@@ -240,7 +241,7 @@ describe('Invoice Storage & Privacy Module', () => {
       expect(duplicated.lineItems[0].id).not.toBe('item_1');
 
       // Dates updated
-      const nowStr = new Date().toISOString().slice(0, 10);
+      const nowStr = formatDateForInput(new Date());
       expect(duplicated.issueDate).toBe(nowStr);
     });
   });

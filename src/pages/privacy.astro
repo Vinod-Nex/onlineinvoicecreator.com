@@ -16,24 +16,29 @@ const privacySchema = {
 const privacyFaqs = [
   {
     question: 'Do you store my invoice details or client financial data?',
-    answer: 'No, we never store, inspect, or log your invoice amounts, client names, or financial calculations on any remote database. Online Invoice Creator is built on a private, local-first architecture. All invoice generation executes 100% in your local web browser, meaning sensitive financial records never leave your personal computer or phone.'
+    answer:
+      'No, we never store, inspect, or log your invoice amounts, client names, or financial calculations on any remote database. Online Invoice Creator is built on a private, local-first architecture. All invoice generation executes 100% in your local web browser, meaning sensitive financial records never leave your personal computer or phone.',
   },
   {
     question: 'What data does localStorage store on my personal device?',
-    answer: 'Our application uses browser localStorage strictly to save your business profile, default currency, and active invoice drafts for your convenience. This local storage allows you to return to the site and create invoices without re-typing your address or re-uploading your logo. Data remains on your device until you clear it.'
+    answer:
+      'Our application uses browser localStorage strictly to save your business profile, default currency, and active invoice drafts for your convenience. This local storage allows you to return to the site and create invoices without re-typing your address or re-uploading your logo. Data remains on your device until you clear it.',
   },
   {
     question: 'How can I clear all saved invoice data from my browser?',
-    answer: 'You can clear all saved business data and drafts immediately by clicking the Clear my data button in the application footer. Alternatively, clearing your browser cookies and site storage for onlineinvoicecreator.com instantly purges all stored drafts, business details, and uploaded logo caches from your machine.'
+    answer:
+      'You can clear all saved business data and drafts immediately by clicking the Clear my data button in the application footer. Alternatively, clearing your browser cookies and site storage for onlineinvoicecreator.com instantly purges all stored drafts, business details, and uploaded logo caches from your machine.',
   },
   {
     question: 'How do secure invoice generation practices protect against data leaks?',
-    answer: 'Our secure invoice generation model prevents data leaks by eliminating the server-side attack surface entirely. Because invoice PDFs are rendered client-side with JavaScript and HTML5 canvas, there is no centralized database to hack or leak. Your business invoices exist only where you choose to download or save them.'
+    answer:
+      'Our secure invoice generation model prevents data leaks by eliminating the server-side attack surface entirely. Because invoice PDFs are rendered client-side with JavaScript and HTML5 canvas, there is no centralized database to hack or leak. Your business invoices exist only where you choose to download or save them.',
   },
   {
     question: 'Do analytics or advertising partners see my private invoice contents?',
-    answer: 'No, our analytics and advertising partners never receive or inspect any invoice data, client names, line items, or billing amounts. We configure analytics tools strictly to measure aggregated page views and site performance. Your private financial data remains completely shielded within client-side memory and is never shared with third parties.'
-  }
+    answer:
+      'No, our analytics and advertising partners never receive or inspect any invoice data, client names, line items, or billing amounts. We configure analytics tools strictly to measure aggregated page views and site performance. Your private financial data remains completely shielded within client-side memory and is never shared with third parties.',
+  },
 ];
 
 const pageSchema = buildPageSchemaGraph({
@@ -337,24 +342,26 @@ const pageSchema = buildPageSchemaGraph({
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {privacyFaqs.map((faq) => (
           <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
-            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
-              {faq.question}
-            </h3>
-            <p class="text-xs sm:text-sm text-mute leading-relaxed">
-              {faq.answer}
-            </p>
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">{faq.question}</h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">{faq.answer}</p>
           </article>
         ))}
       </div>
     </section>
 
     <!-- Fast Document Generators Section -->
-    <section class="space-y-6 pt-6 border-t border-hairline" aria-labelledby="privacy-tools-heading">
+    <section
+      class="space-y-6 pt-6 border-t border-hairline"
+      aria-labelledby="privacy-tools-heading"
+    >
       <div class="text-center sm:text-left">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
           Private Document Creation
         </span>
-        <h2 id="privacy-tools-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        <h2
+          id="privacy-tools-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
           Try Our 100% Client-Side Generators
         </h2>
         <p class="text-sm text-mute mt-1.5">
@@ -363,20 +370,39 @@ const pageSchema = buildPageSchemaGraph({
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a href="/" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Core Tool</span>
+        <a
+          href="/"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Core Tool
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">Multi-currency invoice creation with zero database tracking.</p>
+          <p class="text-xs text-mute mt-1">
+            Multi-currency invoice creation with zero database tracking.
+          </p>
         </a>
-        <a href="/free-online-receipt-generator" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Receipts</span>
+        <a
+          href="/free-online-receipt-generator"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Receipts
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Receipt Generator</h3>
           <p class="text-xs text-mute mt-1">Instant proof of payment slips rendered client-side.</p>
         </a>
-        <a href="/invoice-generator-for-freelancers" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Freelancers</span>
+        <a
+          href="/invoice-generator-for-freelancers"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Freelancers
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Freelancer Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">Private hourly consulting invoices with local draft saves.</p>
+          <p class="text-xs text-mute mt-1">
+            Private hourly consulting invoices with local draft saves.
+          </p>
         </a>
       </div>
     </section>

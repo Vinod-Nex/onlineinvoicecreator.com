@@ -9,63 +9,72 @@ const tools = [
     title: 'Free Online Invoice Generator',
     href: '/',
     badge: '100% Free • Watermark-Free',
-    description: 'Create and download pristine PDF invoices with automatic totals, custom logos, and 30+ currencies.',
+    description:
+      'Create and download pristine PDF invoices with automatic totals, custom logos, and 30+ currencies.',
     icon: 'invoice',
   },
   {
     title: 'Contractor Invoice Template',
     href: '/contractor-invoice-template',
     badge: 'Trades & Construction',
-    description: 'Itemize labor hours, subcontractor rates, materials costs, and project milestone stages.',
+    description:
+      'Itemize labor hours, subcontractor rates, materials costs, and project milestone stages.',
     icon: 'hammer',
   },
   {
     title: 'Free Online Receipt Generator',
     href: '/free-online-receipt-generator',
     badge: 'Sales Receipts',
-    description: 'Issue instant proof-of-payment receipts for cash transactions, bank transfers, and card sales.',
+    description:
+      'Issue instant proof-of-payment receipts for cash transactions, bank transfers, and card sales.',
     icon: 'receipt',
   },
   {
     title: 'Free Rent Receipt Generator',
     href: '/free-rent-receipt-generator',
     badge: 'Landlord & Tenant',
-    description: 'Generate printable monthly rent receipts with property addresses, rental periods, and landlord details.',
+    description:
+      'Generate printable monthly rent receipts with property addresses, rental periods, and landlord details.',
     icon: 'home',
   },
   {
     title: 'Invoice Generator for Freelancers',
     href: '/invoice-generator-for-freelancers',
     badge: 'Consultants & Creatives',
-    description: 'Tailored for independent freelancers, developers, and designers billing hourly or project rates.',
+    description:
+      'Tailored for independent freelancers, developers, and designers billing hourly or project rates.',
     icon: 'user',
   },
   {
     title: 'Receipt Maker with Items',
     href: '/receipt-maker-with-items',
     badge: 'Multi-Line Billing',
-    description: 'Line-by-line itemized receipts with unit prices, quantity multipliers, and automatic tax calculations.',
+    description:
+      'Line-by-line itemized receipts with unit prices, quantity multipliers, and automatic tax calculations.',
     icon: 'list',
   },
   {
     title: 'Tax Invoice Template Australia',
     href: '/tax-invoice-template-australia',
     badge: 'ATO & 10% GST Ready',
-    description: 'Australian tax invoice creator with ABN formatting, 10% GST breakdown, and ATO compliant layouts.',
+    description:
+      'Australian tax invoice creator with ABN formatting, 10% GST breakdown, and ATO compliant layouts.',
     icon: 'tax',
   },
   {
     title: 'Invoice Generator Excel Alternative',
     href: '/invoice-generator-excel',
     badge: 'Spreadsheet Alternative',
-    description: 'Replace fragile Excel templates with an error-free, auto-calculating in-browser invoice workspace.',
+    description:
+      'Replace fragile Excel templates with an error-free, auto-calculating in-browser invoice workspace.',
     icon: 'table',
   },
   {
     title: 'Photography Invoice Generator',
     href: '/photography-invoice-generator',
     badge: 'Studios & Shoots',
-    description: 'Bill photoshoot day rates, editing revisions, commercial usage rights, and equipment fees.',
+    description:
+      'Bill photoshoot day rates, editing revisions, commercial usage rights, and equipment fees.',
     icon: 'camera',
   },
 ];
@@ -74,22 +83,26 @@ const popularPages = [
   {
     title: 'Invoicing & Billing Guides',
     href: '/blog',
-    description: 'Comprehensive guides on invoice requirements, late payment terms, and statutory tax rules.',
+    description:
+      'Comprehensive guides on invoice requirements, late payment terms, and statutory tax rules.',
   },
   {
     title: 'About Online Invoice Creator',
     href: '/about',
-    description: 'Learn why our client-side architecture never transmits or stores your sensitive financial data.',
+    description:
+      'Learn why our client-side architecture never transmits or stores your sensitive financial data.',
   },
   {
     title: 'Contact Support & Feedback',
     href: '/contact',
-    description: 'Need assistance or want to suggest a new billing template? Get in touch with our team.',
+    description:
+      'Need assistance or want to suggest a new billing template? Get in touch with our team.',
   },
   {
     title: 'Zero-Storage Privacy Policy',
     href: '/privacy',
-    description: 'Plain-English commitments explaining our client-side storage and zero-tracker guarantee.',
+    description:
+      'Plain-English commitments explaining our client-side storage and zero-tracker guarantee.',
   },
   {
     title: 'Commercial Terms of Service',
@@ -128,8 +141,9 @@ const popularPages = [
       </h1>
 
       <p class="text-base sm:text-lg text-mute leading-relaxed">
-        The link you followed may be outdated, mistyped, or the document may have moved.
-        All our free, watermark-free invoice and receipt generators are available below with zero signup required.
+        The link you followed may be outdated, mistyped, or the document may have moved. All our
+        free, watermark-free invoice and receipt generators are available below with zero signup
+        required.
       </p>
 
       <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -137,7 +151,13 @@ const popularPages = [
           href="/"
           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-sm hover:bg-primary-hover active:scale-[0.99] transition-all text-sm"
         >
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Return to Free Invoice Generator
@@ -162,7 +182,8 @@ const popularPages = [
             Explore Free Invoicing & Receipt Generators
           </h2>
           <p class="text-xs sm:text-sm text-mute mt-1">
-            Choose a dedicated generator. 100% client-side privacy, instant PDF export, and zero watermarks.
+            Choose a dedicated generator. 100% client-side privacy, instant PDF export, and zero
+            watermarks.
           </p>
         </div>
         <span class="text-xs text-mute font-medium">9 Free Tools Available</span>
@@ -186,9 +207,7 @@ const popularPages = [
               <h3 class="font-bold text-ink text-base group-hover:text-primary transition-colors">
                 {tool.title}
               </h3>
-              <p class="text-xs sm:text-sm text-mute leading-relaxed">
-                {tool.description}
-              </p>
+              <p class="text-xs sm:text-sm text-mute leading-relaxed">{tool.description}</p>
             </div>
             <div class="pt-3 border-t border-hairline/60 flex items-center justify-between text-xs font-medium text-mute">
               <span>Instant PDF Export</span>
@@ -209,7 +228,8 @@ const popularPages = [
           Popular Guides & Company Pages
         </h2>
         <p class="text-xs sm:text-sm text-mute mt-1">
-          Quickly navigate to business tutorials, statutory tax documentation, or platform guidelines.
+          Quickly navigate to business tutorials, statutory tax documentation, or platform
+          guidelines.
         </p>
       </div>
 
@@ -222,11 +242,11 @@ const popularPages = [
             <div class="space-y-1.5">
               <h3 class="font-bold text-ink text-sm sm:text-base group-hover:text-primary transition-colors flex items-center justify-between">
                 <span>{page.title}</span>
-                <span class="text-xs text-mute group-hover:translate-x-0.5 transition-transform">→</span>
+                <span class="text-xs text-mute group-hover:translate-x-0.5 transition-transform">
+                  →
+                </span>
               </h3>
-              <p class="text-xs text-mute leading-relaxed">
-                {page.description}
-              </p>
+              <p class="text-xs text-mute leading-relaxed">{page.description}</p>
             </div>
           </a>
         ))}
@@ -239,7 +259,9 @@ const popularPages = [
         Can't find the billing tool you need?
       </h2>
       <p class="text-xs sm:text-sm text-mute max-w-xl mx-auto">
-        We regularly expand our suite of free billing tools for trade contractors, consultants, and international business owners. Let us know what templates or currency features you would like added.
+        We regularly expand our suite of free billing tools for trade contractors, consultants, and
+        international business owners. Let us know what templates or currency features you would
+        like added.
       </p>
       <div class="pt-2">
         <a

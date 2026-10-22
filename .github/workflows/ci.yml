@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup Node.js (v22)
         uses: actions/setup-node@v4
@@ -48,3 +50,13 @@ jobs:
 
       - name: Build static site & run build-time SEO audit
         run: npm run build
+
+      - name: Submit changed URLs to IndexNow via Worker
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: node scripts/submit-indexnow.mjs
+        env:
+          INDEXNOW_ADMIN_SECRET: ${{ secrets.INDEXNOW_ADMIN_SECRET }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          WORKER_INDEXNOW_URL: ${{ secrets.WORKER_INDEXNOW_URL || 'https://onlineinvoicecreator.com/api/indexnow' }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}

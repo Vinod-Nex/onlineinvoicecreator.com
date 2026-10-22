@@ -14,10 +14,7 @@
     "Zero Watermarks",
     "Instant PDF & Print"
   ],
-  "breadcrumbs": [
-    { "label": "Home", "href": "/" },
-    { "label": "Excel Invoice Generator" }
-  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Excel Invoice Generator" }],
   "howTo": {
     "badge": "No-Code Invoicing",
     "title": "How to Generate an Invoice from Excel Alternative",

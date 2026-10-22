@@ -157,9 +157,7 @@ async function runTechnicalSeoAudit() {
     }
 
     // 5. Mixed Content (http://)
-    const mixedMatches = [
-      ...content.matchAll(/\b(src|href|action)=["'](http:\/\/[^"']+)["']/gi),
-    ];
+    const mixedMatches = [...content.matchAll(/\b(src|href|action)=["'](http:\/\/[^"']+)["']/gi)];
     for (const match of mixedMatches) {
       const attr = match[1];
       const url = match[2];
@@ -206,8 +204,7 @@ async function runTechnicalSeoAudit() {
       // Check anchor on the same page
       if (href.startsWith('#')) {
         const id = href.slice(1);
-        const hasId =
-          content.includes(`id="${id}"`) || content.includes(`id='${id}'`);
+        const hasId = content.includes(`id="${id}"`) || content.includes(`id='${id}'`);
         if (!hasId) {
           issues.brokenLinks.push({ route, href, issue: `Anchor target #${id} not found on page` });
         }
@@ -253,7 +250,9 @@ async function runTechnicalSeoAudit() {
 
     // 7. Hreflang Check in HTML Head
     const hreflangMatches = [
-      ...content.matchAll(/<link[^>]*\brel=["']alternate["'][^>]*\bhreflang=["']([^"']*)["'][^>]*>/gi),
+      ...content.matchAll(
+        /<link[^>]*\brel=["']alternate["'][^>]*\bhreflang=["']([^"']*)["'][^>]*>/gi
+      ),
     ];
     const hreflangs = hreflangMatches.map((m) => m[1]);
     const requiredHreflangs = ['en', 'es', 'pt', 'x-default'];

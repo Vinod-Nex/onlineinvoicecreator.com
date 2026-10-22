@@ -5,10 +5,7 @@ import path from 'node:path';
 describe('Phase 32: Search Console, Bing Webmaster & Cloudflare Analytics', () => {
   const rootDir = path.resolve(__dirname, '..');
   const guidePath = path.resolve(rootDir, 'docs/search-console-analytics.md');
-  const analyticsComponentPath = path.resolve(
-    rootDir,
-    'src/components/CloudflareAnalytics.astro'
-  );
+  const analyticsComponentPath = path.resolve(rootDir, 'src/components/CloudflareAnalytics.astro');
   const baseLayoutPath = path.resolve(rootDir, 'src/layouts/BaseLayout.astro');
   const headersPath = path.resolve(rootDir, 'public/_headers');
 

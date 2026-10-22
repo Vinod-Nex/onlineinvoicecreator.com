@@ -18,24 +18,29 @@ const aboutSchema = {
 const aboutFaqs = [
   {
     question: 'Is Online Invoice Creator truly free without hidden fees or watermarks?',
-    answer: 'Yes, Online Invoice Creator is completely free with zero hidden subscription costs, download fees, or watermarks. We built this tool to provide accessible, unrestricted billing software for solo freelancers, trade contractors, and small businesses worldwide. Every document you create and export is 100% yours with clean, professional presentation.'
+    answer:
+      'Yes, Online Invoice Creator is completely free with zero hidden subscription costs, download fees, or watermarks. We built this tool to provide accessible, unrestricted billing software for solo freelancers, trade contractors, and small businesses worldwide. Every document you create and export is 100% yours with clean, professional presentation.',
   },
   {
     question: 'How does a no server invoice generator protect my financial confidentiality?',
-    answer: 'Our no server invoice generator architecture processes all calculations, currency conversions, and PDF renderings client-side in your web browser. Your client identities, hourly rates, and invoice totals are never transmitted across the network to remote servers. This ensures full data confidentiality without needing to trust external cloud providers.'
+    answer:
+      'Our no server invoice generator architecture processes all calculations, currency conversions, and PDF renderings client-side in your web browser. Your client identities, hourly rates, and invoice totals are never transmitted across the network to remote servers. This ensures full data confidentiality without needing to trust external cloud providers.',
   },
   {
     question: 'Why did you build a watermark free invoice builder instead of a paid app?',
-    answer: 'We created a watermark free invoice builder because essential business paperwork should not be locked behind predatory monthly subscriptions. Traditional accounting platforms charge expensive recurring fees and hold client data hostage. Our tool runs locally with modern browser technology, providing fast, private invoicing with zero barriers to entry.'
+    answer:
+      'We created a watermark free invoice builder because essential business paperwork should not be locked behind predatory monthly subscriptions. Traditional accounting platforms charge expensive recurring fees and hold client data hostage. Our tool runs locally with modern browser technology, providing fast, private invoicing with zero barriers to entry.',
   },
   {
     question: 'Are documents created on Online Invoice Creator legally binding?',
-    answer: 'Yes, invoices and receipts generated on our platform are legally binding commercial billing documents. They contain all statutory required fields including unique sequential numbering, party identifiers, issue dates, itemized breakdowns, and clear payment terms. As long as entered business details are genuine, the exported PDFs satisfy standard commercial accounting standards.'
+    answer:
+      'Yes, invoices and receipts generated on our platform are legally binding commercial billing documents. They contain all statutory required fields including unique sequential numbering, party identifiers, issue dates, itemized breakdowns, and clear payment terms. As long as entered business details are genuine, the exported PDFs satisfy standard commercial accounting standards.',
   },
   {
     question: 'Can I use this invoicing tool on mobile phones and tablets?',
-    answer: 'Yes, our platform is fully responsive and optimized for smartphones, tablets, laptops, and desktop workstations. You can draft bills on the go from a construction jobsite, review live preview updates, and export high-resolution PDFs directly from your mobile browser without installing native app store downloads.'
-  }
+    answer:
+      'Yes, our platform is fully responsive and optimized for smartphones, tablets, laptops, and desktop workstations. You can draft bills on the go from a construction jobsite, review live preview updates, and export high-resolution PDFs directly from your mobile browser without installing native app store downloads.',
+  },
 ];
 
 const pageSchema = buildPageSchemaGraph({
@@ -304,12 +309,8 @@ const pageSchema = buildPageSchemaGraph({
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {aboutFaqs.map((faq) => (
           <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
-            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
-              {faq.question}
-            </h3>
-            <p class="text-xs sm:text-sm text-mute leading-relaxed">
-              {faq.answer}
-            </p>
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">{faq.question}</h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">{faq.answer}</p>
           </article>
         ))}
       </div>

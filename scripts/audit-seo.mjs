@@ -332,7 +332,9 @@ function auditHtmlFile(filePath) {
   // 9. Multilingual Hreflang Alternates Audit (for indexable pages)
   const isNoIndex = content.includes('noindex');
   const hreflangMatches = [
-    ...content.matchAll(/<link[^>]*\brel=["']alternate["'][^>]*\bhreflang=["']([^"']*)["'][^>]*>/gi),
+    ...content.matchAll(
+      /<link[^>]*\brel=["']alternate["'][^>]*\bhreflang=["']([^"']*)["'][^>]*>/gi
+    ),
   ];
   const hreflangs = hreflangMatches.map((m) => m[1]);
   if (!isNoIndex) {
@@ -345,9 +347,7 @@ function auditHtmlFile(filePath) {
   }
 
   // 10. Insecure Mixed Content Audit (http:// references)
-  const mixedMatches = [
-    ...content.matchAll(/\b(src|href|action)=["'](http:\/\/[^"']+)["']/gi),
-  ];
+  const mixedMatches = [...content.matchAll(/\b(src|href|action)=["'](http:\/\/[^"']+)["']/gi)];
   for (const match of mixedMatches) {
     const url = match[2];
     if (!url.includes('schema.org') && !url.includes('w3.org')) {
@@ -436,7 +436,9 @@ for (const [title, pages] of titleMap.entries()) {
 for (const [desc, pages] of descMap.entries()) {
   if (pages.length > 1) {
     totalViolations++;
-    console.error(`❌ Duplicate meta description "${desc}" found across pages: ${pages.join(', ')}`);
+    console.error(
+      `❌ Duplicate meta description "${desc}" found across pages: ${pages.join(', ')}`
+    );
   }
 }
 
@@ -474,7 +476,9 @@ for (const file of htmlFiles) {
     const targetPath = href.split('#')[0];
     if (targetPath.length > 1 && targetPath.endsWith('/')) {
       totalViolations++;
-      console.error(`❌ /${sourceRel}: Internal link "${href}" has a trailing slash, causing a 301 redirect`);
+      console.error(
+        `❌ /${sourceRel}: Internal link "${href}" has a trailing slash, causing a 301 redirect`
+      );
     }
     const cleanPath = targetPath === '/' ? '/' : targetPath.replace(/\/$/, '');
     if (!knownRoutes.has(cleanPath)) {

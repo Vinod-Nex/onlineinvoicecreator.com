@@ -14,10 +14,7 @@
     "Local Draft Auto-Save",
     "Instant PDF & Print"
   ],
-  "breadcrumbs": [
-    { "label": "Home", "href": "/" },
-    { "label": "Contractor Invoice Template" }
-  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Contractor Invoice Template" }],
   "howTo": {
     "badge": "Trade Invoicing Process",
     "title": "How to Fill a Contractor Billing Template",

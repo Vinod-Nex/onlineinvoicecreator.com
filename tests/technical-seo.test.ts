@@ -191,7 +191,11 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
           imageIssues.push({ file: relPath, issue: 'Missing or empty alt attribute', tag: m[0] });
         }
         if (!widthMatch || !heightMatch) {
-          imageIssues.push({ file: relPath, issue: 'Missing width or height attribute', tag: m[0] });
+          imageIssues.push({
+            file: relPath,
+            issue: 'Missing width or height attribute',
+            tag: m[0],
+          });
         }
       }
     }

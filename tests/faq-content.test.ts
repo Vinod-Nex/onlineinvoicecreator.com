@@ -32,7 +32,13 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
     'tax-invoice-template-australia',
   ];
 
-  const utilityPages = ['about.astro', 'contact.astro', 'privacy.astro', 'terms.astro', 'blog.astro'];
+  const utilityPages = [
+    'about.astro',
+    'contact.astro',
+    'privacy.astro',
+    'terms.astro',
+    'blog.astro',
+  ];
 
   describe('Tool Page FAQs (src/data/pages/*.json)', () => {
     toolSlugs.forEach((slug) => {
@@ -64,7 +70,10 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
         it('the first sentence of each answer directly addresses the question', () => {
           data.faq.items.forEach((faq, index) => {
             const firstSentence = extractFirstSentence(faq.answer);
-            expect(firstSentence.length, `FAQ #${index + 1} has empty first sentence`).toBeGreaterThan(15);
+            expect(
+              firstSentence.length,
+              `FAQ #${index + 1} has empty first sentence`
+            ).toBeGreaterThan(15);
             // Check that the first sentence doesn't deflect or waffle
             expect(firstSentence).not.toMatch(/^(it depends|maybe|sometimes|well|to be honest)/i);
           });
@@ -142,7 +151,10 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
 
     it('covers: "what must an invoice include"', () => {
       const matched = allQuestions.some(
-        (q) => q.includes('must an invoice include') || q.includes('what must') || q.includes('must be included')
+        (q) =>
+          q.includes('must an invoice include') ||
+          q.includes('what must') ||
+          q.includes('must be included')
       );
       expect(matched).toBe(true);
     });
@@ -156,14 +168,20 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
 
     it('covers: "is it legally valid"', () => {
       const matched = allQuestions.some(
-        (q) => q.includes('legally valid') || q.includes('legally binding') || q.includes('legal validity')
+        (q) =>
+          q.includes('legally valid') ||
+          q.includes('legally binding') ||
+          q.includes('legal validity')
       );
       expect(matched).toBe(true);
     });
 
     it('covers: "do you store my data"', () => {
       const matched = allQuestions.some(
-        (q) => q.includes('store my data') || q.includes('save my data') || q.includes('where is my data')
+        (q) =>
+          q.includes('store my data') ||
+          q.includes('save my data') ||
+          q.includes('where is my data')
       );
       expect(matched).toBe(true);
     });

@@ -68,7 +68,9 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
     it('is a valid sitemap index referencing sitemap-0.xml', () => {
       const content = fs.readFileSync(sitemapIndexPath, 'utf8');
       expect(content).toContain('<?xml version="1.0" encoding="UTF-8"?>');
-      expect(content).toContain('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
+      expect(content).toContain(
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+      );
       expect(content).toContain('<loc>https://onlineinvoicecreator.com/sitemap-0.xml</loc>');
       expect(content).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}T[\d:.]+Z<\/lastmod>/);
     });
@@ -180,7 +182,8 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         );
 
         // Spanish alternate
-        const cleanPath = loc.replace('https://onlineinvoicecreator.com', '').replace(/\/$/, '') || '/';
+        const cleanPath =
+          loc.replace('https://onlineinvoicecreator.com', '').replace(/\/$/, '') || '/';
         const expectedEsUrl =
           cleanPath === '/'
             ? 'https://onlineinvoicecreator.com/es'

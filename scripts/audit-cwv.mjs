@@ -114,7 +114,9 @@ function createStaticServer(port = 0) {
         'Cache-Control': 'public, max-age=0, must-revalidate',
         Vary: 'Accept-Encoding',
       });
-      fs.createReadStream(filePath).pipe(zlib.createGzip({ level: 6 })).pipe(res);
+      fs.createReadStream(filePath)
+        .pipe(zlib.createGzip({ level: 6 }))
+        .pipe(res);
     } else {
       res.writeHead(200, {
         'Content-Type': contentType,
@@ -251,9 +253,13 @@ async function runMobileAudit() {
   }
 
   // Print Formatted Report Table
-  console.log('\n========================================================================================');
+  console.log(
+    '\n========================================================================================'
+  );
   console.log('📊 CORE WEB VITALS (MOBILE) PERFORMANCE AUDIT REPORT');
-  console.log('========================================================================================');
+  console.log(
+    '========================================================================================'
+  );
   console.log(
     '| Route                             | Score | LCP (ms) | CLS    | TBT (ms) | INP (ms) | Status |'
   );
@@ -269,14 +275,22 @@ async function runMobileAudit() {
     const tbtCol = `${r.tbt}ms`.padStart(8);
     const inpCol = `<${Math.max(r.inp, 20)}ms`.padStart(8);
     const statusCol = r.pagePass ? '  PASS  ' : '  FAIL  ';
-    console.log(`| ${routeCol} | ${scoreCol} | ${lcpCol} | ${clsCol} | ${tbtCol} | ${inpCol} | ${statusCol} |`);
+    console.log(
+      `| ${routeCol} | ${scoreCol} | ${lcpCol} | ${clsCol} | ${tbtCol} | ${inpCol} | ${statusCol} |`
+    );
   }
-  console.log('========================================================================================\n');
+  console.log(
+    '========================================================================================\n'
+  );
 
   // Ad Slot Verification Notice
   console.log('🛡️  Ad Slot Containment & Deferred Hydration Verification:');
-  console.log('   ✓ Ad units configure `contain: layout paint style;` and explicit `min-h-[100px]`');
-  console.log('   ✓ Ad scripts schedule execution via `requestIdleCallback` strictly AFTER tool interactivity');
+  console.log(
+    '   ✓ Ad units configure `contain: layout paint style;` and explicit `min-h-[100px]`'
+  );
+  console.log(
+    '   ✓ Ad scripts schedule execution via `requestIdleCallback` strictly AFTER tool interactivity'
+  );
   console.log('   ✓ Ad elements contribute 0.00 to Cumulative Layout Shift (CLS)\n');
 
   // Write audit results JSON for reference and testing
@@ -294,7 +308,9 @@ async function runMobileAudit() {
   );
   fs.writeFileSync(distReportPath, reportData);
   fs.writeFileSync(docsReportPath, reportData);
-  console.log(`📝 Full audit report saved to: ${path.relative(process.cwd(), distReportPath)} and ${path.relative(process.cwd(), docsReportPath)}`);
+  console.log(
+    `📝 Full audit report saved to: ${path.relative(process.cwd(), distReportPath)} and ${path.relative(process.cwd(), docsReportPath)}`
+  );
 
   if (!allPassed) {
     console.error('\n❌ Core Web Vitals audit failed. Some metrics exceed required thresholds.');

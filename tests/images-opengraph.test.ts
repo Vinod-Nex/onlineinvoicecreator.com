@@ -214,9 +214,13 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
       for (const file of htmlFiles) {
         const content = fs.readFileSync(file, 'utf8');
         expect(content).toMatch(/<link rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/i);
-        expect(content).toMatch(/<link rel="icon" type="image\/png" sizes="32x32" href="\/favicon-32x32\.png"/i);
+        expect(content).toMatch(
+          /<link rel="icon" type="image\/png" sizes="32x32" href="\/favicon-32x32\.png"/i
+        );
         expect(content).toMatch(/<link rel="shortcut icon" href="\/favicon\.ico"/i);
-        expect(content).toMatch(/<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png"/i);
+        expect(content).toMatch(
+          /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png"/i
+        );
         expect(content).toMatch(/<link rel="manifest" href="\/site\.webmanifest"/i);
       }
     });

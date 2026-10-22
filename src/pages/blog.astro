@@ -179,11 +179,15 @@ const pageSchema = buildPageSchemaGraph({
     <!-- Guides Grid -->
     <section class="space-y-6" aria-labelledby="guides-grid-heading">
       <div class="text-center sm:text-left">
-        <h2 id="guides-grid-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        <h2
+          id="guides-grid-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
           Featured Invoicing & Billing Articles
         </h2>
         <p class="text-sm text-mute mt-1.5">
-          Step-by-step documentation to help you create compliant invoices and collect client payments faster.
+          Step-by-step documentation to help you create compliant invoices and collect client
+          payments faster.
         </p>
       </div>
 
@@ -197,12 +201,8 @@ const pageSchema = buildPageSchemaGraph({
                 </span>
                 <span class="text-mute">{guide.readTime}</span>
               </div>
-              <h3 class="font-bold text-ink text-lg leading-snug">
-                {guide.title}
-              </h3>
-              <p class="text-xs sm:text-sm text-mute leading-relaxed">
-                {guide.description}
-              </p>
+              <h3 class="font-bold text-ink text-lg leading-snug">{guide.title}</h3>
+              <p class="text-xs sm:text-sm text-mute leading-relaxed">{guide.description}</p>
             </div>
 
             <div class="pt-3 border-t border-hairline/60">
@@ -220,49 +220,98 @@ const pageSchema = buildPageSchemaGraph({
     </section>
 
     <!-- Fast Document Generators Block -->
-    <section class="space-y-6 pt-6 border-t border-hairline" aria-labelledby="tools-directory-heading">
+    <section
+      class="space-y-6 pt-6 border-t border-hairline"
+      aria-labelledby="tools-directory-heading"
+    >
       <div class="text-center sm:text-left">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-teal/10 text-accent-teal mb-2">
           Tools Directory
         </span>
-        <h2 id="tools-directory-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        <h2
+          id="tools-directory-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
           Free Invoicing & Receipt Generators
         </h2>
         <p class="text-sm text-mute mt-1.5">
-          Jump directly to our free, browser-based document creators with zero signup and instant PDF download.
+          Jump directly to our free, browser-based document creators with zero signup and instant
+          PDF download.
         </p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a href="/" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Core Tool</span>
+        <a
+          href="/"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Core Tool
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">Create professional invoices with instant PDF export and zero watermarks.</p>
+          <p class="text-xs text-mute mt-1">
+            Create professional invoices with instant PDF export and zero watermarks.
+          </p>
         </a>
-        <a href="/free-online-receipt-generator" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Core Tool</span>
+        <a
+          href="/free-online-receipt-generator"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Core Tool
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Receipt Generator</h3>
-          <p class="text-xs text-mute mt-1">Generate official proof of payment and payment receipts in seconds.</p>
+          <p class="text-xs text-mute mt-1">
+            Generate official proof of payment and payment receipts in seconds.
+          </p>
         </a>
-        <a href="/invoice-generator-for-freelancers" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Freelancers</span>
+        <a
+          href="/invoice-generator-for-freelancers"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Freelancers
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Freelancer Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">Hourly rate and project retainer billing for digital professionals.</p>
+          <p class="text-xs text-mute mt-1">
+            Hourly rate and project retainer billing for digital professionals.
+          </p>
         </a>
-        <a href="/contractor-invoice-template" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Trades</span>
+        <a
+          href="/contractor-invoice-template"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Trades
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Contractor Invoice Template</h3>
-          <p class="text-xs text-mute mt-1">Labor, materials, and staged construction milestone billing.</p>
+          <p class="text-xs text-mute mt-1">
+            Labor, materials, and staged construction milestone billing.
+          </p>
         </a>
-        <a href="/tax-invoice-template-australia" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Australia</span>
+        <a
+          href="/tax-invoice-template-australia"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Australia
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Australia Tax Invoice Template</h3>
-          <p class="text-xs text-mute mt-1">ATO-compliant 10% GST breakdown and ABN registration fields.</p>
+          <p class="text-xs text-mute mt-1">
+            ATO-compliant 10% GST breakdown and ABN registration fields.
+          </p>
         </a>
-        <a href="/free-rent-receipt-generator" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Tenancy</span>
+        <a
+          href="/free-rent-receipt-generator"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Tenancy
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Rent Receipt Generator</h3>
-          <p class="text-xs text-mute mt-1">Monthly rent proofs for landlords and tenants with PAN support.</p>
+          <p class="text-xs text-mute mt-1">
+            Monthly rent proofs for landlords and tenants with PAN support.
+          </p>
         </a>
       </div>
     </section>
@@ -273,7 +322,10 @@ const pageSchema = buildPageSchemaGraph({
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
           Billing FAQs
         </span>
-        <h2 id="blog-faq-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        <h2
+          id="blog-faq-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
           Frequently Asked Questions About Billing & Invoicing
         </h2>
         <p class="text-sm text-mute mt-1.5">
@@ -284,12 +336,8 @@ const pageSchema = buildPageSchemaGraph({
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {blogFaqs.map((faq) => (
           <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
-            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
-              {faq.question}
-            </h3>
-            <p class="text-xs sm:text-sm text-mute leading-relaxed">
-              {faq.answer}
-            </p>
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">{faq.question}</h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">{faq.answer}</p>
           </article>
         ))}
       </div>

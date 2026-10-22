@@ -14,10 +14,7 @@
     "AUD Currency Preset",
     "Zero Watermarks"
   ],
-  "breadcrumbs": [
-    { "label": "Home", "href": "/" },
-    { "label": "Australia Tax Invoice" }
-  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Australia Tax Invoice" }],
   "howTo": {
     "badge": "ATO Guidelines",
     "title": "How to Create an Australian Tax Invoice with ATO Compliance",

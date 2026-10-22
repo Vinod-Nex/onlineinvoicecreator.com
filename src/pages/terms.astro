@@ -22,7 +22,8 @@ const termsFaqs = [
       'No, our software is provided on an as-is basis without express or implied financial or legal warranties. While our calculation engines are designed for precision, users must verify that figures, currency rates, and tax percentages match their local regulatory requirements. Online Invoice Creator assumes no liability for billing disputes.',
   },
   {
-    question: 'Can I use Online Invoice Creator for commercial business billing without an account?',
+    question:
+      'Can I use Online Invoice Creator for commercial business billing without an account?',
     answer:
       'Yes, you are fully authorized to use our tools for commercial business billing without creating an account or paying fees. Freelancers, contractors, agencies, and small enterprises may generate unlimited invoices and receipts for daily business operations, client billing, and tax bookkeeping under our permissive terms of service.',
   },
@@ -264,19 +265,16 @@ const pageSchema = buildPageSchemaGraph({
           Frequently Asked Questions About Terms & Acceptable Use
         </h2>
         <p class="text-sm text-mute mt-1.5">
-          Common legal and operational questions regarding legitimate billing, liability, and ownership.
+          Common legal and operational questions regarding legitimate billing, liability, and
+          ownership.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {termsFaqs.map((faq) => (
           <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
-            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">
-              {faq.question}
-            </h3>
-            <p class="text-xs sm:text-sm text-mute leading-relaxed">
-              {faq.answer}
-            </p>
+            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">{faq.question}</h3>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">{faq.answer}</p>
           </article>
         ))}
       </div>
@@ -288,29 +286,54 @@ const pageSchema = buildPageSchemaGraph({
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
           Compliant Tools
         </span>
-        <h2 id="terms-tools-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        <h2
+          id="terms-tools-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
           Authorized Document Generators
         </h2>
         <p class="text-sm text-mute mt-1.5">
-          Access our free tools for genuine commercial invoicing, contracting, and tenancy documentation.
+          Access our free tools for genuine commercial invoicing, contracting, and tenancy
+          documentation.
         </p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a href="/" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Core Tool</span>
+        <a
+          href="/"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Core Tool
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">Legitimate commercial invoicing for goods and services.</p>
+          <p class="text-xs text-mute mt-1">
+            Legitimate commercial invoicing for goods and services.
+          </p>
         </a>
-        <a href="/free-online-receipt-generator" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Receipts</span>
+        <a
+          href="/free-online-receipt-generator"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Receipts
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Free Online Receipt Generator</h3>
-          <p class="text-xs text-mute mt-1">Official proof of payment for completed transactions.</p>
+          <p class="text-xs text-mute mt-1">
+            Official proof of payment for completed transactions.
+          </p>
         </a>
-        <a href="/contractor-invoice-template" class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">Trades</span>
+        <a
+          href="/contractor-invoice-template"
+          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
+        >
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
+            Trades
+          </span>
           <h3 class="font-bold text-ink text-base mt-2">Contractor Invoice Template</h3>
-          <p class="text-xs text-mute mt-1">Milestone and materials billing for construction trades.</p>
+          <p class="text-xs text-mute mt-1">
+            Milestone and materials billing for construction trades.
+          </p>
         </a>
       </div>
     </section>

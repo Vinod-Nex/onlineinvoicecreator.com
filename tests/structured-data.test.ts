@@ -51,7 +51,9 @@ describe('Phase 24: Structured Data (JSON-LD) Unit Tests', () => {
       });
 
       expect(webApp['@type']).toBe('WebApplication');
-      expect(webApp['@id']).toBe('https://onlineinvoicecreator.com/contractor-invoice-template/#webapp');
+      expect(webApp['@id']).toBe(
+        'https://onlineinvoicecreator.com/contractor-invoice-template/#webapp'
+      );
       expect(webApp.name).toBe('Free Contractor Invoice Template');
       expect(webApp.applicationCategory).toBe('BusinessApplication');
       expect(webApp.operatingSystem).toBe('Any');
@@ -170,7 +172,9 @@ describe('Phase 24: Structured Data (JSON-LD) Unit Tests', () => {
 
     function extractJsonLd(filePath: string): Array<Record<string, unknown>> {
       const html = fs.readFileSync(filePath, 'utf8');
-      const matches = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
+      const matches = [
+        ...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi),
+      ];
       expect(matches.length).toBeGreaterThanOrEqual(1);
 
       const entities: Array<Record<string, unknown>> = [];

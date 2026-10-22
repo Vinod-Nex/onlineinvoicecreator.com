@@ -14,10 +14,7 @@
     "Local Draft Auto-Save",
     "Instant PDF & Print"
   ],
-  "breadcrumbs": [
-    { "label": "Home", "href": "/" },
-    { "label": "Freelancer Invoice Generator" }
-  ],
+  "breadcrumbs": [{ "label": "Home", "href": "/" }, { "label": "Freelancer Invoice Generator" }],
   "howTo": {
     "badge": "Freelance Workflow",
     "title": "How to Create a Freelance Invoice in 3 Steps",

@@ -11,7 +11,12 @@ interface LinkOccurrence {
 
 function normalizeUrl(href: string): string | null {
   if (!href) return null;
-  if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+  if (
+    href.startsWith('#') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('tel:') ||
+    href.startsWith('javascript:')
+  ) {
     return null;
   }
   let clean = href.replace(/^https?:\/\/onlineinvoicecreator\.com/, '');
@@ -36,7 +41,10 @@ function extractLinksFromHtml(html: string, pageRoute: string): LinkOccurrence[]
 
     if (target) {
       // Clean anchor text by stripping nested tags and extra spaces
-      const anchorText = rawAnchor.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
+      const anchorText = rawAnchor
+        .replace(/<[^>]+>/g, '')
+        .trim()
+        .replace(/\s+/g, ' ');
       // Identify if link is inside header, footer, or body
       const matchIndex = match.index;
       const beforeHtml = html.slice(0, matchIndex);
@@ -79,7 +87,10 @@ describe('Phase 26: Internal Linking Audit', () => {
   // Crawl all HTML files in dist/
   const pageFiles: Record<string, string> = {};
   knownRoutes.forEach((route) => {
-    const filePath = route === '/' ? path.join(distDir, 'index.html') : path.join(distDir, route.slice(1), 'index.html');
+    const filePath =
+      route === '/'
+        ? path.join(distDir, 'index.html')
+        : path.join(distDir, route.slice(1), 'index.html');
     if (fs.existsSync(filePath)) {
       pageFiles[route] = fs.readFileSync(filePath, 'utf-8');
     }
@@ -154,7 +165,10 @@ describe('Phase 26: Internal Linking Audit', () => {
       it(`Route: ${route} is reachable in <= 3 clicks from home`, () => {
         const clicks = distance[route];
         expect(clicks, `Page ${route} is unreachable from home`).toBeDefined();
-        expect(clicks, `Page ${route} requires ${clicks} clicks from home (limit: 3)`).toBeLessThanOrEqual(3);
+        expect(
+          clicks,
+          `Page ${route} requires ${clicks} clicks from home (limit: 3)`
+        ).toBeLessThanOrEqual(3);
       });
     });
   });
@@ -173,7 +187,9 @@ describe('Phase 26: Internal Linking Audit', () => {
       const violations: Array<{ source: string; target: string; anchor: string }> = [];
 
       allLinks.forEach((link) => {
-        const isForbidden = forbiddenPatterns.some((pattern) => pattern.test(link.anchorText.trim()));
+        const isForbidden = forbiddenPatterns.some((pattern) =>
+          pattern.test(link.anchorText.trim())
+        );
         if (isForbidden) {
           violations.push({
             source: link.source,
@@ -183,7 +199,10 @@ describe('Phase 26: Internal Linking Audit', () => {
         }
       });
 
-      expect(violations, `Found forbidden anchor text: ${JSON.stringify(violations, null, 2)}`).toHaveLength(0);
+      expect(
+        violations,
+        `Found forbidden anchor text: ${JSON.stringify(violations, null, 2)}`
+      ).toHaveLength(0);
     });
 
     it('confirms every anchor text is descriptive and meaningful', () => {

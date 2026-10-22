@@ -14,11 +14,7 @@ interface Props {
   class?: string;
 }
 
-const {
-  slotId = 'ad-slot-default',
-  format = 'responsive',
-  class: className = '',
-} = Astro.props;
+const { slotId = 'ad-slot-default', format = 'responsive', class: className = '' } = Astro.props;
 
 // Standard format dimensions to prevent any layout shifts
 const formatDimensions = {
@@ -50,7 +46,13 @@ const dimensionClass = formatDimensions[format] || formatDimensions.responsive;
   >
     <slot>
       <div class="flex items-center gap-2">
-        <svg class="h-4 w-4 text-mute/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          class="h-4 w-4 text-mute/40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
           <line x1="8" y1="21" x2="16" y2="21"></line>
           <line x1="12" y1="17" x2="12" y2="21"></line>

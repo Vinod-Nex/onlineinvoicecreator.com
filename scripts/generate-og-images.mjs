@@ -359,7 +359,9 @@ async function main() {
     const destPath = path.join(PUBLIC_OG_DIR, `${page.slug}.png`);
     fs.writeFileSync(destPath, pngBuffer);
     count++;
-    console.log(`   ✓ [${count}/${allPages.length}] ${page.slug}.png (1200x630, ${pngBuffer.length} bytes)`);
+    console.log(
+      `   ✓ [${count}/${allPages.length}] ${page.slug}.png (1200x630, ${pngBuffer.length} bytes)`
+    );
 
     // If this is the home page, also update public/og-image.png as standard fallback
     if (page.slug === 'og-invoice-generator') {

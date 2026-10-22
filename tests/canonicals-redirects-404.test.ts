@@ -39,13 +39,18 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       for (const file of htmlFiles) {
         const content = fs.readFileSync(file, 'utf8');
         const relative = path.relative(distDir, file);
-        const canonicalMatch = content.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i);
+        const canonicalMatch = content.match(
+          /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i
+        );
 
         expect(canonicalMatch, `Missing canonical in /${relative}`).not.toBeNull();
         const canonical = canonicalMatch![1];
 
         // Must be absolute https on apex domain
-        expect(canonical.startsWith('https://onlineinvoicecreator.com'), `Non-apex or non-https canonical in /${relative}: ${canonical}`).toBe(true);
+        expect(
+          canonical.startsWith('https://onlineinvoicecreator.com'),
+          `Non-apex or non-https canonical in /${relative}: ${canonical}`
+        ).toBe(true);
         expect(canonical).not.toContain('www.');
 
         // Self-referencing check
@@ -72,10 +77,16 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       const content = fs.readFileSync(redirectsFile, 'utf8');
 
       // www to apex
-      expect(content).toContain('https://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!');
-      expect(content).toContain('http://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!');
+      expect(content).toContain(
+        'https://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
+      );
+      expect(content).toContain(
+        'http://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
+      );
       // http to https
-      expect(content).toContain('http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!');
+      expect(content).toContain(
+        'http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
+      );
     });
 
     it('enforces trailing slash normalization via 301 redirects for all site routes', () => {
@@ -98,7 +109,9 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       ];
 
       for (const route of expectedRoutes) {
-        expect(content, `Missing 301 trailing slash redirect for ${route}`).toContain(`${route}/ ${route} 301`);
+        expect(content, `Missing 301 trailing slash redirect for ${route}`).toContain(
+          `${route}/ ${route} 301`
+        );
       }
     });
   });
@@ -163,7 +176,10 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       const server = http.createServer((req, res) => {
         const urlPath = req.url?.split('?')[0] || '/';
         const cleanPath = urlPath.replace(/\/$/, '') || '/';
-        const candidateFile = path.join(distDir, cleanPath === '/' ? 'index.html' : `${cleanPath}/index.html`);
+        const candidateFile = path.join(
+          distDir,
+          cleanPath === '/' ? 'index.html' : `${cleanPath}/index.html`
+        );
         const directFile = path.join(distDir, cleanPath);
 
         if (fs.existsSync(candidateFile)) {
@@ -183,7 +199,9 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       await new Promise<void>((resolve) => server.listen(0, resolve));
       const port = (server.address() as any).port;
 
-      const response = await fetch(`http://127.0.0.1:${port}/this-page-definitely-does-not-exist-xyz`);
+      const response = await fetch(
+        `http://127.0.0.1:${port}/this-page-definitely-does-not-exist-xyz`
+      );
       expect(response.status).toBe(404);
 
       const body = await response.text();
