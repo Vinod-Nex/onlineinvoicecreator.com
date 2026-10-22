@@ -1,0 +1,27 @@
+---
+/**
+ * Cloudflare Web Analytics Component
+ *
+ * Privacy-friendly, cookie-free web analytics:
+ * - 0 Cookies, 0 Local Storage trackers
+ * - 100% GDPR, CCPA, and PECR compliant without requiring a cookie consent banner
+ * - Deferred non-blocking loading (< 5 KB payload, 0ms Total Blocking Time)
+ * - Configured via `PUBLIC_CF_ANALYTICS_TOKEN` environment variable or direct `token` prop
+ */
+
+interface Props {
+  token?: string;
+}
+
+const { token = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN || '' } = Astro.props;
+---
+
+{
+  token ? (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token })}
+    />
+  ) : null
+}
