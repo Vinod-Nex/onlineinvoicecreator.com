@@ -27,6 +27,7 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
     'og-privacy',
     'og-terms',
     'og-style-guide',
+    'og-changelog',
     'og-404',
   ];
 

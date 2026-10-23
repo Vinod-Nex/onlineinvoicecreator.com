@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import AdSlot from '../components/AdSlot.astro';
+import EditorialNote from '../components/EditorialNote.astro';
 import { buildPageSchemaGraph, type BreadcrumbItem, type FAQItem } from '../lib/schema';
 import { BLOG_ARTICLES, type BlogArticleData } from '../data/blog-articles';
 
@@ -172,6 +173,13 @@ const relatedArticles = BLOG_ARTICLES.filter((a) => a.slug !== article.slug).sli
         </a>
       </div>
     </aside>
+
+    <!-- Editorial Review & Official Statutory Sources (E-E-A-T) -->
+    <EditorialNote
+      lastReviewedDate="October 2026"
+      topic={article.title}
+      officialSources={article.officialSources}
+    />
 
     <!-- FAQs Section (if present) -->
     {faqs.length > 0 && (

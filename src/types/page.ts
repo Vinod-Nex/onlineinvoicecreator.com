@@ -70,6 +70,20 @@ export interface ContextualLinksBlock {
   items: ContextualLinkItem[];
 }
 
+export interface OfficialSourceData {
+  name: string;
+  authority: string;
+  url: string;
+  description: string;
+}
+
+export interface EditorialNoteData {
+  lastReviewedDate?: string;
+  reviewedBy?: string;
+  topic?: string;
+  officialSources?: OfficialSourceData[];
+}
+
 export interface ToolPageData {
   slug: string;
   metaTitle: string;
@@ -109,4 +123,5 @@ export interface ToolPageData {
     items: RelatedTool[];
   };
   contextualLinks?: ContextualLinksBlock;
+  editorialNote?: EditorialNoteData;
 }

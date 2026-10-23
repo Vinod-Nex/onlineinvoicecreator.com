@@ -216,5 +216,24 @@
         "description": "Standard invoice creator with multi-currency support and zero watermarks."
       }
     ]
+  },
+  "editorialNote": {
+    "lastReviewedDate": "October 2026",
+    "reviewedBy": "Online Invoice Creator Editorial Standards Team",
+    "topic": "Australian Tax Invoices, ABN Registration, & 10% GST Compliance",
+    "officialSources": [
+      {
+        "name": "ATO Tax Invoices Requirements",
+        "authority": "Australian Taxation Office (ATO)",
+        "url": "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/tax-invoices",
+        "description": "Statutory requirements for Australian tax invoices, ABN display, and when to include buyer identity for sales over $1,000."
+      },
+      {
+        "name": "ATO Australian Business Register (ABR)",
+        "authority": "Australian Government",
+        "url": "https://abr.business.gov.au/",
+        "description": "Official lookup tool to verify active ABN registration status and GST registration credentials before issuing tax invoices."
+      }
+    ]
   }
 }

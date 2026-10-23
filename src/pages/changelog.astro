@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { buildPageSchemaGraph } from '../lib/schema';
+
+const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Changelog' }];
+
+const changelogSchema = {
+  '@type': 'WebPage',
+  name: 'Online Invoice Creator Product Changelog',
+  description:
+    'Track feature releases, regional tax template updates, and client-side privacy improvements on Online Invoice Creator.',
+  url: 'https://onlineinvoicecreator.com/changelog',
+};
+
+const releases = [
+  {
+    version: 'v1.5',
+    date: 'October 2026',
+    badge: 'Latest Release',
+    badgeColor: 'emerald',
+    title: 'E-E-A-T Trust Signals & Verified Tax Authority Citations',
+    summary:
+      'Strengthened editorial transparency, added formal review dates across legal guidance, and linked all statutory requirements directly to official revenue authorities.',
+    highlights: [
+      'Verified Statutory Citations: Added direct reference links to official regulatory bodies including the Australian Taxation Office (ATO), HM Revenue & Customs (HMRC - UK), Internal Revenue Service (IRS - US), and Income Tax Department of India.',
+      'Editorial Review Badges: Introduced editorial review metadata with last-verified dates and professional accounting disclaimers across all statutory tax pages and guides.',
+      'Transparent Creator Story: Documented the background and origin story of our independent software engineer founder, explaining the technical and philosophical motivation behind our 100% client-side, zero-paywall mission.',
+      'Confirmed Organization Schema: Upgraded Schema.org structured data with comprehensive Organization metadata including support endpoints, founding date, and subject matter knowledge.',
+    ],
+  },
+  {
+    version: 'v1.4',
+    date: 'October 2026',
+    badge: 'Content Hub',
+    badgeColor: 'primary',
+    title: 'Invoicing Knowledge Hub & 12 Deep-Dive Editorial Guides',
+    summary:
+      'Launched comprehensive educational content covering high-intent commercial billing queries with practical math and code assets generic articles lack.',
+    highlights: [
+      '12 Curriculum Outlines: Published structured H2/H3 blueprints for the most critical commercial billing topics, each linking directly to a specialized generator tool.',
+      '4 Full Deep-Dive Guides: Complete articles with real worked calculations (freelance milestone math, CIF customs valuation, double-entry general ledger debit/credit entries, and zero-padding alphanumeric collation sorting).',
+      'Downloadable Code & Sample Payloads: Included standardized JSON invoice import files and production TypeScript sequential number generator algorithms.',
+      'Unified Article Schema: Integrated BlogPosting, BreadcrumbList, and FAQPage JSON-LD graph structures across every guide.',
+    ],
+  },
+  {
+    version: 'v1.3',
+    date: 'October 2026',
+    badge: 'Privacy & Storage',
+    badgeColor: 'teal',
+    title: 'Itemized Receipts, POS Formats & Local-First Draft Memory',
+    summary:
+      'Expanded receipt generation capabilities and engineered private client-side browser storage.',
+    highlights: [
+      'Itemized Receipt Maker: Added dedicated workflow for retail point-of-sale items, per-item quantity, price, and item-level discount rates.',
+      'Local Storage Draft Memory: Automatically saves letterhead, logo, and line items in browser localStorage so users never lose in-progress work upon accidental page reload.',
+      '1-Click Data Purge: Added instantaneous "Clear Data" control giving users total control over their local browser storage.',
+      'Zero Server Guarantee: Retained 100% client-side execution with zero network transmission of confidential invoice line items.',
+    ],
+  },
+  {
+    version: 'v1.2',
+    date: 'October 2026',
+    badge: 'Tax Compliance',
+    badgeColor: 'primary',
+    title: 'Regional Tax Invoices (ATO) & Rent Receipt Generator',
+    summary:
+      'Introduced jurisdiction-specific billing templates engineered for strict statutory compliance.',
+    highlights: [
+      'Australian ATO Tax Invoice: Added support for ABN formatting, mandatory "Tax Invoice" designation, and automatic 10% GST calculation for Australian sole traders.',
+      'Rent Receipt Generator: Built dedicated monthly rent receipt tool featuring rental period dates, property address, tenant/landlord signatures, and mandatory Landlord PAN declaration for HRA tax exemption claims.',
+      'Flexible Currency Switcher: Enabled seamless switching across USD ($), EUR (€), GBP (£), AUD ($), CAD ($), INR (₹), and 25+ global currencies.',
+    ],
+  },
+  {
+    version: 'v1.1',
+    date: 'October 2026',
+    badge: 'Specialized Workflows',
+    badgeColor: 'teal',
+    title: 'Freelancer, Contractor & Photography Templates',
+    summary:
+      'Rolled out dedicated persona templates tailored for distinct industry billing workflows.',
+    highlights: [
+      'Freelancer Invoices: Optimized for hourly time-tracking, fixed-rate milestones, and software licensing fee itemization.',
+      'Contractor Billing: Tailored for construction and trade contractors with labor versus materials separation and retainage deductions.',
+      'Photography & Creative Invoices: Built for commercial usage licensing, shoot day rates, equipment rentals, and copyright retention clauses.',
+      'Excel Export Alternative: Instant in-browser alternative to bloated, error-prone spreadsheet invoice templates.',
+    ],
+  },
+  {
+    version: 'v1.0',
+    date: 'October 2026',
+    badge: 'Public Launch',
+    badgeColor: 'neutral',
+    title: 'Initial Public Launch: Free, Private, Client-Side Invoicing',
+    summary:
+      'The initial release of Online Invoice Creator, offering fast, free, watermark-free invoice generation directly in the web browser.',
+    highlights: [
+      '100% Client-Side Engine: Fast vector PDF rendering powered by in-browser JavaScript without backend server bottlenecks.',
+      'Zero Sign-Up & No Paywalls: Complete access to all templates and features without accounts, credit cards, or subscription tiers.',
+      'Zero Watermarks: Pristine exports ready for official corporate accounting, client billing, and tax remittance.',
+      'Responsive Mobile & Desktop: Fully responsive layout tested across mobile smartphones, tablets, and high-resolution monitors.',
+    ],
+  },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: 'https://onlineinvoicecreator.com/changelog',
+  title: 'Changelog & Updates | Online Invoice Creator',
+  description:
+    'Track feature releases, regional tax template updates, and client-side privacy improvements on Online Invoice Creator.',
+  breadcrumbs: breadcrumbItems,
+  customSchemas: [changelogSchema],
+});
+---
+
+<BaseLayout
+  title="Changelog & Updates | Online Invoice Creator"
+  description="Track feature releases, regional tax template updates, and client-side privacy improvements on Online Invoice Creator."
+  canonical="https://onlineinvoicecreator.com/changelog"
+  ogImage="/og/og-changelog.png"
+  ogImageAlt="Online Invoice Creator Product Changelog and Updates"
+  schema={pageSchema}
+>
+  <!-- Breadcrumb Navigation -->
+  <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+    <!-- Header -->
+    <header class="space-y-4 text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary">
+        <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+        <span>Version History & Release Notes</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display leading-[1.1]">
+        Product Changelog & <span class="text-primary">Updates</span>
+      </h1>
+      <p class="text-base sm:text-lg text-mute max-w-2xl leading-relaxed">
+        We continuously iterate on Online Invoice Creator to improve mathematical accuracy, add
+        regional tax templates, and maintain our strict local-first privacy architecture.
+      </p>
+    </header>
+
+    <!-- Release Timeline -->
+    <section class="space-y-8" aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading" class="sr-only">
+        Chronological Release Timeline
+      </h2>
+
+      <div class="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-4 before:h-full before:w-0.5 before:bg-hairline">
+        {releases.map((release) => (
+          <article class="relative pl-9 sm:pl-11 space-y-4">
+            <!-- Timeline Dot -->
+            <div class="absolute left-1.5 sm:left-2 top-1.5 h-4 w-4 rounded-full border-2 border-primary bg-canvas shadow-2xs"></div>
+
+            <div class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-4">
+              <!-- Version & Date Header -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline/60 pb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-1 rounded-lg bg-surface-soft border border-hairline font-mono font-bold text-ink text-sm">
+                    {release.version}
+                  </span>
+                  <span class="text-xs font-semibold text-primary px-2 py-0.5 rounded-full bg-primary/10">
+                    {release.badge}
+                  </span>
+                </div>
+                <time class="text-xs text-mute font-medium">{release.date}</time>
+              </div>
+
+              <!-- Release Title & Summary -->
+              <div class="space-y-1.5">
+                <h3 class="text-xl sm:text-2xl font-bold text-ink font-display">{release.title}</h3>
+                <p class="text-xs sm:text-sm text-mute leading-relaxed">{release.summary}</p>
+              </div>
+
+              <!-- Highlights List -->
+              <div class="space-y-2 pt-2">
+                <p class="text-xs font-bold uppercase tracking-wider text-charcoal">
+                  Key Improvements & Features:
+                </p>
+                <ul class="space-y-2 text-xs sm:text-sm text-mute">
+                  {release.highlights.map((item) => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-emerald-500 font-bold mt-0.5 shrink-0">&check;</span>
+                      <span class="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Feedback & Feature Requests CTA -->
+    <section
+      class="p-6 sm:p-8 rounded-3xl bg-surface-soft border border-hairline space-y-4 text-center sm:text-left"
+      aria-labelledby="feedback-heading"
+    >
+      <h2 id="feedback-heading" class="text-xl sm:text-2xl font-bold text-ink font-display">
+        Have a Feature Suggestion or Regional Tax Request?
+      </h2>
+      <p class="text-xs sm:text-sm text-mute max-w-2xl leading-relaxed">
+        Our product roadmap is directly shaped by the freelancers, tradespeople, and small
+        businesses who rely on our tools every day. Let us know what currency, invoice layout, or
+        regional tax requirement would improve your workflow.
+      </p>
+      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-2">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary hover:bg-primary-deep text-white font-semibold text-xs sm:text-sm transition-all shadow-xs"
+        >
+          <span>Send Feedback & Suggestions</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a
+          href="mailto:support@onlineinvoicecreator.com"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-card hover:bg-surface-elevated border border-hairline text-ink font-semibold text-xs sm:text-sm transition-all"
+        >
+          <span>Email Support Team</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

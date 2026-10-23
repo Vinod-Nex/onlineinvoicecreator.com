@@ -5,6 +5,7 @@ import InvoiceForm from '../components/InvoiceForm.astro';
 import ReceiptForm from '../components/ReceiptForm.astro';
 import RentReceiptForm from '../components/RentReceiptForm.astro';
 import AdSlot from '../components/AdSlot.astro';
+import EditorialNote from '../components/EditorialNote.astro';
 import type { ToolPageData } from '../types/page';
 import { buildPageSchemaGraph } from '../lib/schema';
 
@@ -397,6 +398,16 @@ const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side too
           </div>
         </div>
       </section>
+
+      <!-- Editorial Review & Official Statutory Sources (E-E-A-T) -->
+      {data.editorialNote && (
+        <EditorialNote
+          lastReviewedDate={data.editorialNote.lastReviewedDate}
+          reviewedBy={data.editorialNote.reviewedBy}
+          topic={data.editorialNote.topic}
+          officialSources={data.editorialNote.officialSources}
+        />
+      )}
 
       <!-- 4. Frequently Asked Questions (FAQ) Section -->
       {data.faq && data.faq.items && data.faq.items.length > 0 && (

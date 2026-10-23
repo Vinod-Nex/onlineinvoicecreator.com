@@ -1,0 +1,140 @@
+---
+/**
+ * EditorialNote Component (E-E-A-T & Trust Signals)
+ *
+ * Displays editorial review metadata, last-reviewed verification dates,
+ * links to official government revenue authorities (ATO, HMRC, IRS, Income Tax Dept),
+ * and an educational tax guidance disclaimer.
+ */
+
+export interface OfficialSource {
+  name: string;
+  authority: string;
+  url: string;
+  description: string;
+}
+
+interface Props {
+  lastReviewedDate?: string;
+  reviewedBy?: string;
+  topic?: string;
+  officialSources?: OfficialSource[];
+  class?: string;
+}
+
+const {
+  lastReviewedDate = 'October 2026',
+  reviewedBy = 'Online Invoice Creator Editorial Standards Team',
+  topic = 'Statutory Billing & Tax Invoicing Standards',
+  officialSources = [],
+  class: className = '',
+} = Astro.props;
+---
+
+<aside
+  class={`editorial-note rounded-3xl border border-hairline bg-surface-card p-6 sm:p-7 shadow-xs space-y-4 no-print ${className}`}
+  aria-label="Editorial review and official regulatory sources"
+>
+  <!-- Header Bar -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-hairline/60">
+    <div class="flex items-center gap-2">
+      <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+      <span class="text-xs font-bold uppercase tracking-wider text-ink font-mono">
+        Editorial Review & Regulatory Accuracy
+      </span>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-mute">
+      <span>Last Verified:</span>
+      <time
+        datetime="2026-10"
+        class="font-semibold text-ink px-2 py-0.5 rounded-md bg-surface-soft border border-hairline/60"
+      >
+        {lastReviewedDate}
+      </time>
+    </div>
+  </div>
+
+  <!-- Reviewer & Scope -->
+  <div class="text-xs sm:text-sm text-mute leading-relaxed space-y-1.5">
+    <p>
+      This guidance covering <strong class="text-ink font-medium">{topic}</strong> has been
+      researched and reviewed by the <strong class="text-ink font-medium">{reviewedBy}</strong> to
+      ensure compliance with commercial accounting principles and statutory invoice formatting
+      standards.
+    </p>
+  </div>
+
+  <!-- Official Government Sources -->
+  {officialSources.length > 0 && (
+    <div class="space-y-2 pt-1">
+      <p class="text-xs font-bold uppercase tracking-wider text-charcoal">
+        Verified Against Official Revenue Authority Guidelines:
+      </p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        {officialSources.map((source) => (
+          <li>
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-start gap-2 p-2.5 rounded-xl bg-surface-soft hover:bg-surface-elevated border border-hairline/60 transition-colors text-ink"
+            >
+              <svg
+                class="h-4 w-4 text-primary shrink-0 mt-0.5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-1 font-semibold text-ink group-hover:text-primary transition-colors">
+                  <span>{source.name}</span>
+                  <span class="text-[10px] text-mute font-mono">({source.authority})</span>
+                  <svg
+                    class="h-3 w-3 text-mute group-hover:text-primary transition-colors inline"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </div>
+                <p class="text-[11px] text-mute leading-snug line-clamp-2">{source.description}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <!-- Editorial Disclaimer -->
+  <div class="pt-2 border-t border-hairline/60 flex items-start gap-2 text-[11px] text-mute leading-relaxed">
+    <svg
+      class="h-4 w-4 shrink-0 text-accent-warning mt-0.5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+    <p>
+      <strong class="font-semibold text-ink">Statutory Disclaimer:</strong> This documentation is
+      published strictly for educational and operational workflow convenience. Tax laws and
+      invoicing regulations change frequently and vary by country, state, and transaction type. For
+      formal tax filings, BAS submissions, or legal disputes, consult a qualified CPA, chartered
+      accountant, or licensed tax advisor.
+    </p>
+  </div>
+</aside>

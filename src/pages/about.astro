@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { Picture } from 'astro:assets';
 import editorPreview from '../assets/invoice-generator-preview.png';
-import { buildPageSchemaGraph } from '../lib/schema';
+import { buildPageSchemaGraph, createOrganizationSchema } from '../lib/schema';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'About Us' }];
 
@@ -11,35 +11,35 @@ const aboutSchema = {
   '@type': 'AboutPage',
   name: 'About Online Invoice Creator',
   description:
-    'Online Invoice Creator provides free, private, watermark-free invoicing and receipt generation running 100% client-side in the browser.',
+    'Learn who built Online Invoice Creator and why: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses.',
   url: 'https://onlineinvoicecreator.com/about',
 };
 
 const aboutFaqs = [
   {
-    question: 'Is Online Invoice Creator truly free without hidden fees or watermarks?',
+    question: 'Who created Online Invoice Creator and why is it free?',
     answer:
-      'Yes, Online Invoice Creator is completely free with zero hidden subscription costs, download fees, or watermarks. We built this tool to provide accessible, unrestricted billing software for solo freelancers, trade contractors, and small businesses worldwide. Every document you create and export is 100% yours with clean, professional presentation.',
+      'Online Invoice Creator was built by an independent software engineer and former freelance contractor frustrated with predatory SaaS paywalls, forced watermarks, and cloud data leaks. We keep it free as a permanent public utility powered by efficient static web hosting and non-intrusive reserved-space advertising.',
   },
   {
-    question: 'How does a no server invoice generator protect my financial confidentiality?',
+    question: 'How does client-side processing ensure financial confidentiality?',
     answer:
-      'Our no server invoice generator architecture processes all calculations, currency conversions, and PDF renderings client-side in your web browser. Your client identities, hourly rates, and invoice totals are never transmitted across the network to remote servers. This ensures full data confidentiality without needing to trust external cloud providers.',
+      'Our architecture executes all invoice calculations, currency conversions, and vector PDF rendering locally in your web browser. Your client identities, hourly billing rates, bank account numbers, and document totals are never transmitted across the network to remote servers or stored in cloud databases.',
   },
   {
-    question: 'Why did you build a watermark free invoice builder instead of a paid app?',
+    question: 'How do you verify the accuracy of your tax invoice templates?',
     answer:
-      'We created a watermark free invoice builder because essential business paperwork should not be locked behind predatory monthly subscriptions. Traditional accounting platforms charge expensive recurring fees and hold client data hostage. Our tool runs locally with modern browser technology, providing fast, private invoicing with zero barriers to entry.',
+      'Our editorial and engineering team reviews all document templates and billing guides against official government revenue authorities, including the Australian Taxation Office (ATO), UK HM Revenue & Customs (HMRC), US Internal Revenue Service (IRS), and the Income Tax Department of India.',
   },
   {
-    question: 'Are documents created on Online Invoice Creator legally binding?',
+    question: 'Are invoices and receipts generated here legally binding?',
     answer:
-      'Yes, invoices and receipts generated on our platform are legally binding commercial billing documents. They contain all statutory required fields including unique sequential numbering, party identifiers, issue dates, itemized breakdowns, and clear payment terms. As long as entered business details are genuine, the exported PDFs satisfy standard commercial accounting standards.',
+      'Yes, invoices and receipts generated on Online Invoice Creator satisfy standard commercial and statutory accounting requirements worldwide. They feature unique sequential numbering, explicit buyer and seller identifiers, issue dates, itemized breakdowns, and clear payment terms. As long as entered business details are genuine, the exported vector PDFs serve as authentic accounting records for client billing, remittance, and tax audits.',
   },
   {
-    question: 'Can I use this invoicing tool on mobile phones and tablets?',
+    question: 'How can I report a bug, suggest a feature, or contact support?',
     answer:
-      'Yes, our platform is fully responsive and optimized for smartphones, tablets, laptops, and desktop workstations. You can draft bills on the go from a construction jobsite, review live preview updates, and export high-resolution PDFs directly from your mobile browser without installing native app store downloads.',
+      'You can contact our support and engineering team directly via email at support@onlineinvoicecreator.com or through our contact page form. We read every inquiry and typically reply within 24 to 48 business hours with technical assistance, bug investigation, or regional tax template updates.',
   },
 ];
 
@@ -47,16 +47,16 @@ const pageSchema = buildPageSchemaGraph({
   canonicalUrl: 'https://onlineinvoicecreator.com/about',
   title: 'About Us | Online Invoice Creator',
   description:
-    'Learn why Online Invoice Creator was built: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses.',
+    'Learn who built Online Invoice Creator and why: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses.',
   breadcrumbs: breadcrumbItems,
   faqItems: aboutFaqs,
-  customSchemas: [aboutSchema],
+  customSchemas: [aboutSchema, createOrganizationSchema('https://onlineinvoicecreator.com')],
 });
 ---
 
 <BaseLayout
   title="About Us | Online Invoice Creator"
-  description="Learn why Online Invoice Creator was built: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses."
+  description="Learn who built Online Invoice Creator and why: 100% private, serverless, watermark-free invoicing for freelancers, contractors, and small businesses."
   canonical="https://onlineinvoicecreator.com/about"
   ogImage="/og/og-about.png"
   ogImageAlt="About Online Invoice Creator - Free & Private Invoicing"
@@ -74,20 +74,20 @@ const pageSchema = buildPageSchemaGraph({
     <header class="space-y-4 text-center sm:text-left">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-soft border border-hairline text-xs font-semibold text-charcoal">
         <span class="flex h-2 w-2 rounded-full bg-accent-teal"></span>
-        <span>Our Mission & Architecture</span>
+        <span>Creator Story & Architecture</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display leading-[1.1]">
         About Online Invoice Creator: Built for Speed, Privacy, and{' '}
         <span class="text-primary">Zero Gimmicks</span>
       </h1>
       <p class="text-base sm:text-lg text-mute max-w-2xl leading-relaxed">
-        We built Online Invoice Creator because creating a professional bill shouldn't require
-        mandatory accounts, expensive subscriptions, intrusive watermarks, or handing over sensitive
-        client financial data.
+        Online Invoice Creator was built by an independent software engineer and former freelance
+        contractor to eliminate subscription paywalls, forced promotional watermarks, and
+        confidential financial data leaks.
       </p>
     </header>
 
-    <!-- Visual Showcase of Client-Side Editor (Optimized AVIF/WebP with astro:assets) -->
+    <!-- Visual Showcase of Client-Side Editor -->
     <div class="relative overflow-hidden rounded-3xl border border-hairline bg-surface-card p-2 sm:p-3 shadow-card">
       <Picture
         src={editorPreview}
@@ -101,13 +101,63 @@ const pageSchema = buildPageSchemaGraph({
       />
     </div>
 
+    <!-- Who Built This & Why: The Independent Engineer's Story -->
+    <section class="space-y-6" aria-labelledby="who-built-this-heading">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <span>Our Origin Story</span>
+        </div>
+        <h2
+          id="who-built-this-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display"
+        >
+          Who Built Online Invoice Creator & Why
+        </h2>
+      </div>
+
+      <div class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-4 text-sm sm:text-base text-mute leading-relaxed">
+        <p>
+          Online Invoice Creator was conceived, designed, and developed by an independent software
+          engineer who worked for years as a freelance contractor. Like millions of solo
+          professionals, trade contractors, and small business owners, our founder encountered the
+          same infuriating cycle every month:
+        </p>
+        <blockquote class="p-4 rounded-2xl bg-surface-soft border-l-4 border-primary text-ink italic text-sm">
+          "You spend fifteen minutes carefully calculating hours, verifying milestone deliverables,
+          and entering client remittance information, only to click 'Download PDF' and hit a
+          surprise $20/month subscription paywall, a giant promotional watermark stamped across your
+          customer bill, or an invasive registration form demanding credit card details."
+        </blockquote>
+        <p>
+          Even more concerning was the <strong class="text-ink">data privacy problem</strong>. Most
+          web-based invoice generators quietly transmit your client names, physical addresses,
+          hourly rate cards, banking details, and invoice totals across the internet into
+          centralized cloud databases and third-party tracking networks.
+        </p>
+        <p>
+          We asked a simple question:{' '}
+          <em class="text-ink font-medium">
+            Why should generating a standard commercial PDF bill require a remote database, an
+            ongoing subscription fee, or surrendering your client's financial confidentiality?
+          </em>
+        </p>
+        <p>
+          The answer is that it shouldn't. Online Invoice Creator was built from the ground up as a{' '}
+          <strong class="text-ink">local-first, serverless utility</strong>. All calculations,
+          currency formatting, and vector PDF rendering take place directly inside your web browser
+          using modern JavaScript and WebAssembly. Your business data never touches a remote server.
+        </p>
+      </div>
+    </section>
+
     <!-- The Problem with Traditional Invoicing Software -->
     <section class="space-y-6" aria-labelledby="why-we-exist-heading">
       <h2 id="why-we-exist-heading" class="text-2xl sm:text-3xl font-bold text-ink font-display">
         The Problem with Most Invoicing Tools
       </h2>
       <p class="text-sm sm:text-base text-mute leading-relaxed">
-        Most invoicing websites fall into two frustrating extremes:
+        Commercial billing software has become increasingly hostile to solo operators and
+        micro-businesses:
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -117,9 +167,9 @@ const pageSchema = buildPageSchemaGraph({
           </div>
           <h3 class="text-lg font-bold text-ink">The Bait-and-Switch Paywall</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            Many commercial invoice apps let you spend fifteen minutes meticulously filling in
-            items, only to block your PDF download behind a mandatory $19/month subscription or
-            stamp a giant "Made with InvoiceApp" watermark across the bottom of your bill.
+            Many commercial invoice apps let you fill in form items for free, but hold your
+            completed document hostage behind a mandatory monthly subscription or stamp an
+            unprofessional "Created with App" logo on the bottom of your client-facing invoice.
           </p>
         </div>
 
@@ -127,11 +177,11 @@ const pageSchema = buildPageSchemaGraph({
           <div class="h-10 w-10 rounded-2xl bg-accent-danger/10 text-accent-danger flex items-center justify-center font-bold text-lg">
             ✕
           </div>
-          <h3 class="text-lg font-bold text-ink">The Privacy & Ad Clutter Problem</h3>
+          <h3 class="text-lg font-bold text-ink">The Privacy & Surveillance Problem</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            Older free tools clutter the screen with heavy skyscraper display ads, slow down your
-            device, and send your proprietary billing rates, client addresses, and banking numbers
-            to remote cloud databases.
+            Older free tools clutter the interface with intrusive popups and transmit sensitive
+            client rates, banking details, and proprietary project scopes to remote servers where
+            they are stored, analyzed, or exposed in cloud data breaches.
           </p>
         </div>
       </div>
@@ -153,9 +203,9 @@ const pageSchema = buildPageSchemaGraph({
           </div>
           <h3 class="font-bold text-ink text-base">100% Client-Side Processing</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            All document calculations, logo processing, and vector PDF rendering occur directly
-            inside your browser. We never transmit or store your invoices, clients, or rates on any
-            remote server.
+            All document calculations, tax math, logo processing, and vector PDF rendering occur
+            locally in your browser. We never store or transmit your invoices, rates, or client
+            names.
           </p>
         </div>
 
@@ -165,8 +215,9 @@ const pageSchema = buildPageSchemaGraph({
           </div>
           <h3 class="font-bold text-ink text-base">100% Watermark-Free</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            Your bills are your business. Every PDF and PNG export is clean, pristine, and ready for
-            official corporate accounting, client remittance, and tax audits.
+            Your bills represent your business reputation. Every PDF and PNG export is clean,
+            pristine, and ready for official corporate accounting, client remittance, and statutory
+            audits.
           </p>
         </div>
 
@@ -176,8 +227,9 @@ const pageSchema = buildPageSchemaGraph({
           </div>
           <h3 class="font-bold text-ink text-base">No Mandatory Signup</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            Open the website and start typing immediately. Download your completed invoice in under
-            thirty seconds. We believe essential business utility should be frictionless.
+            Open the website and start creating immediately. Download your completed invoice in
+            under thirty seconds. We believe essential everyday business utility should be
+            frictionless.
           </p>
         </div>
 
@@ -187,32 +239,174 @@ const pageSchema = buildPageSchemaGraph({
           </div>
           <h3 class="font-bold text-ink text-base">Private Local Storage</h3>
           <p class="text-xs sm:text-sm text-mute leading-relaxed">
-            Your browser's local storage saves your business letterhead, currency, and drafts
-            automatically. You can clear your stored data at any time with one click.
+            Your browser's local storage automatically saves your business letterhead, currency
+            preference, and draft state without contacting external servers. You can clear your data
+            anytime with one click.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- How the Technology Works -->
-    <section
-      class="space-y-4 p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs"
-      aria-labelledby="tech-heading"
-    >
-      <h2 id="tech-heading" class="text-xl sm:text-2xl font-bold text-ink font-display">
-        How the Technology Works
+    <!-- Editorial Standards & Regulatory Verification (E-E-A-T) -->
+    <section class="space-y-6" aria-labelledby="editorial-standards-heading">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          <span>Trust & Accuracy</span>
+        </div>
+        <h2
+          id="editorial-standards-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display"
+        >
+          Editorial Standards & Regulatory Verification
+        </h2>
+      </div>
+
+      <div class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-4 text-xs sm:text-sm text-mute leading-relaxed">
+        <p>
+          Billing documentation carries legal and statutory consequences for businesses of every
+          size. To ensure our templates and guides reflect real-world compliance, our editorial and
+          engineering contributors verify requirements against official government revenue agencies
+          and statutory guidance:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
+          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairline/60 space-y-1">
+            <strong class="text-ink flex items-center gap-1.5 font-bold">
+              <span class="h-2 w-2 rounded-full bg-primary"></span>
+              Australian Taxation Office (ATO)
+            </strong>
+            <p class="text-mute leading-relaxed">
+              Verified compliance for Australian tax invoice rules, active ABN validation, and the
+              statutory 1/11th GST extraction calculation for supplies exceeding $1,000.
+            </p>
+            <a
+              href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/tax-invoices"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-primary hover:underline font-medium pt-1"
+            >
+              <span>ATO Tax Invoices Official Guidance</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairline/60 space-y-1">
+            <strong class="text-ink flex items-center gap-1.5 font-bold">
+              <span class="h-2 w-2 rounded-full bg-accent-teal"></span>
+              HM Revenue & Customs (HMRC - UK)
+            </strong>
+            <p class="text-mute leading-relaxed">
+              Standardized formatting for UK sole trader invoices, VAT-registered tax bills,
+              sequential numbering rules under VAT Notice 700, and Construction Industry Scheme
+              (CIS) details.
+            </p>
+            <a
+              href="https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-primary hover:underline font-medium pt-1"
+            >
+              <span>HMRC Invoicing Statutory Standards</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairline/60 space-y-1">
+            <strong class="text-ink flex items-center gap-1.5 font-bold">
+              <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+              Internal Revenue Service (IRS - US)
+            </strong>
+            <p class="text-mute leading-relaxed">
+              Substantiation guidelines under IRC Section 162, independent contractor documentation
+              for Form 1099-NEC, and Schedule C gross receipt recordkeeping standards.
+            </p>
+            <a
+              href="https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-primary hover:underline font-medium pt-1"
+            >
+              <span>IRS Small Business Recordkeeping</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairline/60 space-y-1">
+            <strong class="text-ink flex items-center gap-1.5 font-bold">
+              <span class="h-2 w-2 rounded-full bg-indigo-500"></span>
+              Income Tax Department of India
+            </strong>
+            <p class="text-mute leading-relaxed">
+              Statutory rent receipt criteria for House Rent Allowance (HRA) tax exemption under
+              Section 10(13A), Form 12BB declaration formatting, and landlord PAN threshold mandates
+              (&gt;₹1,00,000/yr).
+            </p>
+            <a
+              href="https://incometaxindia.gov.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-primary hover:underline font-medium pt-1"
+            >
+              <span>Income Tax Department of India Portal</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="pt-2 text-[11px] text-mute italic">
+          Disclaimer: While our templates and guides are regularly reviewed against official
+          statutory publications, tax regulations vary widely by jurisdiction and transaction type.
+          This documentation is for educational convenience and does not constitute formal legal,
+          accounting, or tax advice.
+        </p>
+      </div>
+    </section>
+
+    <!-- How to Contact Us & Accountability -->
+    <section class="space-y-6" aria-labelledby="contact-and-accountability-heading">
+      <h2
+        id="contact-and-accountability-heading"
+        class="text-2xl sm:text-3xl font-bold text-ink font-display"
+      >
+        Direct Contact, Support & Feedback
       </h2>
-      <p class="text-xs sm:text-sm text-mute leading-relaxed">
-        Online Invoice Creator is engineered using modern static web technologies: Astro, vanilla
-        TypeScript, and client-side vector document libraries. When you click{' '}
-        <strong class="text-ink">Download PDF</strong>, the rendering library loads on demand and
-        constructs the vector PDF locally using your browser's JavaScript engine.
-      </p>
-      <p class="text-xs sm:text-sm text-mute leading-relaxed">
-        Because no backend database is involved in document generation, the tool operates with
-        near-zero latency, remains accessible even on slow internet connections, and provides
-        absolute mathematical privacy.
-      </p>
+      <div class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-4 text-xs sm:text-sm text-mute leading-relaxed">
+        <p>
+          We take direct accountability for the reliability and mathematical correctness of our
+          software. If you discover a currency formatting bug, need a specific regional tax template
+          added, or want to suggest an improvement to our vector PDF exporter, reach out directly:
+        </p>
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a
+            href="mailto:support@onlineinvoicecreator.com"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary hover:bg-primary-deep text-white font-semibold text-xs sm:text-sm transition-all shadow-xs"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            <span>support@onlineinvoicecreator.com</span>
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-soft hover:bg-surface-elevated border border-hairline text-ink font-semibold text-xs sm:text-sm transition-all"
+          >
+            <span>Online Contact Form</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href="/changelog"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-soft hover:bg-surface-elevated border border-hairline text-ink font-semibold text-xs sm:text-sm transition-all"
+          >
+            <span>View Product Changelog</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <p class="text-[11px] text-mute pt-1">
+          Our support desk reviews messages daily and aims to respond to all technical inquiries and
+          feedback within 24 to 48 business hours.
+        </p>
+      </div>
     </section>
 
     <!-- Quick Tool Directory & Navigation -->
@@ -339,6 +533,10 @@ const pageSchema = buildPageSchemaGraph({
         <span>&bull;</span>
         <a href="/contact" class="hover:text-primary transition-colors">
           Contact Support
+        </a>
+        <span>&bull;</span>
+        <a href="/changelog" class="hover:text-primary transition-colors">
+          Changelog
         </a>
       </div>
     </footer>

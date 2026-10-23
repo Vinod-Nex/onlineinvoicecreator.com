@@ -106,6 +106,7 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         'https://onlineinvoicecreator.com/receipt-maker-with-items',
         'https://onlineinvoicecreator.com/tax-invoice-template-australia',
         'https://onlineinvoicecreator.com/terms',
+        'https://onlineinvoicecreator.com/changelog',
       ];
 
       for (const pageUrl of expectedPages) {
@@ -123,9 +124,9 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         expect(content, `Missing in sitemap: ${blogUrl}`).toContain(`<loc>${blogUrl}</loc>`);
       }
 
-      // Count total <url> tags (14 core + 4 blog articles = 18 total indexable pages)
+      // Count total <url> tags (14 core + 1 changelog + 4 blog articles = 19 total indexable pages)
       const urlCount = (content.match(/<url>/g) || []).length;
-      expect(urlCount).toBe(18);
+      expect(urlCount).toBe(19);
     });
 
     it('assigns valid ISO lastmod dates derived from git commit history to every entry', () => {

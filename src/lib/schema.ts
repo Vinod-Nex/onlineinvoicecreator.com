@@ -64,6 +64,23 @@ export function createOrganizationSchema(siteUrl: string = SITE_URL_DEFAULT) {
     description:
       'Free online invoice and receipt generator. Create professional, watermark-free invoices and receipts directly in your browser with zero signup required.',
     email: 'support@onlineinvoicecreator.com',
+    foundingDate: '2026',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'support@onlineinvoicecreator.com',
+        url: `${base}/contact`,
+        availableLanguage: ['en'],
+      },
+    ],
+    knowsAbout: [
+      'Invoicing Software',
+      'Receipt Generation',
+      'Tax Compliance',
+      'Small Business Accounting',
+      'Client-Side Data Privacy',
+    ],
   };
 }
 

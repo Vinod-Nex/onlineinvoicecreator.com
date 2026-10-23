@@ -223,5 +223,24 @@
         "description": "Standard free invoice creator with multi-currency and zero watermarks."
       }
     ]
+  },
+  "editorialNote": {
+    "lastReviewedDate": "October 2026",
+    "reviewedBy": "Online Invoice Creator Editorial Standards Team",
+    "topic": "Independent Contractor Billing, IRS 1099-NEC Records, & CIS Compliance",
+    "officialSources": [
+      {
+        "name": "IRS Form 1099-NEC & Contractor Recordkeeping",
+        "authority": "Internal Revenue Service (IRS)",
+        "url": "https://www.irs.gov/forms-pubs/about-form-1099-nec",
+        "description": "Reporting rules for nonemployee compensation paid to independent trade contractors, EIN/SSN identification, and annual reporting thresholds ($600)."
+      },
+      {
+        "name": "HMRC Invoicing Standards & Construction Rules",
+        "authority": "HM Revenue & Customs (HMRC)",
+        "url": "https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include",
+        "description": "Statutory rules for UK sole trader contractors, itemized labor and materials breakdowns, and Construction Industry Scheme (CIS) deductions."
+      }
+    ]
   }
 }

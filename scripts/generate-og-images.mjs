@@ -97,6 +97,14 @@ const staticPages = [
     tags: ['Design Tokens', 'Typography Specs', 'WCAG AAA Contrast'],
   },
   {
+    slug: 'og-changelog',
+    title: 'Product Changelog & Updates',
+    badge: 'Release Notes & History',
+    description:
+      'Track feature releases, regional tax template additions, and client-side privacy improvements on Online Invoice Creator.',
+    tags: ['Feature Releases', 'Tax Updates', 'Privacy Roadmap'],
+  },
+  {
     slug: 'og-404',
     title: '404: Page Not Found',
     badge: 'Page Not Found',

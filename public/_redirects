@@ -7,6 +7,7 @@ http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!
 
 # 2. Canonical trailing slash normalization (enforce trailingSlash: 'never')
 /about/ /about 301
+/changelog/ /changelog 301
 /blog/ /blog 301
 /contact/ /contact 301
 /privacy/ /privacy 301

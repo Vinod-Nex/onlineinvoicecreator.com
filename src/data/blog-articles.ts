@@ -11,6 +11,13 @@ export interface BlogOutlineSection {
   summary: string;
 }
 
+export interface OfficialSource {
+  name: string;
+  authority: string;
+  url: string;
+  description: string;
+}
+
 export interface BlogArticleData {
   slug: string;
   title: string;
@@ -33,6 +40,7 @@ export interface BlogArticleData {
   };
   outline: BlogOutlineSection[];
   isFull: boolean;
+  officialSources?: OfficialSource[];
 }
 
 export const BLOG_ARTICLES: BlogArticleData[] = [
@@ -108,6 +116,22 @@ export const BLOG_ARTICLES: BlogArticleData[] = [
       },
     ],
     isFull: true,
+    officialSources: [
+      {
+        name: 'HMRC Invoicing Statutory Standards',
+        authority: 'HM Revenue & Customs (HMRC)',
+        url: 'https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include',
+        description:
+          'Mandatory information required on invoices issued by sole traders and VAT-registered companies in the UK.',
+      },
+      {
+        name: 'IRS Small Business & Self-Employed Recordkeeping',
+        authority: 'Internal Revenue Service (IRS)',
+        url: 'https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping',
+        description:
+          'Federal guidance on substantiating freelance gross receipts, deductible business expenses, and invoice records.',
+      },
+    ],
   },
 
   // 2. Full Article 2
@@ -187,6 +211,22 @@ export const BLOG_ARTICLES: BlogArticleData[] = [
       },
     ],
     isFull: true,
+    officialSources: [
+      {
+        name: 'WCO Customs Valuation Compendium',
+        authority: 'World Customs Organization (WCO)',
+        url: 'https://www.wcoomd.org/en/topics/valuation.aspx',
+        description:
+          'International standards on customs declarations, pro forma document roles, and CIF valuation methodology.',
+      },
+      {
+        name: 'WTO Agreement on Customs Valuation',
+        authority: 'World Trade Organization (WTO)',
+        url: 'https://www.wto.org/english/tratop_e/cusval_e/cusval_e.htm',
+        description:
+          'Global trade rules distinguishing non-binding preliminary pro forma invoices from finalized commercial billing.',
+      },
+    ],
   },
 
   // 3. Full Article 3
@@ -265,6 +305,22 @@ export const BLOG_ARTICLES: BlogArticleData[] = [
       },
     ],
     isFull: true,
+    officialSources: [
+      {
+        name: 'IRS Topic No. 305 Recordkeeping & Substantiation',
+        authority: 'Internal Revenue Service (IRS)',
+        url: 'https://www.irs.gov/taxtopics/tc305',
+        description:
+          'Federal statutory standards on documentary evidence and receipts required to substantiate tax-deductible expenses.',
+      },
+      {
+        name: 'HMRC Customer Invoicing & Receipts',
+        authority: 'HM Revenue & Customs (HMRC)',
+        url: 'https://www.gov.uk/invoicing-and-taking-payment-from-customers',
+        description:
+          'Official UK guidance distinguishing payment requests from proof of debt settlement and receipts.',
+      },
+    ],
   },
 
   // 4. Full Article 4
@@ -343,6 +399,22 @@ export const BLOG_ARTICLES: BlogArticleData[] = [
       },
     ],
     isFull: true,
+    officialSources: [
+      {
+        name: 'HMRC VAT Notice 700: Invoicing Rules & Sequential Numbering',
+        authority: 'HM Revenue & Customs (HMRC)',
+        url: 'https://www.gov.uk/guidance/record-keeping-for-vat-notice-70021',
+        description:
+          'Statutory mandate requiring sequential invoice numbering without unexplained gaps to preserve valid audit trails.',
+      },
+      {
+        name: 'IRS Publication 538 Accounting Periods & Methods',
+        authority: 'Internal Revenue Service (IRS)',
+        url: 'https://www.irs.gov/publications/p538',
+        description:
+          'General ledger accounting standards requiring systematic chronological recordation of accounts receivable.',
+      },
+    ],
   },
 
   // 5. Outline 5

@@ -224,5 +224,24 @@
         "description": "Instant browser invoicing without corrupt spreadsheet formulas or macros."
       }
     ]
+  },
+  "editorialNote": {
+    "lastReviewedDate": "October 2026",
+    "reviewedBy": "Online Invoice Creator Editorial Standards Team",
+    "topic": "Rent Receipts, HRA Tax Exemption (Sec 10(13A)), & Landlord PAN Rules",
+    "officialSources": [
+      {
+        "name": "Income Tax Department of India (HRA & Form 12BB)",
+        "authority": "Government of India",
+        "url": "https://incometaxindia.gov.in/",
+        "description": "Statutory House Rent Allowance (HRA) exemption guidelines under Section 10(13A) and mandatory landlord PAN declaration for rent exceeding ₹1,00,000 annually."
+      },
+      {
+        "name": "IRS Rental Income & Expense Recordkeeping",
+        "authority": "Internal Revenue Service (IRS)",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping",
+        "description": "Federal documentation standards for landlords and tenants to substantiate rental payments, security deposits, and deductible housing expenses."
+      }
+    ]
   }
 }
