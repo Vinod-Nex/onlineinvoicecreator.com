@@ -1,0 +1,19 @@
+# ads.txt for https://onlineinvoicecreator.com
+# Specification: IAB Tech Lab Authorized Digital Sellers (ads.txt v1.1)
+# Contact: security@onlineinvoicecreator.com
+#
+# ==============================================================================
+# Google AdSense
+# Replace pub-XXXXXXXXXXXXXXXX with your active AdSense Publisher ID upon account activation.
+# ==============================================================================
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# ==============================================================================
+# Additional Authorized Ad Exchanges & Networks
+# Uncomment and configure below when partnering with certified SSPs / ad networks:
+# ==============================================================================
+# ezoic.com, 12345, RESELLER, 9c734bda7335b6ca
+# mediavine.com, 67890, RESELLER
+# pubmatic.com, 156324, RESELLER, 5d62403b186f2ace
+# rubiconproject.com, 10738, RESELLER, 0bfd66d529a55803
+# openx.com, 537143526, RESELLER, 6a698e2ec38604c6

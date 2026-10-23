@@ -1,0 +1,328 @@
+---
+/**
+ * AffiliatePartners Component
+ *
+ * Implements clearly labelled, contextual affiliate placeholders for accounting software:
+ * 1. Prominent Disclosure: Explicit FTC-compliant sponsorship badges and disclosure statement
+ * 2. Context-Aware Recommendations: Selects relevant tools (FreshBooks, QuickBooks, Xero, Landlord software)
+ * 3. Strict Link Attributes: rel="noopener sponsored" on all outbound affiliate links
+ * 4. Zero Tool Obstruction: In-flow placement below generator canvas, never covering download buttons
+ */
+
+interface Props {
+  context?: 'general' | 'freelance' | 'contractor' | 'australia' | 'excel' | 'landlord';
+  class?: string;
+}
+
+const { context = 'general', class: className = '' } = Astro.props;
+
+interface Partner {
+  name: string;
+  badge: string;
+  tagline: string;
+  description: string;
+  highlights: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  highlighted?: boolean;
+}
+
+const partnersByContext: Record<string, Partner[]> = {
+  australia: [
+    {
+      name: 'Xero',
+      badge: 'Best for Australia & ATO Compliance',
+      tagline: 'ATO-approved Single Touch Payroll & BAS lodgement.',
+      description:
+        'The preferred cloud accounting platform for Australian small businesses and sole traders.',
+      highlights: [
+        'Automatic bank feeds (CBA, ANZ, NAB, Westpac)',
+        'One-click GST & BAS preparation',
+        'Superannuation & Single Touch Payroll',
+      ],
+      ctaLabel: 'Try Xero Free for 30 Days',
+      ctaHref: 'https://www.xero.com/au/',
+      highlighted: true,
+    },
+    {
+      name: 'QuickBooks Online',
+      badge: 'Best for Contractors & Mileage',
+      tagline: 'Automated expense tracking and contractor 1099/ABN management.',
+      description:
+        'Track income, capture receipts on mobile, and claim business deductions automatically.',
+      highlights: [
+        'Automated GPS mileage tracking',
+        'Custom professional estimates & quotes',
+        'Live accountant collaboration',
+      ],
+      ctaLabel: 'Save 50% for 3 Months',
+      ctaHref: 'https://quickbooks.intuit.com/au/',
+    },
+  ],
+  contractor: [
+    {
+      name: 'QuickBooks Online',
+      badge: 'Best for Trade Contractors',
+      tagline: 'Track project costs, mileage, and sub-contractor 1099s.',
+      description:
+        'Built for independent trade contractors, builders, and field technicians needing mobile expense capture.',
+      highlights: [
+        'Live mobile receipt scanning',
+        'Automated job costing & profitability',
+        'Contractor payment direct deposits',
+      ],
+      ctaLabel: 'Explore QuickBooks (50% Off)',
+      ctaHref: 'https://quickbooks.intuit.com/',
+      highlighted: true,
+    },
+    {
+      name: 'FreshBooks',
+      badge: 'Best for Solo Contractors',
+      tagline: 'Effortless client billing and time tracking.',
+      description:
+        'Simple double-entry bookkeeping that turns work hours and expenses into client invoices in seconds.',
+      highlights: [
+        'Automatic late payment reminders',
+        'Client review and approval portal',
+        'Zero accounting jargon',
+      ],
+      ctaLabel: 'Try FreshBooks Free for 30 Days',
+      ctaHref: 'https://www.freshbooks.com/',
+    },
+  ],
+  freelance: [
+    {
+      name: 'FreshBooks',
+      badge: 'Top Pick for Freelancers',
+      tagline: 'Made for solo freelancers, creatives, and digital consultants.',
+      description:
+        'Track client billable hours, automate recurring retainers, and log expenses effortlessly.',
+      highlights: [
+        'Multi-currency client billing',
+        'Automatic expense categorization',
+        'Client portal with instant card payments',
+      ],
+      ctaLabel: 'Start Free 30-Day Trial',
+      ctaHref: 'https://www.freshbooks.com/',
+      highlighted: true,
+    },
+    {
+      name: 'QuickBooks Solopreneur',
+      badge: 'Best for Tax Deductions',
+      tagline: 'Separate business and personal expenses with ease.',
+      description:
+        'Designed specifically for one-person businesses to maximize Schedule C deductions and quarterly tax estimates.',
+      highlights: [
+        'Quarterly estimated tax calculations',
+        'Automatic bank transaction syncing',
+        'Mobile receipt capture',
+      ],
+      ctaLabel: 'Get Started with QuickBooks',
+      ctaHref: 'https://quickbooks.intuit.com/',
+    },
+  ],
+  excel: [
+    {
+      name: 'QuickBooks Online',
+      badge: 'Upgrade from Spreadsheets',
+      tagline: 'Eliminate manual spreadsheet data entry forever.',
+      description:
+        'Sync transactions directly from your bank accounts so you never have to manually enter numbers into Excel again.',
+      highlights: [
+        'Import existing Excel client & item lists',
+        'Real-time profit & loss statements',
+        'Automated bank reconciliations',
+      ],
+      ctaLabel: 'Switch from Excel (50% Off)',
+      ctaHref: 'https://quickbooks.intuit.com/',
+      highlighted: true,
+    },
+    {
+      name: 'Xero',
+      badge: 'Collaborative Cloud Ledger',
+      tagline: 'Clean, modern financial dashboards without complex macros.',
+      description:
+        'Share access securely with your bookkeeper and accountant without emailing conflicting spreadsheet versions.',
+      highlights: [
+        'Interactive cash-flow forecasting',
+        'Unlimited users on select plans',
+        'Clean bank feed matching',
+      ],
+      ctaLabel: 'Try Xero Free for 30 Days',
+      ctaHref: 'https://www.xero.com/',
+    },
+  ],
+  landlord: [
+    {
+      name: 'TurboTenant',
+      badge: 'Top Choice for Independent Landlords',
+      tagline: 'Automated rent collection and digital tenant screening.',
+      description:
+        'Manage rental properties with automated online rent payments, digital lease agreements, and instant rent receipts.',
+      highlights: [
+        'Direct-to-bank tenant rent collection',
+        'Automatic recurring rent receipts',
+        'Online tenant maintenance requests',
+      ],
+      ctaLabel: 'Free Sign Up for Landlords',
+      ctaHref: 'https://www.turbotenant.com/',
+      highlighted: true,
+    },
+    {
+      name: 'QuickBooks Online for Rentals',
+      badge: 'Best for Real Estate Tax Accounting',
+      tagline: 'Track income and property depreciation by unit.',
+      description:
+        'Organize rental income, repair receipts, and mortgage interest per rental property for effortless Schedule E tax preparation.',
+      highlights: [
+        'Class tracking by property address',
+        'Digital repair receipt storage',
+        'Year-end Schedule E summary reports',
+      ],
+      ctaLabel: 'Explore Landlord Accounting',
+      ctaHref: 'https://quickbooks.intuit.com/',
+    },
+  ],
+  general: [
+    {
+      name: 'FreshBooks',
+      badge: 'Best for Small Service Businesses',
+      tagline: 'All-in-one invoicing, time tracking, and expense management.',
+      description:
+        'The easiest way to send professional invoices, accept credit card payments, and track client project time.',
+      highlights: [
+        'Automated payment follow-ups',
+        'Client collaboration portals',
+        'Detailed business financial reports',
+      ],
+      ctaLabel: 'Start Free 30-Day Trial',
+      ctaHref: 'https://www.freshbooks.com/',
+      highlighted: true,
+    },
+    {
+      name: 'QuickBooks Online',
+      badge: 'Industry Standard Accounting',
+      tagline: 'Complete double-entry bookkeeping trusted by CPAs worldwide.',
+      description:
+        'Connect all your financial accounts, manage payroll, track tax deductions, and share real-time reports with your accountant.',
+      highlights: [
+        'Real-time cash flow dashboards',
+        'Automated tax and 1099 reporting',
+        'Seamless accountant integration',
+      ],
+      ctaLabel: 'Save 50% for 3 Months',
+      ctaHref: 'https://quickbooks.intuit.com/',
+    },
+  ],
+};
+
+const activePartners = partnersByContext[context] || partnersByContext.general;
+---
+
+<section
+  class={`affiliate-partners-container my-12 rounded-3xl border border-hairline/80 bg-surface-card p-6 sm:p-8 lg:p-10 shadow-card transition-all no-print ${className}`}
+  aria-labelledby="affiliate-partners-heading"
+>
+  <!-- Sponsorship Disclosure Header -->
+  <div class="space-y-2 border-b border-hairline/60 pb-6 text-center sm:text-left">
+    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-primary/10 text-primary">
+        Sponsored Recommendations
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-surface-soft text-mute border border-hairline">
+        Affiliate Partners
+      </span>
+    </div>
+
+    <h2
+      id="affiliate-partners-heading"
+      class="text-xl sm:text-2xl font-bold text-ink font-display tracking-tight"
+    >
+      Need Automated Bookkeeping & Tax Compliance?
+    </h2>
+
+    <p class="text-xs sm:text-sm text-mute max-w-3xl leading-relaxed">
+      If your business has outgrown manual PDF invoicing and needs automated bank reconciliation,
+      double-entry bookkeeping, or tax filing, we recommend these industry-certified accounting
+      platforms.
+    </p>
+
+    <!-- Clear FTC Disclosure -->
+    <p class="text-[11px] text-mute/80 italic pt-1">
+      <strong>Transparency Disclosure:</strong> When you purchase or sign up for accounting software
+      through the links below, we may earn an affiliate commission at no extra cost to you. We only
+      recommend platforms that satisfy professional accounting and security standards.
+    </p>
+  </div>
+
+  <!-- Partner Cards Grid -->
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+    {activePartners.map((partner) => (
+      <div
+        class={`flex flex-col justify-between rounded-2xl border p-6 transition-all ${
+          partner.highlighted
+            ? 'border-primary/40 bg-surface-soft/40 shadow-xs'
+            : 'border-hairline bg-surface-card hover:border-hairline/80'
+        }`}
+      >
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold text-ink">{partner.name}</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">
+              {partner.badge}
+            </span>
+          </div>
+
+          <p class="text-sm font-semibold text-ink leading-snug">{partner.tagline}</p>
+
+          <p class="text-xs text-mute leading-relaxed">{partner.description}</p>
+
+          <ul class="space-y-1.5 pt-2 border-t border-hairline/40">
+            {partner.highlights.map((item) => (
+              <li class="flex items-center gap-2 text-xs text-ink/90">
+                <svg
+                  class="h-3.5 w-3.5 text-accent-teal shrink-0"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-hairline/60">
+          <a
+            href={partner.ctaHref}
+            target="_blank"
+            rel="noopener sponsored"
+            class={`inline-flex items-center justify-center w-full px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-xs gap-1.5 ${
+              partner.highlighted
+                ? 'bg-primary hover:bg-primary-deep text-white'
+                : 'bg-surface-soft hover:bg-surface border border-hairline text-ink'
+            }`}
+          >
+            <span>{partner.ctaLabel}</span>
+            <svg
+              class="h-3.5 w-3.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

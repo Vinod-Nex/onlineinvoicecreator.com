@@ -1,11 +1,13 @@
 ---
 /**
- * AdSlot Component with Zero-CLS Reserved Space
+ * AdSlot Component with Zero-CLS Reserved Space & Interaction Lazy-Loading
  *
- * Implements strict Core Web Vitals guarantees:
+ * Implements strict Core Web Vitals guarantees & revenue readiness:
  * 1. Reserved Space: Explicit min-height and containment ensures CLS = 0.00
- * 2. Deferred Hydration: Ad scripts only execute AFTER the document is interactive
- * 3. Non-Intrusive: Positioned below primary above-the-fold generator canvas
+ * 2. Interaction-Gated Lazy Loading: Scripts and network requests ONLY trigger AFTER user interaction
+ * 3. Viewport Intersection: Elements only load when approaching the viewport via IntersectionObserver
+ * 4. Non-Intrusive: Positioned strictly below the tool canvas, never inside forms, never covering download buttons
+ * 5. Consent Aware: Cooperates with ConsentBanner (GDPR / UK ePrivacy compliance)
  */
 
 interface Props {
@@ -35,7 +37,7 @@ const dimensionClass = formatDimensions[format] || formatDimensions.responsive;
   <!-- Ad Disclosure Label -->
   <div class="flex items-center justify-between text-[11px] font-medium text-mute pb-2 border-b border-hairline/40">
     <span class="tracking-wider uppercase">Advertisement</span>
-    <span class="text-[10px] text-mute/80">Zero-Tracking • Reserved Space</span>
+    <span class="text-[10px] text-mute/80">Privacy-First • Lazy-Loaded After Interaction</span>
   </div>
 
   <!-- Ad Placeholder / Insertion Zone -->
@@ -57,7 +59,7 @@ const dimensionClass = formatDimensions[format] || formatDimensions.responsive;
           <line x1="8" y1="21" x2="16" y2="21"></line>
           <line x1="12" y1="17" x2="12" y2="21"></line>
         </svg>
-        <span>Reserved Ad Space (Loaded after tool interactivity)</span>
+        <span>Reserved Ad Space (Loaded after user interaction)</span>
       </div>
     </slot>
   </div>
@@ -66,33 +68,79 @@ const dimensionClass = formatDimensions[format] || formatDimensions.responsive;
 <script is:inline>
   (function () {
     // Core Web Vitals Protection:
-    // Only schedule ad loading AFTER the main thread is idle and the invoice tool is interactive
-    function initializeAdSlot() {
-      if (document.readyState === 'complete') {
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(loadAdScripts, { timeout: 3000 });
-        } else {
-          setTimeout(loadAdScripts, 1000);
-        }
-      } else {
-        window.addEventListener('load', function () {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadAdScripts, { timeout: 3000 });
-          } else {
-            setTimeout(loadAdScripts, 1000);
-          }
-        });
-      }
-    }
+    // 1. Wait for first meaningful user interaction (scroll, click, touch, keydown)
+    // 2. Wait for idle time via requestIdleCallback
+    // 3. Only load when the ad container intersects or approaches the viewport
+    let hasInteracted = false;
+    let interactionListenersBound = false;
+
+    const targetContainer = document.getElementById(`container-${slotId}`);
 
     function loadAdScripts() {
-      // Custom ad provider initialization hook (when ad network is configured)
+      // Dispatches custom ad provider initialization hook when ready
       const event = new CustomEvent('oic:ad-slot-ready', {
-        detail: { timestamp: performance.now() },
+        detail: {
+          slotId: slotId,
+          timestamp: performance.now(),
+          consent: localStorage.getItem('oic_consent_status') || 'not_required',
+        },
       });
       window.dispatchEvent(event);
     }
 
-    initializeAdSlot();
+    function scheduleAdLoading() {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadAdScripts, { timeout: 3000 });
+      } else {
+        setTimeout(loadAdScripts, 1000);
+      }
+    }
+
+    function onUserInteraction() {
+      if (hasInteracted) return;
+      hasInteracted = true;
+      removeInteractionListeners();
+
+      // Once user has interacted, observe when the container approaches viewport
+      if ('IntersectionObserver' in window && targetContainer) {
+        const observer = new IntersectionObserver(
+          function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                obs.disconnect();
+                scheduleAdLoading();
+              }
+            });
+          },
+          { rootMargin: '250px' }
+        );
+        observer.observe(targetContainer);
+      } else {
+        scheduleAdLoading();
+      }
+    }
+
+    function bindInteractionListeners() {
+      if (interactionListenersBound) return;
+      interactionListenersBound = true;
+      const interactionEvents = ['pointerdown', 'scroll', 'keydown', 'touchstart', 'wheel'];
+      interactionEvents.forEach(function (evt) {
+        window.addEventListener(evt, onUserInteraction, { once: true, passive: true });
+      });
+    }
+
+    function removeInteractionListeners() {
+      const interactionEvents = ['pointerdown', 'scroll', 'keydown', 'touchstart', 'wheel'];
+      interactionEvents.forEach(function (evt) {
+        window.removeEventListener(evt, onUserInteraction);
+      });
+    }
+
+    // Initialize interaction bindings once document is interactive
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', bindInteractionListeners);
+    } else {
+      bindInteractionListeners();
+    }
   })();
 </script>

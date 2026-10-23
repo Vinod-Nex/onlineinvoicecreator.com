@@ -5,6 +5,7 @@ import InvoiceForm from '../components/InvoiceForm.astro';
 import ReceiptForm from '../components/ReceiptForm.astro';
 import RentReceiptForm from '../components/RentReceiptForm.astro';
 import AdSlot from '../components/AdSlot.astro';
+import AffiliatePartners from '../components/AffiliatePartners.astro';
 import EditorialNote from '../components/EditorialNote.astro';
 import type { ToolPageData } from '../types/page';
 import { buildPageSchemaGraph } from '../lib/schema';
@@ -16,6 +17,22 @@ interface Props {
 const { data } = Astro.props;
 
 const isHomePage = data.slug === 'index';
+
+// Map tool slug to contextual accounting software recommendations
+const affiliateContextMap: Record<
+  string,
+  'australia' | 'contractor' | 'freelance' | 'excel' | 'landlord' | 'general'
+> = {
+  'tax-invoice-template-australia': 'australia',
+  'contractor-invoice-template': 'contractor',
+  'invoice-generator-for-freelancers': 'freelance',
+  'invoice-generator-excel': 'excel',
+  'free-rent-receipt-generator': 'landlord',
+  'photography-invoice-generator': 'freelance',
+  '': 'general',
+  index: 'general',
+};
+const affiliateContext = affiliateContextMap[data.slug || ''];
 
 // Construct complete Schema.org JSON-LD graph matching visible content:
 // - Organization & WebSite (on home page)
@@ -384,6 +401,9 @@ const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side too
           )}
         </section>
       )}
+
+      <!-- Contextual Accounting Software Recommendations (Clearly Labelled) -->
+      {affiliateContext && <AffiliatePartners context={affiliateContext} />}
 
       <!-- 3. Example Section -->
       <section class="space-y-6" aria-labelledby="example-heading">

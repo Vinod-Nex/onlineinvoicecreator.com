@@ -1,0 +1,177 @@
+---
+/**
+ * ConsentBanner Component
+ *
+ * Implements strict legal compliance for GDPR / UK PECR / ePrivacy:
+ * 1. Targeted Display: Only shown to visitors in jurisdictions requiring affirmative cookie consent (EU/EEA/UK).
+ * 2. Zero-Nag for Global Users: Automatically bypassed for non-EU/EEA users (US, CA, AU, NZ, IN, etc.).
+ * 3. Non-Intrusive Layout: Fixed to the bottom-right on desktop / bottom on mobile with dismissal.
+ * 4. Never Blocks the Tool: Does not obscure the generator canvas or the primary PDF download button.
+ */
+---
+
+<div
+  id="oic-consent-banner"
+  class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 hidden rounded-2xl border border-hairline/80 bg-surface-card/95 backdrop-blur-md p-5 shadow-2xl transition-all duration-300 no-print"
+  role="region"
+  aria-label="Privacy & Cookie Preferences"
+  style="display: none;"
+>
+  <div class="flex items-start gap-3">
+    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    </div>
+    <div class="space-y-1.5 flex-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-ink">Privacy & Cookie Choices</h3>
+        <button
+          type="button"
+          id="btn-consent-dismiss"
+          class="text-mute hover:text-ink text-xs p-1 rounded-md transition-colors"
+          aria-label="Dismiss banner"
+          title="Dismiss banner"
+        >
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="text-xs text-mute leading-relaxed">
+        We compile your invoices locally in your browser and never store your financial details on
+        our servers. To keep this tool 100% free, we partner with advertising networks that may use
+        cookies for ad measurement and personalization.
+      </p>
+      <div class="pt-1">
+        <a href="/privacy" class="text-[11px] font-medium text-primary hover:underline">
+          Read our Privacy Policy &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 flex flex-wrap items-center justify-end gap-2.5 pt-3 border-t border-hairline/60">
+    <button
+      type="button"
+      id="btn-consent-essential"
+      class="px-3.5 py-1.5 rounded-lg border border-hairline bg-surface-soft hover:bg-surface text-ink text-xs font-medium transition-colors"
+    >
+      Essential Only
+    </button>
+    <button
+      type="button"
+      id="btn-consent-accept"
+      class="px-4 py-1.5 rounded-lg bg-primary hover:bg-primary-deep text-white text-xs font-semibold shadow-xs transition-colors"
+    >
+      Accept All
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'oic_consent_status';
+
+    function isEuJurisdiction() {
+      // European Economic Area & UK timezone indicators
+      const euPrefixes = [
+        'Europe/',
+        'Atlantic/Reykjavik',
+        'Atlantic/Faroe',
+        'Atlantic/Madeira',
+        'Atlantic/Azores',
+        'Atlantic/Canary',
+      ];
+      try {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        return euPrefixes.some(function (prefix) {
+          return timeZone.indexOf(prefix) === 0;
+        });
+      } catch {
+        return false;
+      }
+    }
+
+    function initConsent() {
+      const banner = document.getElementById('oic-consent-banner');
+      if (!banner) return;
+
+      const storedConsent = localStorage.getItem(STORAGE_KEY);
+
+      // If user has already made a selection, honor it and do not display
+      if (storedConsent) {
+        window.dispatchEvent(
+          new CustomEvent('oic:consent-ready', { detail: { status: storedConsent } })
+        );
+        return;
+      }
+
+      // Check if current jurisdiction requires affirmative consent (EU/EEA/UK)
+      if (!isEuJurisdiction()) {
+        // Outside EU: Consent is not legally required; default to essential/zero-tracking
+        localStorage.setItem(STORAGE_KEY, 'not_required');
+        window.dispatchEvent(
+          new CustomEvent('oic:consent-ready', { detail: { status: 'not_required' } })
+        );
+        return;
+      }
+
+      // Inside EU/EEA/UK: Display the banner safely without layout shifts
+      banner.classList.remove('hidden');
+      banner.style.display = 'block';
+
+      const acceptBtn = document.getElementById('btn-consent-accept');
+      const essentialBtn = document.getElementById('btn-consent-essential');
+      const dismissBtn = document.getElementById('btn-consent-dismiss');
+
+      function hideBanner() {
+        banner.style.display = 'none';
+        banner.classList.add('hidden');
+      }
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', function () {
+          localStorage.setItem(STORAGE_KEY, 'granted');
+          hideBanner();
+          window.dispatchEvent(
+            new CustomEvent('oic:consent-ready', { detail: { status: 'granted' } })
+          );
+        });
+      }
+
+      if (essentialBtn) {
+        essentialBtn.addEventListener('click', function () {
+          localStorage.setItem(STORAGE_KEY, 'denied');
+          hideBanner();
+          window.dispatchEvent(
+            new CustomEvent('oic:consent-ready', { detail: { status: 'denied' } })
+          );
+        });
+      }
+
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', function () {
+          localStorage.setItem(STORAGE_KEY, 'dismissed');
+          hideBanner();
+          window.dispatchEvent(
+            new CustomEvent('oic:consent-ready', { detail: { status: 'dismissed' } })
+          );
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initConsent);
+    } else {
+      initConsent();
+    }
+  })();
+</script>

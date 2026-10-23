@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import AdSlot from '../components/AdSlot.astro';
+import AffiliatePartners from '../components/AffiliatePartners.astro';
 import EditorialNote from '../components/EditorialNote.astro';
 import { buildPageSchemaGraph, type BreadcrumbItem, type FAQItem } from '../lib/schema';
 import { BLOG_ARTICLES, type BlogArticleData } from '../data/blog-articles';
@@ -214,6 +215,9 @@ const relatedArticles = BLOG_ARTICLES.filter((a) => a.slug !== article.slug).sli
     <div class="py-4">
       <AdSlot slotId={`blog-${article.slug}-bottom`} format="responsive" />
     </div>
+
+    <!-- Contextual Accounting Software Recommendations (Clearly Labelled) -->
+    <AffiliatePartners context="general" />
 
     <!-- Related Articles -->
     <section class="space-y-6 pt-6 border-t border-hairline" aria-labelledby="related-heading">
