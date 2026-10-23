@@ -1,0 +1,304 @@
+---
+import BlogArticleLayout from '../../layouts/BlogArticleLayout.astro';
+import { BLOG_ARTICLES } from '../../data/blog-articles';
+
+const article = BLOG_ARTICLES[3]; // how-to-number-invoices
+
+const toc = [
+  { id: 'why-sequential', label: '1. Why Sequential Invoice Numbering Is a Legal Rule' },
+  { id: 'four-systems', label: '2. The 4 Proven Invoice Numbering Systems' },
+  { id: 'zero-padding-math', label: '3. Zero-Padding & Alphanumeric Sorting Math' },
+  { id: 'corrections-voids', label: '4. How to Handle Voids, Errors & Credit Notes' },
+  { id: 'auto-numbering-logic', label: '5. Automated Sequential Code Logic' },
+];
+
+const faqs = [
+  {
+    question: 'Can I start my invoice numbers at 001 or should I start higher?',
+    answer:
+      'You can legally start your invoice sequence at 001. However, many new freelancers prefer to begin at 101 or 1001 so their company appears more established to corporate accounts payable departments.',
+  },
+  {
+    question: 'What happens if I accidentally skip an invoice number in my sequence?',
+    answer:
+      'If you skip an invoice number, document the missing number in your bookkeeping log as a voided record with zero balance. Never re-issue the skipped number out of chronological order, as this raises red flags during tax audits.',
+  },
+  {
+    question: 'Can I reset my invoice numbering sequence back to 001 every new year?',
+    answer:
+      'Yes, resetting your sequence annually is legally compliant provided you incorporate the year into the prefix, such as INV-2026-001 transitioning to INV-2027-001. This guarantees that all invoice numbers remain globally unique across multiple years.',
+  },
+  {
+    question: 'How does Online Invoice Creator automatically number invoices?',
+    answer:
+      'Online Invoice Creator scans the numeric portion of your previous invoice number and increments it by one in local browser memory. No sequence data or client information is ever transmitted to an external database.',
+  },
+];
+
+const incrementCodeSnippet = `// Production auto-increment logic used in OnlineInvoiceCreator.com
+export function incrementInvoiceNumber(currentNumber: string): string {
+  if (!currentNumber || !currentNumber.trim()) return 'INV-001';
+
+  // Match the trailing digits of the invoice string
+  const match = currentNumber.match(/^(.*?)(\\d+)$/);
+  if (!match) return \`\${currentNumber}-001\`;
+
+  const prefix = match[1];
+  const digits = match[2];
+  const nextNum = parseInt(digits, 10) + 1;
+
+  // Preserve the exact zero-padding width of the original sequence
+  const padded = String(nextNum).padStart(digits.length, '0');
+  return \`\${prefix}\${padded}\`;
+}
+
+// Examples:
+// incrementInvoiceNumber("INV-042")      => "INV-043"
+// incrementInvoiceNumber("2026-10-099")  => "2026-10-100"
+// incrementInvoiceNumber("ACME-9")       => "ACME-10"`;
+---
+
+<BlogArticleLayout article={article} faqs={faqs} toc={toc}>
+  <!-- Section 1 -->
+  <section id="why-sequential" class="space-y-4">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      1. Why Sequential Invoice Numbering Is a Legal Rule
+    </h2>
+    <p>
+      An invoice number is not simply an arbitrary reference code; it is a legally required unique
+      identifier mandated by statutory taxation authorities worldwide (including the US Internal
+      Revenue Service, UK HMRC, European VAT authorities, and the Australian Taxation Office).
+    </p>
+    <p>
+      Tax auditors require an <strong>unbroken, sequential audit trail</strong>. When tax
+      investigators review your financial accounts, an uninterrupted sequence proves that all
+      commercial sales were recorded and no cash transactions were hidden off the books.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">1. Prevents Duplication</h3>
+        <p class="text-xs text-mute leading-relaxed">
+          Unique numbers ensure corporate accounting departments never accidentally process or pay
+          the same invoice twice.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">2. Audit Defense</h3>
+        <p class="text-xs text-mute leading-relaxed">
+          Unbroken sequential runs demonstrate systematic bookkeeping, eliminating suspicions of
+          undeclared revenue.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">3. Payment Tracking</h3>
+        <p class="text-xs text-mute leading-relaxed">
+          Clients include your invoice number in their bank transfer references, making payment
+          reconciliation instant.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="four-systems" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      2. The 4 Proven Invoice Numbering Systems
+    </h2>
+    <p>
+      Selecting the right numbering framework depends on your business volume and client base. Here
+      are the four standard structures used in professional commerce:
+    </p>
+
+    <!-- 4 Systems Grid -->
+    <div class="space-y-4 my-6">
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            System 1: Sequential Simple
+          </span>
+          <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-surface-soft text-ink">
+            INV-001, INV-002, INV-003
+          </span>
+        </div>
+        <h3 class="text-base font-bold text-ink font-display">Straight Sequential Numbering</h3>
+        <p class="text-sm text-mute">
+          Ideal for solo freelancers, consultants, and contractors with low-to-moderate monthly
+          volume. A simple three-letter prefix followed by a zero-padded counter.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            System 2: Year-Month-Sequence
+          </span>
+          <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-surface-soft text-ink">
+            INV-2026-10-001, INV-2026-10-002
+          </span>
+        </div>
+        <h3 class="text-base font-bold text-ink font-display">
+          Chronological Date-Based Numbering
+        </h3>
+        <p class="text-sm text-mute">
+          The gold standard for growing agencies and small businesses. Incorporates the four-digit
+          year and two-digit month. Instantly tells both parties when the invoice originated and
+          allows annual counter resets without duplicates.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            System 3: Client-Coded Series
+          </span>
+          <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-surface-soft text-ink">
+            ACME-2026-001, STRIPE-2026-001
+          </span>
+        </div>
+        <h3 class="text-base font-bold text-ink font-display">Client Specific Identifier Series</h3>
+        <p class="text-sm text-mute">
+          Used by agencies managing high-volume retainer accounts. Groups invoices by client code so
+          each corporate customer maintains their own dedicated chronological ledger.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            System 4: Project-Milestone Coded
+          </span>
+          <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-surface-soft text-ink">
+            PRJ-882-01, PRJ-882-02
+          </span>
+        </div>
+        <h3 class="text-base font-bold text-ink font-display">Milestone Contract Numbering</h3>
+        <p class="text-sm text-mute">
+          Preferred by trade contractors and architects. The first part references the master
+          contract or job site number, while the suffix indicates the payment draw or milestone
+          stage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="zero-padding-math" class="space-y-6 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+        <span>The Mathematics of Sorting</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        3. Zero-Padding & Alphanumeric Sorting Math
+      </h2>
+      <p class="text-sm text-mute">
+        Why should you write <code>INV-001</code> instead of <code>INV-1</code>? The reason lies in
+        computer science: <strong>ASCII alphanumeric collation</strong>.
+      </p>
+    </div>
+
+    <!-- Comparison of Bad vs Good Sorting -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl bg-rose-500/5 border border-rose-500/20 space-y-3">
+        <h3 class="text-base font-bold text-rose-600 dark:text-rose-400 font-display">
+          ❌ Unpadded (Chronological Chaos)
+        </h3>
+        <p class="text-xs text-mute">
+          Computers sort strings character-by-character. Without leading zeroes, <code>INV-10</code>{' '}
+          sorts before <code>INV-2</code>:
+        </p>
+        <div class="p-3 rounded-xl bg-surface-soft font-mono text-xs space-y-1 text-ink">
+          <p>INV-1.pdf</p>
+          <p class="text-rose-500 font-bold">INV-10.pdf &larr; (Misfiled between 1 and 2!)</p>
+          <p>INV-2.pdf</p>
+          <p>INV-20.pdf</p>
+          <p>INV-3.pdf</p>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 space-y-3">
+        <h3 class="text-base font-bold text-emerald-600 dark:text-emerald-400 font-display">
+          ✅ 3-Digit Zero-Padded (Flawless Order)
+        </h3>
+        <p class="text-xs text-mute">
+          Zero-padding forces numerical weighting across all operating systems, PDF viewers, and
+          accounting databases:
+        </p>
+        <div class="p-3 rounded-xl bg-surface-soft font-mono text-xs space-y-1 text-ink">
+          <p>INV-001.pdf</p>
+          <p>INV-002.pdf</p>
+          <p>INV-003.pdf</p>
+          <p>INV-010.pdf</p>
+          <p>INV-020.pdf</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="corrections-voids" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      4. How to Handle Voids, Errors & Credit Notes
+    </h2>
+    <p>
+      Mistakes happen: a client cancels an order, or you bill the wrong hourly rate. The golden rule
+      of professional accounting is: <strong>never delete an issued invoice number</strong>.
+      Deleting a number leaves a gap in your sequential records that tax auditors will flag as
+      suspicious.
+    </p>
+
+    <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-4 my-4">
+      <h3 class="text-base font-bold text-ink font-display">
+        The 2 Legally Approved Correction Methods
+      </h3>
+      <div class="space-y-3 text-sm text-mute">
+        <p>
+          <strong>Method 1: Voiding the Invoice.</strong> If the client has not paid and the bill
+          must be canceled, stamp the original PDF with <em>"VOID"</em> across the face, record the
+          balance as $0.00, and retain it in your archives. Issue the next number in sequence for
+          the corrected version.
+        </p>
+        <p>
+          <strong>Method 2: Standalone Credit Note (Credit Memo).</strong> If the invoice was
+          already booked or partially settled, issue an official Credit Note (e.g.{' '}
+          <code>CN-001</code>) referencing the original invoice number. The credit note formally
+          cancels the balance without altering historical records.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="auto-numbering-logic" class="space-y-4 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+        <span>Production Code Architecture</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        5. Automated Sequential Code Logic
+      </h2>
+      <p class="text-sm text-mute">
+        Below is the exact TypeScript incrementation logic implemented inside
+        <a
+          href="/"
+          class="text-primary hover:text-primary-deep font-semibold underline underline-offset-4"
+        >
+          Online Invoice Creator
+        </a>
+        to parse invoice strings, detect prefix conventions, and auto-increment numbers while
+        preserving zero-padding:
+      </p>
+    </div>
+
+    <!-- Code Block -->
+    <div class="rounded-2xl bg-slate-900 border border-slate-800 text-slate-100 overflow-hidden shadow-xs">
+      <div class="px-5 py-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between text-xs">
+        <span class="font-mono text-slate-400">invoice-number-increment.ts</span>
+        <span class="text-emerald-400 font-semibold">Zero-Padding Preserved</span>
+      </div>
+      <pre class="p-5 text-xs font-mono overflow-x-auto leading-relaxed text-slate-200"><code>{incrementCodeSnippet}</code></pre>
+    </div>
+  </section>
+</BlogArticleLayout>

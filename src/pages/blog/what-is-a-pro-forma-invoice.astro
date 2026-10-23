@@ -1,0 +1,312 @@
+---
+import BlogArticleLayout from '../../layouts/BlogArticleLayout.astro';
+import { BLOG_ARTICLES } from '../../data/blog-articles';
+
+const article = BLOG_ARTICLES[1]; // what-is-a-pro-forma-invoice
+
+const toc = [
+  { id: 'definition', label: '1. What Is a Pro Forma Invoice? Definition & Purpose' },
+  { id: 'comparison-matrix', label: '2. Pro Forma vs Commercial Invoice vs Quote' },
+  { id: 'cif-calculation', label: '3. Worked Calculation: International CIF & Customs' },
+  { id: 'mandatory-fields', label: '4. Essential Information to Include' },
+  { id: 'conversion-process', label: '5. Converting Pro Forma to Commercial Invoice' },
+];
+
+const faqs = [
+  {
+    question: 'Is a pro forma invoice legally binding or recorded as accounts receivable?',
+    answer:
+      'No, a pro forma invoice is not recorded as accounts receivable and does not create an immediate legal debt in double-entry bookkeeping. It acts as a formal good-faith estimate binding the seller to specified prices and delivery terms once the buyer accepts the order.',
+  },
+  {
+    question: 'Why do customs officers and banks require a pro forma invoice?',
+    answer:
+      'Customs officers use pro forma invoices to assess import duties, tariffs, and statutory taxes before cargo enters port. Banks require pro forma documentation to approve foreign currency exchange, commercial trade financing, and formal Letters of Credit for international buyers.',
+  },
+  {
+    question: 'Can a buyer pay money directly against a pro forma invoice?',
+    answer:
+      'Yes, international buyers frequently remit upfront deposits or full advance payments based on a pro forma invoice before manufacturing commences. However, sellers must issue an official commercial tax invoice or payment receipt once funds clear the bank.',
+  },
+  {
+    question: 'How do I create a pro forma invoice using Online Invoice Creator?',
+    answer:
+      'You can create a compliant pro forma invoice by using Online Invoice Creator and labeling the document title as Pro Forma Invoice. Include your agreed Incoterms, currency, shipping estimates, and price validity expiration dates before downloading your watermark-free PDF.',
+  },
+];
+---
+
+<BlogArticleLayout article={article} faqs={faqs} toc={toc}>
+  <!-- Section 1 -->
+  <section id="definition" class="space-y-4">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      1. What Is a Pro Forma Invoice? Core Definition and Purpose
+    </h2>
+    <p>
+      The term <em>pro forma</em> is Latin for "as a matter of form" or "for the sake of form." In
+      international commerce and corporate purchasing, a <strong>pro forma invoice</strong> is a
+      preliminary, good-faith billing document sent by a supplier to a buyer prior to the shipment
+      of goods or delivery of services.
+    </p>
+    <p>
+      Unlike a standard commercial invoice, a pro forma invoice is not an official demand for
+      payment and does not post to either party's general ledger as accounts receivable (AR) or
+      accounts payable (AP). Instead, it establishes an explicit, binding commitment detailing the
+      exact description, quantity, price, shipping terms, and estimated delivery dates for an
+      intended transaction.
+    </p>
+
+    <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-3 my-6">
+      <h3 class="text-base font-bold text-ink font-display">
+        When Is a Pro Forma Invoice Strictly Required?
+      </h3>
+      <ul class="text-sm text-mute space-y-2 list-disc list-inside">
+        <li>
+          <strong>Import & Customs Clearance:</strong> Border authorities require itemized
+          documentation to compute applicable import tariffs, duties, and excise taxes prior to
+          freight arrival.
+        </li>
+        <li>
+          <strong>Letters of Credit (LC) & Trade Finance:</strong> Commercial banking institutions
+          will not issue letters of credit or approve foreign exchange without an itemized pro forma
+          document.
+        </li>
+        <li>
+          <strong>Advance Down Payments:</strong> When custom manufacturing or international
+          manufacturing requires a 30% to 50% deposit before production begins.
+        </li>
+        <li>
+          <strong>Export Licensing & Inspection:</strong> Government export control boards inspect
+          pro forma valuations to grant international export permits.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="comparison-matrix" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      2. Pro Forma vs Commercial Invoice vs Quote vs Purchase Order
+    </h2>
+    <p>
+      Business owners often confuse pro forma invoices with standard price quotes, purchase orders,
+      and commercial bills. Understanding their legal and accounting distinctions ensures proper
+      bookkeeping:
+    </p>
+
+    <!-- Comparison Table -->
+    <div class="overflow-x-auto my-6 rounded-2xl border border-hairline shadow-xs">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-surface-soft text-xs font-semibold text-charcoal border-b border-hairline">
+          <tr>
+            <th class="py-3 px-4">Document Type</th>
+            <th class="py-3 px-4">Issuer</th>
+            <th class="py-3 px-4">Accounting Impact</th>
+            <th class="py-3 px-4">Customs Clearance</th>
+            <th class="py-3 px-4">Legal Bindingness</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-hairline text-ink bg-surface-card">
+          <tr>
+            <td class="py-3 px-4 font-semibold text-primary">Pro Forma Invoice</td>
+            <td class="py-3 px-4 text-mute">Seller</td>
+            <td class="py-3 px-4 text-mute">None (Memorandum)</td>
+            <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-medium">
+              Yes (Pre-clearance)
+            </td>
+            <td class="py-3 px-4 text-mute">Conditional on Acceptance</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-semibold">Commercial Invoice</td>
+            <td class="py-3 px-4 text-mute">Seller</td>
+            <td class="py-3 px-4 font-medium text-emerald-600 dark:text-emerald-400">
+              Posts to AR / AP
+            </td>
+            <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-medium">
+              Yes (Final Clearance)
+            </td>
+            <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-medium">
+              Strictly Enforceable
+            </td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-semibold">Price Quotation</td>
+            <td class="py-3 px-4 text-mute">Seller</td>
+            <td class="py-3 px-4 text-mute">None (Informational)</td>
+            <td class="py-3 px-4 text-rose-500 font-medium">No (Rejected by Customs)</td>
+            <td class="py-3 px-4 text-mute">Revocable Estimate</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-semibold">Purchase Order (PO)</td>
+            <td class="py-3 px-4 text-mute">Buyer</td>
+            <td class="py-3 px-4 text-mute">Encumbrance / Commitment</td>
+            <td class="py-3 px-4 text-rose-500 font-medium">No (Buyer internal)</td>
+            <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-medium">
+              Binding upon Supplier Acceptance
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      When drafting preliminary documents, use
+      <a
+        href="/"
+        class="text-primary hover:text-primary-deep font-semibold underline underline-offset-4"
+      >
+        Online Invoice Creator
+      </a>
+      to toggle between standard invoices and pro forma drafts with automated subtotal math.
+    </p>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="cif-calculation" class="space-y-6 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+        <span>Worked Customs Valuation</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        3. Worked Calculation: International CIF & Customs Duty
+      </h2>
+      <p class="text-sm text-mute">
+        In international shipping, customs border agencies do not assess duty solely on the raw
+        factory cost of goods. They calculate duty using the{' '}
+        <strong>CIF Valuation (Cost of Goods + Marine Insurance + Freight)</strong>.
+      </p>
+    </div>
+
+    <!-- Worked Example Card -->
+    <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-6">
+      <div class="space-y-1">
+        <h3 class="text-base font-bold text-ink font-display">
+          Scenario: Exporting 50 Industrial Sensors from USA to Germany
+        </h3>
+        <p class="text-xs text-mute">
+          Incoterms 2020: CIF Hamburg Port &bull; HS Code: 9031.80 &bull; Statutory EU Duty: 4.5%
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div class="p-4 rounded-xl bg-surface-soft space-y-1">
+          <span class="text-xs text-mute font-medium">Factory Cost (FOB)</span>
+          <p class="text-xl font-bold font-mono text-ink">$6,000.00</p>
+          <span class="text-xs text-mute">50 units @ $120.00 each</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-surface-soft space-y-1">
+          <span class="text-xs text-mute font-medium">Freight & Insurance</span>
+          <p class="text-xl font-bold font-mono text-ink">$830.00</p>
+          <span class="text-xs text-mute">Air Freight $650 + Insurance $180</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-surface-soft border border-primary/30 space-y-1">
+          <span class="text-xs text-primary font-bold uppercase">Total CIF Customs Value</span>
+          <p class="text-xl font-bold font-mono text-primary">$6,830.00</p>
+          <span class="text-xs text-mute">Baseline for import duty assessment</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-surface-soft/60 space-y-2 border-t border-hairline text-sm">
+        <h4 class="font-bold text-ink text-xs uppercase tracking-wider">
+          Customs Tariff & Duty Computation
+        </h4>
+        <div class="flex justify-between text-mute">
+          <span>CIF Baseline Valuation:</span>
+          <span class="font-mono tabular-nums text-ink font-medium">$6,830.00</span>
+        </div>
+        <div class="flex justify-between text-mute">
+          <span>Import Tariff Rate (HS 9031.80 @ 4.5%):</span>
+          <span class="font-mono tabular-nums text-ink font-medium">$307.35</span>
+        </div>
+        <div class="flex justify-between text-mute">
+          <span>Import VAT / GST (19% on CIF + Duty = $7,137.35):</span>
+          <span class="font-mono tabular-nums text-ink font-medium">$1,356.10</span>
+        </div>
+        <div class="flex justify-between text-base font-bold text-ink border-t border-hairline pt-2">
+          <span>Total Landed Import Cost:</span>
+          <span class="font-mono tabular-nums text-primary font-extrabold">$8,493.45</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="mandatory-fields" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      4. Essential Information to Include on a Pro Forma Invoice
+    </h2>
+    <p>
+      To prevent customs hold-ups or buyer rejection, ensure your pro forma invoice clearly contains
+      the following statutory disclosures:
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">1. Prominent Pro Forma Title</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          The document must be titled <strong>"PRO FORMA INVOICE"</strong> across the header. This
+          explicitly notifies accounts payable clerks that this is not an active accounts receivable
+          liability.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">2. Validity Expiration Date</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          Always state a clear quote validity limit:{' '}
+          <em>"Prices and terms valid for 30 calendar days from issue date."</em>
+          This shields you from sudden ocean freight spikes or currency swings.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">3. Incoterms 2020 Designation</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          Specify the international commercial shipping rules (e.g., <code>CIF Hamburg Port</code>,{' '}
+          <code>FOB Los Angeles</code>, or <code>DDP London</code>) to define where risk passes from
+          seller to buyer.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">4. Banking & Payment Routing</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          Include your complete corporate bank details: SWIFT/BIC code, IBAN or routing number, and
+          account holder name so buyers can swiftly execute deposit wires.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="conversion-process" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      5. Converting a Pro Forma Invoice to a Final Commercial Bill
+    </h2>
+    <p>
+      Once goods are manufactured, packaged, and weighed, the pro forma invoice has completed its
+      mission. The supplier converts it into a final <strong>Commercial Invoice</strong>:
+    </p>
+    <ol class="space-y-2 my-4 text-mute list-decimal list-inside">
+      <li>
+        <strong>Update Actual Shipping Weights:</strong> Replace estimated cargo dimensions with
+        actual scale weights from the bill of lading.
+      </li>
+      <li>
+        <strong>Assign Sequential Invoice Number:</strong> Retire the pro forma draft tracking code
+        and assign your official sequential commercial invoice sequence (e.g.{' '}
+        <code>INV-2026-104</code>).
+      </li>
+      <li>
+        <strong>Deduct Down Payments Received:</strong> Show upfront deposits as a credit line so
+        the client pays only the remaining balance.
+      </li>
+      <li>
+        <strong>Post to Accounting Ledger:</strong> Record the final sale in Accounts Receivable to
+        recognize earned revenue.
+      </li>
+    </ol>
+  </section>
+</BlogArticleLayout>

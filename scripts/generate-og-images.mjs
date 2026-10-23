@@ -104,6 +104,38 @@ const staticPages = [
       'The requested page could not be found. Explore our 100% free, private online tools to generate invoices and receipts instantly.',
     tags: ['Free Invoices', 'Instant PDF Export', 'Zero Watermarks'],
   },
+  {
+    slug: 'og-how-to-write-an-invoice-for-freelance-work',
+    title: 'How to Write an Invoice for Freelance Work',
+    badge: 'Freelance Billing Guide',
+    description:
+      'Learn how to write a freelance invoice that gets paid on time. Includes hourly vs milestone breakdown, payment terms, and downloadable sample.',
+    tags: ['Hourly & Milestones', 'Net 14 Payment Terms', 'Worked Calculation'],
+  },
+  {
+    slug: 'og-what-is-a-pro-forma-invoice',
+    title: 'What Is a Pro Forma Invoice?',
+    badge: 'International Trade Guide',
+    description:
+      'Understand what a pro forma invoice is, how it differs from commercial invoices, and when to issue one. Includes worked CIF customs calculations.',
+    tags: ['Customs Clearance', 'CIF Calculation', 'Pro Forma vs Commercial'],
+  },
+  {
+    slug: 'og-invoice-vs-receipt',
+    title: 'Invoice vs Receipt: Key Differences',
+    badge: 'Bookkeeping Fundamentals',
+    description:
+      'Understand the core differences between invoices and receipts, double-entry bookkeeping rules, and when to issue each in business transactions.',
+    tags: ['Payment Requests', 'Proof of Payment', 'General Ledger Math'],
+  },
+  {
+    slug: 'og-how-to-number-invoices',
+    title: 'How to Number Invoices',
+    badge: 'Billing Best Practices',
+    description:
+      'Discover how to number invoices sequentially for audit compliance. Compare 4 numbering systems, prefix conventions, and zero-padding rules.',
+    tags: ['Sequential Numbering', 'Zero-Padding Rules', 'Audit Compliance'],
+  },
 ];
 
 // Read tool page JSON files

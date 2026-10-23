@@ -1,0 +1,325 @@
+---
+import BlogArticleLayout from '../../layouts/BlogArticleLayout.astro';
+import { BLOG_ARTICLES } from '../../data/blog-articles';
+
+const article = BLOG_ARTICLES[2]; // invoice-vs-receipt
+
+const toc = [
+  { id: 'core-differences', label: '1. The Fundamental Difference: Request vs Proof' },
+  { id: 'transaction-lifecycle', label: '2. The 4-Stage Transaction Lifecycle' },
+  { id: 'ledger-entries', label: '3. Double-Entry Accounting Journal Entries' },
+  { id: 'receipt-requirements', label: '4. Essential Data Required on a Compliant Receipt' },
+  { id: 'paid-invoices', label: '5. When an Invoice Also Serves as a Receipt' },
+];
+
+const faqs = [
+  {
+    question: 'Can I issue a receipt to a client before they send payment?',
+    answer:
+      'No, you should never issue a payment receipt prior to funds arriving in your bank account or hands. A receipt acts as legal proof that the buyer debt has been satisfied; issuing one prematurely surrenders your legal claim to collect payment.',
+  },
+  {
+    question: 'Can a paid invoice replace a receipt for tax deduction purposes?',
+    answer:
+      'Yes, an invoice stamped or watermarked with PAID, the payment transaction date, and the payment method is recognized by tax authorities as acceptable proof of purchase. However, retail, cash, and rental transactions often require standalone receipts.',
+  },
+  {
+    question: 'Do freelance service providers need to issue receipts to clients?',
+    answer:
+      'Yes, issuing an immediate payment receipt upon receiving funds reassures corporate clients, fulfills accounts payable audit requirements, and maintains clean bookkeeping. Free online receipt tools make generating a receipt effortless.',
+  },
+  {
+    question: 'How do invoices and receipts affect accounts receivable in accounting?',
+    answer:
+      'An invoice increases accounts receivable and recognizes earned revenue on an accrual basis. A payment receipt documents the elimination of accounts receivable and the corresponding increase in cash or bank balance.',
+  },
+];
+---
+
+<BlogArticleLayout article={article} faqs={faqs} toc={toc}>
+  <!-- Section 1 -->
+  <section id="core-differences" class="space-y-4">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      1. The Fundamental Difference: Payment Request vs Proof of Payment
+    </h2>
+    <p>
+      In business accounting, few documents are conflated as frequently as the{' '}
+      <strong>invoice</strong> and the <strong>receipt</strong>. While both summarize the exchange
+      of goods or services between a buyer and a seller, they operate at opposite ends of the
+      financial transaction lifecycle:
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+      <div class="p-6 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-3">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+          <span>Pre-Payment Document</span>
+        </div>
+        <h3 class="text-xl font-bold text-ink font-display">The Commercial Invoice</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          An invoice is an <strong>official demand for payment</strong> issued by a vendor{' '}
+          <em>before</em> funds are received. It itemizes delivered services, establishes Net 14 or
+          Net 30 payment terms, specifies bank wire details, and creates an active legal receivable.
+        </p>
+        <span class="block text-xs font-semibold text-charcoal">
+          Purpose: Tells the customer what they owe and how to pay.
+        </span>
+      </div>
+
+      <div class="p-6 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-3">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+          <span>Post-Payment Confirmation</span>
+        </div>
+        <h3 class="text-xl font-bold text-ink font-display">The Payment Receipt</h3>
+        <p class="text-sm text-mute leading-relaxed">
+          A receipt is an <strong>acknowledgment of satisfied debt</strong> issued by a vendor{' '}
+          <em>after</em> money has cleared. It confirms the exact amount received, date of
+          settlement, transaction reference number, and extinguishes the buyer's financial
+          liability.
+        </p>
+        <span class="block text-xs font-semibold text-charcoal">
+          Purpose: Proves that the customer has already paid.
+        </span>
+      </div>
+    </div>
+
+    <p>
+      If you need to acknowledge payment for completed services or retail purchases, use our
+      <a
+        href="/free-online-receipt-generator"
+        class="text-primary hover:text-primary-deep font-semibold underline underline-offset-4"
+      >
+        Free Online Receipt Generator
+      </a>
+      to issue clean, watermark-free payment confirmations in seconds.
+    </p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="transaction-lifecycle" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      2. The 4-Stage Transaction Lifecycle
+    </h2>
+    <p>
+      To understand how these documents interact, consider a standard $5,000 corporate consulting
+      contract:
+    </p>
+
+    <!-- Visual Timeline -->
+    <div class="relative border-l-2 border-primary/30 ml-4 pl-6 space-y-8 my-6">
+      <div class="relative space-y-1">
+        <span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-surface-card"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-primary">
+          Stage 1: Agreement
+        </span>
+        <h3 class="text-base font-bold text-ink font-display">
+          Estimate & Statement of Work ($5,000 Quote)
+        </h3>
+        <p class="text-sm text-mute">
+          Parties align on project deliverables, milestones, and total budget. No accounting impact.
+        </p>
+      </div>
+
+      <div class="relative space-y-1">
+        <span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-surface-card"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-primary">
+          Stage 2: Payment Request
+        </span>
+        <h3 class="text-base font-bold text-ink font-display">
+          Commercial Invoice Issued (#INV-2026-081)
+        </h3>
+        <p class="text-sm text-mute">
+          Vendor issues Invoice #INV-2026-081 with Net 14 terms. Vendor records $5,000 in Accounts
+          Receivable; Buyer records $5,000 in Accounts Payable.
+        </p>
+      </div>
+
+      <div class="relative space-y-1">
+        <span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-emerald-500 bg-surface-card"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          Stage 3: Upfront Milestone Deposit
+        </span>
+        <h3 class="text-base font-bold text-ink font-display">
+          Milestone Deposit Receipt Issued ($2,500 Wire Received)
+        </h3>
+        <p class="text-sm text-mute">
+          Client wires a 50% deposit. Vendor issues Receipt #REC-2026-041 referencing Invoice
+          #INV-2026-081. Outstanding balance drops to $2,500.
+        </p>
+      </div>
+
+      <div class="relative space-y-1">
+        <span class="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-emerald-500 bg-surface-card"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          Stage 4: Final Project Close-Out
+        </span>
+        <h3 class="text-base font-bold text-ink font-display">
+          Final Settlement Receipt Issued ($2,500 Cleared)
+        </h3>
+        <p class="text-sm text-mute">
+          Deliverables approved. Final wire clears. Vendor issues Receipt #REC-2026-042 showing
+          $0.00 remaining balance. Transaction closed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="ledger-entries" class="space-y-6 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+        <span>Double-Entry Bookkeeping</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        3. Double-Entry Accounting Journal Entries
+      </h2>
+      <p class="text-sm text-mute">
+        Here is how professional accountants and tax software record invoices and receipts in
+        general ledgers:
+      </p>
+    </div>
+
+    <!-- General Ledger Journal Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Seller Ledger -->
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-4">
+        <div class="border-b border-hairline pb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            Seller (Vendor) Books
+          </span>
+          <h3 class="text-base font-bold text-ink font-display">Accrual Revenue Recognition</h3>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div class="p-3 rounded-xl bg-surface-soft space-y-1">
+            <span class="font-bold text-charcoal">Step A: When Invoice Is Issued</span>
+            <div class="flex justify-between font-mono">
+              <span>Debit: Accounts Receivable (Asset &uarr;)</span>
+              <span class="text-ink font-semibold">$5,000.00</span>
+            </div>
+            <div class="flex justify-between font-mono text-mute">
+              <span>Credit: Service Revenue (Equity &uarr;)</span>
+              <span>$5,000.00</span>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-surface-soft space-y-1">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">
+              Step B: When Payment Receipt Is Issued
+            </span>
+            <div class="flex justify-between font-mono">
+              <span>Debit: Cash / Operating Bank (Asset &uarr;)</span>
+              <span class="text-ink font-semibold">$5,000.00</span>
+            </div>
+            <div class="flex justify-between font-mono text-mute">
+              <span>Credit: Accounts Receivable (Asset &darr;)</span>
+              <span>$5,000.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buyer Ledger -->
+      <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-4">
+        <div class="border-b border-hairline pb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-charcoal">
+            Buyer (Client) Books
+          </span>
+          <h3 class="text-base font-bold text-ink font-display">Expense Substantiation</h3>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div class="p-3 rounded-xl bg-surface-soft space-y-1">
+            <span class="font-bold text-charcoal">Step A: When Invoice Is Received</span>
+            <div class="flex justify-between font-mono">
+              <span>Debit: Consulting Expense (Expense &uarr;)</span>
+              <span class="text-ink font-semibold">$5,000.00</span>
+            </div>
+            <div class="flex justify-between font-mono text-mute">
+              <span>Credit: Accounts Payable (Liability &uarr;)</span>
+              <span>$5,000.00</span>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-surface-soft space-y-1">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">
+              Step B: When Receipt Is Received
+            </span>
+            <div class="flex justify-between font-mono">
+              <span>Debit: Accounts Payable (Liability &darr;)</span>
+              <span class="text-ink font-semibold">$5,000.00</span>
+            </div>
+            <div class="flex justify-between font-mono text-mute">
+              <span>Credit: Cash / Bank Account (Asset &darr;)</span>
+              <span>$5,000.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="receipt-requirements" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      4. Essential Data Elements Required on a Compliant Receipt
+    </h2>
+    <p>
+      For tax auditing authorities (such as the IRS in the US, HMRC in the UK, and ATO in
+      Australia), a valid payment receipt must prove that cash actually exchanged hands. Ensure your
+      receipts include:
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+      <div class="p-4 rounded-xl bg-surface-card border border-hairline space-y-1 text-sm">
+        <span class="font-bold text-primary text-xs uppercase">1. Cross-Reference</span>
+        <p class="text-ink font-medium">Original Invoice Number</p>
+        <span class="text-xs text-mute">
+          Ties the payment to the underlying contract and deliverables.
+        </span>
+      </div>
+
+      <div class="p-4 rounded-xl bg-surface-card border border-hairline space-y-1 text-sm">
+        <span class="font-bold text-primary text-xs uppercase">2. Audit Details</span>
+        <p class="text-ink font-medium">Exact Settlement Date</p>
+        <span class="text-xs text-mute">
+          The date funds arrived in bank, not the date invoice was drafted.
+        </span>
+      </div>
+
+      <div class="p-4 rounded-xl bg-surface-card border border-hairline space-y-1 text-sm">
+        <span class="font-bold text-primary text-xs uppercase">3. Method & Balance</span>
+        <p class="text-ink font-medium">Payment Mode & Balance</p>
+        <span class="text-xs text-mute">
+          Wire, check, or card, plus remaining unpaid balance (if any).
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="paid-invoices" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      5. When an Invoice Also Serves as a Receipt
+    </h2>
+    <p>
+      In many B2B workflows, issuing a separate document is redundant. An existing commercial
+      invoice can legally function as a receipt if it is stamped with a prominent{' '}
+      <strong>"PAID" watermark</strong> along with:
+    </p>
+    <ul class="space-y-1 list-disc list-inside text-sm text-mute my-2">
+      <li>
+        The exact settlement date (e.g. <em>"Paid in Full: Oct 23, 2026"</em>)
+      </li>
+      <li>
+        The payment channel used (e.g. <em>"Stripe Ref #ch_9842109482"</em>)
+      </li>
+      <li>
+        Remaining balance due explicitly stated as <code>$0.00</code>
+      </li>
+    </ul>
+    <p>
+      Both methods are fully compliant. Choose the approach that best fits your client's
+      administrative preferences.
+    </p>
+  </section>
+</BlogArticleLayout>

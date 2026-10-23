@@ -1,0 +1,382 @@
+---
+import BlogArticleLayout from '../../layouts/BlogArticleLayout.astro';
+import { BLOG_ARTICLES } from '../../data/blog-articles';
+
+const article = BLOG_ARTICLES[0]; // how-to-write-an-invoice-for-freelance-work
+
+const toc = [
+  { id: 'essential-elements', label: '1. Essential Elements of a Freelance Invoice' },
+  { id: 'hourly-vs-milestone', label: '2. Structuring Hourly vs Milestone Deliverables' },
+  { id: 'worked-calculation', label: '3. Worked Calculation: $3,800 Design Sprint' },
+  { id: 'downloadable-sample', label: '4. Downloadable & Copyable Invoice JSON Sample' },
+  { id: 'payment-terms', label: '5. Setting Payment Terms & Late Payment Penalties' },
+];
+
+const faqs = [
+  {
+    question: 'How do I write an invoice for freelance work if I do not have a registered company?',
+    answer:
+      'You can invoice clients as a sole proprietor using your legal personal name, address, and local tax identification number. Operating as an individual freelancer is fully legally valid worldwide provided you declare freelance income on your annual tax return.',
+  },
+  {
+    question: 'Should freelancers charge hourly or fixed milestone rates on invoices?',
+    answer:
+      'Charging hourly is ideal for open-ended consulting or maintenance, whereas milestone pricing works best for well-defined deliverables with fixed scopes. You can also combine both models on a single invoice by itemizing hourly hours on one row and project milestones on another.',
+  },
+  {
+    question: 'What are the best payment terms for freelance invoices to avoid late payments?',
+    answer:
+      'Net 14 payment terms are standard for freelancers because they provide clients two full business weeks to process payment while keeping your cash flow predictable. Avoid Net 30 or Net 60 terms unless dealing with large enterprise accounts payable departments.',
+  },
+  {
+    question: 'Can I import this freelance sample into Online Invoice Creator to generate a PDF?',
+    answer:
+      'Yes, you can copy the standardized JSON sample below and paste it directly into Online Invoice Creator via the Import JSON feature. The tool will instantly populate all line items, dates, and client information into a printable, watermark-free PDF.',
+  },
+];
+
+const sampleJsonData = JSON.stringify(
+  {
+    generator: 'OnlineInvoiceCreator.com',
+    version: '1.0',
+    exportedAt: '2026-10-23T08:00:00.000Z',
+    invoice: {
+      invoiceNumber: 'INV-2026-042',
+      issueDate: '2026-10-23',
+      dueDate: '2026-11-06',
+      currency: 'USD',
+      currencySymbol: '$',
+      sender: {
+        name: 'Alex Rivera (Design & Code)',
+        email: 'alex@riveradesign.studio',
+        phone: '+1 (555) 382-9102',
+        address: '742 Market St, Suite 400\nSan Francisco, CA 94102',
+        taxId: 'US-EIN-93-8472910',
+      },
+      client: {
+        name: 'Nexus Analytics Inc.',
+        email: 'ap@nexusanalytics.io',
+        phone: '+1 (555) 901-4433',
+        address: '100 Montgomery St\nSan Francisco, CA 94104',
+        taxId: 'US-EIN-12-3456789',
+      },
+      lineItems: [
+        {
+          id: 'item_1',
+          description: 'Frontend Web App Engineering (24 Billable Hours @ $95/hr)',
+          quantity: 24,
+          rate: 95,
+          amount: 2280,
+        },
+        {
+          id: 'item_2',
+          description: 'UX Architecture & Figma Design Sprint (Fixed Milestone Deliverable)',
+          quantity: 1,
+          rate: 1500,
+          amount: 1500,
+        },
+        {
+          id: 'item_3',
+          description: 'Commercial Font & UI Asset Licensing Reimbursement',
+          quantity: 1,
+          rate: 220,
+          amount: 220,
+        },
+      ],
+      subtotal: 4000,
+      discountType: 'percentage',
+      discountRate: 5,
+      discountAmount: 200,
+      taxType: 'none',
+      taxRate: 0,
+      taxAmount: 0,
+      shipping: 0,
+      grandTotal: 3800,
+      notes: 'Thank you for partnering with Rivera Studio! Payment is due within 14 calendar days.',
+      terms:
+        'Net 14 payment terms. Wire transfer: First National Bank, Routing #121000358, Acct #9842109482.',
+      template: 'modern',
+    },
+  },
+  null,
+  2
+);
+---
+
+<BlogArticleLayout article={article} faqs={faqs} toc={toc}>
+  <!-- Section 1 -->
+  <section id="essential-elements" class="space-y-4">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      1. Essential Elements of a Compliant Freelance Invoice
+    </h2>
+    <p>
+      Writing a professional freelance invoice is more than simply sending a dollar figure to a
+      client; it is a formal, legally enforceable request for payment that serves as the official
+      accounting record for both you and your client's accounts payable department.
+    </p>
+    <p>
+      When an invoice is missing basic tax identifiers, clear due dates, or explicit bank wire
+      routing details, corporate accounting teams are required by compliance policy to hold payment
+      until revised documentation is provided. To ensure you get paid without administrative
+      friction, every freelance invoice must include these foundational elements:
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">Header & Contact Identification</h3>
+        <ul class="text-sm text-mute space-y-1 list-disc list-inside">
+          <li>Your legal full name or registered trade name</li>
+          <li>Your professional email and phone number</li>
+          <li>Your mailing address (required for tax 1099/W-9 filing)</li>
+          <li>Your Tax ID (EIN, SSN, ABN, VAT, or GST number)</li>
+        </ul>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+        <h3 class="text-base font-bold text-ink font-display">Client & Billing Metadata</h3>
+        <ul class="text-sm text-mute space-y-1 list-disc list-inside">
+          <li>Client legal company name and AP contact person</li>
+          <li>Client billing address and tax registration number</li>
+          <li>
+            Unique sequential invoice number (e.g. <code>INV-2026-042</code>)
+          </li>
+          <li>Exact issue date and explicit payment due date</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      Using our dedicated
+      <a
+        href="/invoice-generator-for-freelancers"
+        class="text-primary hover:text-primary-deep font-semibold underline underline-offset-4"
+      >
+        Freelance Invoice Generator
+      </a>
+      , these fields are laid out in a clean, modern grid so you can issue a compliant PDF in under
+      two minutes with zero signups.
+    </p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="hourly-vs-milestone" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      2. Structuring Hourly vs Milestone Deliverables
+    </h2>
+    <p>
+      Freelancers frequently grapple with how to present complex, multi-disciplinary work. In
+      real-world projects, creative and technical engagements rarely fit into a single billing
+      bucket:
+    </p>
+    <ul class="space-y-2 my-4 text-mute">
+      <li class="flex items-start gap-2">
+        <span class="text-primary font-bold">&check;</span>
+        <span>
+          <strong>Hourly Labor:</strong> Best for ongoing iteration, ad-hoc bug fixing, and
+          maintenance where the scope fluctuates.
+        </span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-primary font-bold">&check;</span>
+        <span>
+          <strong>Fixed Project Milestones:</strong> Best for deliverables with defined outputs,
+          such as brand identity guides, user research reports, or database architecture sprints.
+        </span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-primary font-bold">&check;</span>
+        <span>
+          <strong>Pass-Through Expenses & Licenses:</strong> Reimbursable out-of-pocket costs, such
+          as font licenses, stock photography, API keys, or web hosting domains.
+        </span>
+      </li>
+    </ul>
+
+    <p>
+      Rather than sending separate bills, modern freelancers group these line items into a unified
+      invoice. This gives your client full visibility into where their budget went while maintaining
+      a single, auditable grand total.
+    </p>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="worked-calculation" class="space-y-6 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+        <span>Worked Real-World Calculation</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        3. Worked Calculation: The $3,800 Design & Development Sprint
+      </h2>
+      <p class="text-sm text-mute">
+        Unlike generic advice articles that give placeholder text, here is an actual commercial
+        billing scenario for a two-week digital product sprint.
+      </p>
+    </div>
+
+    <!-- Worked Table Card -->
+    <div class="overflow-hidden rounded-2xl bg-surface-card border border-hairline shadow-xs">
+      <div class="px-6 py-4 bg-surface-soft border-b border-hairline flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-charcoal">
+          Line Item Specification
+        </span>
+        <span class="text-xs text-mute font-mono">Invoice #INV-2026-042</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-surface-soft/50 text-xs font-semibold text-charcoal border-b border-hairline">
+            <tr>
+              <th class="py-3 px-6">Description</th>
+              <th class="py-3 px-4 text-center">Qty / Hours</th>
+              <th class="py-3 px-4 text-right">Unit Rate</th>
+              <th class="py-3 px-6 text-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-hairline text-ink">
+            <tr>
+              <td class="py-4 px-6 font-medium">
+                Frontend Web App Engineering
+                <span class="block text-xs text-mute font-normal">
+                  React/TypeScript development & mobile responsive testing
+                </span>
+              </td>
+              <td class="py-4 px-4 text-center tabular-nums font-mono">24.0 hrs</td>
+              <td class="py-4 px-4 text-right tabular-nums font-mono">$95.00</td>
+              <td class="py-4 px-6 text-right font-semibold tabular-nums font-mono">$2,280.00</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium">
+                UX Architecture & Figma Design Sprint
+                <span class="block text-xs text-mute font-normal">
+                  Complete wireframes, design system tokens, and interactive prototype
+                </span>
+              </td>
+              <td class="py-4 px-4 text-center tabular-nums font-mono">1.0 milestone</td>
+              <td class="py-4 px-4 text-right tabular-nums font-mono">$1,500.00</td>
+              <td class="py-4 px-6 text-right font-semibold tabular-nums font-mono">$1,500.00</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium">
+                Commercial Asset Licensing Reimbursement
+                <span class="block text-xs text-mute font-normal">
+                  Pass-through software font license & stock 3D illustration assets
+                </span>
+              </td>
+              <td class="py-4 px-4 text-center tabular-nums font-mono">1.0 item</td>
+              <td class="py-4 px-4 text-right tabular-nums font-mono">$220.00</td>
+              <td class="py-4 px-6 text-right font-semibold tabular-nums font-mono">$220.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Financial Totals Summary -->
+      <div class="p-6 bg-surface-soft/30 border-t border-hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div class="space-y-1 text-xs text-mute max-w-sm">
+          <p>
+            <strong>Payment Terms:</strong> Net 14 Days (Due Nov 06, 2026)
+          </p>
+          <p>
+            <strong>Discount Applied:</strong> 5.0% early settlement discount for upfront retainer
+            commitment.
+          </p>
+        </div>
+
+        <div class="space-y-2 sm:w-72 text-sm">
+          <div class="flex justify-between text-mute">
+            <span>Gross Subtotal:</span>
+            <span class="font-mono tabular-nums font-medium text-ink">$4,000.00</span>
+          </div>
+          <div class="flex justify-between text-emerald-600 dark:text-emerald-400">
+            <span>Retainer Discount (5%):</span>
+            <span class="font-mono tabular-nums font-medium">-$200.00</span>
+          </div>
+          <div class="flex justify-between text-mute">
+            <span>Sales Tax / VAT:</span>
+            <span class="font-mono tabular-nums font-medium text-ink">$0.00</span>
+          </div>
+          <div class="flex justify-between text-base font-bold text-ink border-t border-hairline pt-2">
+            <span>Grand Total Due:</span>
+            <span class="font-mono tabular-nums text-primary font-extrabold text-lg">
+              $3,800.00
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="downloadable-sample" class="space-y-4 pt-6 border-t border-hairline">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+        <span>Instant Downloadable Sample</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+        4. Downloadable & Copyable Invoice JSON Sample
+      </h2>
+      <p class="text-sm text-mute">
+        You can copy this standardized JSON payload below and paste it directly into
+        <a
+          href="/"
+          class="text-primary hover:text-primary-deep font-semibold underline underline-offset-4"
+        >
+          Online Invoice Creator
+        </a>
+        via the <strong>Import JSON</strong> menu. It will instantly configure the form and generate
+        an identical PDF ready for download.
+      </p>
+    </div>
+
+    <!-- JSON Code Snippet Box -->
+    <div class="rounded-2xl bg-slate-900 border border-slate-800 text-slate-100 overflow-hidden shadow-xs">
+      <div class="px-5 py-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between text-xs">
+        <span class="font-mono text-slate-400">freelance-invoice-sample.json</span>
+        <span class="text-emerald-400 font-semibold">oic_v1 compatible</span>
+      </div>
+      <pre class="p-5 text-xs font-mono overflow-x-auto leading-relaxed text-slate-200"><code>{sampleJsonData}</code></pre>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="payment-terms" class="space-y-4 pt-6 border-t border-hairline">
+    <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight">
+      5. Setting Payment Terms & Late Payment Penalties
+    </h2>
+    <p>
+      Cash flow is the lifeblood of freelancing. Many new freelancers make the costly mistake of
+      adopting corporate <strong>Net 30</strong> or <strong>Net 60</strong> terms, effectively
+      giving their clients a two-month interest-free loan.
+    </p>
+
+    <h3 class="text-lg font-bold text-ink font-display pt-2">
+      Why Net 14 Is the Freelancer Sweet Spot
+    </h3>
+    <p>
+      <strong>Net 14 (14 calendar days from invoice issue)</strong> gives your client two full
+      business weeks to route the invoice to accounting, review project sign-off, and schedule an
+      electronic ACH or wire transfer. It ensures you receive payment in the same month the work was
+      performed.
+    </p>
+
+    <h3 class="text-lg font-bold text-ink font-display pt-2">
+      Late Payment Statutory Notice Clause
+    </h3>
+    <p>
+      To prevent clients from pushing your bill to the bottom of the payment stack, always include a
+      polite, legally binding late fee reminder on your invoice footer:
+    </p>
+
+    <blockquote class="p-4 rounded-xl bg-surface-card border-l-4 border-primary text-sm text-ink italic my-4">
+      "Payment is due within 14 calendar days of invoice date. In accordance with statutory
+      commercial payment regulations, accounts past due may accrue late interest at 1.5% per month
+      (or the maximum allowable legal rate) plus administrative collection costs."
+    </blockquote>
+
+    <p>
+      By combining clear payment terms, accurate hourly and milestone itemization, and professional
+      formatting, you position yourself as an indispensable business partner rather than a casual
+      contractor.
+    </p>
+  </section>
+</BlogArticleLayout>

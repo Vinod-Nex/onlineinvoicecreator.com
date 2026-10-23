@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { buildPageSchemaGraph } from '../lib/schema';
+import { BLOG_ARTICLES } from '../data/blog-articles';
 
 const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Blog & Guides' }];
 
@@ -33,80 +34,8 @@ const blogFaqs = [
   },
 ];
 
-const guides = [
-  {
-    category: 'Freelancing',
-    title: 'How to Invoice as a Freelancer: Rates, Terms, and Getting Paid',
-    description:
-      'A complete guide to calculating hourly rates, setting 14-day payment terms, and avoiding late client payments.',
-    toolTitle: 'Use Freelancer Invoice Generator',
-    toolHref: '/invoice-generator-for-freelancers',
-    readTime: '6 min read',
-  },
-  {
-    category: 'Trades & Construction',
-    title: 'Contractor Invoicing Guide: Materials, Labor, and Milestone Billing',
-    description:
-      'Learn how trade contractors structure billing for raw supplies, subcontractor labor, and staged project completion.',
-    toolTitle: 'Use Contractor Invoice Template',
-    toolHref: '/contractor-invoice-template',
-    readTime: '5 min read',
-  },
-  {
-    category: 'Tax & Compliance',
-    title: 'Australian GST Invoicing Rules: ATO Compliance Checklist',
-    description:
-      'Everything sole traders and Australian companies need to know about ABN display, 10% GST breakdown, and tax records.',
-    toolTitle: 'Use Australia Tax Invoice Template',
-    toolHref: '/tax-invoice-template-australia',
-    readTime: '7 min read',
-  },
-  {
-    category: 'Creative Industry',
-    title: 'Photography Billing Essentials: Session Fees & Image Licensing',
-    description:
-      'How commercial and portrait photographers separate creative day rates, usage licenses, and print deliverables.',
-    toolTitle: 'Use Photography Invoice Generator',
-    toolHref: '/photography-invoice-generator',
-    readTime: '5 min read',
-  },
-  {
-    category: 'Real Estate & Tenancy',
-    title: 'Rent Receipts for Landlords and Tenants: HRA Tax Proof Guide',
-    description:
-      'How to issue valid monthly rent payment receipts, landlord PAN requirements, and employee tax deduction documentation.',
-    toolTitle: 'Use Free Rent Receipt Generator',
-    toolHref: '/free-rent-receipt-generator',
-    readTime: '4 min read',
-  },
-  {
-    category: 'Retail & POS',
-    title: 'Itemized Receipts vs Simple Payment Slips: When to Detail Line Items',
-    description:
-      'Understand when retail sales, material sales, and client reimbursements require line-by-line itemized proof of payment.',
-    toolTitle: 'Use Itemized Receipt Maker',
-    toolHref: '/receipt-maker-with-items',
-    readTime: '4 min read',
-  },
-  {
-    category: 'Workflow & Tools',
-    title: 'Why Browser-Based Invoicing Outperforms Spreadsheet Templates',
-    description:
-      'Discover why local-first web generators prevent broken spreadsheet formulas and protect confidential client data.',
-    toolTitle: 'Explore Excel Invoice Alternative',
-    toolHref: '/invoice-generator-excel',
-    readTime: '5 min read',
-  },
-  {
-    category: 'Bookkeeping Fundamentals',
-    title: 'The Core Difference Between Invoices and Payment Receipts',
-    description:
-      'Clarify billing terminology: understand the transition from payment request to payment receipt in double-entry bookkeeping.',
-    toolTitle: 'Use Free Receipt Generator',
-    toolHref: '/free-online-receipt-generator',
-    readTime: '4 min read',
-  },
-];
+const fullArticles = BLOG_ARTICLES.filter((a) => a.isFull);
+const allOutlines = BLOG_ARTICLES;
 
 const blogSchema = {
   '@type': 'CollectionPage',
@@ -147,14 +76,15 @@ const pageSchema = buildPageSchemaGraph({
     <header class="space-y-4 text-center sm:text-left">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-soft border border-hairline text-xs font-semibold text-charcoal">
         <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-        <span>Knowledge Hub & Resources</span>
+        <span>Knowledge Hub & Invoicing Guides</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display leading-[1.1]">
         Invoicing Guides & <span class="text-primary">Billing Tips</span>
       </h1>
       <p class="text-base sm:text-lg text-mute max-w-3xl leading-relaxed">
         Practical billing advice, statutory tax guides, and payment workflows for solo freelancers,
-        trade contractors, and small business owners worldwide.
+        trade contractors, and small business owners worldwide. Each guide includes worked examples,
+        calculations, and direct links to our free generator tools.
       </p>
 
       <!-- Primary Action CTAs -->
@@ -176,42 +106,64 @@ const pageSchema = buildPageSchemaGraph({
       </div>
     </header>
 
-    <!-- Guides Grid -->
-    <section class="space-y-6" aria-labelledby="guides-grid-heading">
+    <!-- Featured Deep-Dive Guides (Full Articles) -->
+    <section class="space-y-6" aria-labelledby="featured-guides-heading">
       <div class="text-center sm:text-left">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <span>In-Depth Tutorials</span>
+        </div>
         <h2
-          id="guides-grid-heading"
+          id="featured-guides-heading"
           class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
         >
-          Featured Invoicing & Billing Articles
+          Featured Full Invoicing Guides
         </h2>
         <p class="text-sm text-mute mt-1.5">
-          Step-by-step documentation to help you create compliant invoices and collect client
-          payments faster.
+          Comprehensive step-by-step documentation with real worked calculations, downloadable
+          sample payloads, and audit compliance advice.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {guides.map((guide) => (
+        {fullArticles.map((article) => (
           <article class="p-6 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-4 flex flex-col justify-between hover:border-primary/50 transition-all">
             <div class="space-y-3">
               <div class="flex items-center justify-between text-xs">
                 <span class="font-semibold text-primary px-2.5 py-0.5 rounded-full bg-primary/10">
-                  {guide.category}
+                  {article.category}
                 </span>
-                <span class="text-mute">{guide.readTime}</span>
+                <span class="text-mute">{article.readTime}</span>
               </div>
-              <h3 class="font-bold text-ink text-lg leading-snug">{guide.title}</h3>
-              <p class="text-xs sm:text-sm text-mute leading-relaxed">{guide.description}</p>
+              <h3 class="text-xl font-bold text-ink font-display leading-snug">
+                <a href={`/blog/${article.slug}`} class="hover:text-primary transition-colors">
+                  {article.title}
+                </a>
+              </h3>
+              <p class="text-sm text-mute leading-relaxed">{article.description}</p>
+
+              <!-- Differentiator Badge -->
+              <div class="p-3 rounded-xl bg-surface-soft border border-hairline/60 text-xs text-charcoal flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">&check;</span>
+                <div>
+                  <strong class="text-ink">{article.differentiator.label}:</strong>
+                  <span class="text-mute block mt-0.5">{article.differentiator.description}</span>
+                </div>
+              </div>
             </div>
 
-            <div class="pt-3 border-t border-hairline/60">
+            <div class="pt-4 border-t border-hairline/60 flex items-center justify-between">
               <a
-                href={guide.toolHref}
-                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary hover:text-primary-bright transition-colors"
+                href={`/blog/${article.slug}`}
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-deep"
               >
-                <span>{guide.toolTitle}</span>
+                <span>Read Complete Guide</span>
                 <span aria-hidden="true">&rarr;</span>
+              </a>
+              <a
+                href={article.tool.href}
+                class="text-xs text-mute hover:text-ink transition-colors underline"
+              >
+                {article.tool.name}
               </a>
             </div>
           </article>
@@ -219,159 +171,132 @@ const pageSchema = buildPageSchemaGraph({
       </div>
     </section>
 
-    <!-- Fast Document Generators Block -->
-    <section
-      class="space-y-6 pt-6 border-t border-hairline"
-      aria-labelledby="tools-directory-heading"
-    >
-      <div class="text-center sm:text-left">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-teal/10 text-accent-teal mb-2">
-          Tools Directory
-        </span>
+    <!-- 12 Informational Article Outlines Curriculum -->
+    <section class="space-y-8 pt-8 border-t border-hairline" aria-labelledby="curriculum-heading">
+      <div class="text-center sm:text-left space-y-2">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <span>Complete Editorial Index</span>
+        </div>
         <h2
-          id="tools-directory-heading"
+          id="curriculum-heading"
           class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
         >
-          Free Invoicing & Receipt Generators
+          12 Core Informational Invoicing Topics & Outlines
         </h2>
-        <p class="text-sm text-mute mt-1.5">
-          Jump directly to our free, browser-based document creators with zero signup and instant
-          PDF download.
+        <p class="text-sm text-mute max-w-3xl">
+          Derived directly from high-intent commercial keyword research. Each outline provides the
+          exact heading architecture, core takeaways, and unique practical value lacking in generic
+          internet articles.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a
-          href="/"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Core Tool
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Free Online Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">
-            Create professional invoices with instant PDF export and zero watermarks.
-          </p>
-        </a>
-        <a
-          href="/free-online-receipt-generator"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Core Tool
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Free Online Receipt Generator</h3>
-          <p class="text-xs text-mute mt-1">
-            Generate official proof of payment and payment receipts in seconds.
-          </p>
-        </a>
-        <a
-          href="/invoice-generator-for-freelancers"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Freelancers
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Freelancer Invoice Generator</h3>
-          <p class="text-xs text-mute mt-1">
-            Hourly rate and project retainer billing for digital professionals.
-          </p>
-        </a>
-        <a
-          href="/contractor-invoice-template"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Trades
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Contractor Invoice Template</h3>
-          <p class="text-xs text-mute mt-1">
-            Labor, materials, and staged construction milestone billing.
-          </p>
-        </a>
-        <a
-          href="/tax-invoice-template-australia"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Australia
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Australia Tax Invoice Template</h3>
-          <p class="text-xs text-mute mt-1">
-            ATO-compliant 10% GST breakdown and ABN registration fields.
-          </p>
-        </a>
-        <a
-          href="/free-rent-receipt-generator"
-          class="p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 transition-all shadow-xs block"
-        >
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-soft text-charcoal">
-            Tenancy
-          </span>
-          <h3 class="font-bold text-ink text-base mt-2">Free Rent Receipt Generator</h3>
-          <p class="text-xs text-mute mt-1">
-            Monthly rent proofs for landlords and tenants with PAN support.
-          </p>
-        </a>
-      </div>
-    </section>
+      <div class="space-y-6">
+        {allOutlines.map((item, idx) => (
+          <div
+            id={item.slug}
+            class="p-6 sm:p-8 rounded-3xl bg-surface-card border border-hairline shadow-xs space-y-6"
+          >
+            <!-- Card Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline/60 pb-4">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="font-bold text-primary font-mono">#{idx + 1}</span>
+                  <span class="text-mute">&bull;</span>
+                  <span class="font-semibold text-charcoal">{item.category}</span>
+                  <span class="text-mute">&bull;</span>
+                  <span class="text-mute font-mono">Target Keyword: "{item.primaryKeyword}"</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-ink font-display">
+                  {item.isFull ? (
+                    <a href={`/blog/${item.slug}`} class="hover:text-primary transition-colors">
+                      {item.title}
+                    </a>
+                  ) : (
+                    <span>{item.title}</span>
+                  )}
+                </h3>
+              </div>
 
-    <!-- Frequently Asked Questions (FAQ) Section -->
-    <section class="space-y-6 pt-6 border-t border-hairline" aria-labelledby="blog-faq-heading">
-      <div class="text-center sm:text-left">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-2">
-          Billing FAQs
-        </span>
-        <h2
-          id="blog-faq-heading"
-          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
-        >
-          Frequently Asked Questions About Billing & Invoicing
-        </h2>
-        <p class="text-sm text-mute mt-1.5">
-          Answers to common small business billing, receipting, and compliance questions.
-        </p>
-      </div>
+              <!-- Tool CTA Badge -->
+              <div class="shrink-0">
+                <a
+                  href={item.tool.href}
+                  class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-soft hover:bg-primary/10 border border-hairline text-primary font-semibold text-xs transition-all"
+                >
+                  <span>{item.tool.ctaLabel}</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        {blogFaqs.map((faq) => (
-          <article class="p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2.5">
-            <h3 class="font-bold text-ink text-base sm:text-lg leading-snug">{faq.question}</h3>
-            <p class="text-xs sm:text-sm text-mute leading-relaxed">{faq.answer}</p>
-          </article>
+            <!-- Value Differentiator Box -->
+            <div class="p-4 rounded-2xl bg-surface-soft/60 border border-hairline text-sm space-y-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                ★ Unique Practical Element (Non-Generic Value)
+              </span>
+              <p class="text-ink font-semibold">{item.differentiator.label}</p>
+              <p class="text-xs text-mute leading-relaxed">{item.differentiator.description}</p>
+            </div>
+
+            <!-- Outline Tree -->
+            <div class="space-y-3">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-charcoal">
+                Structured Article Outline (H2 / H3 Blueprint)
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {item.outline.map((sec) => (
+                  <div class="p-3.5 rounded-xl bg-surface-soft border border-hairline/50 space-y-2 text-xs">
+                    <p class="font-bold text-ink">{sec.heading}</p>
+                    <ul class="text-mute space-y-1 list-disc list-inside">
+                      {sec.subheadings.map((sub) => (
+                        <li class="line-clamp-1">{sub}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Read Link for Full Articles -->
+            {item.isFull && (
+              <div class="pt-2 flex items-center justify-end">
+                <a
+                  href={`/blog/${item.slug}`}
+                  class="inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-deep"
+                >
+                  <span>Read Full Article with Interactive Tools & Downloadable Assets</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </section>
 
-    <!-- Institutional Cross-Links Banner -->
-    <footer class="p-6 rounded-3xl bg-surface-soft border border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-mute">
-      <div class="flex items-center gap-2">
-        <svg class="h-4 w-4 text-accent-teal shrink-0" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <span>Looking for privacy guarantees or legal terms?</span>
+    <!-- FAQ Section -->
+    <section class="space-y-6 pt-8 border-t border-hairline" aria-labelledby="faq-heading">
+      <div class="text-center sm:text-left space-y-1">
+        <h2
+          id="faq-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
+          Frequently Asked Questions
+        </h2>
+        <p class="text-sm text-mute">
+          Direct, practical answers to common invoicing, receipt creation, and tax accounting
+          questions.
+        </p>
       </div>
-      <div class="flex items-center gap-4 font-semibold text-ink">
-        <a href="/about" class="hover:text-primary transition-colors">
-          About Us
-        </a>
-        <span>&bull;</span>
-        <a href="/privacy" class="hover:text-primary transition-colors">
-          Privacy Policy
-        </a>
-        <span>&bull;</span>
-        <a href="/terms" class="hover:text-primary transition-colors">
-          Terms of Service
-        </a>
-        <span>&bull;</span>
-        <a href="/contact" class="hover:text-primary transition-colors">
-          Contact Support
-        </a>
+
+      <div class="space-y-4">
+        {blogFaqs.map((faq) => (
+          <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-2">
+            <h3 class="text-base font-semibold text-ink font-display">{faq.question}</h3>
+            <p class="text-sm text-mute leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
       </div>
-    </footer>
+    </section>
   </div>
 </BaseLayout>

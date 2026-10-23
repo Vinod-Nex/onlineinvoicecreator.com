@@ -112,9 +112,20 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         expect(content, `Missing in sitemap: ${pageUrl}`).toContain(`<loc>${pageUrl}</loc>`);
       }
 
-      // Count total <url> tags
+      const expectedBlogPages = [
+        'https://onlineinvoicecreator.com/blog/how-to-write-an-invoice-for-freelance-work',
+        'https://onlineinvoicecreator.com/blog/what-is-a-pro-forma-invoice',
+        'https://onlineinvoicecreator.com/blog/invoice-vs-receipt',
+        'https://onlineinvoicecreator.com/blog/how-to-number-invoices',
+      ];
+
+      for (const blogUrl of expectedBlogPages) {
+        expect(content, `Missing in sitemap: ${blogUrl}`).toContain(`<loc>${blogUrl}</loc>`);
+      }
+
+      // Count total <url> tags (14 core + 4 blog articles = 18 total indexable pages)
       const urlCount = (content.match(/<url>/g) || []).length;
-      expect(urlCount).toBe(14);
+      expect(urlCount).toBe(18);
     });
 
     it('assigns valid ISO lastmod dates derived from git commit history to every entry', () => {

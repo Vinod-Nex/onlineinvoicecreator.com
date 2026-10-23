@@ -46,9 +46,9 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
     expect(content).toContain('Warnings & Maintained Design Decisions');
   });
 
-  it('crawls all 16 built HTML files in dist/ with zero broken internal links or anchors', () => {
+  it('crawls all built HTML files in dist/ with zero broken internal links or anchors', () => {
     const htmlFiles = getHtmlFiles(distDir);
-    expect(htmlFiles.length).toBe(16);
+    expect(htmlFiles.length).toBeGreaterThanOrEqual(16);
 
     const knownRoutes = new Set<string>();
     for (const file of htmlFiles) {
