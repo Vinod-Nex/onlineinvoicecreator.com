@@ -6,7 +6,7 @@
   "badge": "100% Free • Freelancer Invoicing • Zero Watermarks",
   "h1": "Invoice Generator for Freelancers",
   "h1Highlight": "Freelancers",
-  "intro": "Create, customize, and download clean freelancer invoices in seconds with zero watermarks and no signup required.",
+  "intro": "An invoice generator for freelancers is a specialized billing application built to handle flexible solo billing workflows, such as hourly consulting, project deliverables, and milestone retainers. Freelancers can itemize labor hours, apply client discounts, specify Net 14 or Net 30 payment terms, and export pristine PDF invoices without subscription costs or client watermarks.",
   "toolType": "invoice",
   "trustBadges": [
     "Zero Watermarks",
@@ -115,6 +115,44 @@
     "total": "$2,925.00",
     "notes": "Payment due within 14 days via direct bank transfer or ACH. Thank you for your business.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Solo Billing Matrix",
+    "title": "Freelance Invoice Generator vs Enterprise Billing Software",
+    "subtitle": "How solo billing tools eliminate bureaucratic friction compared to complex enterprise accounting platforms.",
+    "headers": [
+      "Invoicing Requirement",
+      "Freelancer Invoice Generator (This Tool)",
+      "Enterprise Accounting Suites"
+    ],
+    "rows": [
+      {
+        "feature": "Mixed Billing Modes",
+        "ourValue": "Combine hourly consulting hours and fixed milestone deliverables seamlessly",
+        "otherValue": "Rigid separation requiring distinct timecards, items, or inventory entries"
+      },
+      {
+        "feature": "Payment Terms Flexibility",
+        "ourValue": "Customizable short payment terms (Due on Receipt, Net 7, Net 14)",
+        "otherValue": "Defaults to corporate enterprise terms (Net 60, Net 90) that harm cash flow"
+      },
+      {
+        "feature": "Account Overhead & Setup",
+        "ourValue": "Zero registration; open in browser, type line items, and export PDF",
+        "otherValue": "Multi-tier chart of accounts, bank linking, and mandatory authentication"
+      },
+      {
+        "feature": "Discounts & Retainers",
+        "ourValue": "Instant percentage or flat discounts for repeat clients or upfront retainers",
+        "otherValue": "Complex promotional pricing tables requiring manager approval configurations"
+      },
+      {
+        "feature": "Monthly Software Cost",
+        "ourValue": "100% Free with unlimited PDF exports and local draft auto-save",
+        "otherValue": "$30 to $80+ monthly subscription fees eating into freelance net income"
+      }
+    ],
+    "note": "Solo creators and consultants need fast, clean client invoices that protect cash flow without recurring SaaS overhead."
   },
   "faq": {
     "badge": "Frequently Asked Questions",

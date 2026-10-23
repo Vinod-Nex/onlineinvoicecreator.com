@@ -88,10 +88,47 @@ const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side too
         )}
       </h1>
 
-      <!-- One-Sentence Intro (Required per prompt specification) -->
+      <!-- Featured Snippet Intro Paragraph (40-60 words answering main intent) -->
       <p class="max-w-3xl mx-auto text-base sm:text-lg text-mute font-normal leading-relaxed">
         {data.intro}
       </p>
+
+      <!-- Short Numbered "How To" Quick Guide Near the Top -->
+      {data.howTo && data.howTo.steps && data.howTo.steps.length > 0 && (
+        <div class="pt-2 pb-1 max-w-4xl mx-auto text-left">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-charcoal mb-2.5 text-center sm:text-left flex items-center justify-center sm:justify-start gap-1.5">
+            <svg
+              class="h-3.5 w-3.5 text-primary"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>3-Step Quick Start</span>
+          </h2>
+          <ol
+            class="grid grid-cols-1 sm:grid-cols-3 gap-3"
+            aria-label="Quick steps to create your document"
+          >
+            {data.howTo.steps.slice(0, 3).map((step, idx) => (
+              <li class="p-3.5 rounded-2xl bg-surface-card border border-hairline shadow-2xs space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
+                    {idx + 1}
+                  </span>
+                  <span class="text-xs font-bold text-ink truncate">{step.title}</span>
+                </div>
+                <p class="text-[11px] text-mute leading-relaxed pl-7">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
 
       <!-- Trust Badges Row -->
       <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 pt-2 text-xs font-medium text-mute">
@@ -275,6 +312,78 @@ const ogImageAltText = `${data.h1} - Online Invoice Creator free client-side too
           </div>
         )}
       </section>
+
+      <!-- Comparison Table Section (Where a table fits) -->
+      {data.comparisonTable && (
+        <section class="space-y-6" aria-labelledby="comparison-heading">
+          <div class="text-center sm:text-left">
+            {data.comparisonTable.badge && (
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-teal/10 text-accent-teal mb-2">
+                {data.comparisonTable.badge}
+              </span>
+            )}
+            <h2
+              id="comparison-heading"
+              class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+            >
+              {data.comparisonTable.title}
+            </h2>
+            {data.comparisonTable.subtitle && (
+              <p class="text-sm sm:text-base text-mute mt-1.5 max-w-3xl leading-relaxed">
+                {data.comparisonTable.subtitle}
+              </p>
+            )}
+          </div>
+
+          <div class="overflow-x-auto rounded-3xl border border-hairline bg-surface-card shadow-card">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-surface-soft/60 text-ink font-semibold">
+                  <th scope="col" class="py-3.5 px-4 sm:px-6 w-1/3">
+                    {data.comparisonTable.headers[0]}
+                  </th>
+                  <th scope="col" class="py-3.5 px-4 sm:px-6 w-1/3 text-primary font-bold">
+                    {data.comparisonTable.headers[1]}
+                  </th>
+                  <th scope="col" class="py-3.5 px-4 sm:px-6 w-1/3 text-charcoal">
+                    {data.comparisonTable.headers[2]}
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline/60">
+                {data.comparisonTable.rows.map((row) => (
+                  <tr class="hover:bg-surface-soft/30 transition-colors">
+                    <td class="py-3.5 px-4 sm:px-6 font-semibold text-ink align-top">
+                      {row.feature}
+                    </td>
+                    <td class="py-3.5 px-4 sm:px-6 text-charcoal align-top bg-primary/[0.02]">
+                      <span class="inline-flex items-center gap-1.5 font-medium text-ink">
+                        <svg
+                          class="h-4 w-4 text-accent-teal shrink-0"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span>{row.ourValue}</span>
+                      </span>
+                    </td>
+                    <td class="py-3.5 px-4 sm:px-6 text-mute align-top">{row.otherValue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {data.comparisonTable.note && (
+            <p class="text-xs text-mute italic">Note: {data.comparisonTable.note}</p>
+          )}
+        </section>
+      )}
 
       <!-- 3. Example Section -->
       <section class="space-y-6" aria-labelledby="example-heading">

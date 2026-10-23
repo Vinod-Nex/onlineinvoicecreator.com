@@ -6,7 +6,7 @@
   "badge": "100% Free • Construction & Trades • Zero Watermarks",
   "h1": "Free Contractor Invoice Template",
   "h1Highlight": "Contractor Invoice",
-  "intro": "Generate professional contractor invoices itemizing labor hours, materials, and project milestones in seconds with zero watermarks.",
+  "intro": "A contractor invoice template is a standardized commercial billing statement used by independent contractors, trade specialists, and 1099 workers to bill clients for labor and materials. It specifies project milestones or hourly rates, itemizes physical supply costs, calculates applicable sales tax, outlines agreed payment terms, and provides contractor tax identification for corporate compliance.",
   "toolType": "invoice",
   "trustBadges": [
     "Labor & Materials Itemization",
@@ -115,6 +115,44 @@
     "total": "$5,269.50",
     "notes": "Payment terms: Net 30 from completion of inspection sign-off. Wire transfer preferred.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Contractor Classification",
+    "title": "Independent Contractor Invoice vs Employee Timesheet",
+    "subtitle": "Understanding the commercial, legal, and taxation differences between contractor billing and internal payroll.",
+    "headers": [
+      "Billing Parameter",
+      "Independent Contractor Invoice",
+      "Employee Timesheet / Wage Report"
+    ],
+    "rows": [
+      {
+        "feature": "Tax Withholding",
+        "ourValue": "Zero tax withheld; contractor self-reports self-employment taxes",
+        "otherValue": "Income taxes, social security, and Medicare automatically withheld"
+      },
+      {
+        "feature": "Material & Equipment Costs",
+        "ourValue": "Directly itemized as billable supplies and reimbursable expenses",
+        "otherValue": "Submitted through corporate expense reimbursement forms"
+      },
+      {
+        "feature": "Payment Terms & Schedule",
+        "ourValue": "Contractual terms (e.g., Net 14, Net 30, or milestone completion)",
+        "otherValue": "Predetermined corporate payroll cycles (bi-weekly or monthly)"
+      },
+      {
+        "feature": "Legal Relationship",
+        "ourValue": "Autonomous business-to-business vendor agreement",
+        "otherValue": "Subordinate master-servant statutory employment relationship"
+      },
+      {
+        "feature": "Tax Reporting Document",
+        "ourValue": "IRS Form 1099-NEC (US) or local equivalent contractor declaration",
+        "otherValue": "IRS Form W-2 (US) or statutory employee wage summary"
+      }
+    ],
+    "note": "Issuing formal contractor invoices establishes clear proof of independent business status for both corporate clients and tax authorities."
   },
   "faq": {
     "badge": "Trade Invoicing FAQs",

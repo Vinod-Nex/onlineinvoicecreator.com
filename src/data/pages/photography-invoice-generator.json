@@ -6,7 +6,7 @@
   "badge": "100% Free • Photography & Creative • Zero Watermarks",
   "h1": "Photography Invoice Generator",
   "h1Highlight": "Photography Invoice",
-  "intro": "Create elegant, high-impact invoices for wedding shoots, portrait sessions, and commercial image licensing in seconds.",
+  "intro": "A photography invoice generator is a billing tool customized for professional photographers, studios, and videographers to bill for shoots, equipment rentals, and digital image licensing. It enables creators to itemize session day rates, editing hours, travel expenses, commercial usage rights, and non-refundable booking retainers into an elegant, downloadable PDF invoice for commercial or wedding clients.",
   "toolType": "invoice",
   "trustBadges": [
     "Licensing & Rights Breakdown",
@@ -121,6 +121,40 @@
     "total": "$6,000.00",
     "notes": "Booking retainer ($3,000) received. Balance due prior to unwatermarked gallery handoff via ACH or wire.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Creative Billing Matrix",
+    "title": "Commercial Photography Invoice vs General Service Invoice",
+    "subtitle": "Why creative productions require specialized licensing clauses and retainer tracking absent from generic bills.",
+    "headers": ["Billing Dimension", "Photography Invoice (This Tool)", "Generic Business Invoice"],
+    "rows": [
+      {
+        "feature": "Image Rights & Commercial Licensing",
+        "ourValue": "Explicit line items for geographic scope, media type, and license duration",
+        "otherValue": "No copyright licensing provisions or usage limitations"
+      },
+      {
+        "feature": "Booking Retainer Tracking",
+        "ourValue": "Deducts non-refundable advance deposits and displays final balance due",
+        "otherValue": "Single lump sum with no upfront booking deposit separation"
+      },
+      {
+        "feature": "Production Cost Breakdown",
+        "ourValue": "Separates creative shoot time, equipment rentals, studio fees, and retouching",
+        "otherValue": "Blends creative labor and operational overhead into generic hourly blocks"
+      },
+      {
+        "feature": "Gallery Delivery Condition",
+        "ourValue": "Explicit payment terms mandating balance clearance prior to raw/full res release",
+        "otherValue": "Standard credit terms without intellectual property delivery conditions"
+      },
+      {
+        "feature": "Export Visual Aesthetics",
+        "ourValue": "Clean typography and minimalist presentation reflecting professional studio standards",
+        "otherValue": "Generic accounting spreadsheet layout with clinical table lines"
+      }
+    ],
+    "note": "Documenting image usage rights directly on the invoice prevents unauthorized commercial distribution and future copyright disputes."
   },
   "faq": {
     "badge": "Photographer FAQs",

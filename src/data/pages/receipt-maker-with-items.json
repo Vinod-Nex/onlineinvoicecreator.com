@@ -6,7 +6,7 @@
   "badge": "100% Free • Line-by-Line Itemization • Zero Watermarks",
   "h1": "Online Receipt Maker with Itemized Products",
   "h1Highlight": "Itemized Products",
-  "intro": "Generate clear, itemized sales receipts with quantities, discounts, and tax breakdowns in seconds. 100% private and watermark-free.",
+  "intro": "A receipt maker with items is a digital transaction tool that generates line-by-line itemized sales slips showing product quantities, unit prices, subtotal breakdowns, and tax rates. It is designed for small retailers, pop-up shops, and service providers who need to provide customers with an official, itemized record of purchased goods and verified payments.",
   "toolType": "receipt",
   "trustBadges": [
     "Itemized Line Items",
@@ -119,6 +119,44 @@
     "total": "$347.69",
     "notes": "Thank you for shopping at SoundWave! 30-day return policy with original receipt.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Itemization Impact",
+    "title": "Itemized Sales Receipt vs Lump-Sum Cash Slip",
+    "subtitle": "How granular line-item documentation protects business warranty rights and corporate expense write-offs.",
+    "headers": [
+      "Receipt Attribute",
+      "Itemized Sales Receipt (This Tool)",
+      "Generic Lump-Sum Cash Slip"
+    ],
+    "rows": [
+      {
+        "feature": "Line-by-Line Product Breakdown",
+        "ourValue": "Individual SKU descriptions, quantities, unit prices, and row subtotals",
+        "otherValue": "Single unitemized dollar amount representing aggregate purchase"
+      },
+      {
+        "feature": "Statutory Tax Audit Compliance",
+        "ourValue": "Acceptable proof for corporate business deduction claims and tax audits",
+        "otherValue": "Frequently disallowed by tax inspectors due to lack of expense verification"
+      },
+      {
+        "feature": "Product Returns & Warranty Proof",
+        "ourValue": "Verifies purchase of specific product model and date for returns",
+        "otherValue": "Cannot prove which specific item was purchased or returned"
+      },
+      {
+        "feature": "Multi-Item Discount Clarity",
+        "ourValue": "Explicitly details individual promotional deductions or overall discount math",
+        "otherValue": "Opaque single total where customer discounts cannot be verified"
+      },
+      {
+        "feature": "Inventory & Job Costing",
+        "ourValue": "Easily maps directly to inventory tracking and job costing categories",
+        "otherValue": "Requires manual guesswork to allocate funds across project materials"
+      }
+    ],
+    "note": "Most corporate accounts payable departments strictly require itemized receipts for expense reimbursements over $25."
   },
   "faq": {
     "badge": "Receipt FAQs",

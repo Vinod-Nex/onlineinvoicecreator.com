@@ -6,7 +6,7 @@
   "badge": "100% Free • Landlord & Tenant Proof • Zero Watermarks",
   "h1": "Free Rent Receipt Generator",
   "h1Highlight": "Rent Receipt",
-  "intro": "Generate valid monthly rent receipts with property details, payment mode, and landlord signature in seconds.",
+  "intro": "A rent receipt generator is an online tool that produces legally valid rental payment receipts for tenants and residential landlords. Tenants use these receipts to claim tax deductions such as House Rent Allowance (HRA) by documenting monthly rental amounts, property addresses, rental periods, payment modes, and landlord tax identification numbers with required signature acknowledgments.",
   "toolType": "rent-receipt",
   "trustBadges": [
     "HRA Exemption Compliant",
@@ -123,6 +123,44 @@
     "total": "₹35,500.00",
     "notes": "Received in full via UPI (Ref #UPI/629103847291) on 2 October 2026. Zero balance remaining for October.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Tax & Tenancy Evidence",
+    "title": "Official Rent Receipt vs Bank Transfer Statement",
+    "subtitle": "Why formal signed rent receipts are required alongside digital bank transfer records for statutory tax claims.",
+    "headers": [
+      "Compliance Criteria",
+      "Official Rent Receipt (This Tool)",
+      "Bank Statement / Transfer Slip"
+    ],
+    "rows": [
+      {
+        "feature": "Landlord PAN / Tax ID",
+        "ourValue": "Explicitly documented for mandatory tax & HRA compliance",
+        "otherValue": "Absent; bank transfers do not record the landlord's tax identifier"
+      },
+      {
+        "feature": "Rental Property Address",
+        "ourValue": "Full physical address and apartment unit number specified",
+        "otherValue": "Missing; bank logs record account numbers without property addresses"
+      },
+      {
+        "feature": "Rental Period Designation",
+        "ourValue": "Explicit calendar month and dates covered (e.g., Oct 1 - Oct 31)",
+        "otherValue": "Only shows single execution timestamp, not tenancy rental period"
+      },
+      {
+        "feature": "Landlord Signature & Acknowledgment",
+        "ourValue": "Dedicated signature line verifying satisfaction of rent debt",
+        "otherValue": "No affirmative endorsement from the property owner"
+      },
+      {
+        "feature": "Tax Authority & HR Acceptance",
+        "ourValue": "Recognized primary evidence for House Rent Allowance (HRA)",
+        "otherValue": "Frequently rejected as standalone proof without supplementary lease agreement"
+      }
+    ],
+    "note": "For annual rent payments exceeding statutory limits (such as ₹100,000 in India), declaring the landlord's PAN on a formal rent receipt is legally mandatory."
   },
   "faq": {
     "badge": "Rent FAQs",

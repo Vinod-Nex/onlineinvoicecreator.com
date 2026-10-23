@@ -6,7 +6,7 @@
   "badge": "100% Free • No Watermarks • No Signup Required",
   "h1": "Free Online Invoice Generator",
   "h1Highlight": "Invoice Generator",
-  "intro": "Create, customize, and download pristine professional invoices in seconds. 100% private and serverless — nothing is uploaded to a server.",
+  "intro": "An online invoice generator is a digital tool that allows freelancers, contractors, and small business owners to create, customize, and issue professional billing documents directly within their browser. You can itemize billable hours or products, calculate taxes and discounts automatically, and instantly download print-ready, watermark-free PDF invoices without creating an account or paying subscriptions.",
   "toolType": "invoice",
   "trustBadges": [
     "Zero Watermarks",
@@ -115,6 +115,44 @@
     "total": "$10,250.00",
     "notes": "Payment due within 30 days via direct deposit or corporate wire transfer. Thank you for your partnership.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Decision Matrix",
+    "title": "Online Invoice Creator vs Traditional Invoicing Software",
+    "subtitle": "How our lightweight, client-side invoice maker compares to complex recurring subscription platforms.",
+    "headers": [
+      "Feature / Capability",
+      "Online Invoice Creator",
+      "Traditional Software (e.g., QuickBooks)"
+    ],
+    "rows": [
+      {
+        "feature": "Account & Sign-Up",
+        "ourValue": "Zero sign-up required (Open and bill immediately)",
+        "otherValue": "Mandatory email account creation and password setup"
+      },
+      {
+        "feature": "Cost & Hidden Fees",
+        "ourValue": "100% Free Forever with unlimited PDF downloads",
+        "otherValue": "$15 to $35+ per month recurring subscription"
+      },
+      {
+        "feature": "Financial Data Privacy",
+        "ourValue": "100% Client-side in browser; no server database",
+        "otherValue": "Client roster and financial numbers stored on vendor cloud"
+      },
+      {
+        "feature": "Promotional Watermarks",
+        "ourValue": "Zero watermarks or branding on exported PDFs",
+        "otherValue": "Often inserts vendor logos or watermarks on free plans"
+      },
+      {
+        "feature": "Speed to First Invoice",
+        "ourValue": "Under 60 seconds from page load to print/download",
+        "otherValue": "10 to 20 minutes of company onboarding and account setup"
+      }
+    ],
+    "note": "Online Invoice Creator is optimized for independent professionals who need fast, pristine billing without administrative bloat."
   },
   "faq": {
     "badge": "General Invoicing FAQs",

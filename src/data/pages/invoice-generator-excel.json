@@ -6,7 +6,7 @@
   "badge": "100% Free • Modern Excel Alternative • Zero Watermarks",
   "h1": "Free Online Invoice Generator Excel & PDF",
   "h1Highlight": "Invoice Generator Excel",
-  "intro": "Create, customize, and export professional invoices directly in your browser without Excel formulas, macro bugs, or spreadsheet formatting headaches.",
+  "intro": "An Excel invoice generator alternative is a browser-based billing tool that replaces error-prone spreadsheet templates with automated calculation logic and instant PDF rendering. It eliminates broken formula errors, misaligned table printing, and font discrepancies while enabling business owners to import existing Excel data, itemize deliverables, and generate professional PDF invoices directly without desktop spreadsheet software.",
   "toolType": "invoice",
   "trustBadges": [
     "No Spreadsheet Formulas",
@@ -115,6 +115,40 @@
     "total": "$7,100.00",
     "notes": "Payment terms: Net 30 days via direct deposit or corporate wire transfer.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Workflow Comparison",
+    "title": "Online Invoice Creator vs Microsoft Excel Invoicing",
+    "subtitle": "Why modern service professionals are replacing static spreadsheet files with automated client-side billing.",
+    "headers": ["Invoicing Workflow", "Online Invoice Creator", "Microsoft Excel / Google Sheets"],
+    "rows": [
+      {
+        "feature": "Formula Calculation Integrity",
+        "ourValue": "Automated code logic; mathematically impossible to corrupt sum formulas",
+        "otherValue": "Prone to accidental formula overwrites, circular references, and rounding errors"
+      },
+      {
+        "feature": "PDF Export & Print Geometry",
+        "ourValue": "Pixel-perfect CSS print styling with clean pagination and no clipped columns",
+        "otherValue": "Clunky print area boundaries; frequently splits tables awkwardly across pages"
+      },
+      {
+        "feature": "Mobile Phone & Tablet Editing",
+        "ourValue": "Fully responsive web interface optimized for touch devices and on-the-go billing",
+        "otherValue": "Frustrating and error-prone to pinch-zoom and edit cells on mobile devices"
+      },
+      {
+        "feature": "Local Auto-Save Memory",
+        "ourValue": "Silently caches your company logo, terms, and draft in browser storage",
+        "otherValue": "Requires manual 'Save As' file management and messy desktop folder clutter"
+      },
+      {
+        "feature": "Software Dependency & Cost",
+        "ourValue": "Zero cost; runs in any modern browser without Office 365 licensing",
+        "otherValue": "Requires paid Microsoft Office license or Google account authentication"
+      }
+    ],
+    "note": "Switching to an automated browser tool saves an estimated 15 minutes of manual layout and formatting time per invoice."
   },
   "faq": {
     "badge": "Excel vs Web FAQs",

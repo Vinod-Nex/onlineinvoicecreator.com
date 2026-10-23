@@ -84,6 +84,21 @@ export interface EditorialNoteData {
   officialSources?: OfficialSourceData[];
 }
 
+export interface ComparisonTableRow {
+  feature: string;
+  ourValue: string;
+  otherValue: string;
+}
+
+export interface ComparisonTableData {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  headers: [string, string, string];
+  rows: ComparisonTableRow[];
+  note?: string;
+}
+
 export interface ToolPageData {
   slug: string;
   metaTitle: string;
@@ -109,6 +124,7 @@ export interface ToolPageData {
     disclaimer?: string;
     items: DocumentItem[];
   };
+  comparisonTable?: ComparisonTableData;
   example: DocumentExample;
   faq: {
     badge?: string;

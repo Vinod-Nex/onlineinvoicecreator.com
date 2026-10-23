@@ -6,7 +6,7 @@
   "badge": "100% Free • ATO Compliant • 10% GST Ready",
   "h1": "Free Invoice Template Australia: ATO Tax & GST Compliant",
   "h1Highlight": "Invoice Template Australia",
-  "intro": "Create ATO-compliant Australian tax invoices with 10% GST calculations and your ABN in seconds.",
+  "intro": "A tax invoice template for Australia is a billing document designed to satisfy Australian Taxation Office (ATO) statutory requirements under the GST Act. It clearly displays the words 'Tax Invoice', the supplier's Australian Business Number (ABN), issue dates, an itemized schedule of taxable sales, and explicit 10% GST amounts for sales exceeding $82.50 AUD.",
   "toolType": "invoice",
   "trustBadges": [
     "ATO GST Compliant",
@@ -115,6 +115,44 @@
     "total": "$1,573.00",
     "notes": "Payment due within 14 days. EFT: BSB 083-004 Account 9283-7462. Total includes 10% GST ($143.00).",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Statutory Comparison",
+    "title": "ATO Tax Invoice vs Standard Regular Invoice",
+    "subtitle": "Understanding the strict legal requirements separating Australian tax invoices from generic commercial bills.",
+    "headers": [
+      "Statutory Element",
+      "ATO Compliant Tax Invoice (This Tool)",
+      "Generic Commercial Invoice"
+    ],
+    "rows": [
+      {
+        "feature": "Document Title Header",
+        "ourValue": "Mandatory 'Tax Invoice' heading prominently displayed at top",
+        "otherValue": "Generic heading (e.g., 'Invoice', 'Bill', or 'Statement')"
+      },
+      {
+        "feature": "Australian Business Number (ABN)",
+        "ourValue": "Mandatory 11-digit ABN displayed with official ATO formatting",
+        "otherValue": "Optional or absent; international bills lack valid Australian ABN"
+      },
+      {
+        "feature": "10% GST Accounting Breakdown",
+        "ourValue": "Explicit 10% GST line item or clear 'Total price includes GST' notice",
+        "otherValue": "Single unitemized total with unspecified or generic tax rates"
+      },
+      {
+        "feature": "Buyer ABN for Sales > $1,000",
+        "ourValue": "Mandatory buyer name, address, or ABN for transactions over $1,000 AUD",
+        "otherValue": "Often omits buyer ABN or formal corporate legal entity"
+      },
+      {
+        "feature": "Input Tax Credit Eligibility",
+        "ourValue": "Fully valid document for Australian buyers to claim GST input tax credits",
+        "otherValue": "Disallowed by ATO; buyers cannot reclaim GST paid on purchases"
+      }
+    ],
+    "note": "Australian businesses registered for GST must issue an ATO-compliant tax invoice within 28 days of a customer request."
   },
   "faq": {
     "badge": "ATO Tax FAQs",

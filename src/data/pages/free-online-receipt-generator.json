@@ -6,7 +6,7 @@
   "badge": "100% Free • Itemized, Cash & Payment Modes • Zero Watermarks",
   "h1": "Free Online Receipt Generator",
   "h1Highlight": "Receipt Generator",
-  "intro": "Generate official payment acknowledgments, itemized sales receipts, or instant cash slips in seconds with zero watermarks and no server uploads.",
+  "intro": "An online receipt generator is a free web-based utility that produces verified proof-of-payment documents for retail transactions, client deposits, and cash sales. Users enter seller information, buyer details, payment methods, transaction dates, and itemized purchase totals, allowing them to instantly generate, print, or download clean, audit-compliant PDF receipts with zero watermarks or registration required.",
   "toolType": "receipt",
   "trustBadges": [
     "Itemized & Cash Modes",
@@ -109,6 +109,40 @@
     "total": "$4,893.75",
     "notes": "Payment received in full via Corporate Wire Transfer (Ref #WIRE-829140). Remaining balance due: $0.00.",
     "disclaimer": "General information, not legal or tax advice. Check your local rules."
+  },
+  "comparisonTable": {
+    "badge": "Document Distinction",
+    "title": "Payment Receipt vs Commercial Invoice",
+    "subtitle": "Understanding the fundamental timing, legal purpose, and accounting role of receipts compared to invoices.",
+    "headers": ["Document Aspect", "Payment Receipt (This Tool)", "Commercial Invoice"],
+    "rows": [
+      {
+        "feature": "Issuance Timing",
+        "ourValue": "Issued immediately AFTER payment is completed and verified",
+        "otherValue": "Issued BEFORE payment as a formal request for funds"
+      },
+      {
+        "feature": "Legal & Accounting Purpose",
+        "ourValue": "Conclusive proof of payment and transaction settlement",
+        "otherValue": "Demands payment and establishes accounts receivable credit terms"
+      },
+      {
+        "feature": "Payment Status",
+        "ourValue": "Explicitly stamped 'PAID IN FULL' with zero balance due",
+        "otherValue": "Displays payment terms (Net 14, Net 30) and pending balance"
+      },
+      {
+        "feature": "Audit & Expense Claims",
+        "ourValue": "Required by tax authorities to substantiate deductible expense write-offs",
+        "otherValue": "Tracks outstanding debt obligation between commercial entities"
+      },
+      {
+        "feature": "Payment Method Tracking",
+        "ourValue": "Records exact payment tender (Cash, Card, Wire, Check, Transfer)",
+        "otherValue": "Lists acceptable bank details and remitting instructions"
+      }
+    ],
+    "note": "Always issue a receipt immediately after client funds clear to provide permanent proof of settlement for tax records."
   },
   "faq": {
     "badge": "Receipt FAQs",
