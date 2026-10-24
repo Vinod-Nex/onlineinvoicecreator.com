@@ -25,6 +25,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "indexnow": "node scripts/submit-indexnow.mjs",
+    "gsc:export": "node scripts/export-gsc-queries.mjs",
     "worker:dev": "wrangler dev --config workers/api/wrangler.toml",
     "worker:deploy": "wrangler deploy --config workers/api/wrangler.toml"
   },
