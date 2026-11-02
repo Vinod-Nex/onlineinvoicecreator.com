@@ -55,12 +55,15 @@ export const PaymentDetailsSchema = z.object({
 
 export const InvoiceSchema = z.object({
   id: z.string().optional(),
+  documentTitle: z.string().optional().default('INVOICE'),
   invoiceNumber: z.string().min(1, 'Invoice number is required').default('INV-001'),
+  poNumber: z.string().optional().default(''),
   issueDate: z.string().min(1, 'Issue date is required'),
   dueDate: z.string().min(1, 'Due date is required'),
   currency: z.string().min(3).max(3).default('USD'),
   sender: InvoicePartySchema,
   client: InvoicePartySchema,
+  shipTo: InvoicePartySchema.optional(),
   lineItems: z.array(LineItemSchema).min(1, 'At least one line item is required'),
   discount: z
     .union([z.number().min(0), DiscountSchema])
@@ -69,8 +72,12 @@ export const InvoiceSchema = z.object({
       typeof val === 'number' ? { type: 'percentage' as const, value: val } : val
     ),
   shipping: z.number().min(0, 'Shipping cost cannot be negative').default(0),
+  amountPaid: z.number().min(0).optional().default(0),
   notes: z.string().optional().default(''),
   paymentDetails: PaymentDetailsSchema.optional(),
+  paymentQrType: z.enum(['none', 'upi', 'paypal', 'link', 'sepa']).optional().default('none'),
+  paymentQrValue: z.string().optional().default(''),
+  customLabels: z.record(z.string(), z.string()).optional().default({}),
   signature: z.string().optional().default(''),
   logo: z.string().optional().default(''),
   template: z.enum(['modern', 'classic', 'minimal', 'compact']).optional().default('modern'),

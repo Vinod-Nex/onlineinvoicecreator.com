@@ -157,6 +157,7 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
         'favicon.ico',
         'favicon-16x16.png',
         'favicon-32x32.png',
+        'favicon-96x96.png',
         'apple-touch-icon.png',
         'android-chrome-192x192.png',
         'android-chrome-512x512.png',
@@ -177,6 +178,10 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
       const meta32 = await sharp(path.join(publicDir, 'favicon-32x32.png')).metadata();
       expect(meta32.width).toBe(32);
       expect(meta32.height).toBe(32);
+
+      const meta96 = await sharp(path.join(publicDir, 'favicon-96x96.png')).metadata();
+      expect(meta96.width).toBe(96);
+      expect(meta96.height).toBe(96);
 
       const meta180 = await sharp(path.join(publicDir, 'apple-touch-icon.png')).metadata();
       expect(meta180.width).toBe(180);
@@ -214,13 +219,16 @@ describe('Phase 27: Images, Open Graph, Favicons, and Web Manifest', () => {
       const htmlFiles = getAllHtmlFiles(distDir);
       for (const file of htmlFiles) {
         const content = fs.readFileSync(file, 'utf8');
-        expect(content).toMatch(/<link rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/i);
         expect(content).toMatch(
-          /<link rel="icon" type="image\/png" sizes="32x32" href="\/favicon-32x32\.png"/i
+          /<link rel="icon" type="image\/png" href="\/favicon-96x96\.png" sizes="96x96"/i
         );
+        expect(content).toMatch(/<link rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/i);
         expect(content).toMatch(/<link rel="shortcut icon" href="\/favicon\.ico"/i);
         expect(content).toMatch(
           /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png"/i
+        );
+        expect(content).toMatch(
+          /<meta name="apple-mobile-web-app-title" content="Online Invoice Creator"/i
         );
         expect(content).toMatch(/<link rel="manifest" href="\/site\.webmanifest"/i);
       }

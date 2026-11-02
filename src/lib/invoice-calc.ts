@@ -50,17 +50,24 @@ export interface Invoice {
   id?: string;
   template?: InvoiceTemplateId;
   pageFormat?: InvoicePageFormat;
+  documentTitle?: string;
   invoiceNumber: string;
+  poNumber?: string;
   issueDate: string;
   dueDate: string;
   currency: string;
   sender: InvoiceParty;
   client: InvoiceParty;
+  shipTo?: InvoiceParty;
   lineItems: LineItem[];
   discount?: number | Discount;
   shipping: number;
+  amountPaid?: number;
   notes?: string;
   paymentDetails?: PaymentDetails;
+  paymentQrType?: 'upi' | 'paypal' | 'link' | 'sepa' | 'none';
+  paymentQrValue?: string;
+  customLabels?: Record<string, string>;
   signature?: string;
   logo?: string;
 }
@@ -85,6 +92,9 @@ export interface InvoiceTotals {
   totalTax: number;
   shipping: number;
   grandTotal: number;
+  amountPaid: number;
+  balanceDue: number;
+  isPaidInFull: boolean;
   lineItemsCalculated: LineItemCalculated[];
 }
 
@@ -133,6 +143,7 @@ export function calculateTotals(
   invoice: Pick<Invoice, 'lineItems'> & {
     discount?: number | Discount;
     shipping?: number;
+    amountPaid?: number;
   }
 ): InvoiceTotals {
   const items = invoice.lineItems || [];
@@ -200,8 +211,11 @@ export function calculateTotals(
   // 4. Shipping
   const shipping = roundToDecimals(Math.max(0, invoice.shipping || 0), 2);
 
-  // 5. Grand Total
+  // 5. Grand Total, Amount Paid & Balance Due
   const grandTotal = roundToDecimals(netTaxableSubtotal + totalTax + shipping, 2);
+  const amountPaid = roundToDecimals(Math.max(0, invoice.amountPaid || 0), 2);
+  const balanceDue = roundToDecimals(Math.max(0, grandTotal - amountPaid), 2);
+  const isPaidInFull = grandTotal > 0 && balanceDue === 0;
 
   return {
     subtotal,
@@ -211,6 +225,9 @@ export function calculateTotals(
     totalTax,
     shipping,
     grandTotal,
+    amountPaid,
+    balanceDue,
+    isPaidInFull,
     lineItemsCalculated,
   };
 }
@@ -272,7 +289,9 @@ export function createDefaultInvoice(): Invoice {
 
   return {
     id: `inv_${Date.now()}`,
+    documentTitle: 'INVOICE',
     invoiceNumber: 'INV-001',
+    poNumber: '',
     issueDate: formatDate(today),
     dueDate: formatDate(dueDate),
     currency: 'USD',
@@ -306,6 +325,9 @@ export function createDefaultInvoice(): Invoice {
       value: 0,
     },
     shipping: 0,
+    amountPaid: 0,
+    paymentQrType: 'none',
+    paymentQrValue: '',
     notes: 'Thank you for your business. Please remit payment by the due date.',
     paymentDetails: {
       bankName: '',

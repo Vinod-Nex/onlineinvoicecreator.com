@@ -11,8 +11,8 @@
   "pages": {
     "/": {
       "path": "/",
-      "pageTitle": "Invoice Generator: Free Online PDF Invoices (No Signup)",
-      "primaryKeyword": "invoice generator",
+      "pageTitle": "Free Online Invoice Generator - Online Invoice Creator",
+      "primaryKeyword": "free online invoice generator",
       "targetVolume": 500000,
       "competitionIndex": 14,
       "competition": "Low",
@@ -31,10 +31,10 @@
           "competition": "Low"
         },
         {
-          "phrase": "free online invoice generator",
-          "volume": 5000,
-          "competitionIndex": 41,
-          "competition": "Medium"
+          "phrase": "invoice generator",
+          "volume": 500000,
+          "competitionIndex": 14,
+          "competition": "Low"
         },
         {
           "phrase": "invoice maker",

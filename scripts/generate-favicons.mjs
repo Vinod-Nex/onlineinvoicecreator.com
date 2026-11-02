@@ -66,6 +66,12 @@ async function generateFavicons() {
   const png32 = await sharp(svgBuffer).resize(32, 32).png().toBuffer();
   fs.writeFileSync(path.join(PUBLIC_DIR, 'favicon-32x32.png'), png32);
 
+  const png48 = await sharp(svgBuffer).resize(48, 48).png().toBuffer();
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'favicon-48x48.png'), png48);
+
+  const png96 = await sharp(svgBuffer).resize(96, 96).png().toBuffer();
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'favicon-96x96.png'), png96);
+
   const png180 = await sharp(svgBuffer).resize(180, 180).png().toBuffer();
   fs.writeFileSync(path.join(PUBLIC_DIR, 'apple-touch-icon.png'), png180);
 
@@ -99,6 +105,11 @@ async function generateFavicons() {
         purpose: 'any maskable',
       },
       {
+        src: '/favicon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png',
+      },
+      {
         src: '/favicon-32x32.png',
         sizes: '32x32',
         type: 'image/png',
@@ -107,6 +118,22 @@ async function generateFavicons() {
         src: '/apple-touch-icon.png',
         sizes: '180x180',
         type: 'image/png',
+      },
+      {
+        src: '/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/icon-512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+      {
+        src: '/icon-maskable-512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'maskable',
       },
       {
         src: '/android-chrome-192x192.png',

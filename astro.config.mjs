@@ -81,8 +81,10 @@ function isNoIndexPage(urlStr) {
     // Disallowed routes
     if (
       pathname.includes('/404') ||
+      pathname.includes('/500') ||
       pathname.includes('/style-guide') ||
-      pathname.startsWith('/api')
+      pathname.startsWith('/api') ||
+      pathname.endsWith('.xml')
     ) {
       return true;
     }
@@ -108,69 +110,88 @@ export default defineConfig({
   site: 'https://onlineinvoicecreator.com',
   trailingSlash: 'never',
   compressHTML: true,
+  devToolbar: {
+    enabled: false,
+  },
   build: {
     inlineStylesheets: 'always',
   },
+  server: {
+    host: true,
+  },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: true,
+      host: true,
+      watch: {
+        ignored: ['**/testsprite_tests/**', '**/dist/**', '**/downloads/**', '**/.git/**', '**/*.pdf', '**/*.log'],
+      },
+    },
   },
   integrations: [
+    {
+      name: 'strip-html-comments',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const distDir = fileURLToPath(dir);
+          function cleanDir(d) {
+            const files = fs.readdirSync(d);
+            for (const f of files) {
+              const full = path.join(d, f);
+              if (fs.statSync(full).isDirectory()) {
+                cleanDir(full);
+              } else if (f.endsWith('.html')) {
+                let content = fs.readFileSync(full, 'utf8');
+                content = content.replace(/<!--(?!\[if|<!)([\s\S]*?)-->/g, '');
+                fs.writeFileSync(full, content, 'utf8');
+              }
+            }
+          }
+          cleanDir(distDir);
+        },
+      },
+    },
     sitemap({
       filter: (page) => !isNoIndexPage(page),
       serialize(item) {
         if (isNoIndexPage(item.url)) {
           return undefined;
         }
-
-        const parsed = new URL(item.url);
-        const cleanPath = parsed.pathname.replace(/\/$/, '') || '/';
-        const origin = parsed.origin;
-
-        // Lastmod retrieved directly from git commit history
-        item.lastmod = getGitLastMod(item.url);
-
-        // Tiered priority and changefreq
-        if (cleanPath === '/') {
-          item.changefreq = ChangeFreqEnum.WEEKLY;
-          item.priority = 1.0;
-        } else if (
-          [
-            '/free-online-receipt-generator',
-            '/free-rent-receipt-generator',
-            '/receipt-maker-with-items',
-            '/invoice-generator-for-freelancers',
-            '/invoice-generator-excel',
-            '/contractor-invoice-template',
-            '/photography-invoice-generator',
-            '/tax-invoice-template-australia',
-          ].includes(cleanPath)
-        ) {
-          item.changefreq = ChangeFreqEnum.WEEKLY;
-          item.priority = 0.9;
-        } else if (cleanPath === '/blog') {
-          item.changefreq = ChangeFreqEnum.WEEKLY;
-          item.priority = 0.8;
-        } else if (cleanPath === '/about' || cleanPath === '/contact') {
-          item.changefreq = ChangeFreqEnum.MONTHLY;
-          item.priority = 0.6;
-        } else {
-          item.changefreq = ChangeFreqEnum.MONTHLY;
-          item.priority = 0.4;
-        }
-
-        // Hreflang-ready structure: English (default), Spanish, Portuguese, and x-default
-        const esPath = cleanPath === '/' ? '/es' : `/es${cleanPath}`;
-        const ptPath = cleanPath === '/' ? '/pt' : `/pt${cleanPath}`;
-
-        item.links = [
-          { lang: 'en', url: item.url },
-          { lang: 'es', url: `${origin}${esPath}` },
-          { lang: 'pt', url: `${origin}${ptPath}` },
-          { lang: 'x-default', url: item.url },
-        ];
-
-        return item;
+        return {
+          url: item.url,
+        };
       },
     }),
+    {
+      name: 'pretty-format-sitemaps',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const distDir = fileURLToPath(dir);
+          const sitemap0Path = path.join(distDir, 'sitemap-0.xml');
+          if (fs.existsSync(sitemap0Path)) {
+            let content = fs.readFileSync(sitemap0Path, 'utf8');
+            content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
+            content = content
+              .replace(/<url>/g, '\n  <url>\n    ')
+              .replace(/<\/url>/g, '\n  </url>')
+              .replace(/<\/urlset>/g, '\n</urlset>\n');
+            fs.writeFileSync(sitemap0Path, content, 'utf8');
+          }
+          const sitemapIndexPath = path.join(distDir, 'sitemap-index.xml');
+          if (fs.existsSync(sitemapIndexPath)) {
+            let content = fs.readFileSync(sitemapIndexPath, 'utf8');
+            content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
+            fs.writeFileSync(sitemapIndexPath, content, 'utf8');
+          }
+          const sitemapXmlPath = path.join(distDir, 'sitemap.xml');
+          if (fs.existsSync(sitemapXmlPath)) {
+            let content = fs.readFileSync(sitemapXmlPath, 'utf8');
+            content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
+            fs.writeFileSync(sitemapXmlPath, content, 'utf8');
+          }
+        },
+      },
+    },
   ],
 });

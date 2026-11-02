@@ -78,6 +78,14 @@ export function setupReceiptForm() {
   const subtotalDisp = document.getElementById('receipt-subtotal-disp');
   const grandtotalDisp = document.getElementById('receipt-grandtotal-disp');
 
+  const receiptTaxRateInput = document.getElementById('receipt-tax-rate') as HTMLInputElement | null;
+  const receiptTaxRow = document.getElementById('receipt-tax-row');
+  const receiptTaxLabel = document.getElementById('receipt-tax-label');
+  const receiptTaxDisp = document.getElementById('receipt-tax-disp');
+  const prevTaxRow = document.getElementById('prev-rec-tax-row');
+  const prevTaxLabel = document.getElementById('prev-rec-tax-label');
+  const prevTax = document.getElementById('prev-rec-tax');
+
   // Currency Formatter
   function getCurrencySymbol() {
     const found = TOP_30_CURRENCIES.find((c) => c.code === receipt.currency);
@@ -166,23 +174,26 @@ export function setupReceiptForm() {
       row.innerHTML = `
         <input
           type="text"
-          class="item-desc text-input h-10 text-xs flex-1"
+          class="item-desc text-input h-10 text-xs flex-1 min-w-0"
           placeholder="Description of product / service"
+          aria-label="Item description"
           value="${item.description}"
           data-index="${index}"
         />
         <input
           type="number"
-          class="item-qty text-input h-10 text-xs w-16 text-center font-mono"
+          class="item-qty text-input h-10 text-xs !w-16 shrink-0 text-center font-mono"
           placeholder="Qty"
+          aria-label="Quantity"
           value="${item.quantity}"
           min="1"
           data-index="${index}"
         />
         <input
           type="number"
-          class="item-price text-input h-10 text-xs w-24 text-right font-mono"
+          class="item-price text-input h-10 text-xs !w-24 shrink-0 text-right font-mono"
           placeholder="Price"
+          aria-label="Unit price"
           value="${item.unitPrice}"
           min="0"
           step="0.01"
@@ -190,9 +201,10 @@ export function setupReceiptForm() {
         />
         <button
           type="button"
-          class="btn-del-item h-9 w-9 flex items-center justify-center text-gray-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
+          class="btn-del-item h-9 w-9 shrink-0 flex items-center justify-center text-gray-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
           data-index="${index}"
           title="Remove line item"
+          aria-label="Remove item ${index + 1}"
         >
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -205,30 +217,39 @@ export function setupReceiptForm() {
 
     // Wire input events
     itemsContainer.querySelectorAll('.item-desc').forEach((el) => {
-      el.addEventListener('input', (e) => {
+      const onDescInput = (e: Event) => {
         const idx = Number((e.target as HTMLElement).getAttribute('data-index'));
         receipt.lineItems[idx].description = (e.target as HTMLInputElement).value;
         triggerSave();
         updatePreview();
-      });
+      };
+      el.addEventListener('input', onDescInput);
+      el.addEventListener('change', onDescInput);
+      el.addEventListener('keyup', onDescInput);
     });
 
     itemsContainer.querySelectorAll('.item-qty').forEach((el) => {
-      el.addEventListener('input', (e) => {
+      const onQtyInput = (e: Event) => {
         const idx = Number((e.target as HTMLElement).getAttribute('data-index'));
         receipt.lineItems[idx].quantity = Number((e.target as HTMLInputElement).value) || 0;
         triggerSave();
         updatePreview();
-      });
+      };
+      el.addEventListener('input', onQtyInput);
+      el.addEventListener('change', onQtyInput);
+      el.addEventListener('keyup', onQtyInput);
     });
 
     itemsContainer.querySelectorAll('.item-price').forEach((el) => {
-      el.addEventListener('input', (e) => {
+      const onPriceInput = (e: Event) => {
         const idx = Number((e.target as HTMLElement).getAttribute('data-index'));
         receipt.lineItems[idx].unitPrice = Number((e.target as HTMLInputElement).value) || 0;
         triggerSave();
         updatePreview();
-      });
+      };
+      el.addEventListener('input', onPriceInput);
+      el.addEventListener('change', onPriceInput);
+      el.addEventListener('keyup', onPriceInput);
     });
 
     itemsContainer.querySelectorAll('.btn-del-item').forEach((el) => {
@@ -304,13 +325,32 @@ export function setupReceiptForm() {
       });
     }
 
-    // Subtotal & Grandtotal
+    // Subtotal, Tax & Grandtotal
+    const taxRate = Math.max(0, receipt.taxRate || 0);
+    const taxAmount = (totals.subtotal * taxRate) / 100;
+    const finalTotal = totals.subtotal + taxAmount;
+
     const formattedSub = formatMoney(totals.subtotal);
-    const formattedGrand = formatMoney(totals.grandTotal);
+    const formattedGrand = formatMoney(finalTotal);
 
     if (prevSubtotal) prevSubtotal.textContent = formattedSub;
-    if (prevGrandtotal) prevGrandtotal.textContent = formattedGrand;
     if (subtotalDisp) subtotalDisp.textContent = formattedSub;
+
+    if (taxRate > 0) {
+      const taxText = formatMoney(taxAmount);
+      if (receiptTaxLabel) receiptTaxLabel.textContent = `Tax (${taxRate}%)`;
+      if (receiptTaxDisp) receiptTaxDisp.textContent = taxText;
+      if (receiptTaxRow) receiptTaxRow.classList.remove('hidden');
+
+      if (prevTaxLabel) prevTaxLabel.textContent = `Tax (${taxRate}%)`;
+      if (prevTax) prevTax.textContent = taxText;
+      if (prevTaxRow) prevTaxRow.classList.remove('hidden');
+    } else {
+      if (receiptTaxRow) receiptTaxRow.classList.add('hidden');
+      if (prevTaxRow) prevTaxRow.classList.add('hidden');
+    }
+
+    if (prevGrandtotal) prevGrandtotal.textContent = formattedGrand;
     if (grandtotalDisp) grandtotalDisp.textContent = formattedGrand;
 
     if (prevNotes) prevNotes.textContent = receipt.notes || '';
@@ -318,6 +358,13 @@ export function setupReceiptForm() {
   }
 
   // Field change bindings
+  const onTaxRateChange = (e: Event) => {
+    receipt.taxRate = parseFloat((e.target as HTMLInputElement).value) || 0;
+    triggerSave();
+    updatePreview();
+  };
+  receiptTaxRateInput?.addEventListener('input', onTaxRateChange);
+  receiptTaxRateInput?.addEventListener('change', onTaxRateChange);
   receiptNumInput?.addEventListener('input', (e) => {
     receipt.receiptNumber = (e.target as HTMLInputElement).value;
     triggerSave();
@@ -390,10 +437,12 @@ export function setupReceiptForm() {
     updatePreview();
   });
 
-  paymentMethodSelect?.addEventListener('change', (e) => {
-    receipt.paymentMethod = (e.target as HTMLSelectElement).value;
-    triggerSave();
-    updatePreview();
+  ['change', 'input'].forEach((evt) => {
+    paymentMethodSelect?.addEventListener(evt, (e) => {
+      receipt.paymentMethod = (e.target as HTMLSelectElement).value || 'Cash';
+      triggerSave();
+      updatePreview();
+    });
   });
 
   txRefInput?.addEventListener('input', (e) => {
@@ -436,10 +485,10 @@ export function setupReceiptForm() {
 
       document.querySelectorAll('.btn-receipt-type').forEach((b) => {
         b.className =
-          'btn-receipt-type px-3 py-1 rounded-full text-charcoal hover:text-ink cursor-pointer transition-all';
+          'btn-receipt-type px-3.5 py-1.5 min-h-[32px] rounded-full text-charcoal hover:text-ink cursor-pointer transition-all';
       });
       target.className =
-        'btn-receipt-type px-3 py-1 rounded-full bg-primary text-white shadow-2xs cursor-pointer transition-all';
+        'btn-receipt-type px-3.5 py-1.5 min-h-[32px] rounded-full bg-primary text-white shadow-2xs cursor-pointer transition-all';
 
       if (type === 'cash') {
         receipt.paymentMethod = 'Cash';
@@ -494,49 +543,71 @@ export function setupReceiptForm() {
   const formCol = document.getElementById('receipt-form-column');
   const previewCol = document.getElementById('receipt-preview-column');
 
-  btnToggleForm?.addEventListener('click', () => {
-    formCol?.classList.remove('hidden');
-    previewCol?.classList.add('hidden');
-    btnToggleForm.className =
-      'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
-    if (btnTogglePreview)
-      btnTogglePreview.className =
-        'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
-  });
+  let activeReceiptTab: 'form' | 'preview' = 'form';
 
-  btnTogglePreview?.addEventListener('click', () => {
-    formCol?.classList.add('hidden');
-    previewCol?.classList.remove('hidden');
-    btnTogglePreview.className =
-      'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
-    if (btnToggleForm)
-      btnToggleForm.className =
-        'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+  function setReceiptMobileView(tab: 'form' | 'preview') {
+    activeReceiptTab = tab;
+    if (tab === 'form') {
+      formCol?.classList.remove('hidden');
+      previewCol?.classList.add('hidden');
+      if (btnToggleForm) {
+        btnToggleForm.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
+        btnToggleForm.setAttribute('aria-pressed', 'true');
+      }
+      if (btnTogglePreview) {
+        btnTogglePreview.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+        btnTogglePreview.setAttribute('aria-pressed', 'false');
+      }
+    } else {
+      formCol?.classList.add('hidden');
+      previewCol?.classList.remove('hidden');
+      updatePreview();
+      if (btnTogglePreview) {
+        btnTogglePreview.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
+        btnTogglePreview.setAttribute('aria-pressed', 'true');
+      }
+      if (btnToggleForm) {
+        btnToggleForm.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+        btnToggleForm.setAttribute('aria-pressed', 'false');
+      }
+    }
+  }
+
+  btnToggleForm?.addEventListener('click', () => setReceiptMobileView('form'));
+  btnTogglePreview?.addEventListener('click', () => setReceiptMobileView('preview'));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      formCol?.classList.remove('hidden');
+      previewCol?.classList.remove('hidden');
+    } else {
+      setReceiptMobileView(activeReceiptTab);
+    }
   });
 
   // Reset & Clear
   const btnReset = document.getElementById('btn-reset-receipt');
   btnReset?.addEventListener('click', () => {
-    if (confirm('Reset receipt to default values?')) {
-      receipt = createDefaultReceipt();
-      populateInputs();
-      renderLineItems();
-      updatePreview();
-      triggerSave();
-      showToast('info', 'Receipt Reset', 'Restored default receipt values.');
-    }
+    receipt = createDefaultReceipt();
+    populateInputs();
+    renderLineItems();
+    updatePreview();
+    triggerSave();
+    showToast('info', 'Receipt Reset', 'Restored default receipt values.');
   });
 
   const btnClearAll = document.getElementById('btn-clear-receipt-data');
   btnClearAll?.addEventListener('click', () => {
-    if (confirm('Clear saved receipt data from this browser?')) {
-      clearReceiptDraft();
-      receipt = createDefaultReceipt();
-      populateInputs();
-      renderLineItems();
-      updatePreview();
-      showToast('success', 'Receipt Cleared', 'All local receipt data has been cleared.');
-    }
+    clearReceiptDraft();
+    receipt = createDefaultReceipt();
+    populateInputs();
+    renderLineItems();
+    updatePreview();
+    showToast('success', 'Receipt Cleared', 'All local receipt data has been cleared.');
   });
 
   // Exports

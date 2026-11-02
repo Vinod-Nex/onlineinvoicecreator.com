@@ -23,11 +23,11 @@ const resourceLinks = [
 ];
 
 const companyLinks = [
-  { name: 'About Online Invoice Creator', href: '/about' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Contact Us', href: '/contact' },
+  { name: 'Privacy Policy', href: '/privacy' },
+  { name: 'Terms and Conditions', href: '/terms' },
   { name: 'Product Changelog', href: '/changelog' },
-  { name: 'Contact & Support', href: '/contact' },
-  { name: 'Privacy Policy (Local-First)', href: '/privacy' },
-  { name: 'Terms of Service', href: '/terms' },
 ];
 ---
 
@@ -43,27 +43,15 @@ const companyLinks = [
           href="/"
           class="group inline-flex items-center gap-2.5 text-ink transition-colors hover:text-primary"
         >
-          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white shadow-xs">
-            <svg
-              class="h-4 w-4"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <rect width="32" height="32" rx="8" fill="#494FDF" />
-              <path
-                d="M9 7C9 5.89543 9.89543 5 11 5H17.5858C18.1163 5 18.625 5.21071 19 5.58579L22.4142 9C22.7893 9.375 23 9.88371 23 10.4142V25C23 26.1046 22.1046 27 21 27H11C9.89543 27 9 26.1046 9 25V7Z"
-                fill="white"
-              />
-              <path
-                d="M17 5V9C17 9.55228 17.4477 10 18 10H22"
-                stroke="#494FDF"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
+          <img
+            src="/favicon.svg"
+            alt="Online Invoice Creator"
+            width="32"
+            height="32"
+            class="h-8 w-8 rounded-lg shadow-xs transition-transform group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
           <span class="text-lg font-bold tracking-tight text-ink">OnlineInvoiceCreator</span>
         </a>
         <p class="text-xs text-mute leading-relaxed">
@@ -181,11 +169,7 @@ const companyLinks = [
           />
         </svg>
         <p>
-          <strong class="font-semibold text-ink">Important Notice:</strong> Tools and templates on
-          OnlineInvoiceCreator.com are intended solely for genuine, lawful business transactions.
-          Users are strictly responsible for the accuracy of their financial records and for
-          complying with applicable local tax, statutory invoicing, and accounting regulations in
-          their respective jurisdictions.
+          <strong class="font-semibold text-ink">Important Notice:</strong> Online Invoice Creator tools and templates are designed strictly for genuine business documents, valid accounting records, and lawful commercial transactions. Users are responsible for complying with applicable local tax, statutory invoicing, and bookkeeping regulations in their respective jurisdictions.
         </p>
       </div>
     </div>
@@ -195,23 +179,23 @@ const companyLinks = [
       <div>© 2026 Online Invoice Creator. All rights reserved. 100% Client-Side Architecture.</div>
       <div class="flex items-center gap-4">
         <a href="/privacy" class="hover:text-ink transition-colors">
-          Privacy
+          Privacy Policy
         </a>
         <span class="text-hairline">·</span>
         <a href="/terms" class="hover:text-ink transition-colors">
-          Terms
+          Terms & Conditions
+        </a>
+        <span class="text-hairline">·</span>
+        <a href="/about" class="hover:text-ink transition-colors">
+          About Us
         </a>
         <span class="text-hairline">·</span>
         <a href="/contact" class="hover:text-ink transition-colors">
-          Support
+          Contact Us
         </a>
         <span class="text-hairline">·</span>
         <a href="/changelog" class="hover:text-ink transition-colors">
           Changelog
-        </a>
-        <span class="text-hairline">·</span>
-        <a href="/style-guide" class="hover:text-ink transition-colors">
-          Style Guide
         </a>
       </div>
     </div>

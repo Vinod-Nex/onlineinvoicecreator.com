@@ -1,11 +1,11 @@
 {
   "slug": "index",
-  "metaTitle": "Invoice Generator: Free Online PDF Invoices (No Signup)",
-  "metaDescription": "Use our free invoice generator to create and download professional PDF invoices in seconds. 100% private in-browser tool with zero watermarks or signup.",
+  "metaTitle": "Free Online Invoice Generator - Online Invoice Creator",
+  "metaDescription": "Create and download clean PDF invoices in seconds. Free online invoice generator with logo, 30 currencies, auto-calculations, and zero sign-up required.",
   "canonical": "https://onlineinvoicecreator.com/",
   "badge": "100% Free • No Watermarks • No Signup Required",
   "h1": "Free Online Invoice Generator",
-  "h1Highlight": "Invoice Generator",
+  "h1Highlight": "Free Online Invoice Generator",
   "intro": "An online invoice generator is a digital tool that allows freelancers, contractors, and small business owners to create, customize, and issue professional billing documents directly within their browser. You can itemize billable hours or products, calculate taxes and discounts automatically, and instantly download print-ready, watermark-free PDF invoices without creating an account or paying subscriptions.",
   "toolType": "invoice",
   "trustBadges": [
@@ -17,7 +17,7 @@
   "breadcrumbs": [{ "label": "Home" }],
   "howTo": {
     "badge": "Frictionless Billing",
-    "title": "How to Create Invoice Free Online in 3 Steps",
+    "title": "How to Create Invoice Free Online in 4 Steps",
     "subtitle": "Create professional client invoices with no account signups or subscriptions.",
     "steps": [
       {
@@ -34,9 +34,15 @@
       },
       {
         "step": 3,
+        "title": "Configure Amount Paid and Scan-to-Pay QR",
+        "description": "Enter advance retainer deposits to display live balance due, and generate an instant payment QR code.",
+        "tip": "When paid in full, our engine automatically renders an emerald PAID IN FULL stamp."
+      },
+      {
+        "step": 4,
         "title": "Download Clean PDF or Print",
         "description": "Select from four clean visual templates and export a watermark-free A4 or US Letter PDF instantly.",
-        "tip": "If your client has already transferred funds and needs proof of payment, use our <a href=\"/free-online-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Online Receipt Generator</a> to issue an instant payment receipt."
+        "tip": "If your client has already transferred funds, use our <a href=\"/free-online-receipt-generator\" class=\"text-primary font-semibold hover:underline\">Free Online Receipt Generator</a> to issue an instant payment receipt."
       }
     ]
   },
@@ -48,7 +54,7 @@
     "items": [
       {
         "title": "Business and Sender Identity",
-        "description": "Your registered business name or trading name, physical address, email, phone number, and tax registration ID [Verify with official source: commercial company invoicing statutes].",
+        "description": "Your registered business name or trading name, physical address, email, phone number, and tax registration ID.",
         "badge": "Required"
       },
       {
@@ -73,7 +79,7 @@
       },
       {
         "title": "Payment Terms and Remittance Details",
-        "description": "An explicit due date, bank wire or ACH account numbers, PayPal, Stripe, or local transfer details.",
+        "description": "An explicit due date, bank wire or ACH routing numbers, direct deposit, or secure online transfer details.",
         "badge": "Required"
       }
     ]
@@ -123,7 +129,7 @@
     "headers": [
       "Feature / Capability",
       "Online Invoice Creator",
-      "Traditional Software (e.g., QuickBooks)"
+      "Traditional Accounting Platforms"
     ],
     "rows": [
       {
@@ -155,33 +161,61 @@
     "note": "Online Invoice Creator is optimized for independent professionals who need fast, pristine billing without administrative bloat."
   },
   "faq": {
-    "badge": "General Invoicing FAQs",
-    "title": "Free Online Invoice Generator & Maker FAQs",
-    "subtitle": "Everything you need to know about creating, saving, and downloading invoices.",
+    "badge": "Frequently Asked Questions",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Clear, direct answers about creating, customizing, and downloading invoices online.",
     "items": [
       {
-        "question": "What must an invoice include to be legally complete?",
-        "answer": "A professional invoice must include a unique invoice number, issue date, payment due date, seller and buyer contact details, an itemized description of goods or services, and the total amount due. You should also clearly specify accepted payment methods, currency, applicable sales taxes, and bank account details for direct transfer. Clear payment terms prevent billing disputes and accelerate client remittance."
+        "question": "What is an online invoice creator?",
+        "answer": "An online invoice creator is a web-based software program that allows businesses, freelancers, and contractors to generate professional billing documents directly in their browser. Using our fast online invoice tool, you can input line items, calculate sales tax, apply discounts, and generate polished invoices instantly without installing desktop software. Everything processes immediately inside your browser."
       },
       {
-        "question": "Is this invoice generator really 100% free with no watermarks?",
-        "answer": "Yes, Online Invoice Creator is a completely free invoice generator with zero hidden fees, premium tiers, or intrusive watermarks. You can create invoice free drafts, generate unlimited documents, and download high-resolution PDF or PNG files without paying anything. We do not require account signups, credit cards, or trial subscriptions to unlock export features."
+        "question": "Is there a free online invoice generator with no sign-up?",
+        "answer": "Yes, Online Invoice Creator is a completely free online invoice generator with no sign-up or registration required. You can start creating your invoice immediately upon opening the page, customize line items, calculate totals, and download your finished document without submitting an email address, entering a password, or providing credit card information. Your billing workflow remains private and instant."
       },
       {
-        "question": "Are invoices created with this free online invoice generator legally valid?",
-        "answer": "Yes, invoices generated through our tool are fully legally valid commercial billing documents across standard commercial jurisdictions. As long as you provide genuine seller details, client identification, an itemized transaction breakdown, and appropriate tax identifiers, your downloaded invoice meets standard bookkeeping and commercial accounting requirements worldwide. Always check local tax rules for specific mandatory disclosures."
+        "question": "How do I create an invoice online for free?",
+        "answer": "You can create an invoice online for free in four simple steps using our interactive builder. First, enter your business details and client contact information. Next, add your itemized products or billable hours with unit prices. Then, choose your preferred currency, sales tax, and discount rate. Finally, click download to create invoice free drafts as clean, high-resolution PDF files ready to email."
       },
       {
-        "question": "Do you store my data or uploaded invoice details?",
-        "answer": "No, we never store, inspect, or transmit your invoice data, client names, or financial amounts to any remote database. Our free online bill generator operates 100% client-side inside your web browser. All calculations, draft auto-saves, and PDF conversions occur entirely on your local machine using private browser storage that you can clear whenever you want."
+        "question": "What should an invoice include?",
+        "answer": "A complete commercial invoice should include clear identification for both parties, transaction dates, and an itemized breakdown of costs. Specifically, make sure to list your business name, client details, a unique invoice number, issue date, payment due date, item descriptions with quantities and rates, subtotal, applicable taxes, and total due. You should also add explicit payment instructions and bank details."
       },
       {
-        "question": "Can I add a business logo to my invoice?",
-        "answer": "Yes, our invoice generator with logo allows you to upload custom branding directly onto your document header. Supported formats include PNG, JPG, and SVG images. Once selected, your logo is automatically scaled, sharpened, and embedded client-side into your PDF download without ever uploading your private brand graphics to external third-party servers."
+        "question": "Can I add my logo to a free invoice?",
+        "answer": "Yes, you can upload and display your custom company logo on any invoice at no cost. Simply click the logo upload box at the top of the invoice editor and select your PNG, JPG, or SVG image file. The system formats and sharpens your graphic client-side, embedding it directly into your printable invoice without adding third-party watermarks."
+      },
+      {
+        "question": "Can I download my invoice as a PDF?",
+        "answer": "Yes, you can download your invoice as a vector-sharp PDF document with a single click. Our client-side pdf invoice generator produces standard A4 and US Letter formats optimized for printing and digital emailing. You can also print physical copies directly or export your invoice data as JSON for secure offline backups on your own hard drive."
+      },
+      {
+        "question": "Is there an invoice generator app for my phone?",
+        "answer": "While we do not operate a native app store download, our platform works seamlessly as an invoice generator app directly inside any mobile browser. You can open the website on your iPhone, iPad, or Android device, fill in client charges, preview the layout, and save crisp PDF invoices on the go without installing separate software packages or consuming storage space."
+      },
+      {
+        "question": "Is this invoice generator good for small business?",
+        "answer": "Yes, our tool is specifically engineered as an efficient invoice generator for small business owners who need quick, professional invoicing without ongoing subscription overhead. It accommodates multi-currency invoicing, custom sales tax rates, line-item discounts, and company logos. Small businesses can send professional, unbranded invoices to clients immediately while maintaining total control over their billing records without vendor lock-in."
+      },
+      {
+        "question": "How do I create an invoice for freelance work?",
+        "answer": "To create an invoice for freelance work, document your project milestones or hourly rates, add client details, and itemize completed deliverables. For specialized freelancer workflows including retainer billing and hourly tracking, explore our dedicated <a href=\"/invoice-generator-for-freelancers\" class=\"text-primary hover:underline font-medium\">freelancers page</a>. You can enter project descriptions, specify payment terms, and download polished PDFs to ensure prompt client payment."
+      },
+      {
+        "question": "Can I make an invoice in Excel or Word?",
+        "answer": "Yes, you can build invoices using spreadsheet or word processing software, although manual templates frequently suffer from broken formatting and calculation errors. For a more reliable automated alternative with instant PDF generation, visit our <a href=\"/invoice-generator-excel\" class=\"text-primary hover:underline font-medium\">invoice generator excel page</a>. Our browser tool computes taxes and totals automatically without manual spreadsheet formulas or cell alignment headaches."
       },
       {
         "question": "What is the difference between an invoice and a receipt?",
-        "answer": "An invoice is a formal payment request issued before payment, whereas a receipt is proof of payment issued after funds clear. Use this invoice builder to bill clients for completed work, establish Net 30 terms, and itemize owed balances. Once your customer pays in full, issue an official receipt to confirm payment receipt for tax records."
+        "answer": "An invoice is a formal payment request issued before receiving payment, whereas a receipt is proof of payment issued after funds have been settled. Invoices establish payment terms, due dates, and owed balances for completed deliverables. Once your customer pays their bill in full, use our <a href=\"/free-online-receipt-generator\" class=\"text-primary hover:underline font-medium\">free online receipt generator</a> to provide official documentation confirming receipt of funds for accounting records."
+      },
+      {
+        "question": "Is an invoice made here legally valid?",
+        "answer": "Invoices created here contain all standard fields required by commercial jurisdictions worldwide, making them suitable for business billing and tax accounting. However, specific tax rules vary by region, so please check local regulations such as ABN and GST in Australia or VAT obligations via <a href=\"https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-primary hover:underline font-medium\">GOV.UK invoicing rules</a> to confirm your jurisdiction's mandatory disclosures."
+      },
+      {
+        "question": "Do you store my invoice data?",
+        "answer": "No, we do not store, view, or transmit any of your invoice data or customer information. Nothing is uploaded to external servers; every calculation, company logo, and line item stays strictly on your local device. Your private business records and financial figures remain stored exclusively within your own browser, ensuring total privacy and data confidentiality."
       }
     ]
   },

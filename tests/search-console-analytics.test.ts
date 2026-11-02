@@ -56,11 +56,32 @@ describe('Phase 32: Search Console, Bing Webmaster & Cloudflare Analytics', () =
     expect(content).toContain('cfAnalyticsToken');
   });
 
-  it('public/_headers CSP authorizes Cloudflare Web Analytics scripts and connect endpoints', () => {
+  it('public/_headers CSP authorizes Cloudflare and Google Analytics scripts and connect endpoints', () => {
     expect(fs.existsSync(headersPath)).toBe(true);
     const content = fs.readFileSync(headersPath, 'utf8');
 
     expect(content).toContain('https://static.cloudflareinsights.com');
     expect(content).toContain('https://cloudflareinsights.com');
+    expect(content).toContain('https://www.googletagmanager.com');
+    expect(content).toContain('https://*.google-analytics.com');
+    expect(content).toContain('https://*.analytics.google.com');
+    expect(content).toContain('https://*.googletagmanager.com');
+  });
+
+  it('src/layouts/BaseLayout.astro installs Google Analytics (gtag.js) high in the head element', () => {
+    expect(fs.existsSync(baseLayoutPath)).toBe(true);
+    const content = fs.readFileSync(baseLayoutPath, 'utf8');
+
+    expect(content).toContain('https://www.googletagmanager.com/gtag/js?id=G-67T95F4D53');
+    expect(content).toContain("gtag('config', 'G-67T95F4D53');");
+  });
+
+  it('dist/index.html renders the Google Analytics script in the head element', () => {
+    const distIndexPath = path.resolve(rootDir, 'dist/index.html');
+    if (fs.existsSync(distIndexPath)) {
+      const content = fs.readFileSync(distIndexPath, 'utf8');
+      expect(content).toContain('https://www.googletagmanager.com/gtag/js?id=G-67T95F4D53');
+      expect(content).toContain("gtag('config', 'G-67T95F4D53')");
+    }
   });
 });

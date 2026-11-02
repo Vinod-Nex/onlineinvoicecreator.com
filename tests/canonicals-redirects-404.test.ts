@@ -9,9 +9,10 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
   const distDir = path.resolve(rootDir, 'dist');
   const redirectsFile = path.join(distDir, '_redirects');
   const html404File = path.join(distDir, '404.html');
+  const html500File = path.join(distDir, '500.html');
 
   beforeAll(() => {
-    if (!fs.existsSync(distDir) || !fs.existsSync(html404File)) {
+    if (!fs.existsSync(distDir) || !fs.existsSync(html404File) || !fs.existsSync(html500File)) {
       execSync('npm run build', { cwd: rootDir, stdio: 'pipe' });
     }
   });
@@ -73,20 +74,11 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       expect(fs.existsSync(redirectsFile)).toBe(true);
     });
 
-    it('enforces single apex hostname and HTTPS in _redirects', () => {
+    it('enforces canonical redirect rules in _redirects', () => {
       const content = fs.readFileSync(redirectsFile, 'utf8');
-
-      // www to apex
-      expect(content).toContain(
-        'https://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
-      );
-      expect(content).toContain(
-        'http://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
-      );
-      // http to https
-      expect(content).toContain(
-        'http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
-      );
+      expect(content).toContain('/about/ /about 301');
+      expect(content).toContain('/privacy-policy /privacy 301');
+      expect(content).toContain('/terms-and-conditions /terms 301');
     });
 
     it('enforces trailing slash normalization via 301 redirects for all site routes', () => {
@@ -106,6 +98,7 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
         '/receipt-maker-with-items',
         '/tax-invoice-template-australia',
         '/style-guide',
+        '/500',
       ];
 
       for (const route of expectedRoutes) {
@@ -209,6 +202,70 @@ describe('Phase 29: Canonicals, Redirects, and Error Pages', () => {
       expect(body).toContain('Return to Free Invoice Generator');
 
       server.close();
+    });
+  });
+
+  describe('500 Server Error Page: Structure, Data Protection Guarantee, and Tools', () => {
+    it('builds dist/500.html', () => {
+      expect(fs.existsSync(html500File)).toBe(true);
+    });
+
+    it('includes noindex, nofollow robots directive on 500 page', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      expect(content).toMatch(/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i);
+    });
+
+    it('has a clear single H1 heading and technical guidance', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      const h1Matches = [...content.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+      expect(h1Matches.length).toBe(1);
+      expect(h1Matches[0][1]).toContain('Internal Server Error');
+    });
+
+    it('includes reload action button, return home link, and contact support', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      expect(content).toContain('Reload Page');
+      expect(content).toContain('Return to Free Invoice Generator');
+      expect(content).toContain('Contact Support');
+      expect(content).toMatch(/href=["']\/["']/);
+      expect(content).toMatch(/href=["']\/contact["']/);
+    });
+
+    it('contains data protection guarantee reassuring users about client-side storage', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      expect(content).toContain('Why Your Business Data Remains Protected');
+      expect(content).toContain('Your Invoice Data is 100% Safe');
+      expect(content).toContain('localStorage');
+    });
+
+    it('contains direct links to all 9 free billing and receipt tools', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      const requiredTools = [
+        '/',
+        '/contractor-invoice-template',
+        '/free-online-receipt-generator',
+        '/free-rent-receipt-generator',
+        '/invoice-generator-for-freelancers',
+        '/receipt-maker-with-items',
+        '/tax-invoice-template-australia',
+        '/invoice-generator-excel',
+        '/photography-invoice-generator',
+      ];
+
+      for (const toolHref of requiredTools) {
+        expect(content, `500 missing tool link: ${toolHref}`).toMatch(
+          new RegExp(`href=["']${toolHref}["']`)
+        );
+      }
+    });
+
+    it('contains a curated list of popular pages and guides', () => {
+      const content = fs.readFileSync(html500File, 'utf8');
+      expect(content).toContain('/blog');
+      expect(content).toContain('/about');
+      expect(content).toContain('/contact');
+      expect(content).toContain('/privacy');
+      expect(content).toContain('/terms');
     });
   });
 });

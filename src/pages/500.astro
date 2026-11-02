@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: '500 Server Error' }];
+
+const tools = [
+  {
+    title: 'Free Online Invoice Generator',
+    href: '/',
+    badge: '100% Free • Watermark-Free',
+    description:
+      'Create and download pristine PDF invoices with automatic totals, custom logos, and 30+ currencies.',
+  },
+  {
+    title: 'Contractor Invoice Template',
+    href: '/contractor-invoice-template',
+    badge: 'Trades & Construction',
+    description:
+      'Itemize labor hours, subcontractor rates, materials costs, and project milestone stages.',
+  },
+  {
+    title: 'Free Online Receipt Generator',
+    href: '/free-online-receipt-generator',
+    badge: 'Sales Receipts',
+    description:
+      'Issue instant proof-of-payment receipts for cash transactions, bank transfers, and card sales.',
+  },
+  {
+    title: 'Free Rent Receipt Generator',
+    href: '/free-rent-receipt-generator',
+    badge: 'Landlord & Tenant',
+    description:
+      'Generate printable monthly rent receipts with property addresses, rental periods, and landlord details.',
+  },
+  {
+    title: 'Invoice Generator for Freelancers',
+    href: '/invoice-generator-for-freelancers',
+    badge: 'Consultants & Creatives',
+    description:
+      'Tailored for independent freelancers, developers, and designers billing hourly or project rates.',
+  },
+  {
+    title: 'Receipt Maker with Items',
+    href: '/receipt-maker-with-items',
+    badge: 'Multi-Line Billing',
+    description:
+      'Line-by-line itemized receipts with unit prices, quantity multipliers, and automatic tax calculations.',
+  },
+  {
+    title: 'Tax Invoice Template Australia',
+    href: '/tax-invoice-template-australia',
+    badge: 'ATO & 10% GST Ready',
+    description:
+      'Australian tax invoice creator with ABN formatting, 10% GST breakdown, and ATO compliant layouts.',
+  },
+  {
+    title: 'Invoice Generator Excel Alternative',
+    href: '/invoice-generator-excel',
+    badge: 'Spreadsheet Alternative',
+    description:
+      'Replace fragile Excel templates with an error-free, auto-calculating in-browser invoice workspace.',
+  },
+  {
+    title: 'Photography Invoice Generator',
+    href: '/photography-invoice-generator',
+    badge: 'Studios & Shoots',
+    description:
+      'Bill photoshoot day rates, editing revisions, commercial usage rights, and equipment fees.',
+  },
+];
+
+const popularPages = [
+  {
+    title: 'Invoicing & Billing Guides',
+    href: '/blog',
+    description:
+      'Comprehensive guides on invoice requirements, late payment terms, and statutory tax rules.',
+  },
+  {
+    title: 'About Online Invoice Creator',
+    href: '/about',
+    description:
+      'Learn why our client-side architecture never transmits or stores your sensitive financial data.',
+  },
+  {
+    title: 'Contact Support & Feedback',
+    href: '/contact',
+    description:
+      'Need assistance or want to report a technical issue? Reach out directly to our engineering team.',
+  },
+  {
+    title: 'Zero-Storage Privacy Policy',
+    href: '/privacy',
+    description:
+      'Plain-English commitments explaining our client-side storage and zero-tracker guarantee.',
+  },
+  {
+    title: 'Commercial Terms of Service',
+    href: '/terms',
+    description: 'Unrestricted commercial use guidelines for generating valid business paperwork.',
+  },
+];
+
+const recoveryTips = [
+  {
+    title: 'Your Invoice Data is 100% Safe',
+    description:
+      'Online Invoice Creator operates strictly in your browser memory. In-progress drafts, sender profiles, and logos stored in localStorage remain completely safe and untouched.',
+  },
+  {
+    title: 'Try Refreshing Your Browser',
+    description:
+      'A temporary network interruption or stale service cache can cause connectivity glitches. A hard refresh (Ctrl+F5 or Cmd+Shift+R) often resolves edge cache misalignments immediately.',
+  },
+  {
+    title: 'Direct Engineering Support',
+    description:
+      'If this error repeats, reach out to our team at support@onlineinvoicecreator.com or use our Contact Us page. We investigate all server and routing errors with highest priority.',
+  },
+];
+---
+
+<BaseLayout
+  title="500: Server Error | Online Invoice Creator"
+  description="An unexpected server error occurred. Your invoice drafts remain safe in your local browser storage. Return home or explore our free invoicing tools."
+  canonical="https://onlineinvoicecreator.com/500"
+  ogImage="/og/og-500.png"
+  ogImageAlt="500 Server Error - Online Invoice Creator"
+  breadcrumbs={breadcrumbItems}
+  noindex={true}
+>
+  <!-- Breadcrumb Navigation -->
+  <div class="border-b border-hairline/60 bg-surface-soft/40 no-print">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
+    <!-- Hero 500 Notice -->
+    <header class="text-center max-w-3xl mx-auto space-y-5">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-warning/10 text-accent-warning border border-accent-warning/20">
+        <span class="flex h-2 w-2 rounded-full bg-accent-warning animate-pulse"></span>
+        <span>500 Error • Internal Server Error</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-ink font-display">
+        Internal Server Error
+      </h1>
+
+      <p class="text-base sm:text-lg text-mute leading-relaxed">
+        Something unexpected occurred on our edge network. Because our core invoice engines run
+        locally in your browser, your saved drafts and business data are safe. Try reloading the page
+        or return to the invoice editor below.
+      </p>
+
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          onclick="window.location.reload()"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-sm hover:bg-primary-hover active:scale-[0.99] transition-all text-sm cursor-pointer"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+          </svg>
+          Reload Page
+        </button>
+
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-card border border-hairline text-ink font-semibold hover:bg-surface-soft active:scale-[0.99] transition-all text-sm"
+        >
+          <svg
+            class="w-4 h-4 text-primary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Return to Free Invoice Generator
+        </a>
+
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-surface-card border border-hairline text-ink font-medium hover:bg-surface-soft text-sm transition-colors"
+        >
+          Contact Support
+        </a>
+      </div>
+    </header>
+
+    <!-- Recovery Guarantee Cards -->
+    <section class="space-y-6" aria-labelledby="recovery-tips-heading">
+      <div class="border-b border-hairline pb-4">
+        <h2
+          id="recovery-tips-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
+          Why Your Business Data Remains Protected
+        </h2>
+        <p class="text-xs sm:text-sm text-mute mt-1">
+          Our zero-server local architecture ensures unexpected network interruptions never jeopardize client records.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {recoveryTips.map((tip) => (
+          <div class="p-6 rounded-2xl bg-surface-card border border-hairline shadow-xs space-y-3">
+            <div class="flex items-center gap-2.5">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 class="font-bold text-ink text-base">{tip.title}</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-mute leading-relaxed">{tip.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 1. All Free Invoicing & Receipt Tools Grid -->
+    <section class="space-y-6" aria-labelledby="available-tools-heading">
+      <div class="border-b border-hairline pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <h2
+            id="available-tools-heading"
+            class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+          >
+            Explore Free Invoicing & Receipt Generators
+          </h2>
+          <p class="text-xs sm:text-sm text-mute mt-1">
+            Choose a dedicated generator. 100% client-side privacy, instant PDF export, and zero
+            watermarks.
+          </p>
+        </div>
+        <span class="text-xs text-mute font-medium">9 Free Tools Available</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {tools.map((tool) => (
+          <a
+            href={tool.href}
+            class="group p-5 rounded-2xl bg-surface-card border border-hairline hover:border-primary/50 shadow-xs hover:shadow-card transition-all flex flex-col justify-between space-y-4"
+          >
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-primary/10 text-primary">
+                  {tool.badge}
+                </span>
+                <span class="text-xs text-mute group-hover:text-primary transition-colors">
+                  Open Tool →
+                </span>
+              </div>
+              <h3 class="font-bold text-ink text-base group-hover:text-primary transition-colors">
+                {tool.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-mute leading-relaxed">{tool.description}</p>
+            </div>
+            <div class="pt-3 border-t border-hairline/60 flex items-center justify-between text-xs font-medium text-mute">
+              <span>Instant PDF Export</span>
+              <span class="text-accent-teal">Zero Signup</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 2. Curated List of Popular Pages -->
+    <section class="space-y-6" aria-labelledby="popular-pages-heading">
+      <div class="border-b border-hairline pb-4">
+        <h2
+          id="popular-pages-heading"
+          class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight"
+        >
+          Popular Guides & Company Pages
+        </h2>
+        <p class="text-xs sm:text-sm text-mute mt-1">
+          Quickly navigate to business tutorials, statutory tax documentation, or platform
+          guidelines.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {popularPages.map((page) => (
+          <a
+            href={page.href}
+            class="group p-5 rounded-2xl bg-surface-card border border-hairline hover:border-hairline-strong shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between"
+          >
+            <div class="space-y-1.5">
+              <h3 class="font-bold text-ink text-sm sm:text-base group-hover:text-primary transition-colors flex items-center justify-between">
+                <span>{page.title}</span>
+                <span class="text-xs text-mute group-hover:translate-x-0.5 transition-transform">
+                  →
+                </span>
+              </h3>
+              <p class="text-xs text-mute leading-relaxed">{page.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Help Banner -->
+    <section class="p-6 sm:p-8 rounded-3xl bg-surface-soft border border-hairline text-center space-y-3">
+      <h2 class="text-lg sm:text-xl font-bold text-ink font-display">
+        Need assistance with an invoice or receipt?
+      </h2>
+      <p class="text-xs sm:text-sm text-mute max-w-xl mx-auto">
+        Our engineering and support team is here to assist with billing templates, currency settings, or bug reports.
+      </p>
+      <div class="pt-2">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary hover:underline"
+        >
+          <span>Contact Customer Support</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

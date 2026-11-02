@@ -40,3 +40,6 @@ playwright-report/
 # Temp files
 *.tmp
 *.bak
+downloads/
+testsprite_tests/tmp/
+testsprite_tests/tmp/config.json

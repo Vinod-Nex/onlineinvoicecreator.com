@@ -5,6 +5,7 @@ import type { ToolPageData } from '../src/types/page';
 
 function countWords(text: string): number {
   return text
+    .replace(/<[^>]+>/g, ' ')
     .trim()
     .replace(/\s+/g, ' ')
     .split(' ')
@@ -46,11 +47,15 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
         const filePath = path.join(pagesDir, `${slug}.json`);
         const data = JSON.parse(fs.readFileSync(filePath, 'utf-8')) as ToolPageData;
 
-        it('contains exactly 5 to 6 FAQs', () => {
+        it(slug === 'index' ? 'contains 13 FAQs' : 'contains exactly 5 to 6 FAQs', () => {
           expect(data.faq).toBeDefined();
           expect(Array.isArray(data.faq.items)).toBe(true);
-          expect(data.faq.items.length).toBeGreaterThanOrEqual(5);
-          expect(data.faq.items.length).toBeLessThanOrEqual(6);
+          if (slug === 'index') {
+            expect(data.faq.items.length).toBe(13);
+          } else {
+            expect(data.faq.items.length).toBeGreaterThanOrEqual(5);
+            expect(data.faq.items.length).toBeLessThanOrEqual(6);
+          }
         });
 
         it('each FAQ answer is strictly between 40 and 70 words', () => {
@@ -154,7 +159,8 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
         (q) =>
           q.includes('must an invoice include') ||
           q.includes('what must') ||
-          q.includes('must be included')
+          q.includes('must be included') ||
+          q.includes('what should an invoice include')
       );
       expect(matched).toBe(true);
     });
@@ -180,6 +186,7 @@ describe('Phase 25: FAQ Content & Direct Answers Audit', () => {
       const matched = allQuestions.some(
         (q) =>
           q.includes('store my data') ||
+          q.includes('store my invoice data') ||
           q.includes('save my data') ||
           q.includes('where is my data')
       );

@@ -54,13 +54,12 @@ describe('Phase 20: Cloudflare Pages Deployment Headers & Redirects', () => {
   it('validates canonical apex domain redirection in _redirects', () => {
     const content = fs.readFileSync(publicRedirectsPath, 'utf8');
 
-    // www to apex redirect
-    expect(content).toContain(
-      'https://www.onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
-    );
-    expect(content).toContain(
-      'http://onlineinvoicecreator.com/* https://onlineinvoicecreator.com/:splat 301!'
-    );
+    // Cloudflare Workers Static Assets enforces relative redirect rules in _redirects
+    // (apex/www domain-level redirection is handled via Cloudflare DNS / Page Rules)
+    expect(content).not.toContain('https://');
+    expect(content).not.toContain('http://');
+    expect(content).toContain('/privacy-policy /privacy 301');
+    expect(content).toContain('/about-us /about 301');
   });
 
   it('validates trailing slash normalization in _redirects', () => {

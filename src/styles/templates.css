@@ -288,6 +288,31 @@
 }
 
 /* ==========================================================================
+   BALANCE DUE & SCAN-TO-PAY QR STYLES
+   ========================================================================== */
+.tmpl-balance-due-row {
+  margin-top: 4px;
+}
+
+.invoice-paper[data-template='modern'] .tmpl-balance-due {
+  color: var(--tmpl-accent);
+}
+
+.invoice-paper[data-template='classic'] .tmpl-balance-due {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  color: #0f172a;
+}
+
+.invoice-paper[data-template='minimal'] .tmpl-balance-due {
+  color: #111827;
+}
+
+.invoice-paper[data-template='compact'] .tmpl-balance-due {
+  color: #0f172a;
+  font-size: 18px;
+}
+
+/* ==========================================================================
    PRINT / PDF MEDIA STYLES (Exact 1:1 Match)
    ========================================================================== */
 @media print {

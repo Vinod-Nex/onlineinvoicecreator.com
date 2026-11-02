@@ -73,7 +73,7 @@
       },
       {
         "title": "Bank Details and Payment Methods",
-        "description": "Direct bank transfer information (IBAN, BSB, or routing numbers), PayPal, Stripe, or wire instructions.",
+        "description": "Direct bank transfer information (IBAN, BSB, or routing numbers), payment link, Stripe, or wire instructions.",
         "badge": "Required"
       }
     ]

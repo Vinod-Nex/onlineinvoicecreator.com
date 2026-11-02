@@ -63,18 +63,6 @@
   --color-hairline-strong: var(--color-hairline-strong);
   --color-divider: var(--color-divider);
 
-  /* Spacing Scale matching DESIGN.md */
-  --spacing-xxs: 4px;
-  --spacing-xs: 6px;
-  --spacing-sm: 8px;
-  --spacing-md: 14px;
-  --spacing-lg: 16px;
-  --spacing-xl: 24px;
-  --spacing-xxl: 32px;
-  --spacing-xxxl: 48px;
-  --spacing-block: 80px;
-  --spacing-section: 88px;
-  --spacing-band: 120px;
 
   /* Radius Scale matching DESIGN.md */
   --radius-none: 0px;
@@ -240,6 +228,21 @@ body {
   background-color: var(--color-canvas);
   color: var(--color-body);
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS Safari auto-zoom on form input focus below 16px */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Smooth touch scrolling for all responsive tables */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Accessible Global Focus States */

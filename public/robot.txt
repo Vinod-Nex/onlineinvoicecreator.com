@@ -1,0 +1,8 @@
+# robots.txt for https://onlineinvoicecreator.com
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /style-guide
+
+# Sitemap index
+Sitemap: https://onlineinvoicecreator.com/sitemap-index.xml

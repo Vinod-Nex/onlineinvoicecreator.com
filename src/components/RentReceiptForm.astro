@@ -445,6 +445,7 @@ const defaultRent = createDefaultRentReceipt();
                   Payment Mode
                 </label>
                 <select id="rent-payment-mode" class="text-input h-11 text-sm">
+                  <option value="">Select payment method / mode</option>
                   <option value="Bank Transfer" selected>
                     Bank Transfer / NEFT / IMPS
                   </option>
@@ -471,8 +472,8 @@ const defaultRent = createDefaultRentReceipt();
           </div>
 
           <!-- Total Calculation Display -->
-          <div class="flex justify-end pt-2" aria-live="polite" aria-atomic="true">
-            <div class="w-full max-w-xs space-y-1.5 text-xs">
+          <div class="pt-2 flex flex-col sm:items-end" aria-live="polite" aria-atomic="true">
+            <div class="w-full sm:max-w-xs space-y-1.5 text-xs">
               <div class="flex justify-between text-gray-600">
                 <span>Rent Amount</span>
                 <span id="rent-base-disp" class="font-mono font-medium">
@@ -529,7 +530,7 @@ const defaultRent = createDefaultRentReceipt();
     <!-- Right Column: Live Rent Receipt Preview (Sticky) -->
     <div
       id="rent-preview-column"
-      class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
+      class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
     >
       <!-- Preview Controls Toolbar -->
       <div class="flex items-center justify-between gap-3 p-3 bg-surface-card rounded-2xl border border-hairline mb-4 shadow-xs no-print">
@@ -587,7 +588,7 @@ const defaultRent = createDefaultRentReceipt();
       <div class="flex justify-center">
         <article
           id="rent-preview-document"
-          class="invoice-paper p-6 sm:p-10 relative"
+          class="invoice-paper p-4 sm:p-8 md:p-10 relative w-full"
           data-template="modern"
           data-format="a4"
         >
@@ -652,41 +653,43 @@ const defaultRent = createDefaultRentReceipt();
             </div>
 
             <!-- Financial Breakdown Table -->
-            <table class="w-full text-xs text-left">
-              <thead>
-                <tr class="border-b border-gray-200 text-gray-500 uppercase text-[10px] tracking-wider">
-                  <th class="py-2">Item</th>
-                  <th class="py-2">Period</th>
-                  <th class="py-2 text-right">Amount</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100">
-                <tr>
-                  <td class="py-2.5 font-medium text-gray-900">Monthly House Rent</td>
-                  <td class="py-2.5 text-gray-600" id="prev-rent-period-td">
-                    {defaultRent.periodMonthYear}
-                  </td>
-                  <td
-                    class="py-2.5 text-right font-mono font-medium text-gray-900"
-                    id="prev-rent-base-td"
-                  >
-                    $1,850.00
-                  </td>
-                </tr>
-                <tr id="prev-rent-maint-row">
-                  <td class="py-2.5 font-medium text-gray-900">Maintenance / Utility Charges</td>
-                  <td class="py-2.5 text-gray-600" id="prev-rent-maint-period-td">
-                    {defaultRent.periodMonthYear}
-                  </td>
-                  <td
-                    class="py-2.5 text-right font-mono font-medium text-gray-900"
-                    id="prev-rent-maint-td"
-                  >
-                    $150.00
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="overflow-x-auto w-full">
+              <table class="w-full text-xs text-left min-w-[280px]">
+                <thead>
+                  <tr class="border-b border-gray-200 text-gray-500 uppercase text-[10px] tracking-wider">
+                    <th class="py-2">Item</th>
+                    <th class="py-2">Period</th>
+                    <th class="py-2 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr>
+                    <td class="py-2.5 font-medium text-gray-900">Monthly House Rent</td>
+                    <td class="py-2.5 text-gray-600" id="prev-rent-period-td">
+                      {defaultRent.periodMonthYear}
+                    </td>
+                    <td
+                      class="py-2.5 text-right font-mono font-medium text-gray-900"
+                      id="prev-rent-base-td"
+                    >
+                      $1,850.00
+                    </td>
+                  </tr>
+                  <tr id="prev-rent-maint-row">
+                    <td class="py-2.5 font-medium text-gray-900">Maintenance / Utility Charges</td>
+                    <td class="py-2.5 text-gray-600" id="prev-rent-maint-period-td">
+                      {defaultRent.periodMonthYear}
+                    </td>
+                    <td
+                      class="py-2.5 text-right font-mono font-medium text-gray-900"
+                      id="prev-rent-maint-td"
+                    >
+                      $150.00
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <!-- Payment Details & Landlord PAN Box -->

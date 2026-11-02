@@ -6,7 +6,7 @@
   "badge": "100% Free • Construction & Trades • Zero Watermarks",
   "h1": "Free Contractor Invoice Template",
   "h1Highlight": "Contractor Invoice",
-  "intro": "A contractor invoice template is a standardized commercial billing statement used by independent contractors, trade specialists, and 1099 workers to bill clients for labor and materials. It specifies project milestones or hourly rates, itemizes physical supply costs, calculates applicable sales tax, outlines agreed payment terms, and provides contractor tax identification for corporate compliance.",
+  "intro": "A contractor invoice template is a standardized billing statement used by independent contractors, trade specialists, and 1099 workers to bill for labor and materials. It specifies milestones or hourly rates, itemizes supply costs, calculates sales tax, and outlines agreed payment terms for commercial compliance.",
   "toolType": "invoice",
   "trustBadges": [
     "Labor & Materials Itemization",
@@ -48,32 +48,32 @@
     "items": [
       {
         "title": "Contractor Identity and Licence",
-        "description": "Your registered business name, contact details, and state or municipal contractor licence number [Verify with official source: state contractor licensing regulations].",
+        "description": "Your registered business name, contact details, and state contractor licence number [Verify with official source: state contractor licensing regulations].",
         "badge": "Required"
       },
       {
         "title": "Client and Jobsite Physical Address",
-        "description": "The client's billing information plus the exact physical address where the construction or trade work was performed.",
+        "description": "Client billing details plus the physical address where construction or trade work was performed.",
         "badge": "Required"
       },
       {
         "title": "Contract or PO Reference Number",
-        "description": "The original estimate number, client purchase order, or change-order identifier for clear cross-referencing.",
+        "description": "Original estimate number, client purchase order, or change-order identifier for cross-referencing.",
         "badge": "Recommended"
       },
       {
         "title": "Separated Labor and Materials",
-        "description": "An itemized breakdown distinguishing hourly labor from raw building materials, fixtures, and equipment rentals.",
+        "description": "Itemized breakdown distinguishing hourly labor from raw building materials, fixtures, and rentals.",
         "badge": "Required"
       },
       {
         "title": "Deposits and Milestone Credits",
-        "description": "Clear accounting of deposits already received, progress draws, and any agreed retainage holdback amount.",
+        "description": "Clear accounting of deposits received, progress draws, and agreed retainage holdback.",
         "badge": "Trade Standard"
       },
       {
         "title": "Payment Terms and Remittance Details",
-        "description": "Direct bank transfer details (ACH or wire), check mailing instructions, and due dates [Verify with official source: statutory mechanics lien notice deadlines].",
+        "description": "Direct bank transfer details (ACH/wire), check mailing instructions, and due dates [Verify with official source: statutory mechanics lien notice deadlines].",
         "badge": "Required"
       }
     ]
@@ -82,8 +82,8 @@
     "title": "Sample Contractor Invoice Example Breakdown",
     "scenario": "Commercial Plumbing Renovation & Fixture Rough-in",
     "sender": {
-      "name": "Apex Commercial Mechanical Services LLC",
-      "details": "Contractor Licence #CMC-104928\n1204 Industrial Parkway, Unit 8\nDenver, CO 80216\nbilling@apexmechanical.com"
+      "name": "Apex Mechanical Services LLC",
+      "details": "Contractor Licence #CMC-104928\n1204 Industrial Pkwy, Denver, CO 80216\nbilling@apexmechanical.com"
     },
     "recipient": {
       "name": "Summit Property Management Corp",
@@ -91,19 +91,19 @@
     },
     "items": [
       {
-        "description": "Rough-in Plumbing Labor (Master Plumber + Journeyman)",
+        "description": "Rough-in Plumbing Labor (36 hours)",
         "quantity": 36,
         "rate": "$95.00/hr",
         "amount": "$3,420.00"
       },
       {
-        "description": "Commercial Grade PEX-A Piping & Copper Manifold Fittings",
+        "description": "PEX-A Piping & Copper Manifold Fittings",
         "quantity": 1,
         "rate": "$1,450.00",
         "amount": "$1,450.00"
       },
       {
-        "description": "Municipal Building Inspection Fee and Pressure Test Sign-off",
+        "description": "Building Inspection Fee & Pressure Test Sign-off",
         "quantity": 1,
         "rate": "$275.00",
         "amount": "$275.00"
@@ -128,31 +128,31 @@
     "rows": [
       {
         "feature": "Tax Withholding",
-        "ourValue": "Zero tax withheld; contractor self-reports self-employment taxes",
-        "otherValue": "Income taxes, social security, and Medicare automatically withheld"
+        "ourValue": "Zero tax withheld; contractor self-reports tax obligations",
+        "otherValue": "Income tax, social security, and Medicare withheld by employer"
       },
       {
         "feature": "Material & Equipment Costs",
-        "ourValue": "Directly itemized as billable supplies and reimbursable expenses",
-        "otherValue": "Submitted through corporate expense reimbursement forms"
+        "ourValue": "Itemized as billable supplies and reimbursable expenses",
+        "otherValue": "Submitted through employee expense reimbursement claims"
       },
       {
         "feature": "Payment Terms & Schedule",
-        "ourValue": "Contractual terms (e.g., Net 14, Net 30, or milestone completion)",
-        "otherValue": "Predetermined corporate payroll cycles (bi-weekly or monthly)"
+        "ourValue": "Contractual terms (e.g., Net 14, Net 30, or milestone draws)",
+        "otherValue": "Standard corporate payroll cycles (bi-weekly or monthly)"
       },
       {
         "feature": "Legal Relationship",
-        "ourValue": "Autonomous business-to-business vendor agreement",
-        "otherValue": "Subordinate master-servant statutory employment relationship"
+        "ourValue": "Independent business-to-business vendor agreement",
+        "otherValue": "Statutory employer-employee master-servant relationship"
       },
       {
         "feature": "Tax Reporting Document",
-        "ourValue": "IRS Form 1099-NEC (US) or local equivalent contractor declaration",
-        "otherValue": "IRS Form W-2 (US) or statutory employee wage summary"
+        "ourValue": "IRS Form 1099-NEC (US) or equivalent contractor declaration",
+        "otherValue": "IRS Form W-2 (US) statutory employee wage summary"
       }
     ],
-    "note": "Issuing formal contractor invoices establishes clear proof of independent business status for both corporate clients and tax authorities."
+    "note": "Issuing formal contractor invoices establishes clear proof of independent business status for clients and tax authorities."
   },
   "faq": {
     "badge": "Trade Invoicing FAQs",
@@ -161,68 +161,68 @@
     "items": [
       {
         "question": "What must a contractor invoice include to prevent client payment disputes?",
-        "answer": "A contractor invoice must include your contracting license number, business address, client details, jobsite physical location, unique invoice number, dates of work, itemized labor and materials, and payment terms. Separating labor hours from materials cost and documenting approved change orders provides the legal transparency necessary to protect mechanic lien rights and accelerate invoice sign-off."
+        "answer": "A contractor invoice must include your business name, license number, client details, jobsite location, unique invoice number, dates worked, itemized labor hours, materials costs, and payment terms. Explicitly separating labor from materials clarifies sales tax obligations and protects your statutory mechanics lien rights across commercial and residential projects."
       },
       {
         "question": "Why should contractors separate labor and materials on billing templates?",
-        "answer": "Separating labor and materials clarifies project billing and simplifies statutory sales tax reporting across trade jurisdictions. In many regions, sales tax applies strictly to physical building materials while specialized contractor labor remains tax-exempt. Clear itemization prevents client overcharging, facilitates job costing, and simplifies year-end construction tax accounting."
+        "answer": "Separating labor and materials clarifies project billing and simplifies statutory sales tax reporting across jurisdictions. In most regions, sales tax applies strictly to physical construction materials while skilled contractor labor is exempt. Clear line-item breakdowns prevent client disputes, make job costing transparent, and streamline annual trade tax filings."
       },
       {
         "question": "Is this contractor billing invoice template free to download without watermarks?",
-        "answer": "Yes, our contractor billing invoice template is 100% free and prints clean, professional bills with zero watermarks. Builders, plumbers, electricians, and general contractors can create unlimited invoices on site, download watermark-free PDFs, and bill clients without paying monthly software subscriptions or setup charges."
+        "answer": "Yes, our contractor invoice template is 100% free and downloads as a clean, watermark-free vector PDF. Tradespeople, builders, electricians, and plumbers can generate unlimited invoices right on the jobsite. You can email professional documents directly to property owners without paying any recurring software subscriptions or hidden upgrade fees."
       },
       {
         "question": "Are invoices created with this contractor bill format legally valid?",
-        "answer": "Yes, contractor bills generated here are legally valid commercial documents suitable for trade contracts and construction accounting. When paired with signed work authorizations, itemized receipts, and formal change order documentation, these invoices provide complete, dispute-proof legal evidence for client billing, insurance claims, and commercial litigation."
+        "answer": "Yes, contractor bills created with this format are legally valid commercial documents for trade accounting and contracts. When paired with signed work authorizations, material receipts, and approved change orders, these invoices provide complete, dispute-proof legal evidence for commercial clients, general contractor billing, and statutory tax compliance audits."
       },
       {
         "question": "Can contractors add a company logo and license badge?",
-        "answer": "Yes, you can upload your trade business logo, state license badge, or guild credential directly onto the invoice letterhead. Displaying your professional branding and state licensing details builds immediate trust with commercial property owners and general contractors reviewing your billing packet."
+        "answer": "Yes, you can upload your trade company logo, guild badge, or state licensing credential directly to the invoice letterhead. Displaying your branding and credentials prominently reinforces professional authority. It also helps commercial property managers and general contractors verify your trade legitimacy before approving disbursements."
       },
       {
         "question": "What is the difference between a contractor invoice and a receipt?",
-        "answer": "A contractor invoice bills for labor hours and jobsite materials due, whereas a contractor receipt confirms payment has been received. Issue a contractor invoice upon hitting project milestones to request progress payments. Once your client pays by cheque or wire, issue an official receipt to acknowledge settled accounts."
+        "answer": "A contractor invoice requests payment for completed labor and jobsite supplies before settlement occurs, whereas a receipt acknowledges payment after funds clear. Issue an itemized invoice upon hitting project milestones to request draws. Once your client pays by transfer or cheque, issue an official receipt to acknowledge settled accounts."
       }
     ]
   },
   "contextualLinks": {
     "badge": "Contractor Workflows",
     "title": "Complete Your Trade Billing & Deposit System",
-    "subtitle": "Easily link progress milestone billing, deposit receipts, regional tax compliance, and solo consulting.",
+    "subtitle": "Connect milestone billing, deposit receipts, regional tax compliance, and solo consulting.",
     "items": [
       {
         "prompt": "Received milestone deposit or materials payment?",
         "text": "Create an Itemized Receipt",
         "href": "/receipt-maker-with-items",
         "badge": "Deposit Proof",
-        "description": "Provide an itemized receipt for materials delivered, equipment hire, and progress deposits."
+        "description": "Provide an itemized receipt for materials delivered and progress deposits."
       },
       {
         "prompt": "Contracting in Australia under ATO rules?",
         "text": "Switch to Australia Tax Invoice Template",
         "href": "/tax-invoice-template-australia",
         "badge": "ATO GST",
-        "description": "Includes mandatory Australian Business Number (ABN) fields and 10% GST calculations."
+        "description": "Includes Australian Business Number (ABN) fields and 10% GST calculations."
       },
       {
         "prompt": "Providing solo digital consulting or remote work?",
         "text": "Use Invoice Generator for Freelancers",
         "href": "/invoice-generator-for-freelancers",
         "badge": "Consulting",
-        "description": "Optimized for billable hours, software development, and remote digital services."
+        "description": "Optimized for billable hours, coding projects, and remote digital services."
       },
       {
         "prompt": "Need general commercial invoicing?",
         "text": "Return to Free Online Invoice Generator",
         "href": "/",
         "badge": "General",
-        "description": "Standard business invoice generator with clean PDF export and custom line items."
+        "description": "Standard business invoice generator with clean PDF export and custom lines."
       }
     ]
   },
   "relatedTools": {
     "title": "Related Contractor Billing & Trade Tools",
-    "subtitle": "Streamline your contracting paperwork with our free browser-based tools.",
+    "subtitle": "Streamline your contracting paperwork with free browser-based tools.",
     "items": [
       {
         "title": "Itemized Receipt Maker",
@@ -234,19 +234,19 @@
         "title": "Australia Tax Invoices",
         "href": "/tax-invoice-template-australia",
         "badge": "ATO Compliant",
-        "description": "Operating in Australia? Generate ATO-compliant GST tax invoices with ABN."
+        "description": "Generate ATO-compliant GST tax invoices with ABN for Australian clients."
       },
       {
         "title": "Freelancer Invoices",
         "href": "/invoice-generator-for-freelancers",
         "badge": "Solo Creators",
-        "description": "Invoicing for designers, developers, and creative consultants."
+        "description": "Invoicing for designers, developers, and creative trade consultants."
       },
       {
         "title": "Excel Invoice Alternative",
         "href": "/invoice-generator-excel",
         "badge": "Spreadsheets",
-        "description": "In-browser invoicing without corrupt spreadsheet formulas or macros."
+        "description": "In-browser invoicing without corrupt spreadsheet formulas or broken macros."
       },
       {
         "title": "Free Online Receipt Generator",
@@ -271,13 +271,13 @@
         "name": "IRS Form 1099-NEC & Contractor Recordkeeping",
         "authority": "Internal Revenue Service (IRS)",
         "url": "https://www.irs.gov/forms-pubs/about-form-1099-nec",
-        "description": "Reporting rules for nonemployee compensation paid to independent trade contractors, EIN/SSN identification, and annual reporting thresholds ($600)."
+        "description": "Rules for nonemployee compensation paid to independent trade contractors, EIN/SSN IDs, and reporting thresholds ($600)."
       },
       {
         "name": "HMRC Invoicing Standards & Construction Rules",
         "authority": "HM Revenue & Customs (HMRC)",
         "url": "https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include",
-        "description": "Statutory rules for UK sole trader contractors, itemized labor and materials breakdowns, and Construction Industry Scheme (CIS) deductions."
+        "description": "Statutory rules for sole traders, itemized labor and materials breakdowns, and CIS deductions."
       }
     ]
   }

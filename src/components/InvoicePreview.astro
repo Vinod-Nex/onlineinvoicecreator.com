@@ -5,6 +5,15 @@ const defaultInvoice = createDefaultInvoice();
 ---
 
 <div id="invoice-preview-container" class="w-full">
+  <!-- Invoice Preview Header -->
+  <div class="flex items-center justify-between mb-2 no-print">
+    <h2 class="text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-1.5">
+      <span class="flex h-2 w-2 rounded-full bg-accent-teal"></span>
+      <span>Invoice Preview</span>
+    </h2>
+    <span class="text-[11px] text-mute">Live real-time view</span>
+  </div>
+
   <!-- Template Switcher, Paper Format & Export Toolbar (Hidden in Print) -->
   <div
     id="preview-toolbar"
@@ -120,11 +129,13 @@ const defaultInvoice = createDefaultInvoice();
       </button>
 
       <!-- PDF Download Button (Primary) -->
+      <!-- PDF Download Button (Primary) -->
       <button
         type="button"
         id="btn-download-pdf-preview"
         class="btn-cobalt h-9 px-4 text-xs font-semibold rounded-full flex items-center gap-1.5 shadow-2xs cursor-pointer"
         title="Generate & Download PDF"
+        aria-label="Download PDF"
       >
         <svg
           class="btn-pdf-icon h-3.5 w-3.5"
@@ -145,7 +156,7 @@ const defaultInvoice = createDefaultInvoice();
   <!-- The Document Canvas (Rendered with 100% Print/PDF Fidelity) -->
   <article
     id="invoice-preview-document"
-    class="invoice-paper tmpl-pad-main p-6 sm:p-10 space-y-6 sm:space-y-8"
+    class="invoice-paper tmpl-pad-main p-4 sm:p-8 md:p-10 space-y-6 sm:space-y-8"
     data-template="modern"
   >
     <!-- Document Header: Logo & Meta -->
@@ -191,8 +202,11 @@ const defaultInvoice = createDefaultInvoice();
       <!-- Document Title & Meta Box -->
       <div class="text-left sm:text-right space-y-2">
         <div class="flex items-center sm:justify-end gap-2.5">
-          <div class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase">
-            INVOICE
+          <div
+            id="preview-doc-title"
+            class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase"
+          >
+            {defaultInvoice.documentTitle || 'INVOICE'}
           </div>
           <span class="tmpl-badge-status px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
             Issued
@@ -205,6 +219,10 @@ const defaultInvoice = createDefaultInvoice();
             <strong id="preview-invoice-number" class="text-gray-900 font-bold ml-1 tabular-nums">
               {defaultInvoice.invoiceNumber}
             </strong>
+          </p>
+          <p id="preview-row-po" class="hidden">
+            <span class="text-gray-500 font-medium">PO #:</span>
+            <span id="preview-po-number" class="ml-1 font-mono font-semibold text-gray-900 tabular-nums"></span>
           </p>
           <p>
             <span class="text-gray-500 font-medium">Issue Date:</span>
@@ -222,8 +240,9 @@ const defaultInvoice = createDefaultInvoice();
       </div>
     </header>
 
-    <!-- Bill To / Recipient Details -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-2">
+    <!-- Bill To / Recipient Details & Optional Ship To -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-2">
+      <!-- Bill To -->
       <div class="space-y-1">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
           Billed To:
@@ -248,10 +267,28 @@ const defaultInvoice = createDefaultInvoice();
         </p>
       </div>
 
-      <!-- Quick Payment Summary Callout -->
-      <div class="sm:text-right flex flex-col sm:items-end justify-start space-y-1">
+      <!-- Optional Ship To -->
+      <div id="preview-shipto-block" class="hidden space-y-1">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          Amount Due:
+          Shipped To:
+        </span>
+        <div id="preview-shipto-name" class="text-base sm:text-lg font-bold text-gray-900"></div>
+        <p
+          id="preview-shipto-address"
+          class="text-xs sm:text-sm text-gray-600 whitespace-pre-line leading-relaxed"
+        ></p>
+        <p id="preview-shipto-email" class="text-xs sm:text-sm text-gray-600"></p>
+        <p id="preview-shipto-phone" class="text-xs sm:text-sm text-gray-600"></p>
+      </div>
+
+      <!-- Quick Payment Summary Callout -->
+      <div class="sm:text-right flex flex-col sm:items-end justify-start space-y-1 sm:col-start-2 lg:col-start-3">
+        <div id="preview-paid-stamp" class="hidden mb-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border-2 border-emerald-500 shadow-2xs">
+          <span>✓</span>
+          <span>PAID IN FULL</span>
+        </div>
+        <span id="preview-header-balance-label" class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+          Balance Due:
         </span>
         <span
           id="preview-header-grand-total"
@@ -270,11 +307,11 @@ const defaultInvoice = createDefaultInvoice();
       <table class="w-full text-left border-collapse">
         <thead class="tmpl-table-head">
           <tr>
-            <th class="py-2.5 px-3 text-left font-bold">Description</th>
-            <th class="py-2.5 px-3 text-center font-bold w-16">Qty</th>
-            <th class="py-2.5 px-3 text-right font-bold w-24">Rate</th>
-            <th class="py-2.5 px-3 text-right font-bold w-20">Tax</th>
-            <th class="py-2.5 px-3 text-right font-bold w-28">Amount</th>
+            <th id="preview-col-desc" class="py-2.5 px-3 text-left font-bold">Description</th>
+            <th id="preview-col-qty" class="py-2.5 px-3 text-center font-bold w-16">Qty</th>
+            <th id="preview-col-rate" class="py-2.5 px-3 text-right font-bold w-24">Rate</th>
+            <th id="preview-col-tax" class="py-2.5 px-3 text-right font-bold w-20">Tax</th>
+            <th id="preview-col-amount" class="py-2.5 px-3 text-right font-bold w-28">Amount</th>
           </tr>
         </thead>
         <tbody
@@ -282,7 +319,7 @@ const defaultInvoice = createDefaultInvoice();
           class="divide-y divide-gray-200 text-xs sm:text-sm text-gray-800"
         >
           <!-- Dynamically populated line items -->
-          <tr class="tmpl-table-row">
+          <tr class="tmpl-table-row" aria-label="Professional Services 1 $0.00 0% $">
             <td class="py-3 px-3 font-medium text-gray-900">Professional Services</td>
             <td class="py-3 px-3 text-center tabular-nums">1</td>
             <td class="py-3 px-3 text-right tabular-nums">$0.00</td>
@@ -298,7 +335,7 @@ const defaultInvoice = createDefaultInvoice();
       <!-- Notes & Terms on Left -->
       <div class="md:col-span-7 space-y-4">
         <div id="preview-notes-block" class="space-y-1">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+          <span id="preview-lbl-notes" class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
             Notes & Instructions
           </span>
           <p
@@ -334,7 +371,7 @@ const defaultInvoice = createDefaultInvoice();
           aria-atomic="true"
         >
           <div class="flex items-center justify-between text-gray-600">
-            <span>Subtotal:</span>
+            <span id="preview-lbl-subtotal">Subtotal:</span>
             <span id="preview-subtotal" class="font-medium text-gray-900 tabular-nums">
               {formatCurrency(0, 'USD')}
             </span>
@@ -359,14 +396,14 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-row-shipping"
             class="hidden flex items-center justify-between text-gray-600"
           >
-            <span>Shipping:</span>
+            <span id="preview-lbl-shipping">Shipping:</span>
             <span id="preview-shipping" class="font-medium text-gray-900 tabular-nums">
               $0.00
             </span>
           </div>
 
           <div class="tmpl-grand-total-row pt-3 border-t border-gray-300 flex items-baseline justify-between">
-            <span class="font-bold text-gray-900 text-sm sm:text-base">Grand Total:</span>
+            <span id="preview-lbl-total" class="font-bold text-gray-900 text-sm sm:text-base">Grand Total:</span>
             <span
               id="preview-grand-total"
               class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
@@ -374,63 +411,118 @@ const defaultInvoice = createDefaultInvoice();
               {formatCurrency(0, 'USD')}
             </span>
           </div>
+
+          <!-- Amount Paid Row -->
+          <div
+            id="preview-row-amount-paid"
+            class="hidden flex items-center justify-between text-gray-600 pt-1"
+          >
+            <span id="preview-lbl-amount-paid">Amount Paid:</span>
+            <span id="preview-amount-paid" class="font-medium text-gray-900 tabular-nums">
+              $0.00
+            </span>
+          </div>
+
+          <!-- Balance Due Row -->
+          <div
+            id="preview-row-balance-due"
+            class="tmpl-balance-due-row hidden pt-2.5 border-t border-dashed border-gray-300 flex items-baseline justify-between font-bold"
+          >
+            <span id="preview-lbl-balance-due" class="text-primary text-sm sm:text-base font-extrabold">Balance Due:</span>
+            <span
+              id="preview-balance-due"
+              class="tmpl-balance-due text-xl sm:text-2xl font-black text-primary tabular-nums"
+            >
+              $0.00
+            </span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Payment Details Tile -->
+    <!-- Payment Details Tile & Dynamic Scan-to-Pay QR -->
     <footer
       id="preview-payment-block"
-      class="tmpl-payment-tile p-4 sm:p-5 text-xs sm:text-sm space-y-2 border-t border-gray-200"
+      class="tmpl-payment-tile p-4 sm:p-5 text-xs sm:text-sm space-y-4 border-t border-gray-200"
     >
-      <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-        Payment Methods & Details
-      </span>
+      <div class="space-y-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+          Payment Methods & Details
+        </span>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1.5 text-gray-700">
-        <p id="preview-bank-item" class="hidden">
-          <span class="text-gray-500">Bank:</span>{' '}
-          <strong id="preview-bank-name" class="font-semibold text-gray-900 ml-1"></strong>
-        </p>
-        <p id="preview-account-item" class="hidden">
-          <span class="text-gray-500">Account Name:</span>{' '}
-          <span id="preview-account-name" class="font-medium text-gray-900 ml-1"></span>
-        </p>
-        <p id="preview-acc-num-item" class="hidden">
-          <span class="text-gray-500">Account #:</span>{' '}
-          <span id="preview-account-number" class="font-mono text-gray-900 ml-1"></span>
-        </p>
-        <p id="preview-routing-item" class="hidden">
-          <span class="text-gray-500">Routing / BSB:</span>{' '}
-          <span id="preview-routing-number" class="font-mono text-gray-900 ml-1"></span>
-        </p>
-        <p id="preview-iban-item" class="hidden">
-          <span class="text-gray-500">IBAN:</span>{' '}
-          <span id="preview-iban" class="font-mono text-gray-900 ml-1"></span>
-        </p>
-        <p id="preview-swift-item" class="hidden">
-          <span class="text-gray-500">SWIFT / BIC:</span>{' '}
-          <span id="preview-swift-bic" class="font-mono text-gray-900 ml-1"></span>
-        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1.5 text-gray-700">
+          <p id="preview-bank-item" class="hidden">
+            <span class="text-gray-500">Bank:</span>{' '}
+            <strong id="preview-bank-name" class="font-semibold text-gray-900 ml-1"></strong>
+          </p>
+          <p id="preview-account-item" class="hidden">
+            <span class="text-gray-500">Account Name:</span>{' '}
+            <span id="preview-account-name" class="font-medium text-gray-900 ml-1"></span>
+          </p>
+          <p id="preview-acc-num-item" class="hidden">
+            <span class="text-gray-500">Account #:</span>{' '}
+            <span id="preview-account-number" class="font-mono text-gray-900 ml-1"></span>
+          </p>
+          <p id="preview-routing-item" class="hidden">
+            <span class="text-gray-500">Routing / BSB:</span>{' '}
+            <span id="preview-routing-number" class="font-mono text-gray-900 ml-1"></span>
+          </p>
+          <p id="preview-iban-item" class="hidden">
+            <span class="text-gray-500">IBAN:</span>{' '}
+            <span id="preview-iban" class="font-mono text-gray-900 ml-1"></span>
+          </p>
+          <p id="preview-swift-item" class="hidden">
+            <span class="text-gray-500">SWIFT / BIC:</span>{' '}
+            <span id="preview-swift-bic" class="font-mono text-gray-900 ml-1"></span>
+          </p>
+        </div>
+
+        <div id="preview-link-item" class="hidden pt-1">
+          <span class="text-gray-500">Pay Online:</span>
+          <a
+            id="preview-payment-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 underline font-medium ml-1"
+          ></a>
+        </div>
+
+        <div
+          id="preview-instructions-item"
+          class="hidden pt-1 text-gray-600 whitespace-pre-line text-xs"
+        >
+          <span class="text-gray-500 font-semibold">Instructions:</span>{' '}
+          <span id="preview-custom-instructions"></span>
+        </div>
       </div>
 
-      <div id="preview-link-item" class="hidden pt-1">
-        <span class="text-gray-500">Pay Online:</span>
-        <a
-          id="preview-payment-link"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 underline font-medium ml-1"
-        ></a>
-      </div>
-
+      <!-- Instant Scan-to-Pay QR Code Box -->
       <div
-        id="preview-instructions-item"
-        class="hidden pt-1 text-gray-600 whitespace-pre-line text-xs"
+        id="preview-qr-container"
+        class="hidden flex flex-col sm:flex-row items-center sm:items-start gap-4 p-3.5 rounded-2xl bg-white border border-gray-200 shadow-2xs"
       >
-        <span class="text-gray-500 font-semibold">Instructions:</span>{' '}
-        <span id="preview-custom-instructions"></span>
+        <div
+          id="preview-qr-svg"
+          class="w-24 h-24 shrink-0 bg-white p-1 rounded-xl border border-gray-200 shadow-2xs flex items-center justify-center overflow-hidden"
+          aria-label="Scan-to-Pay QR Code"
+        >
+          <!-- SVG rendered dynamically -->
+        </div>
+        <div class="space-y-1 text-center sm:text-left">
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <span class="text-xs font-bold text-gray-900 tracking-tight">Instant Scan to Pay</span>
+            <span
+              id="preview-qr-badge"
+              class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20"
+            >
+              UPI / Link
+            </span>
+          </div>
+          <p id="preview-qr-hint" class="text-xs text-gray-600 leading-relaxed max-w-sm">
+            Scan this code with your banking or camera app on your mobile phone to pay instantly.
+          </p>
+        </div>
       </div>
     </footer>
   </article>

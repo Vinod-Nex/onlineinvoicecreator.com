@@ -490,6 +490,29 @@ export function importInvoiceFromJson(jsonString: string): {
           }
         : undefined,
       shipping: typeof rawInvoice.shipping === 'number' ? rawInvoice.shipping : undefined,
+      documentTitle:
+        typeof rawInvoice.documentTitle === 'string' && rawInvoice.documentTitle.trim()
+          ? rawInvoice.documentTitle.trim()
+          : defaultInv.documentTitle || 'INVOICE',
+      poNumber: typeof rawInvoice.poNumber === 'string' ? rawInvoice.poNumber.trim() : '',
+      shipTo: rawInvoice.shipTo
+        ? {
+            name: rawInvoice.shipTo.name || '',
+            email: rawInvoice.shipTo.email || '',
+            phone: rawInvoice.shipTo.phone || '',
+            address: rawInvoice.shipTo.address || '',
+            taxId: rawInvoice.shipTo.taxId || '',
+          }
+        : undefined,
+      amountPaid: typeof rawInvoice.amountPaid === 'number' ? rawInvoice.amountPaid : 0,
+      paymentQrType: ['upi', 'paypal', 'link', 'sepa', 'none'].includes(rawInvoice.paymentQrType)
+        ? rawInvoice.paymentQrType
+        : 'none',
+      paymentQrValue: typeof rawInvoice.paymentQrValue === 'string' ? rawInvoice.paymentQrValue : '',
+      customLabels:
+        rawInvoice.customLabels && typeof rawInvoice.customLabels === 'object'
+          ? rawInvoice.customLabels
+          : {},
       paymentDetails: rawInvoice.paymentDetails
         ? {
             bankName: rawInvoice.paymentDetails.bankName || '',

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "invoicecreationandediting",
+    "description": "Test the primary invoice creation and editing functionality by entering invoice header details, business and client information, adding line items, and verifying live preview updates and PDF download."
+  },
+  {
+    "id": "TC002",
+    "title": "pricingtaxtaxdiscountshippingandcurrencycontrols",
+    "description": "Verify tax, discount, shipping, and currency controls by applying various rates and charges, checking recalculated totals, and ensuring correct currency formatting in the invoice preview."
+  },
+  {
+    "id": "TC003",
+    "title": "logouploadandvisualbranding",
+    "description": "Test uploading and removing a company logo on the invoice, verifying the logo appears and disappears correctly in the live preview and PDF export."
+  },
+  {
+    "id": "TC004",
+    "title": "templateswitchingandlivepreview",
+    "description": "Validate switching between different invoice templates retains all entered data intact and updates the live preview accordingly, including on mobile layouts."
+  },
+  {
+    "id": "TC005",
+    "title": "pdfdownloadandprinting",
+    "description": "Test generating and downloading the invoice as a PDF file and triggering the browser print dialog from the invoice page."
+  },
+  {
+    "id": "TC006",
+    "title": "browserdraftsavingandreset",
+    "description": "Verify that invoice data is automatically saved in browser localStorage, restored on page refresh, and can be cleared with confirmation to reset the form."
+  },
+  {
+    "id": "TC007",
+    "title": "freelancerinvoicetemplate",
+    "description": "Test the freelancer invoice template by entering project and billing details, adding rates and payment terms, and downloading the invoice PDF."
+  },
+  {
+    "id": "TC008",
+    "title": "contractorinvoicetemplate",
+    "description": "Validate the contractor invoice template by entering labor and material costs, verifying separated totals, and downloading the contractor invoice PDF."
+  },
+  {
+    "id": "TC009",
+    "title": "australiantaxinvoicetemplate",
+    "description": "Test the Australian tax invoice template by entering ABN, adding invoice items, verifying automatic 10% GST calculation, and downloading the compliant PDF."
+  },
+  {
+    "id": "TC010",
+    "title": "receiptgenerator",
+    "description": "Verify the sales receipt generator by selecting payment method, entering transaction details and itemized lines, and downloading the receipt as a PDF."
+  }
+]

@@ -135,9 +135,11 @@ async function runTechnicalSeoAudit() {
         reason:
           route === '/404' || rel === '404.html'
             ? 'HTTP 404 Error page should not be indexed in search engines'
-            : route === '/style-guide'
-              ? 'Internal component style guide & design system preview'
-              : 'Configured with noindex',
+            : route === '/500' || rel === '500.html'
+              ? 'HTTP 500 Error page should not be indexed in search engines'
+              : route === '/style-guide'
+                ? 'Internal component style guide & design system preview'
+                : 'Configured with noindex',
       });
     }
 

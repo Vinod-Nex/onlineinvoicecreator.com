@@ -161,27 +161,27 @@
     "items": [
       {
         "question": "What must an Australian tax invoice include to be ATO compliant?",
-        "answer": "An ATO-compliant Australian tax invoice must prominently display the words Tax invoice, the seller identity and ABN, invoice date, brief description of items sold, GST amount payable, and total price. For sales exceeding one thousand dollars including GST, the document must also display the buyer identity or ABN to allow the purchaser to claim input tax credits."
+        "answer": "An ATO-compliant Australian tax invoice must prominently display 'Tax invoice', seller identity, ABN, invoice date, item description, GST amount payable, and total price. For sales over $1,000, it must also include the buyer's identity or ABN so they can claim input tax credits."
       },
       {
         "question": "How do I create an invoice template australia no gst if not registered?",
-        "answer": "If your business is not registered for GST in Australia, do not include the words Tax invoice or add a 10% GST component. Our tool lets you toggle tax calculation off or set GST to 0%, outputting a standard commercial bill marked Invoice with your ABN, fully compliant with ATO guidelines for non-registered micro-businesses."
+        "answer": "If your business is not registered for GST in Australia, do not include 'Tax invoice' or add 10% GST. Set GST to 0% in our tool to output a standard bill marked 'Invoice' with your ABN, fully compliant with ATO rules for non-registered micro-businesses."
       },
       {
         "question": "Is this Australian tax invoice template free with no watermarks?",
-        "answer": "Yes, our free invoice template australia tool is 100% free with zero watermarks, subscriptions, or account requirements. Sole traders, tradespeople, and Australian businesses can create compliant ABN tax invoices, calculate 10% GST automatically, and export print-ready PDFs without paying ongoing accounting software subscription fees."
+        "answer": "Yes, our free Australian tax invoice tool is 100% free with zero watermarks, subscription fees, or account requirements. Sole traders, tradespeople, contractors, and registered companies can create compliant ABN tax invoices, calculate 10% GST automatically, and export print-ready PDF files without paying monthly accounting software subscription charges."
       },
       {
         "question": "Are tax invoices generated here legally valid for Australian tax compliance?",
-        "answer": "Yes, tax invoices generated using our ATO tax invoice template format satisfy all Australian Taxation Office requirements for valid tax invoices. When filled with an active Australian Business Number, valid tax descriptions, and correct 10% GST calculations, these documents serve as authentic tax records for quarterly BAS reporting and ATO audits."
+        "answer": "Yes, tax invoices generated here satisfy Australian Taxation Office requirements for valid commercial tax invoices. When filled with an active Australian Business Number, valid item descriptions, and correct 10% GST calculations, these documents serve as authentic commercial records for quarterly Business Activity Statement (BAS) lodgments and official ATO tax audits."
       },
       {
         "question": "Can I add my Australian company logo and ABN to the invoice?",
-        "answer": "Yes, you can upload your business logo and prominently display your Australian Business Number (ABN) on the invoice header. Positioning your ABN, contact information, and logo clearly on the document ensures your corporate clients can promptly verify your entity details via the Australian Business Register (ABR) before processing payment."
+        "answer": "Yes, you can upload your corporate logo and prominently display your Australian Business Number (ABN) on the document header. Displaying your ABN, contact information, and business branding ensures that Australian corporate clients can promptly verify your entity details through the Australian Business Register (ABR) before processing payment disbursements."
       },
       {
         "question": "What is the difference between an Australian tax invoice and a receipt?",
-        "answer": "An Australian tax invoice requests payment and details GST owed, while a payment receipt confirms that funds have cleared. Use a tax invoice to bill customers and outline GST liabilities before settlement. After the customer pays via EFT or PayID, issue an official receipt to confirm finalized transaction payment."
+        "answer": "An Australian tax invoice requests payment and details GST owed before settlement, while a payment receipt confirms funds have formally cleared. Use a compliant tax invoice to bill commercial buyers and establish GST liabilities. After your customer pays via EFT, PayID, or bank transfer, issue an official receipt to confirm payment settlement."
       }
     ]
   },

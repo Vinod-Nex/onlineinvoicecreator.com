@@ -113,6 +113,14 @@ const staticPages = [
     tags: ['Free Invoices', 'Instant PDF Export', 'Zero Watermarks'],
   },
   {
+    slug: 'og-500',
+    title: '500: Server Error',
+    badge: 'Internal Server Error',
+    description:
+      'An unexpected server error occurred. Your invoice drafts remain safe in your local browser memory.',
+    tags: ['Safe Local Storage', 'Private Invoicing', 'Instant Recovery'],
+  },
+  {
     slug: 'og-how-to-write-an-invoice-for-freelance-work',
     title: 'How to Write an Invoice for Freelance Work',
     badge: 'Freelance Billing Guide',

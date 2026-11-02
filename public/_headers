@@ -1,13 +1,14 @@
 # Security Headers & Caching Policy for Cloudflare Pages
 
 # 1. Global defaults for HTML documents and all endpoints
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://onlineinvoicecreator.com;
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://onlineinvoicecreator.com;
   Cache-Control: public, max-age=0, must-revalidate
 
 # 2. Immutable long-term cache for fingerprint-hashed assets (Vite / Astro bundles)
@@ -20,6 +21,8 @@
 
 # 4. Standard assets, icons, and metadata (24 hours cache with 7-day stale-while-revalidate)
 /favicon.svg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/favicon-96x96.png
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /favicon.ico
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800

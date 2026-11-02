@@ -336,5 +336,84 @@ describe('Invoice Data Model & Calculation Suite', () => {
       expect(parsed.currency).toBe('USD');
       expect(parsed.lineItems).toHaveLength(1);
     });
+
+    it('parses extended fields: documentTitle, poNumber, shipTo, amountPaid, paymentQr', () => {
+      const data = {
+        documentTitle: 'TAX INVOICE',
+        poNumber: 'PO-98765',
+        invoiceNumber: 'INV-004',
+        issueDate: '2026-10-17',
+        dueDate: '2026-10-31',
+        sender: { name: 'Sender Corp' },
+        client: { name: 'Client Corp' },
+        shipTo: { name: 'Warehouse Beta', address: '456 Logistics Blvd' },
+        lineItems: [{ description: 'Hardware', quantity: 2, unitPrice: 250 }],
+        amountPaid: 100,
+        paymentQrType: 'upi' as const,
+        paymentQrValue: 'merchant@oksbi',
+      };
+
+      const parsed = InvoiceSchema.parse(data);
+      expect(parsed.documentTitle).toBe('TAX INVOICE');
+      expect(parsed.poNumber).toBe('PO-98765');
+      expect(parsed.shipTo?.name).toBe('Warehouse Beta');
+      expect(parsed.amountPaid).toBe(100);
+      expect(parsed.paymentQrType).toBe('upi');
+      expect(parsed.paymentQrValue).toBe('merchant@oksbi');
+    });
+  });
+
+  // ==========================================================================
+  // AMOUNT PAID & BALANCE DUE SUITE
+  // ==========================================================================
+  describe('Amount Paid & Balance Due Calculations', () => {
+    it('calculates full balance due when amountPaid is 0 or undefined', () => {
+      const invoice = createDefaultInvoice();
+      invoice.lineItems = [{ description: 'Dev', quantity: 1, unitPrice: 500, taxRate: 0 }];
+      invoice.amountPaid = 0;
+
+      const totals = calculateTotals(invoice);
+      expect(totals.grandTotal).toBe(500);
+      expect(totals.amountPaid).toBe(0);
+      expect(totals.balanceDue).toBe(500);
+      expect(totals.isPaidInFull).toBe(false);
+    });
+
+    it('calculates correct remaining balance on partial payment', () => {
+      const invoice = createDefaultInvoice();
+      invoice.lineItems = [{ description: 'Design Sprint', quantity: 1, unitPrice: 1000, taxRate: 10 }];
+      invoice.amountPaid = 400;
+
+      const totals = calculateTotals(invoice);
+      expect(totals.grandTotal).toBe(1100);
+      expect(totals.amountPaid).toBe(400);
+      expect(totals.balanceDue).toBe(700);
+      expect(totals.isPaidInFull).toBe(false);
+    });
+
+    it('flags isPaidInFull as true and sets balanceDue to 0 when exact amount is paid', () => {
+      const invoice = createDefaultInvoice();
+      invoice.lineItems = [{ description: 'Consulting', quantity: 2, unitPrice: 200, taxRate: 0 }];
+      invoice.amountPaid = 400;
+
+      const totals = calculateTotals(invoice);
+      expect(totals.grandTotal).toBe(400);
+      expect(totals.amountPaid).toBe(400);
+      expect(totals.balanceDue).toBe(0);
+      expect(totals.isPaidInFull).toBe(true);
+    });
+
+    it('safely clamps balanceDue to 0 if amountPaid exceeds grandTotal', () => {
+      const invoice = createDefaultInvoice();
+      invoice.lineItems = [{ description: 'Retainer', quantity: 1, unitPrice: 300, taxRate: 0 }];
+      invoice.amountPaid = 500; // overpaid
+
+      const totals = calculateTotals(invoice);
+      expect(totals.grandTotal).toBe(300);
+      expect(totals.amountPaid).toBe(500);
+      expect(totals.balanceDue).toBe(0);
+      expect(totals.isPaidInFull).toBe(true);
+    });
   });
 });
+

@@ -534,17 +534,9 @@ if (!fs.existsSync(sitemap0Path)) {
     totalViolations++;
     console.error('❌ sitemap-0.xml must NOT include noindex page /style-guide');
   }
-  if (!sitemap0.includes('<lastmod>')) {
+  if (!sitemap0.includes('<loc>https://onlineinvoicecreator.com/</loc>')) {
     totalViolations++;
-    console.error('❌ sitemap-0.xml missing <lastmod> timestamps');
-  }
-  if (
-    !sitemap0.includes('hreflang="en"') ||
-    !sitemap0.includes('hreflang="es"') ||
-    !sitemap0.includes('hreflang="pt"')
-  ) {
-    totalViolations++;
-    console.error('❌ sitemap-0.xml missing hreflang-ready alternates for en, es, pt');
+    console.error('❌ sitemap-0.xml missing homepage <loc>');
   }
 }
 

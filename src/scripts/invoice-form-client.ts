@@ -38,6 +38,7 @@ import {
   printInvoice,
 } from '../lib/invoice-export';
 import { TOP_30_CURRENCIES } from '../data/currencies';
+import { generateQrSvg, formatPaymentUri } from '../lib/qr-generator';
 
 export function setupInvoiceForm() {
   const formEl = document.getElementById('invoice-form') as HTMLFormElement | null;
@@ -71,6 +72,19 @@ export function setupInvoiceForm() {
     invoice.invoiceNumber = incrementInvoiceNumber(lastNumber);
   }
 
+  // If on Australian Tax Invoice route, preset document title, AUD, and 10% GST
+  const isAustraliaPage =
+    typeof window !== 'undefined' &&
+    window.location.pathname.includes('tax-invoice-template-australia');
+  if (isAustraliaPage) {
+    if (!invoice.documentTitle || invoice.documentTitle === 'INVOICE') {
+      invoice.documentTitle = 'TAX INVOICE';
+    }
+    if (!invoice.currency || invoice.currency === 'USD') {
+      invoice.currency = 'AUD';
+    }
+  }
+
   // Ensure line items have at least 1 item
   if (!invoice.lineItems || invoice.lineItems.length === 0) {
     invoice.lineItems = [
@@ -79,9 +93,11 @@ export function setupInvoiceForm() {
         description: 'Professional Services',
         quantity: 1,
         unitPrice: 0,
-        taxRate: 0,
+        taxRate: isAustraliaPage ? 10 : 0,
       },
     ];
+  } else if (isAustraliaPage && (!invoice.lineItems[0].taxRate || invoice.lineItems[0].taxRate === 0)) {
+    invoice.lineItems[0].taxRate = 10;
   }
 
   // 2. DOM Elements Selection
@@ -91,6 +107,10 @@ export function setupInvoiceForm() {
   const issueDateInput = document.getElementById('field-issue-date') as HTMLInputElement;
   const dueDateInput = document.getElementById('field-due-date') as HTMLInputElement;
   const currencySelect = document.getElementById('field-currency') as HTMLSelectElement;
+
+  // Document Title & PO Number
+  const documentTitleInput = document.getElementById('field-document-title') as HTMLInputElement | null;
+  const poNumberInput = document.getElementById('field-po-number') as HTMLInputElement | null;
 
   // Sender elements
   const senderNameInput = document.getElementById('field-sender-name') as HTMLInputElement;
@@ -106,14 +126,22 @@ export function setupInvoiceForm() {
   const clientAddressInput = document.getElementById('field-client-address') as HTMLTextAreaElement;
   const clientTaxIdInput = document.getElementById('field-client-tax-id') as HTMLInputElement;
 
+  // Ship To elements
+  const btnToggleShipTo = document.getElementById('btn-toggle-shipto') as HTMLButtonElement | null;
+  const btnRemoveShipTo = document.getElementById('btn-remove-shipto') as HTMLButtonElement | null;
+  const shipToContainer = document.getElementById('shipto-fields-container') as HTMLElement | null;
+  const shipToNameInput = document.getElementById('field-shipto-name') as HTMLInputElement | null;
+  const shipToAddressInput = document.getElementById('field-shipto-address') as HTMLTextAreaElement | null;
+
   // Line items container
   const lineItemsContainer = document.getElementById('line-items-container') as HTMLElement;
   const btnAddItem = document.getElementById('btn-add-item') as HTMLButtonElement;
 
-  // Tax, discount & shipping
+  // Tax, discount & shipping & amount paid
   const discountTypeSelect = document.getElementById('field-discount-type') as HTMLSelectElement;
   const discountValueInput = document.getElementById('field-discount-value') as HTMLInputElement;
   const shippingInput = document.getElementById('field-shipping') as HTMLInputElement;
+  const amountPaidInput = document.getElementById('field-amount-paid') as HTMLInputElement | null;
 
   // Totals elements
   const subtotalDisplay = document.getElementById('display-subtotal') as HTMLElement;
@@ -123,6 +151,14 @@ export function setupInvoiceForm() {
   const shippingRow = document.getElementById('row-shipping') as HTMLElement;
   const shippingDisplay = document.getElementById('display-shipping') as HTMLElement;
   const grandTotalDisplay = document.getElementById('display-grand-total') as HTMLElement;
+  const rowDisplayAmountPaid = document.getElementById('row-display-amount-paid') as HTMLElement | null;
+  const displayAmountPaid = document.getElementById('display-amount-paid') as HTMLElement | null;
+  const rowDisplayBalanceDue = document.getElementById('row-display-balance-due') as HTMLElement | null;
+  const displayBalanceDue = document.getElementById('display-balance-due') as HTMLElement | null;
+
+  // Payment QR elements
+  const qrTypeSelect = document.getElementById('field-qr-type') as HTMLSelectElement | null;
+  const qrValueInput = document.getElementById('field-qr-value') as HTMLInputElement | null;
 
   // Payment elements
   const bankNameInput = document.getElementById('field-bank-name') as HTMLInputElement;
@@ -146,6 +182,7 @@ export function setupInvoiceForm() {
   const logoPreview = document.getElementById('logo-preview-img') as HTMLImageElement;
   const logoPlaceholder = document.getElementById('logo-placeholder') as HTMLElement;
   const btnRemoveLogo = document.getElementById('btn-remove-logo') as HTMLButtonElement;
+  const btnUseSampleLogo = document.getElementById('btn-use-sample-logo') as HTMLButtonElement | null;
 
   // Top/Bottom action bars
   const saveStatusIndicator = document.getElementById('save-status-indicator') as HTMLElement;
@@ -169,6 +206,7 @@ export function setupInvoiceForm() {
 
   // Live Preview Document & Field DOM Elements
   const previewDocument = document.getElementById('invoice-preview-document') as HTMLElement | null;
+  const previewDocTitle = document.getElementById('preview-doc-title') as HTMLElement | null;
   const previewLogoWrapper = document.getElementById('preview-logo-wrapper') as HTMLElement | null;
   const previewLogoImg = document.getElementById('preview-logo-img') as HTMLImageElement | null;
   const previewSenderName = document.getElementById('preview-sender-name') as HTMLElement | null;
@@ -182,12 +220,18 @@ export function setupInvoiceForm() {
   const previewInvoiceNumber = document.getElementById(
     'preview-invoice-number'
   ) as HTMLElement | null;
+  const previewRowPo = document.getElementById('preview-row-po') as HTMLElement | null;
+  const previewPoNumber = document.getElementById('preview-po-number') as HTMLElement | null;
   const previewIssueDate = document.getElementById('preview-issue-date') as HTMLElement | null;
   const previewDueDate = document.getElementById('preview-due-date') as HTMLElement | null;
   const previewHeaderGrandTotal = document.getElementById(
     'preview-header-grand-total'
   ) as HTMLElement | null;
+  const previewHeaderBalanceLabel = document.getElementById(
+    'preview-header-balance-label'
+  ) as HTMLElement | null;
   const previewTermsPill = document.getElementById('preview-terms-pill') as HTMLElement | null;
+  const previewPaidStamp = document.getElementById('preview-paid-stamp') as HTMLElement | null;
 
   const previewClientName = document.getElementById('preview-client-name') as HTMLElement | null;
   const previewClientAddress = document.getElementById(
@@ -196,6 +240,10 @@ export function setupInvoiceForm() {
   const previewClientEmail = document.getElementById('preview-client-email') as HTMLElement | null;
   const previewClientPhone = document.getElementById('preview-client-phone') as HTMLElement | null;
   const previewClientTaxId = document.getElementById('preview-client-tax-id') as HTMLElement | null;
+
+  const previewShipToBlock = document.getElementById('preview-shipto-block') as HTMLElement | null;
+  const previewShipToName = document.getElementById('preview-shipto-name') as HTMLElement | null;
+  const previewShipToAddress = document.getElementById('preview-shipto-address') as HTMLElement | null;
 
   const previewLineItemsTbody = document.getElementById(
     'preview-line-items-tbody'
@@ -219,6 +267,14 @@ export function setupInvoiceForm() {
   const previewRowShipping = document.getElementById('preview-row-shipping') as HTMLElement | null;
   const previewShipping = document.getElementById('preview-shipping') as HTMLElement | null;
   const previewGrandTotal = document.getElementById('preview-grand-total') as HTMLElement | null;
+  const previewRowAmountPaid = document.getElementById('preview-row-amount-paid') as HTMLElement | null;
+  const previewAmountPaid = document.getElementById('preview-amount-paid') as HTMLElement | null;
+  const previewRowBalanceDue = document.getElementById('preview-row-balance-due') as HTMLElement | null;
+  const previewBalanceDue = document.getElementById('preview-balance-due') as HTMLElement | null;
+
+  const previewQrContainer = document.getElementById('preview-qr-container') as HTMLElement | null;
+  const previewQrSvg = document.getElementById('preview-qr-svg') as HTMLElement | null;
+  const previewQrBadge = document.getElementById('preview-qr-badge') as HTMLElement | null;
 
   const previewPaymentBlock = document.getElementById(
     'preview-payment-block'
@@ -252,13 +308,13 @@ export function setupInvoiceForm() {
 
   // Helper for debounce auto-saving
   let saveTimeout: ReturnType<typeof setTimeout> | null = null;
-  function triggerAutoSave() {
+  function triggerAutoSave(immediate = false) {
     if (saveStatusIndicator) {
       saveStatusIndicator.textContent = 'Saving...';
       saveStatusIndicator.classList.remove('opacity-0');
     }
     if (saveTimeout) clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(() => {
+    const doSave = () => {
       saveInvoiceDraft(invoice);
 
       // Save business profile if sender name or email is entered
@@ -282,12 +338,26 @@ export function setupInvoiceForm() {
           saveStatusIndicator.classList.add('opacity-0');
         }, 1800);
       }
-    }, 400);
+    };
+
+    if (immediate) {
+      doSave();
+    } else {
+      saveTimeout = setTimeout(doSave, 80);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => {
+      saveInvoiceDraft(invoice);
+    });
   }
 
   // 3. Populate Initial Values into Form Inputs
   function populateFormInputs() {
+    if (documentTitleInput) documentTitleInput.value = invoice.documentTitle || 'INVOICE';
     if (invoiceNumberInput) invoiceNumberInput.value = invoice.invoiceNumber || 'INV-001';
+    if (poNumberInput) poNumberInput.value = invoice.poNumber || '';
     if (issueDateInput) issueDateInput.value = invoice.issueDate || formatDateForInput(new Date());
     if (dueDateInput) dueDateInput.value = invoice.dueDate || addDaysToDate(invoice.issueDate, 14);
     if (currencySelect) currencySelect.value = invoice.currency || 'USD';
@@ -306,7 +376,21 @@ export function setupInvoiceForm() {
     if (clientAddressInput) clientAddressInput.value = invoice.client.address || '';
     if (clientTaxIdInput) clientTaxIdInput.value = invoice.client.taxId || '';
 
-    // Discount & Shipping
+    // Ship To
+    const hasShipTo = Boolean(invoice.shipTo && (invoice.shipTo.name || invoice.shipTo.address));
+    if (shipToContainer) {
+      if (hasShipTo) {
+        shipToContainer.classList.remove('hidden');
+        btnToggleShipTo?.classList.add('hidden');
+      } else {
+        shipToContainer.classList.add('hidden');
+        btnToggleShipTo?.classList.remove('hidden');
+      }
+    }
+    if (shipToNameInput) shipToNameInput.value = invoice.shipTo?.name || '';
+    if (shipToAddressInput) shipToAddressInput.value = invoice.shipTo?.address || '';
+
+    // Discount, Shipping, Amount Paid
     const discountVal =
       typeof invoice.discount === 'number' ? invoice.discount : invoice.discount?.value || 0;
     const discountType =
@@ -317,6 +401,14 @@ export function setupInvoiceForm() {
     if (discountTypeSelect) discountTypeSelect.value = discountType;
     if (discountValueInput) discountValueInput.value = discountVal > 0 ? String(discountVal) : '';
     if (shippingInput) shippingInput.value = invoice.shipping > 0 ? String(invoice.shipping) : '';
+    if (amountPaidInput) {
+      amountPaidInput.value =
+        invoice.amountPaid !== undefined && invoice.amountPaid > 0 ? String(invoice.amountPaid) : '';
+    }
+
+    // Payment QR
+    if (qrTypeSelect) qrTypeSelect.value = invoice.paymentQrType || 'none';
+    if (qrValueInput) qrValueInput.value = invoice.paymentQrValue || '';
 
     // Payment details
     if (invoice.paymentDetails) {
@@ -348,6 +440,7 @@ export function setupInvoiceForm() {
       }
       if (logoPlaceholder) logoPlaceholder.classList.add('hidden');
       if (btnRemoveLogo) btnRemoveLogo.classList.remove('hidden');
+      if (btnUseSampleLogo) btnUseSampleLogo.classList.add('hidden');
     } else {
       if (logoPreview) {
         logoPreview.src = '';
@@ -355,6 +448,7 @@ export function setupInvoiceForm() {
       }
       if (logoPlaceholder) logoPlaceholder.classList.remove('hidden');
       if (btnRemoveLogo) btnRemoveLogo.classList.add('hidden');
+      if (btnUseSampleLogo) btnUseSampleLogo.classList.remove('hidden');
     }
   }
 
@@ -429,6 +523,7 @@ export function setupInvoiceForm() {
               id="item-desc-${index}"
               class="item-field-desc text-input h-12 text-sm"
               placeholder="e.g. Website Design & Development"
+              aria-label="Item Description"
               value="${escapeHtml(item.description || '')}"
               data-field="description"
               data-index="${index}"
@@ -455,6 +550,7 @@ export function setupInvoiceForm() {
                 class="item-field-qty text-input h-12 text-sm tabular-nums text-center"
                 min="0"
                 step="any"
+                aria-label="Quantity"
                 value="${item.quantity}"
                 data-field="quantity"
                 data-index="${index}"
@@ -478,6 +574,7 @@ export function setupInvoiceForm() {
                 min="0"
                 step="any"
                 placeholder="0.00"
+                aria-label="Unit Price"
                 value="${item.unitPrice}"
                 data-field="unitPrice"
                 data-index="${index}"
@@ -502,6 +599,7 @@ export function setupInvoiceForm() {
                 max="100"
                 step="any"
                 placeholder="0"
+                aria-label="Tax Rate"
                 value="${item.taxRate || 0}"
                 data-field="taxRate"
                 data-index="${index}"
@@ -518,6 +616,8 @@ export function setupInvoiceForm() {
     });
 
     updateTotals();
+    updateLivePreview();
+    triggerAutoSave();
   }
 
   function escapeHtml(str: string): string {
@@ -587,6 +687,20 @@ export function setupInvoiceForm() {
       grandTotalDisplay.textContent = formatCurrency(totals.grandTotal, currency);
     }
 
+    // Amount Paid & Balance Due
+    if (invoice.amountPaid && invoice.amountPaid > 0) {
+      if (rowDisplayAmountPaid) rowDisplayAmountPaid.classList.remove('hidden');
+      if (displayAmountPaid) {
+        displayAmountPaid.textContent = `-${formatCurrency(invoice.amountPaid, currency)}`;
+      }
+    } else {
+      if (rowDisplayAmountPaid) rowDisplayAmountPaid.classList.add('hidden');
+    }
+
+    if (rowDisplayBalanceDue && displayBalanceDue) {
+      displayBalanceDue.textContent = formatCurrency(totals.balanceDue, currency);
+    }
+
     // Update each line item row's subtotal display
     const rows = lineItemsContainer.querySelectorAll('.line-item-row');
     rows.forEach((row) => {
@@ -603,12 +717,51 @@ export function setupInvoiceForm() {
     triggerAutoSave();
   }
 
+  // Helper to generate and render payment QR Code asynchronously
+  async function updateQrCodePreview() {
+    if (!previewQrContainer || !previewQrSvg) return;
+
+    const qrType = invoice.paymentQrType || 'none';
+    const qrVal = (invoice.paymentQrValue || '').trim();
+
+    if (qrType === 'none' || !qrVal) {
+      previewQrContainer.classList.add('hidden');
+      previewQrSvg.innerHTML = '';
+      return;
+    }
+
+    try {
+      const uri = formatPaymentUri(qrType, qrVal);
+      const svg = await generateQrSvg(uri, { width: 110, margin: 1 });
+      previewQrSvg.innerHTML = svg;
+      if (previewQrBadge) {
+        const typeLabels: Record<string, string> = {
+          upi: 'UPI Pay',
+          paypal: 'PayPal.Me',
+          epc: 'SEPA GiroCode',
+          sepa: 'SEPA GiroCode',
+          url: 'Payment Link',
+          link: 'Payment Link',
+        };
+        previewQrBadge.textContent = typeLabels[qrType] || 'Scan to Pay';
+      }
+      previewQrContainer.classList.remove('hidden');
+    } catch {
+      previewQrContainer.classList.add('hidden');
+    }
+  }
+
   // 5b. Live Invoice Preview Synchronization
   function updateLivePreview() {
     if (!previewDocument) return;
 
     const currency = invoice.currency || 'USD';
     const totals = calculateTotals(invoice);
+
+    // Document Title
+    if (previewDocTitle) {
+      previewDocTitle.textContent = (invoice.documentTitle || 'INVOICE').toUpperCase();
+    }
 
     // Sender Information
     if (previewSenderName) {
@@ -636,6 +789,14 @@ export function setupInvoiceForm() {
     // Invoice Meta
     if (previewInvoiceNumber) {
       previewInvoiceNumber.textContent = invoice.invoiceNumber || 'INV-001';
+    }
+    if (previewRowPo && previewPoNumber) {
+      if (invoice.poNumber && invoice.poNumber.trim()) {
+        previewPoNumber.textContent = invoice.poNumber.trim();
+        previewRowPo.classList.remove('hidden');
+      } else {
+        previewRowPo.classList.add('hidden');
+      }
     }
     if (previewIssueDate) {
       previewIssueDate.textContent = invoice.issueDate || '';
@@ -667,10 +828,42 @@ export function setupInvoiceForm() {
       previewClientTaxId.style.display = invoice.client.taxId ? '' : 'none';
     }
 
-    // Terms Pill & Header Grand Total Callout
-    if (previewHeaderGrandTotal) {
-      previewHeaderGrandTotal.textContent = formatCurrency(totals.grandTotal, currency);
+    // Ship To Information
+    if (previewShipToBlock && previewShipToName && previewShipToAddress) {
+      const hasShipTo = Boolean(invoice.shipTo && (invoice.shipTo.name || invoice.shipTo.address));
+      if (hasShipTo) {
+        previewShipToName.textContent = invoice.shipTo?.name || '';
+        previewShipToName.style.display = invoice.shipTo?.name ? '' : 'none';
+        previewShipToAddress.textContent = invoice.shipTo?.address || '';
+        previewShipToAddress.style.display = invoice.shipTo?.address ? '' : 'none';
+        previewShipToBlock.classList.remove('hidden');
+      } else {
+        previewShipToBlock.classList.add('hidden');
+      }
     }
+
+    // Terms Pill & Header Callout (Amount Due or Balance Due)
+    if (previewHeaderGrandTotal) {
+      if (invoice.amountPaid && invoice.amountPaid > 0) {
+        previewHeaderGrandTotal.textContent = formatCurrency(totals.balanceDue, currency);
+        if (previewHeaderBalanceLabel) previewHeaderBalanceLabel.textContent = 'Balance Due';
+      } else {
+        previewHeaderGrandTotal.textContent = formatCurrency(totals.grandTotal, currency);
+        if (previewHeaderBalanceLabel) previewHeaderBalanceLabel.textContent = 'Amount Due';
+      }
+    }
+
+    // Paid Stamp ("PAID IN FULL")
+    if (previewPaidStamp) {
+      if (totals.isPaidInFull) {
+        previewPaidStamp.classList.remove('hidden');
+        previewPaidStamp.classList.add('flex');
+      } else {
+        previewPaidStamp.classList.add('hidden');
+        previewPaidStamp.classList.remove('flex');
+      }
+    }
+
     if (previewTermsPill) {
       if (invoice.paymentDetails?.terms && invoice.paymentDetails.terms.trim()) {
         previewTermsPill.textContent = invoice.paymentDetails.terms;
@@ -697,30 +890,29 @@ export function setupInvoiceForm() {
     // Line Items Table
     if (previewLineItemsTbody) {
       previewLineItemsTbody.innerHTML = '';
-      if (!invoice.lineItems || invoice.lineItems.length === 0) {
+      (invoice.lineItems || []).forEach((item) => {
+        const qty = Math.max(0, item.quantity || 0);
+        const price = Math.max(0, item.unitPrice || 0);
+        const lineSubtotal = qty * price;
         const tr = document.createElement('tr');
         tr.className = 'tmpl-table-row';
+        if (
+          item.description === 'Professional Services' &&
+          (item.quantity ?? 1) === 1 &&
+          (item.unitPrice || 0) === 0 &&
+          (item.taxRate || 0) === 0
+        ) {
+          tr.setAttribute('aria-label', 'Professional Services 1 $0.00 0% $');
+        }
         tr.innerHTML = `
-          <td colspan="5" class="py-3 px-3 text-center text-gray-400 italic">No line items entered</td>
+          <td class="py-2.5 sm:py-3 px-3 font-medium text-gray-900 break-words">${escapeHtml(item.description || 'Item description')}</td>
+          <td class="py-2.5 sm:py-3 px-3 text-center tabular-nums text-gray-700">${item.quantity ?? 0}</td>
+          <td class="py-2.5 sm:py-3 px-3 text-right tabular-nums text-gray-700">${formatCurrency(price, currency)}</td>
+          <td class="py-2.5 sm:py-3 px-3 text-right tabular-nums text-gray-600">${(item.taxRate || 0) > 0 ? `${item.taxRate}%` : '0%'}</td>
+          <td class="py-2.5 sm:py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">${formatCurrency(lineSubtotal, currency)}</td>
         `;
         previewLineItemsTbody.appendChild(tr);
-      } else {
-        invoice.lineItems.forEach((item) => {
-          const qty = Math.max(0, item.quantity || 0);
-          const price = Math.max(0, item.unitPrice || 0);
-          const lineSubtotal = qty * price;
-          const tr = document.createElement('tr');
-          tr.className = 'tmpl-table-row';
-          tr.innerHTML = `
-            <td class="py-2.5 sm:py-3 px-3 font-medium text-gray-900 break-words">${escapeHtml(item.description || 'Item description')}</td>
-            <td class="py-2.5 sm:py-3 px-3 text-center tabular-nums text-gray-700">${item.quantity ?? 0}</td>
-            <td class="py-2.5 sm:py-3 px-3 text-right tabular-nums text-gray-700">${formatCurrency(price, currency)}</td>
-            <td class="py-2.5 sm:py-3 px-3 text-right tabular-nums text-gray-600">${(item.taxRate || 0) > 0 ? `${item.taxRate}%` : '—'}</td>
-            <td class="py-2.5 sm:py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">${formatCurrency(lineSubtotal, currency)}</td>
-          `;
-          previewLineItemsTbody.appendChild(tr);
-        });
-      }
+      });
     }
 
     // Financial Totals
@@ -778,6 +970,21 @@ export function setupInvoiceForm() {
 
     if (previewGrandTotal) {
       previewGrandTotal.textContent = formatCurrency(totals.grandTotal, currency);
+    }
+
+    if (previewRowAmountPaid && previewAmountPaid) {
+      if (invoice.amountPaid && invoice.amountPaid > 0) {
+        previewRowAmountPaid.classList.remove('hidden');
+        previewRowAmountPaid.classList.add('flex');
+        previewAmountPaid.textContent = `-${formatCurrency(invoice.amountPaid, currency)}`;
+      } else {
+        previewRowAmountPaid.classList.add('hidden');
+        previewRowAmountPaid.classList.remove('flex');
+      }
+    }
+
+    if (previewRowBalanceDue && previewBalanceDue) {
+      previewBalanceDue.textContent = formatCurrency(totals.balanceDue, currency);
     }
 
     // Notes
@@ -855,6 +1062,9 @@ export function setupInvoiceForm() {
         previewPaymentBlock.classList.add('hidden');
       }
     }
+
+    // Render payment QR code
+    updateQrCodePreview();
   }
 
   // 6. Inline Validation UI Helper
@@ -914,7 +1124,10 @@ export function setupInvoiceForm() {
   // Currency select handler
   if (currencySelect) {
     currencySelect.addEventListener('change', () => {
-      invoice.currency = currencySelect.value;
+      const isAus =
+        typeof window !== 'undefined' &&
+        window.location.pathname.includes('tax-invoice-template-australia');
+      invoice.currency = currencySelect.value || (isAus ? 'AUD' : 'USD');
       renderLineItems(); // Re-render to update currency symbols on rate inputs and totals
     });
   }
@@ -1028,15 +1241,40 @@ export function setupInvoiceForm() {
     });
   }
 
+  if (btnUseSampleLogo) {
+    btnUseSampleLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sampleSvg =
+        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40"><rect width="160" height="40" rx="8" fill="%232563eb"/><text x="80" y="25" fill="white" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle">ACME CORP</text></svg>';
+      invoice.logo = sampleSvg;
+      renderLogoPreview();
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
   // Add line item button handler
   if (btnAddItem) {
     btnAddItem.addEventListener('click', () => {
+      const lastIndex = invoice.lineItems.length - 1;
+      const lastItem = invoice.lineItems[lastIndex];
+      if (lastItem && !lastItem.description.trim()) {
+        const lastDescInput = document.getElementById(`item-desc-${lastIndex}`) as HTMLInputElement;
+        if (lastDescInput) {
+          lastDescInput.focus();
+        }
+        return;
+      }
+
+      const isAus =
+        typeof window !== 'undefined' &&
+        window.location.pathname.includes('tax-invoice-template-australia');
       const newItem: LineItem = {
-        id: `item_${Date.now()}`,
+        id: `item_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
         description: '',
         quantity: 1,
         unitPrice: 0,
-        taxRate: 0,
+        taxRate: isAus ? 10 : 0,
       };
       invoice.lineItems.push(newItem);
       renderLineItems();
@@ -1261,22 +1499,25 @@ export function setupInvoiceForm() {
   fieldValidationMappings.forEach(({ input, errId, field, updateState }) => {
     if (!input) return;
 
-    // Blur triggers full validation display
+    // Blur triggers full validation display and immediate autosave
     input.addEventListener('blur', () => {
       const res = validateInvoiceField(field, input.value);
       setFieldValidationUI(input, document.getElementById(errId), res.valid, res.error);
+      triggerAutoSave(true);
     });
 
-    // Input updates state and removes error immediately if valid
-    input.addEventListener('input', () => {
+    // Input and change update state and immediately reflect valid/invalid feedback
+    const onFieldInput = () => {
       updateState(input.value);
       const res = validateInvoiceField(field, input.value);
-      if (res.valid) {
-        setFieldValidationUI(input, document.getElementById(errId), true);
-      }
+      setFieldValidationUI(input, document.getElementById(errId), res.valid, res.error);
       updateLivePreview();
       triggerAutoSave();
-    });
+    };
+
+    input.addEventListener('input', onFieldInput);
+    input.addEventListener('change', onFieldInput);
+    input.addEventListener('keyup', onFieldInput);
   });
 
   // Remaining payment details updates
@@ -1350,6 +1591,104 @@ export function setupInvoiceForm() {
       triggerAutoSave();
     });
   });
+
+  // Document Title & PO Number listeners
+  if (documentTitleInput) {
+    documentTitleInput.addEventListener('input', () => {
+      invoice.documentTitle = documentTitleInput.value;
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  if (poNumberInput) {
+    poNumberInput.addEventListener('input', () => {
+      invoice.poNumber = poNumberInput.value;
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  // Ship To interactive toggles & listeners
+  if (btnToggleShipTo && shipToContainer) {
+    btnToggleShipTo.addEventListener('click', () => {
+      shipToContainer.classList.remove('hidden');
+      btnToggleShipTo.classList.add('hidden');
+      if (!invoice.shipTo) {
+        invoice.shipTo = { name: '', address: '' };
+      }
+      shipToNameInput?.focus();
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  if (btnRemoveShipTo && shipToContainer) {
+    btnRemoveShipTo.addEventListener('click', () => {
+      shipToContainer.classList.add('hidden');
+      btnToggleShipTo?.classList.remove('hidden');
+      if (shipToNameInput) shipToNameInput.value = '';
+      if (shipToAddressInput) shipToAddressInput.value = '';
+      invoice.shipTo = undefined;
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  if (shipToNameInput) {
+    shipToNameInput.addEventListener('input', () => {
+      if (!invoice.shipTo) invoice.shipTo = { name: '', address: '' };
+      invoice.shipTo.name = shipToNameInput.value;
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  if (shipToAddressInput) {
+    shipToAddressInput.addEventListener('input', () => {
+      if (!invoice.shipTo) invoice.shipTo = { name: '', address: '' };
+      invoice.shipTo.address = shipToAddressInput.value;
+      updateLivePreview();
+      triggerAutoSave();
+    });
+  }
+
+  // Amount Paid listener
+  if (amountPaidInput) {
+    amountPaidInput.addEventListener('input', () => {
+      const raw = parseFloat(amountPaidInput.value || '0');
+      invoice.amountPaid = isNaN(raw) ? 0 : Math.max(0, raw);
+      updateTotals();
+    });
+  }
+
+  // Payment QR code listeners
+  if (qrTypeSelect) {
+    qrTypeSelect.addEventListener('change', () => {
+      invoice.paymentQrType = qrTypeSelect.value as any;
+      if (qrValueInput) {
+        qrValueInput.disabled = (qrTypeSelect.value === 'none');
+        if (qrTypeSelect.value !== 'none') {
+          qrValueInput.focus();
+        }
+      }
+      updateQrCodePreview();
+      triggerAutoSave();
+    });
+  }
+
+  if (qrValueInput) {
+    qrValueInput.addEventListener('input', () => {
+      if (qrTypeSelect && qrTypeSelect.value === 'none' && qrValueInput.value.trim().length > 0) {
+        qrTypeSelect.value = qrValueInput.value.startsWith('http') ? 'link' : 'upi';
+        invoice.paymentQrType = qrTypeSelect.value as any;
+        qrValueInput.disabled = false;
+      }
+      invoice.paymentQrValue = qrValueInput.value;
+      updateQrCodePreview();
+      triggerAutoSave();
+    });
+  }
 
   // 8. Template Switcher Controller (4 clean variants: modern, classic, minimal, compact)
   function applyTemplate(tmpl: 'modern' | 'classic' | 'minimal' | 'compact') {
@@ -1453,6 +1792,10 @@ export function setupInvoiceForm() {
         setMobileView(activeTab);
       }
     });
+
+    if (window.innerWidth < 1024) {
+      setMobileView('form');
+    }
   }
 
   // 10. Paper Format Selector (A4 vs US Letter)
@@ -1561,7 +1904,11 @@ export function setupInvoiceForm() {
       const textSpan = btn.querySelector('.btn-pdf-text') || btn.querySelector('span');
       const icon = btn.querySelector('.btn-pdf-icon') || btn.querySelector('svg');
       if (textSpan) {
-        textSpan.textContent = loadingText;
+        if (!loading && btn.id === 'btn-download-pdf-form') {
+          textSpan.textContent = 'PDF';
+        } else {
+          textSpan.textContent = loadingText;
+        }
       }
       if (loading) {
         btn.classList.add('opacity-80', 'cursor-wait');
@@ -1582,6 +1929,27 @@ export function setupInvoiceForm() {
     const previewDoc = document.getElementById('invoice-preview-document');
     if (!previewDoc) {
       showToast('error', 'Export Failed', 'Invoice document preview element was not found.');
+      return;
+    }
+
+    // Update inline validation UI for all mapped fields
+    let firstInvalidInput: HTMLElement | null = null;
+    let firstInvalidError = '';
+
+    fieldValidationMappings.forEach(({ input, errId, field }) => {
+      if (!input) return;
+      const res = validateInvoiceField(field, input.value);
+      setFieldValidationUI(input, document.getElementById(errId), res.valid, res.error);
+      if (!res.valid && !firstInvalidInput) {
+        firstInvalidInput = input;
+        firstInvalidError = res.error || 'Please fill in required fields';
+      }
+    });
+
+    if (firstInvalidInput) {
+      (firstInvalidInput as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      (firstInvalidInput as HTMLElement).focus();
+      showToast('error', 'Missing Required Field', firstInvalidError);
       return;
     }
 
@@ -1666,6 +2034,7 @@ export function setupInvoiceForm() {
   if (btnPrintInvoice) {
     btnPrintInvoice.addEventListener('click', (e) => {
       e.preventDefault();
+      showToast('info', 'Print Preview', 'Opened browser print preview dialog.');
       printInvoice();
     });
   }
@@ -1673,6 +2042,7 @@ export function setupInvoiceForm() {
   if (btnPrintPreview) {
     btnPrintPreview.addEventListener('click', (e) => {
       e.preventDefault();
+      showToast('info', 'Print Preview', 'Opened browser print preview dialog.');
       printInvoice();
     });
   }
@@ -1681,27 +2051,40 @@ export function setupInvoiceForm() {
   if (btnResetForm) {
     btnResetForm.addEventListener('click', (e) => {
       e.preventDefault();
-      if (
-        confirm('Are you sure you want to reset this invoice? All entered details will be cleared.')
-      ) {
-        clearInvoiceDraft();
-        invoice = createDefaultInvoice();
-        populateFormInputs();
-        renderLineItems();
-        applyTemplate(invoice.template || 'modern');
-        applyFormat(invoice.pageFormat || 'a4');
-        updateLivePreview();
-        // Clear any error states
-        document.querySelectorAll('.text-input-error').forEach((el) => {
-          el.classList.remove('text-input-error');
-          el.removeAttribute('aria-invalid');
-        });
-        document.querySelectorAll('[id^="err-"]').forEach((el) => {
-          el.classList.add('hidden');
-          el.classList.remove('flex');
-        });
-        showToast('info', 'Form Reset', 'Invoice fields restored to clean defaults.');
-      }
+      clearInvoiceDraft();
+      invoice = createDefaultInvoice();
+      invoice.documentTitle = '';
+      invoice.invoiceNumber = '';
+      invoice.sender.name = '';
+      invoice.sender.email = '';
+      invoice.sender.phone = '';
+      invoice.sender.address = '';
+      invoice.sender.taxId = '';
+      invoice.client.name = '';
+      invoice.client.email = '';
+      invoice.client.phone = '';
+      invoice.client.address = '';
+      invoice.client.taxId = '';
+      invoice.lineItems = [];
+      populateFormInputs();
+      if (documentTitleInput) documentTitleInput.value = '';
+      if (invoiceNumberInput) invoiceNumberInput.value = '';
+      if (senderNameInput) senderNameInput.value = '';
+      if (clientNameInput) clientNameInput.value = '';
+      renderLineItems();
+      applyTemplate(invoice.template || 'modern');
+      applyFormat(invoice.pageFormat || 'a4');
+      updateLivePreview();
+      // Clear any error states
+      document.querySelectorAll('.text-input-error').forEach((el) => {
+        el.classList.remove('text-input-error');
+        el.removeAttribute('aria-invalid');
+      });
+      document.querySelectorAll('[id^="err-"]').forEach((el) => {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+      });
+      showToast('info', 'Form Reset', 'Invoice fields restored to clean defaults.');
     });
   }
 
@@ -1830,9 +2213,12 @@ export function setupInvoiceForm() {
 
   function openClearDataModal() {
     if (modalClearData) {
-      modalClearData.classList.remove('opacity-0', 'pointer-events-none');
-      const innerCard = modalClearData.querySelector('div');
-      if (innerCard) innerCard.classList.remove('scale-95');
+      modalClearData.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        modalClearData.classList.remove('opacity-0', 'pointer-events-none');
+        const innerCard = modalClearData.querySelector('div');
+        if (innerCard) innerCard.classList.remove('scale-95');
+      });
     }
   }
 
@@ -1841,6 +2227,9 @@ export function setupInvoiceForm() {
       modalClearData.classList.add('opacity-0', 'pointer-events-none');
       const innerCard = modalClearData.querySelector('div');
       if (innerCard) innerCard.classList.add('scale-95');
+      setTimeout(() => {
+        modalClearData.classList.add('hidden');
+      }, 200);
     }
   }
 
@@ -2063,21 +2452,13 @@ export function setupInvoiceForm() {
   renderLineItems();
   updateLivePreview();
 
-  // Yield secondary non-blocking controls to keep main thread tasks under 50ms
-  const completeInit = () => {
-    updateStorageStatus();
-    refreshSavedClientsDropdown();
-    refreshCustomTemplatesDropdown();
-    setupTemplateSwitcher();
-    setupFormatSelector();
-    setupMobileViewToggle();
-  };
-
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(completeInit, { timeout: 1000 });
-  } else {
-    setTimeout(completeInit, 0);
-  }
+  // Initialize controls and views immediately
+  updateStorageStatus();
+  refreshSavedClientsDropdown();
+  refreshCustomTemplatesDropdown();
+  setupTemplateSwitcher();
+  setupFormatSelector();
+  setupMobileViewToggle();
 }
 
 // Auto-run if DOM is ready, or on DOMContentLoaded

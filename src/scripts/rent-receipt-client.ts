@@ -210,7 +210,7 @@ export function setupRentReceiptForm() {
     if (prevGrandtotal) prevGrandtotal.textContent = totalFormatted;
     if (rentTotalDisp) rentTotalDisp.textContent = totalFormatted;
 
-    if (prevMode) prevMode.textContent = rentReceipt.paymentMode;
+    if (prevMode) prevMode.textContent = rentReceipt.paymentMode || 'Bank Transfer';
     if (prevRef) prevRef.textContent = rentReceipt.transactionReference || 'N/A';
     if (prevRefRow) {
       if (rentReceipt.transactionReference) prevRefRow.classList.remove('hidden');
@@ -324,10 +324,13 @@ export function setupRentReceiptForm() {
     updatePreview();
   });
 
-  paymentModeSelect?.addEventListener('change', (e) => {
-    rentReceipt.paymentMode = (e.target as HTMLSelectElement).value;
-    triggerSave();
-    updatePreview();
+  ['change', 'input'].forEach((evt) => {
+    paymentModeSelect?.addEventListener(evt, (e) => {
+      rentReceipt.paymentMode =
+        (e.target as HTMLSelectElement).value || 'UPI / Instant Pay';
+      triggerSave();
+      updatePreview();
+    });
   });
 
   rentTxRefInput?.addEventListener('input', (e) => {
@@ -390,47 +393,69 @@ export function setupRentReceiptForm() {
   const formCol = document.getElementById('rent-form-column');
   const previewCol = document.getElementById('rent-preview-column');
 
-  btnToggleForm?.addEventListener('click', () => {
-    formCol?.classList.remove('hidden');
-    previewCol?.classList.add('hidden');
-    btnToggleForm.className =
-      'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
-    if (btnTogglePreview)
-      btnTogglePreview.className =
-        'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
-  });
+  let activeRentTab: 'form' | 'preview' = 'form';
 
-  btnTogglePreview?.addEventListener('click', () => {
-    formCol?.classList.add('hidden');
-    previewCol?.classList.remove('hidden');
-    btnTogglePreview.className =
-      'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
-    if (btnToggleForm)
-      btnToggleForm.className =
-        'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+  function setRentMobileView(tab: 'form' | 'preview') {
+    activeRentTab = tab;
+    if (tab === 'form') {
+      formCol?.classList.remove('hidden');
+      previewCol?.classList.add('hidden');
+      if (btnToggleForm) {
+        btnToggleForm.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
+        btnToggleForm.setAttribute('aria-pressed', 'true');
+      }
+      if (btnTogglePreview) {
+        btnTogglePreview.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+        btnTogglePreview.setAttribute('aria-pressed', 'false');
+      }
+    } else {
+      formCol?.classList.add('hidden');
+      previewCol?.classList.remove('hidden');
+      updatePreview();
+      if (btnTogglePreview) {
+        btnTogglePreview.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-primary text-white shadow-2xs cursor-pointer';
+        btnTogglePreview.setAttribute('aria-pressed', 'true');
+      }
+      if (btnToggleForm) {
+        btnToggleForm.className =
+          'flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 text-charcoal hover:text-ink hover:bg-surface-soft cursor-pointer';
+        btnToggleForm.setAttribute('aria-pressed', 'false');
+      }
+    }
+  }
+
+  btnToggleForm?.addEventListener('click', () => setRentMobileView('form'));
+  btnTogglePreview?.addEventListener('click', () => setRentMobileView('preview'));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      formCol?.classList.remove('hidden');
+      previewCol?.classList.remove('hidden');
+    } else {
+      setRentMobileView(activeRentTab);
+    }
   });
 
   // Reset & Clear
   const btnReset = document.getElementById('btn-reset-rent');
   btnReset?.addEventListener('click', () => {
-    if (confirm('Reset rent receipt to default values?')) {
-      rentReceipt = createDefaultRentReceipt();
-      populateInputs();
-      updatePreview();
-      triggerSave();
-      showToast('info', 'Receipt Reset', 'Restored default rent receipt details.');
-    }
+    rentReceipt = createDefaultRentReceipt();
+    populateInputs();
+    updatePreview();
+    triggerSave();
+    showToast('info', 'Receipt Reset', 'Restored default rent receipt details.');
   });
 
   const btnClearAll = document.getElementById('btn-clear-rent-data');
   btnClearAll?.addEventListener('click', () => {
-    if (confirm('Clear saved rent receipt data from this browser?')) {
-      clearRentReceiptDraft();
-      rentReceipt = createDefaultRentReceipt();
-      populateInputs();
-      updatePreview();
-      showToast('success', 'Data Cleared', 'Rent receipt data cleared from your browser.');
-    }
+    clearRentReceiptDraft();
+    rentReceipt = createDefaultRentReceipt();
+    populateInputs();
+    updatePreview();
+    showToast('success', 'Data Cleared', 'Rent receipt data cleared from your browser.');
   });
 
   // Exports
