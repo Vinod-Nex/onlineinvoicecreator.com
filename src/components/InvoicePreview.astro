@@ -10,6 +10,15 @@ interface Props {
 const { locale = DEFAULT_LOCALE } = Astro.props;
 const d = getDictionary(locale);
 const defaultInvoice = createDefaultInvoice();
+if (locale === 'pt-br') {
+  defaultInvoice.documentTitle = 'FATURA';
+  defaultInvoice.currency = 'BRL';
+  defaultInvoice.sender.name = 'Sua Empresa ou Nome';
+  defaultInvoice.client.name = 'Nome do Cliente';
+  if (defaultInvoice.lineItems[0]) {
+    defaultInvoice.lineItems[0].description = 'Serviços Prestados';
+  }
+}
 ---
 
 <div id="invoice-preview-container" class="w-full">
@@ -17,9 +26,9 @@ const defaultInvoice = createDefaultInvoice();
   <div class="flex items-center justify-between mb-2 no-print">
     <h2 class="text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-1.5">
       <span class="flex h-2 w-2 rounded-full bg-accent-teal"></span>
-      <span>Invoice Preview</span>
+      <span>{locale === 'pt-br' ? 'Prévia da Fatura' : 'Invoice Preview'}</span>
     </h2>
-    <span class="text-[11px] text-mute">Live real-time view</span>
+    <span class="text-[11px] text-mute">{locale === 'pt-br' ? 'Visualização em tempo real' : 'Live real-time view'}</span>
   </div>
 
   <!-- Template Switcher, Paper Format & Export Toolbar (Hidden in Print) -->
@@ -213,32 +222,32 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-doc-title"
             class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase"
           >
-            {defaultInvoice.documentTitle || 'INVOICE'}
+            {defaultInvoice.documentTitle || (locale === 'pt-br' ? 'FATURA' : 'INVOICE')}
           </div>
           <span class="tmpl-badge-status px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
-            Issued
+            {locale === 'pt-br' ? 'Emitida' : 'Issued'}
           </span>
         </div>
 
         <div class="text-xs sm:text-sm text-gray-700 space-y-1">
           <p>
-            <span class="text-gray-500 font-medium">Invoice #:</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Fatura Nº:' : 'Invoice #:'}</span>
             <strong id="preview-invoice-number" class="text-gray-900 font-bold ml-1 tabular-nums">
               {defaultInvoice.invoiceNumber}
             </strong>
           </p>
           <p id="preview-row-po" class="hidden">
-            <span class="text-gray-500 font-medium">PO #:</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Pedido Nº:' : 'PO #:'}</span>
             <span id="preview-po-number" class="ml-1 font-mono font-semibold text-gray-900 tabular-nums"></span>
           </p>
           <p>
-            <span class="text-gray-500 font-medium">Issue Date:</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Emissão:' : 'Issue Date:'}</span>
             <span id="preview-issue-date" class="ml-1 tabular-nums">
               {defaultInvoice.issueDate}
             </span>
           </p>
           <p>
-            <span class="text-gray-500 font-medium">Due Date:</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Vencimento:' : 'Due Date:'}</span>
             <span id="preview-due-date" class="ml-1 font-semibold text-gray-900 tabular-nums">
               {defaultInvoice.dueDate}
             </span>
@@ -252,7 +261,7 @@ const defaultInvoice = createDefaultInvoice();
       <!-- Bill To -->
       <div class="space-y-1">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          Billed To:
+          {d.preview.billedTo}:
         </span>
         <div id="preview-client-name" class="text-base sm:text-lg font-bold text-gray-900">
           {defaultInvoice.client.name}
@@ -270,14 +279,14 @@ const defaultInvoice = createDefaultInvoice();
           {defaultInvoice.client.phone}
         </p>
         <p id="preview-client-tax-id" class="text-xs text-gray-500 font-medium pt-0.5">
-          {defaultInvoice.client.taxId ? `Tax ID: ${defaultInvoice.client.taxId}` : ''}
+          {defaultInvoice.client.taxId ? (locale === 'pt-br' ? `CNPJ/CPF: ${defaultInvoice.client.taxId}` : `Tax ID: ${defaultInvoice.client.taxId}`) : ''}
         </p>
       </div>
 
       <!-- Optional Ship To -->
       <div id="preview-shipto-block" class="hidden space-y-1">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          Shipped To:
+          {d.preview.shippedTo}
         </span>
         <div id="preview-shipto-name" class="text-base sm:text-lg font-bold text-gray-900"></div>
         <p
@@ -292,19 +301,19 @@ const defaultInvoice = createDefaultInvoice();
       <div class="sm:text-right flex flex-col sm:items-end justify-start space-y-1 sm:col-start-2 lg:col-start-3">
         <div id="preview-paid-stamp" class="hidden mb-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border-2 border-emerald-500 shadow-2xs">
           <span>✓</span>
-          <span>PAID IN FULL</span>
+          <span>{d.preview.paidInFull}</span>
         </div>
         <span id="preview-header-balance-label" class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          Balance Due:
+          {d.preview.balanceDue}
         </span>
         <span
           id="preview-header-grand-total"
           class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
         >
-          {formatCurrency(0, 'USD')}
+          {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
         </span>
         <span id="preview-terms-pill" class="text-xs text-gray-500 font-medium">
-          Due in 14 days
+          {locale === 'pt-br' ? 'Vence em 14 dias' : 'Due in 14 days'}
         </span>
       </div>
     </section>
@@ -314,11 +323,11 @@ const defaultInvoice = createDefaultInvoice();
       <table class="w-full text-left border-collapse">
         <thead class="tmpl-table-head">
           <tr>
-            <th id="preview-col-desc" class="py-2.5 px-3 text-left font-bold">Description</th>
-            <th id="preview-col-qty" class="py-2.5 px-3 text-center font-bold w-16">Qty</th>
-            <th id="preview-col-rate" class="py-2.5 px-3 text-right font-bold w-24">Rate</th>
-            <th id="preview-col-tax" class="py-2.5 px-3 text-right font-bold w-20">Tax</th>
-            <th id="preview-col-amount" class="py-2.5 px-3 text-right font-bold w-28">Amount</th>
+            <th id="preview-col-desc" class="py-2.5 px-3 text-left font-bold">{d.preview.description}</th>
+            <th id="preview-col-qty" class="py-2.5 px-3 text-center font-bold w-16">{d.preview.qty}</th>
+            <th id="preview-col-rate" class="py-2.5 px-3 text-right font-bold w-24">{d.preview.rate}</th>
+            <th id="preview-col-tax" class="py-2.5 px-3 text-right font-bold w-20">{d.preview.tax}</th>
+            <th id="preview-col-amount" class="py-2.5 px-3 text-right font-bold w-28">{d.preview.amount}</th>
           </tr>
         </thead>
         <tbody
@@ -327,11 +336,11 @@ const defaultInvoice = createDefaultInvoice();
         >
           <!-- Dynamically populated line items -->
           <tr class="tmpl-table-row" aria-label="Professional Services 1 $0.00 0% $">
-            <td class="py-3 px-3 font-medium text-gray-900">Professional Services</td>
+            <td class="py-3 px-3 font-medium text-gray-900">{locale === 'pt-br' ? 'Serviços Prestados' : 'Professional Services'}</td>
             <td class="py-3 px-3 text-center tabular-nums">1</td>
-            <td class="py-3 px-3 text-right tabular-nums">$0.00</td>
+            <td class="py-3 px-3 text-right tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}</td>
             <td class="py-3 px-3 text-right tabular-nums">0%</td>
-            <td class="py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">$0.00</td>
+            <td class="py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}</td>
           </tr>
         </tbody>
       </table>
@@ -343,7 +352,7 @@ const defaultInvoice = createDefaultInvoice();
       <div class="md:col-span-7 space-y-4">
         <div id="preview-notes-block" class="space-y-1">
           <span id="preview-lbl-notes" class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-            Notes & Instructions
+            {d.preview.notes}
           </span>
           <p
             id="preview-notes"
@@ -364,7 +373,7 @@ const defaultInvoice = createDefaultInvoice();
             </p>
             <div class="tmpl-signature-line w-44 pt-1"></div>
             <span class="text-[10px] uppercase tracking-wider text-gray-500 block">
-              Authorized Signature
+              {locale === 'pt-br' ? 'Assinatura Autorizada' : 'Authorized Signature'}
             </span>
           </div>
         </div>
@@ -378,9 +387,9 @@ const defaultInvoice = createDefaultInvoice();
           aria-atomic="true"
         >
           <div class="flex items-center justify-between text-gray-600">
-            <span id="preview-lbl-subtotal">Subtotal:</span>
+            <span id="preview-lbl-subtotal">{d.preview.subtotal}:</span>
             <span id="preview-subtotal" class="font-medium text-gray-900 tabular-nums">
-              {formatCurrency(0, 'USD')}
+              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
             </span>
           </div>
 
@@ -388,7 +397,7 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-row-discount"
             class="hidden flex items-center justify-between text-emerald-600 font-medium"
           >
-            <span id="preview-discount-label">Discount:</span>
+            <span id="preview-discount-label">{locale === 'pt-br' ? 'Desconto:' : 'Discount:'}</span>
             <span id="preview-discount" class="tabular-nums">
               -$0.00
             </span>
@@ -403,19 +412,19 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-row-shipping"
             class="hidden flex items-center justify-between text-gray-600"
           >
-            <span id="preview-lbl-shipping">Shipping:</span>
+            <span id="preview-lbl-shipping">{locale === 'pt-br' ? 'Frete / Envio:' : 'Shipping:'}</span>
             <span id="preview-shipping" class="font-medium text-gray-900 tabular-nums">
               $0.00
             </span>
           </div>
 
           <div class="tmpl-grand-total-row pt-3 border-t border-gray-300 flex items-baseline justify-between">
-            <span id="preview-lbl-total" class="font-bold text-gray-900 text-sm sm:text-base">Grand Total:</span>
+            <span id="preview-lbl-total" class="font-bold text-gray-900 text-sm sm:text-base">{locale === 'pt-br' ? 'Total Geral:' : 'Grand Total:'}</span>
             <span
               id="preview-grand-total"
               class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
             >
-              {formatCurrency(0, 'USD')}
+              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
             </span>
           </div>
 
@@ -424,7 +433,7 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-row-amount-paid"
             class="hidden flex items-center justify-between text-gray-600 pt-1"
           >
-            <span id="preview-lbl-amount-paid">Amount Paid:</span>
+            <span id="preview-lbl-amount-paid">{locale === 'pt-br' ? 'Valor Pago:' : 'Amount Paid:'}</span>
             <span id="preview-amount-paid" class="font-medium text-gray-900 tabular-nums">
               $0.00
             </span>
@@ -435,7 +444,7 @@ const defaultInvoice = createDefaultInvoice();
             id="preview-row-balance-due"
             class="tmpl-balance-due-row hidden pt-2.5 border-t border-dashed border-gray-300 flex items-baseline justify-between font-bold"
           >
-            <span id="preview-lbl-balance-due" class="text-primary text-sm sm:text-base font-extrabold">Balance Due:</span>
+            <span id="preview-lbl-balance-due" class="text-primary text-sm sm:text-base font-extrabold">{d.preview.balanceDue}</span>
             <span
               id="preview-balance-due"
               class="tmpl-balance-due text-xl sm:text-2xl font-black text-primary tabular-nums"
@@ -454,24 +463,24 @@ const defaultInvoice = createDefaultInvoice();
     >
       <div class="space-y-2">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          Payment Methods & Details
+          {locale === 'pt-br' ? 'Métodos e Dados de Pagamento' : 'Payment Methods & Details'}
         </span>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1.5 text-gray-700">
           <p id="preview-bank-item" class="hidden">
-            <span class="text-gray-500">Bank:</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Banco:' : 'Bank:'}</span>{' '}
             <strong id="preview-bank-name" class="font-semibold text-gray-900 ml-1"></strong>
           </p>
           <p id="preview-account-item" class="hidden">
-            <span class="text-gray-500">Account Name:</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Titular:' : 'Account Name:'}</span>{' '}
             <span id="preview-account-name" class="font-medium text-gray-900 ml-1"></span>
           </p>
           <p id="preview-acc-num-item" class="hidden">
-            <span class="text-gray-500">Account #:</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Conta:' : 'Account #:'}</span>{' '}
             <span id="preview-account-number" class="font-mono text-gray-900 ml-1"></span>
           </p>
           <p id="preview-routing-item" class="hidden">
-            <span class="text-gray-500">Routing / BSB:</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Agência:' : 'Routing / BSB:'}</span>{' '}
             <span id="preview-routing-number" class="font-mono text-gray-900 ml-1"></span>
           </p>
           <p id="preview-iban-item" class="hidden">
@@ -485,7 +494,7 @@ const defaultInvoice = createDefaultInvoice();
         </div>
 
         <div id="preview-link-item" class="hidden pt-1">
-          <span class="text-gray-500">Pay Online:</span>
+          <span class="text-gray-500">{locale === 'pt-br' ? 'Pagar Online:' : 'Pay Online:'}</span>
           <a
             id="preview-payment-link"
             href="#"
@@ -499,7 +508,7 @@ const defaultInvoice = createDefaultInvoice();
           id="preview-instructions-item"
           class="hidden pt-1 text-gray-600 whitespace-pre-line text-xs"
         >
-          <span class="text-gray-500 font-semibold">Instructions:</span>{' '}
+          <span class="text-gray-500 font-semibold">{locale === 'pt-br' ? 'Instruções:' : 'Instructions:'}</span>{' '}
           <span id="preview-custom-instructions"></span>
         </div>
       </div>
@@ -518,7 +527,7 @@ const defaultInvoice = createDefaultInvoice();
         </div>
         <div class="space-y-1 text-center sm:text-left">
           <div class="flex items-center justify-center sm:justify-start gap-2">
-            <span class="text-xs font-bold text-gray-900 tracking-tight">Instant Scan to Pay</span>
+            <span class="text-xs font-bold text-gray-900 tracking-tight">{locale === 'pt-br' ? 'Pague com QR Code' : 'Instant Scan to Pay'}</span>
             <span
               id="preview-qr-badge"
               class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20"
@@ -527,7 +536,7 @@ const defaultInvoice = createDefaultInvoice();
             </span>
           </div>
           <p id="preview-qr-hint" class="text-xs text-gray-600 leading-relaxed max-w-sm">
-            Scan this code with your banking or camera app on your mobile phone to pay instantly.
+            {locale === 'pt-br' ? 'Escaneie este código no aplicativo do seu banco para pagar com agilidade.' : 'Scan this code with your banking or camera app on your mobile phone to pay instantly.'}
           </p>
         </div>
       </div>

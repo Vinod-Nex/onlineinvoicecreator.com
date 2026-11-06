@@ -85,6 +85,28 @@ export function setupInvoiceForm() {
     }
   }
 
+  // If on Brazilian route or document has lang pt-BR, preset document title, BRL, and Portuguese defaults
+  const isPtBrPage =
+    typeof window !== 'undefined' &&
+    (window.location.pathname.startsWith('/pt-br') || document.documentElement?.lang === 'pt-BR');
+  if (isPtBrPage && !storedDraft) {
+    if (!invoice.documentTitle || invoice.documentTitle === 'INVOICE') {
+      invoice.documentTitle = 'FATURA';
+    }
+    if (!invoice.currency || invoice.currency === 'USD') {
+      invoice.currency = 'BRL';
+    }
+    if (invoice.sender.name === 'Your Business Name') {
+      invoice.sender.name = 'Sua Empresa ou Nome';
+    }
+    if (invoice.client.name === 'Client Name') {
+      invoice.client.name = 'Nome do Cliente';
+    }
+    if (invoice.lineItems?.[0] && invoice.lineItems[0].description === 'Professional Services') {
+      invoice.lineItems[0].description = 'Serviços Prestados';
+    }
+  }
+
   // Ensure line items have at least 1 item
   if (!invoice.lineItems || invoice.lineItems.length === 0) {
     invoice.lineItems = [
@@ -477,13 +499,28 @@ export function setupInvoiceForm() {
       const lineSubtotal = safeQty * safePrice;
       const formattedTotal = formatCurrency(lineSubtotal, currencyCode);
 
+      const isPtBr =
+        typeof window !== 'undefined' &&
+        (window.location.pathname.startsWith('/pt-br') || document.documentElement?.lang === 'pt-BR');
+      const labelItem = isPtBr ? `Item nº ${index + 1}` : `Item #${index + 1}`;
+      const labelRemove = isPtBr ? 'Remover item' : 'Remove item';
+      const labelDesc = isPtBr ? 'Descrição' : 'Description';
+      const placeholderDesc = isPtBr
+        ? 'ex.: Desenvolvimento de Website ou Consultoria'
+        : 'e.g. Website Design & Development';
+      const errDesc = isPtBr ? 'A descrição é obrigatória' : 'Description is required';
+      const labelQty = isPtBr ? 'Qtd' : 'Qty';
+      const errNum = isPtBr ? 'Deve ser ≥ 0' : 'Must be ≥ 0';
+      const labelRate = isPtBr ? `Preço (${currencySymbol})` : `Rate (${currencySymbol})`;
+      const labelTax = isPtBr ? 'Imposto (%)' : 'Tax (%)';
+
       rowEl.innerHTML = `
         <div class="flex items-center justify-between gap-3 mb-3 pb-2 border-b border-hairline/40">
           <div class="flex items-center gap-2">
             <span class="flex h-6 w-6 items-center justify-center rounded-full bg-surface-soft text-xs font-semibold text-charcoal">
               ${index + 1}
             </span>
-            <span class="text-xs font-medium uppercase tracking-wider text-mute">Item #${index + 1}</span>
+            <span class="text-xs font-medium uppercase tracking-wider text-mute">${labelItem}</span>
           </div>
 
           <div class="flex items-center gap-3">
@@ -498,8 +535,8 @@ export function setupInvoiceForm() {
               type="button"
               class="btn-remove-item flex h-10 w-10 sm:h-9 sm:w-9 items-center justify-center rounded-xl text-stone hover:text-accent-danger hover:bg-accent-danger/10 transition-colors focus-visible:ring-2 focus-visible:ring-accent-danger focus-visible:outline-none"
               data-index="${index}"
-              title="Remove item"
-              aria-label="Remove item ${index + 1}"
+              title="${labelRemove}"
+              aria-label="${labelRemove} ${index + 1}"
               ${isOnlyItem ? 'disabled aria-disabled="true"' : ''}
             >
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -516,14 +553,14 @@ export function setupInvoiceForm() {
           <!-- Description: Spans full on mobile, 6 cols on desktop -->
           <div class="md:col-span-6">
             <label for="item-desc-${index}" class="block text-xs font-semibold text-charcoal mb-1.5">
-              Description <span class="text-accent-danger">*</span>
+              ${labelDesc} <span class="text-accent-danger">*</span>
             </label>
             <input
               type="text"
               id="item-desc-${index}"
               class="item-field-desc text-input h-12 text-sm"
-              placeholder="e.g. Website Design & Development"
-              aria-label="Item Description"
+              placeholder="${placeholderDesc}"
+              aria-label="${labelDesc}"
               value="${escapeHtml(item.description || '')}"
               data-field="description"
               data-index="${index}"
@@ -534,7 +571,7 @@ export function setupInvoiceForm() {
               <svg class="h-3.5 w-3.5 inline-block shrink-0" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
               </svg>
-              <span>Description is required</span>
+              <span>${errDesc}</span>
             </p>
           </div>
 
@@ -542,7 +579,7 @@ export function setupInvoiceForm() {
           <div class="grid grid-cols-3 gap-3 md:col-span-6 md:grid-cols-3">
             <div>
               <label for="item-qty-${index}" class="block text-xs font-semibold text-charcoal mb-1.5">
-                Qty <span class="text-accent-danger">*</span>
+                ${labelQty} <span class="text-accent-danger">*</span>
               </label>
               <input
                 type="number"
@@ -550,7 +587,7 @@ export function setupInvoiceForm() {
                 class="item-field-qty text-input h-12 text-sm tabular-nums text-center"
                 min="0"
                 step="any"
-                aria-label="Quantity"
+                aria-label="${labelQty}"
                 value="${item.quantity}"
                 data-field="quantity"
                 data-index="${index}"
@@ -558,14 +595,14 @@ export function setupInvoiceForm() {
                 aria-required="true"
               />
               <p id="err-item-qty-${index}" class="hidden text-xs text-accent-danger mt-1 items-center gap-1 font-medium">
-                <span>Must be ≥ 0</span>
+                <span>${errNum}</span>
               </p>
             </div>
 
             <!-- Unit Price: with currency prefix -->
             <div>
               <label for="item-price-${index}" class="block text-xs font-semibold text-charcoal mb-1.5">
-                Rate (${currencySymbol}) <span class="text-accent-danger">*</span>
+                ${labelRate} <span class="text-accent-danger">*</span>
               </label>
               <input
                 type="number"
@@ -574,7 +611,7 @@ export function setupInvoiceForm() {
                 min="0"
                 step="any"
                 placeholder="0.00"
-                aria-label="Unit Price"
+                aria-label="${labelRate}"
                 value="${item.unitPrice}"
                 data-field="unitPrice"
                 data-index="${index}"
@@ -582,14 +619,14 @@ export function setupInvoiceForm() {
                 aria-required="true"
               />
               <p id="err-item-price-${index}" class="hidden text-xs text-accent-danger mt-1 items-center gap-1 font-medium">
-                <span>Must be ≥ 0</span>
+                <span>${errNum}</span>
               </p>
             </div>
 
             <!-- Tax Rate % -->
             <div>
               <label for="item-tax-${index}" class="block text-xs font-semibold text-charcoal mb-1.5">
-                Tax (%)
+                ${labelTax}
               </label>
               <input
                 type="number"

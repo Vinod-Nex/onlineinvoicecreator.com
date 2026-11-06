@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import InvoiceForm from '../../components/InvoiceForm.astro';
 import { getRouteUrl } from '../../i18n/routes';
 import { buildPageSchemaGraph } from '../../lib/schema';
 
@@ -15,11 +16,22 @@ const breadcrumbs = [
 
 const tools = [
   {
+    title: 'Fatura Comercial para Cobrança',
+    badge: 'Gerador Ativo',
+    badgeColor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
+    description: 'Documento comercial completo para discriminar produtos ou serviços, prazos e condições de pagamento entre partes. Preencha e baixe seu PDF diretamente no gerador.',
+    href: '#invoice-workspace',
+    buttonText: 'Usar Gerador de Fatura',
+    icon: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z',
+    features: ['Discriminação de itens e valores em R$', 'Cálculo automático de descontos e taxas', 'Exportação em PDF A4 sem marca d\'água', 'Totalmente no navegador'],
+  },
+  {
     title: 'Gerador de Recibo de Pagamento',
     badge: 'Mais Utilizado',
     badgeColor: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
     description: 'Emita recibos de pagamento simples e completos para serviços, autônomos, MEI ou comércio com valor por extenso automático.',
     href: getRouteUrl('receipt', locale),
+    buttonText: 'Abrir Gerador de Recibo',
     icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
     features: ['Valor por extenso em R$', 'QR Code Pix integrado', 'Validação de CPF e CNPJ', 'Exportação em PDF A4'],
   },
@@ -29,6 +41,7 @@ const tools = [
     badgeColor: 'bg-primary/10 text-primary border-primary/20',
     description: 'Comprovante mensal de locação de imóveis com cálculo automático de aluguel, condomínio, IPTU e taxa de água conforme a Lei do Inquilinato.',
     href: getRouteUrl('rent-receipt', locale),
+    buttonText: 'Gerar Recibo de Aluguel',
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
     features: ['Discriminação de IPTU e condomínio', 'Mês de referência', 'Dados do locador e locatário', 'Sem necessidade de cadastro'],
   },
@@ -38,17 +51,9 @@ const tools = [
     badgeColor: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
     description: 'Confira um modelo pronto e formatado para preenchimento rápido. Entenda todos os campos obrigatórios e baixe o modelo em branco ou preenchido.',
     href: getRouteUrl('receipt-template', locale),
+    buttonText: 'Ver Modelo Pronto',
     icon: 'M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2',
     features: ['Campos legais obrigatórios', 'Exemplo visual completo', 'Download imediato', 'Ideal para autônomos'],
-  },
-  {
-    title: 'Fatura Comercial para Cobrança',
-    badge: 'Cobrança Comercial',
-    badgeColor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
-    description: 'Documento comercial para discriminar itens, prazos e condições de pagamento entre partes. Não substitui a nota fiscal oficial.',
-    href: `${getRouteUrl('receipt', locale)}?tipo=fatura`,
-    icon: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z',
-    features: ['Discriminação de itens e valores', 'Chave Pix opcional', 'Zero custo ou mensalidades', 'Totalmente no navegador'],
   },
 ];
 
@@ -57,9 +62,21 @@ const pageSchema = buildPageSchemaGraph({
   title,
   description,
   isHomePage: true,
-  isToolPage: false,
+  isToolPage: true,
   breadcrumbs,
   inLanguage: 'pt-BR',
+  webAppOptions: {
+    name: 'Gerador de Fatura e Recibo Online',
+    description: 'Gerador de fatura comercial e recibo de pagamento online grátis com exportação para PDF e sem cadastro.',
+    applicationCategory: 'BusinessApplication',
+    features: [
+      'Emissão de fatura comercial com itens detalhados',
+      'Cálculo de subtotal, descontos, taxas e frete',
+      'Download em PDF A4 sem marca d\'água',
+      'Suporte a pagamentos via Pix e dados bancários',
+      'Armazenamento local privado no navegador (LGPD)',
+    ],
+  },
 });
 ---
 
@@ -72,7 +89,7 @@ const pageSchema = buildPageSchemaGraph({
   ogImage="/og/og-pt-br-index.png"
   ogImageAlt="Gerador de Recibo e Fatura Grátis Online"
 >
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12 sm:space-y-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 sm:space-y-14">
     <Breadcrumbs items={breadcrumbs} />
 
     <!-- Hero Section -->
@@ -87,18 +104,24 @@ const pageSchema = buildPageSchemaGraph({
       </h1>
 
       <p class="text-base sm:text-lg text-mute leading-relaxed">
-        Crie recibos de pagamento profissionais, recibos de aluguel e faturas comerciais em instantes. Com valor por extenso automático em português, suporte a Pix Copia e Cola e exportação em PDF A4 sem marca d'água.
+        Crie faturas comerciais e recibos de pagamento profissionais em instantes. Com discriminação de itens, cálculo automático de impostos, suporte a Pix e exportação em PDF A4 sem marca d'água.
       </p>
 
       <div class="pt-3 flex flex-wrap items-center justify-center gap-3">
         <a
-          href={getRouteUrl('receipt', locale)}
+          href="#invoice-workspace"
           class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm shadow-sm transition-all active:scale-98"
         >
-          <span>Criar Recibo Agora</span>
+          <span>Criar Fatura Agora</span>
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
+        </a>
+        <a
+          href={getRouteUrl('receipt', locale)}
+          class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-surface-card border border-hairline hover:bg-surface-soft text-ink font-semibold text-sm transition-colors"
+        >
+          <span>Gerador de Recibo</span>
         </a>
         <a
           href={getRouteUrl('rent-receipt', locale)}
@@ -110,7 +133,6 @@ const pageSchema = buildPageSchemaGraph({
     </section>
 
     <!-- Legal Notice -->
-    <!-- verificar: verificar com fonte oficial ou contador -->
     <div class="rounded-2xl bg-amber-500/10 border border-amber-500/20 p-5 text-xs text-amber-900 dark:text-amber-200">
       <div class="flex items-start gap-3">
         <svg class="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -121,18 +143,22 @@ const pageSchema = buildPageSchemaGraph({
         <div class="space-y-1">
           <p class="font-bold">Aviso legal e tributário:</p>
           <p class="leading-relaxed">
-            O recibo comprova quitação de valores entre pagador e recebedor. Este documento <strong>não substitui a Nota Fiscal (NF-e ou NFS-e)</strong>, documento oficial de recolhimento tributário regulado pela Receita Federal e prefeituras. Nossa plataforma gratuita não emite notas fiscais.
+            A fatura comercial e o recibo de pagamento comprovam acordos, prestação de serviços e quitações financeiras entre as partes. Este documento <strong>não substitui a Nota Fiscal (NF-e ou NFS-e)</strong>, documento oficial regulamentado pela Receita Federal e secretarias de fazenda municipais. Nossa plataforma gratuita não emite notas fiscais eletrônicas.
           </p>
-          <!-- verificar: verificar com fonte oficial ou contador -->
           <p class="text-[11px] text-mute dark:text-amber-300/80 italic">
-            Informação geral, não é orientação jurídica ou contábil.
+            Informação geral informativa, não constitui assessoria contábil ou jurídica.
           </p>
         </div>
       </div>
     </div>
 
+    <!-- Interactive Invoice Generator Workspace -->
+    <main class="w-full bg-canvas -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+      <InvoiceForm locale={locale} />
+    </main>
+
     <!-- Tools Grid -->
-    <section class="space-y-6">
+    <section class="space-y-6 pt-6">
       <div class="text-center max-w-2xl mx-auto space-y-2">
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink font-display">
           Escolha o Modelo Ideal para a Sua Necessidade
@@ -182,7 +208,7 @@ const pageSchema = buildPageSchemaGraph({
               href={t.href}
               class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface hover:bg-surface-soft border border-hairline text-ink font-semibold text-xs transition-colors"
             >
-              <span>Abrir Gerador</span>
+              <span>{t.buttonText}</span>
               <svg class="h-3.5 w-3.5 text-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
@@ -196,7 +222,7 @@ const pageSchema = buildPageSchemaGraph({
     <section class="rounded-3xl border border-hairline bg-surface-card p-6 sm:p-10 shadow-xs space-y-8">
       <div class="text-center max-w-2xl mx-auto space-y-2">
         <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display">
-          Por que Usar Nosso Gerador de Recibos?
+          Por que Usar Nosso Gerador de Faturas e Recibos?
         </h2>
         <p class="text-sm text-mute">
           Desenvolvido com foco na realidade dos profissionais e empresas brasileiras.
@@ -246,4 +272,3 @@ const pageSchema = buildPageSchemaGraph({
     </section>
   </div>
 </BaseLayout>
-

@@ -240,11 +240,16 @@ export function calculateTotals(
  * Formats a currency amount with correct symbol and decimal placement using Intl.NumberFormat.
  * Handles zero-decimal currencies (JPY, KRW) and standard 2-decimal currencies.
  */
-export function formatCurrency(amount: number, currency = 'USD', locale = 'en-US'): string {
+export function formatCurrency(amount: number, currency = 'USD', locale?: string): string {
   const safeAmount = roundToDecimals(amount, 2);
+  const activeLocale =
+    locale ||
+    (typeof document !== 'undefined' && document.documentElement?.lang
+      ? document.documentElement.lang
+      : 'en-US');
 
   try {
-    return new Intl.NumberFormat(locale, {
+    return new Intl.NumberFormat(activeLocale, {
       style: 'currency',
       currency: currency.toUpperCase(),
       currencyDisplay: 'narrowSymbol',

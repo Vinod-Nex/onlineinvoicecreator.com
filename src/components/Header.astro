@@ -205,7 +205,7 @@ const templates = locale === 'pt-br'
       <LanguageSwitcher currentPath={currentPath} currentLocale={locale} />
       <ThemeToggle />
       <a
-        href={locale === 'pt-br' ? getRouteUrl('receipt', 'pt-br') : `${getRouteUrl('home', locale)}#invoice-workspace`}
+        href={`${getRouteUrl('home', locale)}#invoice-workspace`}
         id="header-btn-create-invoice"
         class="btn btn-cobalt h-9 px-3.5 xl:px-4 text-xs shadow-xs"
       >
@@ -378,7 +378,12 @@ const templates = locale === 'pt-br'
     }
 
     const handleInvoiceScroll = (e: Event) => {
-      if (window.location.pathname === '/' || window.location.pathname === '') {
+      const isHome =
+        window.location.pathname === '/' ||
+        window.location.pathname === '' ||
+        window.location.pathname === '/pt-br' ||
+        window.location.pathname === '/pt-br/';
+      if (isHome) {
         e.preventDefault();
         const ws = document.getElementById('invoice-workspace');
         if (ws) {
