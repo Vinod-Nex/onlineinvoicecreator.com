@@ -114,6 +114,7 @@ const GLOBAL_AFFECTING_PATTERNS = [
   'src/components/',
   'src/styles/',
   'src/lib/',
+  'src/i18n/',
   'src/data/currencies.ts',
   'src/data/keyword-map.json',
   'astro.config.mjs',

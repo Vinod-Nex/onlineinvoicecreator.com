@@ -4,8 +4,17 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CloudflareAnalytics from '../components/CloudflareAnalytics.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import LanguageBanner from '../components/LanguageBanner.astro';
 
 import { buildPageSchemaGraph, type BreadcrumbItem } from '../lib/schema';
+import {
+  type Locale,
+  DEFAULT_LOCALE,
+  LOCALE_CONFIGS,
+  getLocaleConfig,
+  getPublishedLocales,
+} from '../i18n/config';
+import { getRouteKeyFromPath, getHreflangAlternates } from '../i18n/routes';
 
 export interface Props {
   title?: string;
@@ -19,6 +28,7 @@ export interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   cfAnalyticsToken?: string;
+  locale?: Locale;
 }
 
 const {
@@ -33,12 +43,17 @@ const {
   showHeader = true,
   showFooter = true,
   cfAnalyticsToken,
+  locale,
 } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.origin : 'https://onlineinvoicecreator.com';
 
 // Normalize canonical URL: absolute, self-referencing, root slash for home, no trailing slash for subpages
 const normalizedPath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, '') : '/';
+const resolvedRoute = getRouteKeyFromPath(normalizedPath);
+const activeLocale: Locale = locale || resolvedRoute?.locale || DEFAULT_LOCALE;
+const localeConfig = getLocaleConfig(activeLocale);
+
 let canonicalUrl = canonical || new URL(normalizedPath, siteUrl).href;
 if (normalizedPath === '/' && !canonicalUrl.endsWith('/')) {
   canonicalUrl += '/';
@@ -46,12 +61,11 @@ if (normalizedPath === '/' && !canonicalUrl.endsWith('/')) {
   canonicalUrl = canonicalUrl.replace(/\/$/, '');
 }
 
-// Construct multilingual hreflang alternates (en, es, pt, x-default) matching XML sitemap
-const cleanRoutePath = normalizedPath === '/' ? '' : normalizedPath;
-const hreflangEn = canonicalUrl;
-const hreflangEs = `${siteUrl}/es${cleanRoutePath}`;
-const hreflangPt = `${siteUrl}/pt${cleanRoutePath}`;
-const hreflangXDefault = canonicalUrl;
+// Construct multilingual hreflang alternates matching routes.ts for published locales (and x-default to English)
+const hreflangAlternates = resolvedRoute ? getHreflangAlternates(resolvedRoute.key, siteUrl) : [
+  { lang: 'en', href: canonicalUrl },
+  { lang: 'x-default', href: canonicalUrl },
+];
 
 // Resolve absolute Open Graph image URL
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
@@ -65,6 +79,7 @@ const defaultSchema = buildPageSchemaGraph({
   isHomePage: normalizedPath === '/',
   isToolPage: false,
   breadcrumbs,
+  inLanguage: localeConfig.lang,
 });
 
 let serializedSchema = '';
@@ -92,7 +107,7 @@ if (schema) {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeConfig.lang} dir={localeConfig.dir}>
   <head>
     <!-- Character Encoding & Viewport -->
     <meta charset="utf-8" />
@@ -114,14 +129,10 @@ if (schema) {
 
     <!-- Canonical URL & Multilingual Hreflang Alternates -->
     <link rel="canonical" href={canonicalUrl} />
-    {!noindex && (
-      <>
-        <link rel="alternate" hreflang="en" href={hreflangEn} />
-        <link rel="alternate" hreflang="es" href={hreflangEs} />
-        <link rel="alternate" hreflang="pt" href={hreflangPt} />
-        <link rel="alternate" hreflang="x-default" href={hreflangXDefault} />
-      </>
-    )}
+    {!noindex &&
+      hreflangAlternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+      ))}
 
     <!-- Search Engine Indexing & Crawling -->
     {noindex ? (
@@ -154,7 +165,12 @@ if (schema) {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt || title} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={localeConfig.ogLocale} />
+    {getPublishedLocales()
+      .filter((loc) => loc !== activeLocale)
+      .map((loc) => (
+        <meta property="og:locale:alternate" content={LOCALE_CONFIGS[loc].ogLocale} />
+      ))}
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -225,8 +241,11 @@ if (schema) {
           <slot name="header" />
         </header>
       ) : (
-        <Header currentPath={normalizedPath} />
+        <Header currentPath={normalizedPath} locale={activeLocale} />
       ))}
+
+    <!-- Optional Language Suggestion Banner (Dismissible, No Auto-Redirect) -->
+    <LanguageBanner currentPath={normalizedPath} currentLocale={activeLocale} />
 
     <!-- Main Landmark -->
     <main id="main-content" role="main" tabindex="-1" class="focus:outline-none flex-1">
@@ -240,7 +259,7 @@ if (schema) {
           <slot name="footer" />
         </footer>
       ) : (
-        <Footer />
+        <Footer locale={activeLocale} />
       ))}
 
     <!-- First-party listener for system theme preference changes -->

@@ -1,33 +1,44 @@
 ---
+import { getDictionary } from '../i18n';
+import { getRouteUrl } from '../i18n/routes';
+import { type Locale, DEFAULT_LOCALE } from '../i18n/config';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const d = getDictionary(locale);
+
 const toolLinks = [
-  { name: 'Free Invoice Generator', href: '/' },
-  { name: 'Free Receipt Generator', href: '/free-online-receipt-generator' },
-  { name: 'Rent Receipt Generator', href: '/free-rent-receipt-generator' },
-  { name: 'Itemized Receipt Maker', href: '/receipt-maker-with-items' },
-  { name: 'Excel Invoice Generator', href: '/invoice-generator-excel' },
+  { name: 'Free Invoice Generator', href: getRouteUrl('home', locale) },
+  { name: 'Free Receipt Generator', href: getRouteUrl('receipt', locale) },
+  { name: 'Rent Receipt Generator', href: getRouteUrl('rent-receipt', locale) },
+  { name: 'Itemized Receipt Maker', href: getRouteUrl('receipt-items', locale) },
+  { name: 'Excel Invoice Generator', href: getRouteUrl('invoice-excel', locale) },
 ];
 
 const templateLinks = [
-  { name: 'Freelancer Invoices', href: '/invoice-generator-for-freelancers' },
-  { name: 'Contractor Invoices', href: '/contractor-invoice-template' },
-  { name: 'Australia Tax Invoices (ATO)', href: '/tax-invoice-template-australia' },
-  { name: 'Photography Invoices', href: '/photography-invoice-generator' },
+  { name: 'Freelancer Invoices', href: getRouteUrl('invoice-freelance', locale) },
+  { name: 'Contractor Invoices', href: getRouteUrl('contractor-invoice', locale) },
+  { name: 'Australia Tax Invoices (ATO)', href: getRouteUrl('tax-invoice-australia', locale) },
+  { name: 'Photography Invoices', href: getRouteUrl('photography-invoice', locale) },
   { name: 'Design System & Style Guide', href: '/style-guide' },
 ];
 
 const resourceLinks = [
-  { name: 'Invoicing Blog & Guides', href: '/blog' },
-  { name: 'How to Invoice Clients', href: '/blog' },
-  { name: 'Small Business Bookkeeping', href: '/blog' },
-  { name: 'GST & VAT Compliance Guide', href: '/tax-invoice-template-australia' },
+  { name: 'Invoicing Blog & Guides', href: getRouteUrl('blog', locale) },
+  { name: 'How to Invoice Clients', href: getRouteUrl('blog-freelance', locale) },
+  { name: 'Small Business Bookkeeping', href: getRouteUrl('blog', locale) },
+  { name: 'GST & VAT Compliance Guide', href: getRouteUrl('tax-invoice-australia', locale) },
 ];
 
 const companyLinks = [
-  { name: 'About Us', href: '/about' },
-  { name: 'Contact Us', href: '/contact' },
-  { name: 'Privacy Policy', href: '/privacy' },
-  { name: 'Terms and Conditions', href: '/terms' },
-  { name: 'Product Changelog', href: '/changelog' },
+  { name: d.footer.aboutUs, href: getRouteUrl('about', locale) },
+  { name: d.footer.contactUs, href: getRouteUrl('contact', locale) },
+  { name: d.footer.privacyPolicy, href: getRouteUrl('privacy', locale) },
+  { name: 'Terms and Conditions', href: getRouteUrl('terms', locale) },
+  { name: 'Product Changelog', href: getRouteUrl('changelog', locale) },
 ];
 ---
 
@@ -40,7 +51,7 @@ const companyLinks = [
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b border-hairline">
       <div class="space-y-2 max-w-xl">
         <a
-          href="/"
+          href={getRouteUrl('home', locale)}
           class="group inline-flex items-center gap-2.5 text-ink transition-colors hover:text-primary"
         >
           <img
@@ -55,8 +66,7 @@ const companyLinks = [
           <span class="text-lg font-bold tracking-tight text-ink">OnlineInvoiceCreator</span>
         </a>
         <p class="text-xs text-mute leading-relaxed">
-          The fast, private online invoice and receipt maker for freelancers, contractors, and small
-          businesses worldwide. 100% free with instant PDF download and zero account required.
+          {d.footer.brandStatement}
         </p>
       </div>
 
@@ -76,7 +86,7 @@ const companyLinks = [
               d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
             />
           </svg>
-          <span>100% Client-Side Private</span>
+          <span>{d.form.clientSidePrivate}</span>
         </div>
         <div class="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-card px-3 py-1.5 text-ink shadow-2xs font-medium">
           <svg
@@ -88,7 +98,7 @@ const companyLinks = [
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
           </svg>
-          <span>No Watermark · No Sign-Up</span>
+          <span>{d.form.noWatermarkNoSignup}</span>
         </div>
       </div>
     </div>
@@ -97,7 +107,7 @@ const companyLinks = [
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
       <!-- Col 1: Core Tools -->
       <div class="space-y-3">
-        <p class="font-bold text-ink uppercase tracking-wider text-[11px]">Invoicing Tools</p>
+        <p class="font-bold text-ink uppercase tracking-wider text-[11px]" set:html={d.footer.invoicingTools}></p>
         <ul class="space-y-2 text-mute">
           {toolLinks.map((link) => (
             <li>
@@ -111,7 +121,7 @@ const companyLinks = [
 
       <!-- Col 2: Templates -->
       <div class="space-y-3">
-        <p class="font-bold text-ink uppercase tracking-wider text-[11px]">Specialized Templates</p>
+        <p class="font-bold text-ink uppercase tracking-wider text-[11px]" set:html={d.footer.specializedTemplates}></p>
         <ul class="space-y-2 text-mute">
           {templateLinks.map((link) => (
             <li>
@@ -125,7 +135,7 @@ const companyLinks = [
 
       <!-- Col 3: Resources -->
       <div class="space-y-3">
-        <p class="font-bold text-ink uppercase tracking-wider text-[11px]">Guides & Resources</p>
+        <p class="font-bold text-ink uppercase tracking-wider text-[11px]" set:html={d.footer.guidesResources}></p>
         <ul class="space-y-2 text-mute">
           {resourceLinks.map((link) => (
             <li>
@@ -139,7 +149,7 @@ const companyLinks = [
 
       <!-- Col 4: Legal & Company -->
       <div class="space-y-3">
-        <p class="font-bold text-ink uppercase tracking-wider text-[11px]">Company & Legal</p>
+        <p class="font-bold text-ink uppercase tracking-wider text-[11px]" set:html={d.footer.companyLegal}></p>
         <ul class="space-y-2 text-mute">
           {companyLinks.map((link) => (
             <li>
@@ -169,33 +179,33 @@ const companyLinks = [
           />
         </svg>
         <p>
-          <strong class="font-semibold text-ink">Important Notice:</strong> Online Invoice Creator tools and templates are designed strictly for genuine business documents, valid accounting records, and lawful commercial transactions. Users are responsible for complying with applicable local tax, statutory invoicing, and bookkeeping regulations in their respective jurisdictions.
+          {d.footer.complianceNotice}
         </p>
       </div>
     </div>
 
     <!-- Bottom Row: Copyright & Legal Slugs -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-hairline text-[11px] text-mute">
-      <div>© 2026 Online Invoice Creator. All rights reserved. 100% Client-Side Architecture.</div>
+      <div>{d.footer.copyright}</div>
       <div class="flex items-center gap-4">
-        <a href="/privacy" class="hover:text-ink transition-colors">
-          Privacy Policy
+        <a href={getRouteUrl('privacy', locale)} class="hover:text-ink transition-colors">
+          {d.footer.privacyPolicy}
         </a>
         <span class="text-hairline">·</span>
-        <a href="/terms" class="hover:text-ink transition-colors">
-          Terms & Conditions
+        <a href={getRouteUrl('terms', locale)} class="hover:text-ink transition-colors">
+          {d.footer.termsOfService}
         </a>
         <span class="text-hairline">·</span>
-        <a href="/about" class="hover:text-ink transition-colors">
-          About Us
+        <a href={getRouteUrl('about', locale)} class="hover:text-ink transition-colors">
+          {d.footer.aboutUs}
         </a>
         <span class="text-hairline">·</span>
-        <a href="/contact" class="hover:text-ink transition-colors">
-          Contact Us
+        <a href={getRouteUrl('contact', locale)} class="hover:text-ink transition-colors">
+          {d.footer.contactUs}
         </a>
         <span class="text-hairline">·</span>
-        <a href="/changelog" class="hover:text-ink transition-colors">
-          Changelog
+        <a href={getRouteUrl('changelog', locale)} class="hover:text-ink transition-colors">
+          {d.footer.changelog}
         </a>
       </div>
     </div>

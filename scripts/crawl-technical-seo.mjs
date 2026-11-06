@@ -257,7 +257,7 @@ async function runTechnicalSeoAudit() {
       ),
     ];
     const hreflangs = hreflangMatches.map((m) => m[1]);
-    const requiredHreflangs = ['en', 'es', 'pt', 'x-default'];
+    const requiredHreflangs = ['en', 'x-default'];
     const missingHreflangLangs = requiredHreflangs.filter((l) => !hreflangs.includes(l));
 
     if (!isNoIndex && missingHreflangLangs.length > 0) {

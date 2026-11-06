@@ -338,7 +338,7 @@ function auditHtmlFile(filePath) {
   ];
   const hreflangs = hreflangMatches.map((m) => m[1]);
   if (!isNoIndex) {
-    const requiredLangs = ['en', 'es', 'pt', 'x-default'];
+    const requiredLangs = ['en', 'x-default'];
     for (const lang of requiredLangs) {
       if (!hreflangs.includes(lang)) {
         errors.push(`Missing <link rel="alternate" hreflang="${lang}"> tag in <head>`);

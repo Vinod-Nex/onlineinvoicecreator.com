@@ -8,13 +8,26 @@
  * 3. Non-Intrusive Layout: Fixed to the bottom-right on desktop / bottom on mobile with dismissal.
  * 4. Never Blocks the Tool: Does not obscure the generator canvas or the primary PDF download button.
  */
+
+import { getDictionary } from '../i18n';
+import { getRouteUrl } from '../i18n/routes';
+import { type Locale, DEFAULT_LOCALE } from '../i18n/config';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale } = Astro.props;
+const activeLocale = (locale || (Astro.currentLocale as Locale) || DEFAULT_LOCALE) as Locale;
+const d = getDictionary(activeLocale);
+const privacyUrl = getRouteUrl('privacy', activeLocale) || '/privacy';
 ---
 
 <div
   id="oic-consent-banner"
   class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 hidden rounded-2xl border border-hairline/80 bg-surface-card/95 backdrop-blur-md p-5 shadow-2xl transition-all duration-300 no-print"
   role="region"
-  aria-label="Privacy & Cookie Preferences"
+  aria-label={d.cookie.title}
   style="display: none;"
 >
   <div class="flex items-start gap-3">
@@ -25,13 +38,13 @@
     </div>
     <div class="space-y-1.5 flex-1">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-bold text-ink">Privacy & Cookie Choices</h3>
+        <h3 class="text-sm font-bold text-ink">{d.cookie.title}</h3>
         <button
           type="button"
           id="btn-consent-dismiss"
           class="text-mute hover:text-ink text-xs p-2 min-h-[32px] min-w-[32px] rounded-md transition-colors flex items-center justify-center"
-          aria-label="Dismiss banner"
-          title="Dismiss banner"
+          aria-label={d.cookie.dismiss}
+          title={d.cookie.dismiss}
         >
           <svg
             class="h-4 w-4"
@@ -46,13 +59,11 @@
         </button>
       </div>
       <p class="text-xs text-mute leading-relaxed">
-        We compile your invoices locally in your browser and never store your financial details on
-        our servers. To keep this tool 100% free, we partner with advertising networks that may use
-        cookies for ad measurement and personalization.
+        {d.cookie.description}
       </p>
       <div class="pt-1">
-        <a href="/privacy" class="text-[11px] font-medium text-primary hover:underline">
-          Read our Privacy Policy &rarr;
+        <a href={privacyUrl} class="text-[11px] font-medium text-primary hover:underline">
+          {d.cookie.readPrivacyPolicy}
         </a>
       </div>
     </div>
@@ -64,14 +75,14 @@
       id="btn-consent-essential"
       class="px-4 py-2 min-h-[36px] rounded-lg border border-hairline bg-surface-soft hover:bg-surface text-ink text-xs font-medium transition-colors cursor-pointer"
     >
-      Essential Only
+      {d.cookie.essentialOnly || 'Essential Only'}
     </button>
     <button
       type="button"
       id="btn-consent-accept"
       class="px-4 py-2 min-h-[36px] rounded-lg bg-primary hover:bg-primary-deep text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
     >
-      Accept All
+      {d.cookie.acceptAll || 'Accept All'}
     </button>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isLocalePublished } from './src/i18n/config';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -110,6 +111,13 @@ export default defineConfig({
   site: 'https://onlineinvoicecreator.com',
   trailingSlash: 'never',
   compressHTML: true,
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'pt-br', 'es', 'fr', 'de'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   devToolbar: {
     enabled: false,
   },
@@ -153,14 +161,31 @@ export default defineConfig({
       },
     },
     sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          'pt-br': 'pt-BR',
+          es: 'es',
+          fr: 'fr',
+          de: 'de',
+        },
+      },
       filter: (page) => !isNoIndexPage(page),
       serialize(item) {
         if (isNoIndexPage(item.url)) {
           return undefined;
         }
-        return {
-          url: item.url,
-        };
+        if (item.links && item.links.length > 0) {
+          item.links = item.links.filter((link) => {
+            const code = link.lang?.toLowerCase();
+            return code === 'en' || isLocalePublished(code);
+          });
+          if (item.links.length <= 1) {
+            delete item.links;
+          }
+        }
+        return item;
       },
     }),
     {

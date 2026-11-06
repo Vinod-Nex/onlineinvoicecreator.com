@@ -41,6 +41,7 @@ export interface PageSchemaOptions {
   faqItems?: FAQItem[];
   customSchemas?: Record<string, unknown>[];
   webAppOptions?: Partial<WebApplicationOptions>;
+  inLanguage?: string;
 }
 
 export const SITE_URL_DEFAULT = 'https://onlineinvoicecreator.com';
@@ -87,7 +88,7 @@ export function createOrganizationSchema(siteUrl: string = SITE_URL_DEFAULT) {
 /**
  * Creates Schema.org WebSite structured data with site name and publisher reference.
  */
-export function createWebSiteSchema(siteUrl: string = SITE_URL_DEFAULT) {
+export function createWebSiteSchema(siteUrl: string = SITE_URL_DEFAULT, inLanguage: string = 'en-US') {
   const base = siteUrl.replace(/\/$/, '');
   return {
     '@type': 'WebSite',
@@ -100,7 +101,7 @@ export function createWebSiteSchema(siteUrl: string = SITE_URL_DEFAULT) {
     publisher: {
       '@id': `${base}/#organization`,
     },
-    inLanguage: 'en-US',
+    inLanguage,
   };
 }
 
@@ -213,7 +214,7 @@ export function buildPageSchemaGraph(options: PageSchemaOptions): {
   // Home Page: Organization and WebSite
   if (options.isHomePage) {
     graph.push(createOrganizationSchema(siteUrl));
-    graph.push(createWebSiteSchema(siteUrl));
+    graph.push(createWebSiteSchema(siteUrl, options.inLanguage || 'en-US'));
   }
 
   // Tool Page: WebApplication

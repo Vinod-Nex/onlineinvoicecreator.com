@@ -1,6 +1,14 @@
 ---
 import { createDefaultInvoice, formatCurrency } from '../lib/invoice-calc';
+import { getDictionary } from '../i18n';
+import { type Locale, DEFAULT_LOCALE } from '../i18n/config';
 
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const d = getDictionary(locale);
 const defaultInvoice = createDefaultInvoice();
 ---
 
@@ -104,7 +112,7 @@ const defaultInvoice = createDefaultInvoice();
           <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
           <rect x="6" y="14" width="12" height="8"></rect>
         </svg>
-        <span>Print</span>
+        <span>{d.buttons.print}</span>
       </button>
 
       <!-- PNG Export Button -->
@@ -125,10 +133,9 @@ const defaultInvoice = createDefaultInvoice();
           <circle cx="8.5" cy="8.5" r="1.5"></circle>
           <polyline points="21 15 16 10 5 21"></polyline>
         </svg>
-        <span>PNG</span>
+        <span>{d.buttons.png}</span>
       </button>
 
-      <!-- PDF Download Button (Primary) -->
       <!-- PDF Download Button (Primary) -->
       <button
         type="button"
@@ -148,7 +155,7 @@ const defaultInvoice = createDefaultInvoice();
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        <span class="btn-pdf-text">Download PDF</span>
+        <span class="btn-pdf-text">{d.buttons.downloadPdf}</span>
       </button>
     </div>
   </div>

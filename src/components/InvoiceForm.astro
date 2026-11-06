@@ -2,7 +2,15 @@
 import { TOP_30_CURRENCIES } from '../data/currencies';
 import { createDefaultInvoice, formatCurrency } from '../lib/invoice';
 import InvoicePreview from './InvoicePreview.astro';
+import { getDictionary } from '../i18n';
+import { type Locale, DEFAULT_LOCALE } from '../i18n/config';
 
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const d = getDictionary(locale);
 const defaultInvoice = createDefaultInvoice();
 ---
 
@@ -25,7 +33,7 @@ const defaultInvoice = createDefaultInvoice();
         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
       </svg>
-      <span>Edit Form</span>
+      <span>{d.form.editForm}</span>
     </button>
     <button
       type="button"
@@ -37,7 +45,7 @@ const defaultInvoice = createDefaultInvoice();
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
         <circle cx="12" cy="12" r="3"></circle>
       </svg>
-      <span>Live Preview</span>
+      <span>{d.form.livePreview}</span>
     </button>
   </div>
 
@@ -57,19 +65,18 @@ const defaultInvoice = createDefaultInvoice();
       <div>
         <div class="flex items-center gap-2 flex-wrap">
           <p class="text-xs sm:text-sm font-bold text-ink">
-            100% Private & Serverless — Nothing is uploaded to a server
+            {d.form.privacyBannerTitle}
           </p>
           <span
             id="storage-status-pill"
             class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20"
           >
             <span class="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse"></span>
-            <span id="storage-status-text">Local Storage Active</span>
+            <span id="storage-status-text">{d.form.localStorageActive}</span>
           </span>
         </div>
         <p class="text-xs text-mute mt-0.5 leading-relaxed">
-          Your business details, client records, and invoices are saved solely inside your browser's
-          private local storage. No data is ever transmitted to an external server.
+          {d.form.privacyBannerSubtitle}
         </p>
       </div>
     </div>
@@ -91,7 +98,7 @@ const defaultInvoice = createDefaultInvoice();
           <polyline points="3 6 5 6 21 6"></polyline>
           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
         </svg>
-        <span>Clear my data</span>
+        <span>{d.buttons.clearMyData}</span>
       </button>
     </div>
   </aside>
@@ -148,7 +155,7 @@ const defaultInvoice = createDefaultInvoice();
               >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              <span class="hidden sm:inline">Save Template</span>
+              <span class="hidden sm:inline">{d.buttons.saveTemplate}</span>
             </button>
 
             <!-- Duplicate Invoice Button -->
@@ -168,7 +175,7 @@ const defaultInvoice = createDefaultInvoice();
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-              <span>Duplicate</span>
+              <span>{d.buttons.duplicate}</span>
             </button>
 
             <!-- Export JSON -->
@@ -189,7 +196,7 @@ const defaultInvoice = createDefaultInvoice();
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span>JSON</span>
+              <span>{d.buttons.jsonExport}</span>
             </button>
 
             <!-- Import JSON Button & Hidden File Input -->
@@ -217,7 +224,7 @@ const defaultInvoice = createDefaultInvoice();
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
               </svg>
-              <span class="hidden xs:inline">Import</span>
+              <span class="hidden xs:inline">{d.buttons.jsonImport}</span>
             </button>
 
             <!-- Reset Button -->
@@ -227,7 +234,7 @@ const defaultInvoice = createDefaultInvoice();
               class="btn-outline h-9 px-3 text-xs font-semibold rounded-full hover:bg-surface-soft hover:text-accent-danger transition-colors cursor-pointer"
               title="Clear all fields and reset form"
             >
-              Reset
+              {d.buttons.reset}
             </button>
 
             <!-- Print Button -->
@@ -248,7 +255,7 @@ const defaultInvoice = createDefaultInvoice();
                 <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
                 <rect x="6" y="14" width="12" height="8"></rect>
               </svg>
-              <span class="hidden sm:inline">Print</span>
+              <span class="hidden sm:inline">{d.buttons.print}</span>
             </button>
 
             <!-- PNG Button -->
@@ -269,7 +276,7 @@ const defaultInvoice = createDefaultInvoice();
                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                 <polyline points="21 15 16 10 5 21"></polyline>
               </svg>
-              <span>PNG</span>
+              <span>{d.buttons.png}</span>
             </button>
 
             <!-- Download PDF Button -->
@@ -291,7 +298,7 @@ const defaultInvoice = createDefaultInvoice();
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span class="btn-pdf-text">PDF</span>
+              <span class="btn-pdf-text">{d.buttons.downloadPdf}</span>
             </button>
           </div>
         </div>
@@ -1406,7 +1413,7 @@ const defaultInvoice = createDefaultInvoice();
       id="invoice-preview-column"
       class="hidden lg:block lg:col-span-6 xl:col-span-6 w-full lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
     >
-      <InvoicePreview />
+      <InvoicePreview locale={locale} />
     </div>
   </div>
 

@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getDictionary } from '../i18n';
+import { getRouteUrl } from '../i18n/routes';
+import { DEFAULT_LOCALE } from '../i18n/config';
 
-const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: '404 Page Not Found' }];
+const locale = DEFAULT_LOCALE;
+const d = getDictionary(locale);
+
+const breadcrumbItems = [{ label: 'Home', href: getRouteUrl('home', locale) }, { label: '404 Page Not Found' }];
 
 const tools = [
   {
@@ -133,22 +139,20 @@ const popularPages = [
     <header class="text-center max-w-3xl mx-auto space-y-5">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-danger/10 text-accent-danger border border-accent-danger/20">
         <span class="flex h-2 w-2 rounded-full bg-accent-danger animate-pulse"></span>
-        <span>404 Error • Resource Not Found</span>
+        <span>{d.error404.badge}</span>
       </div>
 
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-ink font-display">
-        Page Not Found
+        {d.error404.title}
       </h1>
 
       <p class="text-base sm:text-lg text-mute leading-relaxed">
-        The link you followed may be outdated, mistyped, or the document may have moved. All our
-        free, watermark-free invoice and receipt generators are available below with zero signup
-        required.
+        {d.error404.description}
       </p>
 
       <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
         <a
-          href="/"
+          href={getRouteUrl('home', locale)}
           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-sm hover:bg-primary-hover active:scale-[0.99] transition-all text-sm"
         >
           <svg
@@ -160,10 +164,10 @@ const popularPages = [
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Return to Free Invoice Generator
+          {d.error404.backHome}
         </a>
         <a
-          href="/contact"
+          href={getRouteUrl('contact', locale)}
           class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-surface-card border border-hairline text-ink font-medium hover:bg-surface-soft text-sm transition-colors"
         >
           Contact Support

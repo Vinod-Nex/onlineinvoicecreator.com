@@ -242,7 +242,7 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
   it('verifies all 14 indexable pages include complete multilingual hreflang placeholders in <head>', () => {
     const htmlFiles = getHtmlFiles(distDir);
     const missingHreflang: any[] = [];
-    const expectedLangs = ['en', 'es', 'pt', 'x-default'];
+    const expectedLangs = ['en', 'x-default'];
 
     for (const file of htmlFiles) {
       const content = fs.readFileSync(file, 'utf8');

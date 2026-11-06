@@ -1,0 +1,169 @@
+---
+/**
+ * LanguageBanner Component
+ *
+ * One-time dismissible banner suggesting visitor's browser language if different:
+ * 1. Shows only if visitor's browser language matches an active published locale.
+ * 2. Strictly manual interaction — NO automatic redirects.
+ * 3. Remembers dismissal in localStorage inside try/catch.
+ * 4. Links to the translated equivalent of the current page.
+ */
+
+import { getPublishedLocales, LOCALE_CONFIGS, type Locale, DEFAULT_LOCALE } from '../i18n/config';
+import { getLocalizedEquivalentUrl } from '../i18n/routes';
+
+interface Props {
+  currentPath?: string;
+  currentLocale?: Locale;
+}
+
+const {
+  currentPath = Astro.url.pathname,
+  currentLocale = DEFAULT_LOCALE,
+} = Astro.props;
+
+const publishedLocales = getPublishedLocales();
+
+// Precompute links for all published locales so client JS can pick the matching one without extra fetch
+const localeMap = publishedLocales.map((loc) => ({
+  code: loc,
+  lang: LOCALE_CONFIGS[loc].lang,
+  displayName: LOCALE_CONFIGS[loc].displayName,
+  href: getLocalizedEquivalentUrl(currentPath, loc),
+}));
+---
+
+<aside
+  id="oic-language-suggestion-banner"
+  class="hidden fixed top-16 left-0 right-0 z-40 bg-surface-card/95 border-b border-hairline/80 backdrop-blur-md px-4 py-2.5 shadow-md no-print animate-in fade-in slide-in-from-top-2 duration-200"
+  role="region"
+  aria-label="Language Suggestion"
+  data-current-locale={currentLocale}
+  data-published-locales={JSON.stringify(localeMap)}
+>
+  <div class="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+    <div class="flex items-center gap-2.5 text-ink">
+      <svg
+        class="h-4 w-4 text-primary shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      <span id="lang-banner-message">
+        We noticed your browser language is different. Would you like to switch?
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <a
+        id="lang-banner-switch-btn"
+        href="#"
+        class="btn btn-cobalt h-7 px-3 text-[11px] font-semibold rounded-lg shadow-2xs"
+      >
+        Switch
+      </a>
+      <button
+        type="button"
+        id="lang-banner-dismiss-btn"
+        class="h-7 px-2.5 text-[11px] font-medium text-mute hover:text-ink rounded-lg hover:bg-surface-soft transition-colors cursor-pointer"
+        aria-label="Dismiss language suggestion"
+      >
+        Dismiss
+      </button>
+    </div>
+  </div>
+</aside>
+
+<script>
+  function initLanguageBanner() {
+    const banner = document.getElementById('oic-language-suggestion-banner');
+    if (!banner) return;
+
+    const STORAGE_KEY = 'oic_lang_banner_dismissed';
+
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === '1') {
+        return; // User already dismissed the suggestion
+      }
+    } catch {
+      // localStorage disabled, safe to continue
+    }
+
+    const currentLocale = banner.getAttribute('data-current-locale') || 'en';
+    const rawMap = banner.getAttribute('data-published-locales');
+    if (!rawMap) return;
+
+    let locales: Array<{ code: string; lang: string; displayName: string; href: string }> = [];
+    try {
+      locales = JSON.parse(rawMap);
+    } catch {
+      return;
+    }
+
+    // Check browser languages
+    const browserLangs = (navigator.languages || [navigator.language || '']).map((l) =>
+      l.toLowerCase()
+    );
+
+    let match = null;
+    for (const bLang of browserLangs) {
+      match = locales.find((loc) => {
+        const code = loc.code.toLowerCase();
+        const lang = loc.lang.toLowerCase();
+        // Exact match or primary language match (e.g. 'pt' matching 'pt-br')
+        return (
+          bLang === code ||
+          bLang === lang ||
+          bLang.startsWith(`${code}-`) ||
+          (bLang.length >= 2 && code.startsWith(bLang.slice(0, 2)))
+        );
+      });
+      if (match) break;
+    }
+
+    // Only suggest if the matched published locale differs from current page locale
+    if (match && match.code !== currentLocale) {
+      const msgEl = document.getElementById('lang-banner-message');
+      const switchBtn = document.getElementById('lang-banner-switch-btn') as HTMLAnchorElement | null;
+      const dismissBtn = document.getElementById('lang-banner-dismiss-btn');
+
+      if (msgEl) {
+        msgEl.textContent = `We noticed your browser is in ${match.displayName}. Would you like to view this page in ${match.displayName}?`;
+      }
+      if (switchBtn) {
+        switchBtn.href = match.href;
+        switchBtn.textContent = `Switch to ${match.displayName}`;
+        switchBtn.addEventListener('click', () => {
+          try {
+            localStorage.setItem('oic_preferred_locale', match!.code);
+            localStorage.setItem(STORAGE_KEY, '1');
+          } catch {}
+        });
+      }
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+          banner.classList.add('hidden');
+          try {
+            localStorage.setItem(STORAGE_KEY, '1');
+          } catch {}
+        });
+      }
+
+      banner.classList.remove('hidden');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageBanner);
+  } else {
+    initLanguageBanner();
+  }
+  document.addEventListener('astro:after-swap', initLanguageBanner);
+</script>
+
