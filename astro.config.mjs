@@ -193,27 +193,81 @@ export default defineConfig({
       hooks: {
         'astro:build:done': async ({ dir }) => {
           const distDir = fileURLToPath(dir);
+          const publicDir = path.resolve(__dirname, 'public');
+
+          function formatSitemap0(xml) {
+            let clean = xml.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
+            const urlRegex = /<url>([\s\S]*?)<\/url>/g;
+            const urls = [];
+            let match;
+            while ((match = urlRegex.exec(clean)) !== null) {
+              const inner = match[1];
+              const locMatch = inner.match(/<loc>([\s\S]*?)<\/loc>/);
+              const loc = locMatch ? locMatch[1].trim() : '';
+              const linkMatches = inner.match(/<xhtml:link[^>]*\/>/g) || [];
+
+              let block = '  <url>\n';
+              if (loc) {
+                block += `    <loc>${loc}</loc>\n`;
+              }
+              for (const link of linkMatches) {
+                block += `    ${link.trim()}\n`;
+              }
+              block += '  </url>';
+              urls.push(block);
+            }
+
+            return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
+          }
+
+          function formatSitemapIndex(xml) {
+            let clean = xml.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
+            const sitemapRegex = /<sitemap>([\s\S]*?)<\/sitemap>/g;
+            const sitemaps = [];
+            let match;
+            while ((match = sitemapRegex.exec(clean)) !== null) {
+              const inner = match[1];
+              const locMatch = inner.match(/<loc>([\s\S]*?)<\/loc>/);
+              const loc = locMatch ? locMatch[1].trim() : '';
+              const lastmodMatch = inner.match(/<lastmod>([\s\S]*?)<\/lastmod>/);
+              const lastmod = lastmodMatch ? lastmodMatch[1].trim() : '';
+
+              let block = '  <sitemap>\n';
+              if (loc) {
+                block += `    <loc>${loc}</loc>\n`;
+              }
+              if (lastmod) {
+                block += `    <lastmod>${lastmod}</lastmod>\n`;
+              }
+              block += '  </sitemap>';
+              sitemaps.push(block);
+            }
+
+            return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemaps.join('\n')}\n</sitemapindex>\n`;
+          }
+
           const sitemap0Path = path.join(distDir, 'sitemap-0.xml');
           if (fs.existsSync(sitemap0Path)) {
-            let content = fs.readFileSync(sitemap0Path, 'utf8');
-            content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
-            content = content
-              .replace(/<url>/g, '\n  <url>\n    ')
-              .replace(/<\/url>/g, '\n  </url>')
-              .replace(/<\/urlset>/g, '\n</urlset>\n');
-            fs.writeFileSync(sitemap0Path, content, 'utf8');
+            const content = fs.readFileSync(sitemap0Path, 'utf8');
+            const formatted = formatSitemap0(content);
+            fs.writeFileSync(sitemap0Path, formatted, 'utf8');
+            fs.writeFileSync(path.join(publicDir, 'sitemap-0.xml'), formatted, 'utf8');
           }
+
           const sitemapIndexPath = path.join(distDir, 'sitemap-index.xml');
           if (fs.existsSync(sitemapIndexPath)) {
-            let content = fs.readFileSync(sitemapIndexPath, 'utf8');
-            content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
-            fs.writeFileSync(sitemapIndexPath, content, 'utf8');
+            const content = fs.readFileSync(sitemapIndexPath, 'utf8');
+            const formatted = formatSitemapIndex(content);
+            fs.writeFileSync(sitemapIndexPath, formatted, 'utf8');
+            fs.writeFileSync(path.join(publicDir, 'sitemap-index.xml'), formatted, 'utf8');
           }
+
           const sitemapXmlPath = path.join(distDir, 'sitemap.xml');
           if (fs.existsSync(sitemapXmlPath)) {
             let content = fs.readFileSync(sitemapXmlPath, 'utf8');
             content = content.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
             fs.writeFileSync(sitemapXmlPath, content, 'utf8');
+            fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), content, 'utf8');
           }
         },
       },
