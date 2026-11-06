@@ -43,3 +43,7 @@ playwright-report/
 downloads/
 testsprite_tests/tmp/
 testsprite_tests/tmp/config.json
+demo.mp4
+demo-video/
+record-demo.mjs
+recorded.md

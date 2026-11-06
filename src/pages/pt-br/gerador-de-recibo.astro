@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BrazilianReceiptForm from '../../components/BrazilianReceiptForm.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Gerador de Recibo Grátis – Crie e Baixe em PDF';
+const description = 'Gere seu recibo online grátis e simples. Preencha os dados, veja a prévia e baixe o PDF. Sem cadastro e sem marca d\'água.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/gerador-de-recibo';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Gerador de Recibo', href: getRouteUrl('receipt', locale) },
+];
+
+const faqItems = [
+  {
+    question: 'O que é um gerador de recibo?',
+    answer: 'Um gerador de recibo é uma ferramenta digital que permite preencher e emitir comprovantes de pagamento profissionais em formato PDF. Ele organiza os dados do pagador, do recebedor, a quantia paga e a descrição do serviço ou produto de forma padronizada. O documento gerado serve para comprovar formalmente a quitação de uma obrigação financeira entre as partes.',
+  },
+  {
+    question: 'Existe gerador de recibo grátis e sem cadastro?',
+    answer: 'Sim, o Online Invoice Creator oferece um gerador de recibo 100% gratuito e que não exige nenhum tipo de cadastro ou login. Você acessa a página, digita os dados do documento, confere a pré-visualização em tempo real e baixa o arquivo em PDF imediatamente. Não há limite de emissões, cobrança de taxas nem inclusão de marcas d\'água.',
+  },
+  {
+    question: 'Como fazer um recibo de pagamento?',
+    answer: 'Para fazer um recibo de pagamento, informe o nome e CPF ou CNPJ de quem está recebendo e de quem realizou o pagamento. Em seguida, digite o valor numérico em reais, selecione a forma de quitação (como Pix ou dinheiro) e descreva com clareza o motivo da transação. Por fim, defina a data, a cidade e assine o documento para atestar a quitação.',
+  },
+  {
+    question: 'O que deve ter em um recibo?',
+    answer: 'Um recibo válido deve conter a identificação completa do recebedor e do pagador (nome e CPF/CNPJ), o valor monetário numérico e por extenso, a descrição detalhada do que foi pago, a forma de pagamento, a data, o local de emissão e a assinatura do recebedor. A presença desses elementos garante clareza jurídica e contábil sobre o cumprimento da obrigação.',
+  },
+  {
+    question: 'Qual a diferença entre recibo e nota fiscal?',
+    answer: 'O recibo é um documento civil que comprova exclusivamente que determinado valor foi pago e recebido por alguém. Já a nota fiscal é um documento fiscal e contábil oficial, obrigatório para pessoas jurídicas na venda de mercadorias ou prestação de serviços, utilizado para apuração de tributos perante a Receita Federal e municípios. O recibo não substitui a nota fiscal.',
+  },
+  {
+    question: 'O recibo feito aqui tem validade?',
+    answer: 'Sim, o recibo emitido possui validade jurídica como comprovante de pagamento e quitação entre pessoas físicas e prestadores de serviços, conforme o Código Civil brasileiro. Para ter eficácia probatória plena, o documento deve conter as informações verídicas das partes e a assinatura do recebedor. Ressaltamos que ele não substitui a emissão de nota fiscal quando esta for obrigatória por lei.',
+  },
+  {
+    question: 'Posso escrever o valor por extenso automaticamente?',
+    answer: 'Sim, nossa ferramenta converte qualquer valor numérico digitado em reais diretamente para o texto por extenso em português brasileiro. Ao preencher o campo de valor, o sistema gera a frase correspondente com centavos, milhares e milhões de forma imediata. Isso economiza tempo, elimina dúvidas de grafia e evita rasuras ou inconsistências em documentos impressos.',
+  },
+  {
+    question: 'Posso incluir um QR code Pix?',
+    answer: 'Sim, você pode habilitar a opção de QR code Pix estático diretamente no recibo. Basta informar sua chave Pix (CPF, CNPJ, celular, e-mail ou chave aleatória) e o nome do titular para que o código no padrão oficial BR Code do Banco Central seja desenhado no documento. O pagador pode escanear o código diretamente com o celular para quitar o valor.',
+  },
+  {
+    question: 'Como fazer um recibo de aluguel?',
+    answer: 'Para emitir um recibo de aluguel, utilize nossa ferramenta especializada selecionando a opção de aluguel no menu superior. Além do valor da locação e dos dados do locador e locatário, inclua o endereço completo do imóvel e o mês de referência correspondente. Você também pode discriminar valores adicionais como cota condominial, IPTU e taxa de consumo de água.',
+  },
+  {
+    question: 'Vocês guardam meus dados?',
+    answer: 'Não, nós não guardamos nenhum dos seus dados em nossos servidores. Todo o processamento, cálculo e conversão em PDF ocorrem localmente dentro da memória do navegador do seu computador ou celular, em total respeito à Lei Geral de Proteção de Dados (LGPD). Os rascunhos são armazenados exclusivamente no seu dispositivo e podem ser apagados quando você desejar.',
+  },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: true,
+  breadcrumbs,
+  faqItems,
+  webAppOptions: {
+    name: 'Gerador de Recibo Grátis',
+    description,
+    url: canonical,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    features: [
+      'Cálculo de valor por extenso automático em R$',
+      'Validação de CPF e CNPJ com máscara dinâmica',
+      'QR Code Pix padrão Banco Central EMV BR Code',
+      'Exportação instantânea para PDF A4 sem marca d\'água',
+    ],
+  },
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-gerador-de-recibo.png"
+  ogImageAlt="Gerador de Recibo Grátis – Crie e Baixe em PDF"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Page Header (SEO H1 with Primary Keyword) -->
+    <header class="text-center max-w-3xl mx-auto space-y-3 pt-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Gerador Online Simples e Gratuito</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display">
+        Gerador de Recibo Grátis
+      </h1>
+
+      <p class="text-sm sm:text-base text-mute leading-relaxed">
+        Preencha os campos abaixo, acompanhe a pré-visualização em tempo real e baixe seu recibo em PDF ou imagem PNG. Sem cadastro, sem marca d'água e 100% privado no seu navegador.
+      </p>
+    </header>
+
+    <!-- Interactive Brazilian Receipt Canvas Tool -->
+    <BrazilianReceiptForm defaultType="pagamento" />
+
+    <!-- Editorial In-Depth Content Below the Tool (800 - 1200 Words) -->
+    <article class="max-w-4xl mx-auto space-y-12 pt-12 pb-16 border-t border-hairline text-ink">
+      
+      <!-- Section 1: 4 Steps -->
+      <section id="como-fazer" class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Como fazer um recibo simples e online grátis em 4 passos
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Emitir um comprovante financeiro não precisa ser um processo burocrático ou exigir o uso de talões de papel carbono. Com nossa plataforma, você cria um recibo de pagamento completo seguindo um passo a passo objetivo:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-primary/10 text-primary font-bold flex items-center justify-center text-sm">
+              1
+            </div>
+            <h3 class="text-base font-bold text-ink">Identifique as Partes</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Insira o nome completo ou a razão social de quem recebe e de quem paga, acompanhados de seus respectivos números de CPF ou CNPJ válidos.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-primary/10 text-primary font-bold flex items-center justify-center text-sm">
+              2
+            </div>
+            <h3 class="text-base font-bold text-ink">Defina o Valor e a Forma</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Digite a quantia em reais. O sistema escreverá o valor por extenso automaticamente. Selecione se o pagamento foi feito via Pix, dinheiro, boleto ou cartão.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-primary/10 text-primary font-bold flex items-center justify-center text-sm">
+              3
+            </div>
+            <h3 class="text-base font-bold text-ink">Descreva o Pagamento</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Discrimine com precisão o serviço prestado, a mercadoria vendida ou a obrigação quitada, evitando contestações e assegurando clareza contábil.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-primary/10 text-primary font-bold flex items-center justify-center text-sm">
+              4
+            </div>
+            <h3 class="text-base font-bold text-ink">Confira e Baixe o PDF</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Verifique a pré-visualização ao lado e clique em "Baixar PDF". O arquivo A4 será baixado instantaneamente sem marcas d'água no seu computador ou celular.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: O que deve constar -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          O que deve constar em um recibo de pagamento válido
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Para que um recibo cumpra sua finalidade legal e ateste a quitação de uma dívida segundo as diretrizes do Código Civil brasileiro e orientações do Sebrae, alguns elementos essenciais não podem faltar:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-mute">
+          <li><strong class="text-ink">Título claro:</strong> Indicação explícita da natureza do documento (por exemplo, "Recibo de Pagamento" ou "Recibo de Aluguel").</li>
+          <li><strong class="text-ink">Qualificação do recebedor (emitente):</strong> Nome completo ou razão social, CPF ou CNPJ e endereço de contato.</li>
+          <li><strong class="text-ink">Qualificação do pagador:</strong> Nome de quem efetuou o pagamento e seu respectivo documento de identificação.</li>
+          <li><strong class="text-ink">Valor numérico e por extenso:</strong> O montante em reais grafado em algarismos (R$ 1.250,50) e também por extenso para evitar fraudes e adulterações posteriores.</li>
+          <li><strong class="text-ink">Discriminação do objeto:</strong> Texto explicativo citando o serviço executado, período trabalhado ou produto entregue.</li>
+          <li><strong class="text-ink">Forma e data da quitação:</strong> Meio de pagamento utilizado e data exata da transação.</li>
+          <li><strong class="text-ink">Assinatura do recebedor:</strong> Confirmação expressa da pessoa que recebeu os valores atestando a quitação da quantia informada.</li>
+        </ul>
+      </section>
+
+      <!-- Section 3: Exemplo Preenchido -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Exemplo de recibo preenchido para prestação de serviços
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Veja abaixo um exemplo clássico de como o texto do recibo é estruturado formalmente no modelo gerado pela nossa plataforma:
+        </p>
+
+        <div class="rounded-2xl border border-hairline bg-surface-soft/80 p-6 font-mono text-xs text-ink space-y-4 leading-relaxed">
+          <div class="text-center font-bold text-sm uppercase tracking-wider pb-2 border-b border-hairline">
+            RECIBO DE PAGAMENTO — Nº 042/2026 — VALOR: R$ 1.500,00
+          </div>
+          <p>
+            Recebi(emos) de <strong>CONSTRUTORA HORIZONTE LTDA</strong>, inscrita no CNPJ sob o nº 12.345.678/0001-90, a importância de <strong>R$ 1.500,00 (mil e quinhentos reais)</strong>, referente a serviços de pintura e acabamento em alvenaria no Edifício Solar das Flores.
+          </p>
+          <p>
+            Forma de pagamento: <strong>Pix</strong> (Chave: contato@pinturasilva.com.br). Pela qual dou(damos) plena, geral e irrevogável quitação dos serviços acima discriminados.
+          </p>
+          <div class="pt-4 flex justify-between items-end">
+            <div>São Paulo - SP, 15 de janeiro de 2026.</div>
+            <div class="text-center border-t border-ink/40 pt-1 min-w-[200px]">
+              Marcos Vinícius da Silva<br />CPF: 123.456.789-00
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Recibo vs Nota Fiscal -->
+      <!-- verificar: verificar com fonte oficial ou contador -->
+      <section id="recibo-vs-nota-fiscal" class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Diferença essencial: recibo vs nota fiscal (NF-e / NFS-e)
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Uma das dúvidas mais comuns entre prestadores de serviço e autônomos diz respeito à diferença prática entre um recibo comum e uma nota fiscal:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <h3 class="text-base font-bold text-ink flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span>Recibo de Pagamento</span>
+            </h3>
+            <p class="text-xs text-mute leading-relaxed">
+              É um comprovante civil de quitação entre duas partes. Atesta que o credor recebeu o valor devido do devedor. Pode ser emitido livremente por pessoas físicas, autônomos ou proprietários de imóveis. <strong>Não gera tributos nem serve para recolhimento fiscal empresarial.</strong>
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-hairline bg-surface-card p-5 space-y-2">
+            <h3 class="text-base font-bold text-ink flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-primary"></span>
+              <span>Nota Fiscal (NF-e / NFS-e)</span>
+            </h3>
+            <p class="text-xs text-mute leading-relaxed">
+              É um documento contábil emitido perante a Receita Federal, Secretaria da Fazenda estadual ou Prefeitura municipal. Tem por finalidade registrar a circulação de mercadorias ou a prestação de serviços para fins de tributação (como ISS, ICMS e IRPJ).
+            </p>
+          </div>
+        </div>
+
+        <!-- verificar: verificar com fonte oficial ou contador -->
+        <p class="text-xs text-mute italic bg-surface-soft p-3 rounded-xl border border-hairline">
+          Nota de esclarecimento: Esta ferramenta online não emite notas fiscais eletrônicas nem se comunica com os sistemas da Receita Federal ou de prefeituras. Ela destina-se exclusivamente à criação de comprovantes civis e faturas de controle interno.
+        </p>
+      </section>
+
+      <!-- Section 5: Valor por extenso -->
+      <section id="valor-por-extenso" class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Valor por extenso automático: por que é importante?
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          No meio bancário e jurídico brasileiro, a grafia por extenso prevalece sobre o valor puramente numérico em caso de divergência ou contestação. Quando você preenche um valor em nosso gerador (como R$ 1.250,50), o sistema calcula instantaneamente a versão em texto: <em>"mil duzentos e cinquenta reais e cinquenta centavos"</em>.
+        </p>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Isso previne que dígitos sejam adulterados após a impressão e assegura que ambas as partes concordem exatamente com a quantia combinada, garantindo total transparência.
+        </p>
+      </section>
+
+      <!-- Section 6: Recibo com Pix -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Recibo com QR code Pix: agilidade no recebimento
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          O Pix tornou-se o principal meio de pagamento no Brasil pela sua agilidade e liquidez imediata. Nosso gerador permite embutir um QR Code Pix estático no padrão BR Code do Banco Central diretamente no documento impresso ou PDF.
+        </p>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Quando o cliente recebe o documento, basta abrir o aplicativo bancário, apontar a câmera e efetuar o pagamento. As chaves suportadas incluem CPF, CNPJ, telefone celular com DDD (+55), e-mail corporativo ou chave aleatória EVP.
+        </p>
+      </section>
+
+      <!-- Section 7: Quem pode usar -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Quem pode utilizar o gerador de recibo gratuito?
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-mute">
+          <div class="p-4 rounded-xl border border-hairline bg-surface-card space-y-1">
+            <h3 class="font-bold text-ink">Profissionais Autônomos</h3>
+            <p>Eletricistas, pedreiros, marceneiros, diaristas, técnicos e encanadores que precisam comprovar pagamentos recebidos.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-hairline bg-surface-card space-y-1">
+            <h3 class="font-bold text-ink">Microempreendedores Individuais (MEI)</h3>
+            <p>Comprovante prático para transações comerciais com pessoas físicas quando a emissão de nota fiscal for dispensada por lei.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-hairline bg-surface-card space-y-1">
+            <h3 class="font-bold text-ink">Locadores e Proprietários</h3>
+            <p>Geração mensal de comprovantes de aluguel discriminando IPTU, condomínio e encargos para inquilinos.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-hairline bg-surface-card space-y-1">
+            <h3 class="font-bold text-ink">Prestadores de Serviços Liberais</h3>
+            <p>Consultores, designers, fotógrafos, psicólogos, médicos e advogados fornecendo quitação de consultas e honorários.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: FAQ Accordion / Listing -->
+      <section class="space-y-6 pt-4">
+        <div class="space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+            Perguntas Frequentes sobre Recibos de Pagamento
+          </h2>
+          <p class="text-sm text-mute">
+            Tire suas principais dúvidas sobre emissão, validade jurídica e privacidade dos recibos.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          {faqItems.map((item, idx) => (
+            <details class="group rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 transition-all">
+              <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-ink select-none">
+                <span>{item.question}</span>
+                <svg class="h-4 w-4 text-mute transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed pt-2 border-t border-hairline">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Section 9: Dicas e Conclusão -->
+      <section class="rounded-3xl border border-hairline bg-surface-soft/60 p-6 sm:p-8 space-y-3">
+        <h2 class="text-xl font-bold text-ink">
+          Dicas para não ter problemas com comprovantes de pagamento
+        </h2>
+        <ul class="list-disc pl-5 space-y-2 text-xs text-mute leading-relaxed">
+          <li>Sempre guarde uma cópia assinada física ou digital do recibo pelo prazo prescricional aplicável (normalmente 5 anos).</li>
+          <li>Confira atentamente os números de CPF e CNPJ antes de imprimir para evitar erros em declarações de Imposto de Renda.</li>
+          <li>Em caso de pagamentos parcelados, emita recibos individuais para cada parcela citando o número da prestação (ex: "parcela 1 de 6").</li>
+          <li>Evite rasuras manuais em valores impressos. Caso haja erro, gere um novo recibo digitalmente e descarte a versão incorreta.</li>
+        </ul>
+      </section>
+
+    </article>
+  </div>
+</BaseLayout>
+

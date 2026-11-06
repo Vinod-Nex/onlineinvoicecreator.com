@@ -28,6 +28,7 @@ export interface WebApplicationOptions {
   applicationCategory?: string;
   operatingSystem?: string;
   features?: string[];
+  inLanguage?: string;
 }
 
 export interface PageSchemaOptions {
@@ -121,6 +122,7 @@ export function createWebApplicationSchema({
     'Instant Print & PDF Download',
     'No Signup Required',
   ],
+  inLanguage,
 }: WebApplicationOptions) {
   const cleanUrl = url.replace(/\/$/, '') || SITE_URL_DEFAULT;
   return {
@@ -129,13 +131,14 @@ export function createWebApplicationSchema({
     name,
     url: cleanUrl,
     description,
+    ...(inLanguage ? { inLanguage } : {}),
     applicationCategory,
     operatingSystem,
     browserRequirements: 'Requires JavaScript and HTML5 canvas/PDF support',
     offers: {
       '@type': 'Offer',
       price: '0',
-      priceCurrency: 'USD',
+      priceCurrency: inLanguage === 'pt-BR' ? 'BRL' : 'USD',
     },
     featureList: features,
   };
@@ -227,6 +230,7 @@ export function buildPageSchemaGraph(options: PageSchemaOptions): {
         applicationCategory: options.webAppOptions?.applicationCategory || 'BusinessApplication',
         operatingSystem: options.webAppOptions?.operatingSystem || 'Any',
         features: options.webAppOptions?.features,
+        inLanguage: options.inLanguage,
       })
     );
   }

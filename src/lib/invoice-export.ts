@@ -88,7 +88,7 @@ function sanitizeClonedDocForHtml2Canvas(clonedDoc: Document): void {
   });
 
   // 3. Layout stabilization for preview articles
-  ['invoice-preview-document', 'receipt-preview-document', 'rent-preview-document'].forEach((id) => {
+  ['invoice-preview-document', 'receipt-preview-document', 'rent-preview-document', 'brazilian-receipt-preview'].forEach((id) => {
     const docEl = clonedDoc.getElementById(id);
     if (docEl) {
       docEl.style.width = '800px';

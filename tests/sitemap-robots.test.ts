@@ -157,9 +157,9 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         expect(content, `Missing in sitemap: ${blogUrl}`).toContain(`<loc>${blogUrl}</loc>`);
       }
 
-      // Count total <url> tags (14 core + 1 changelog + 4 blog articles = 19 total indexable pages)
+      // Count total <url> tags (19 English + 8 Brazilian Portuguese = 27 total indexable pages)
       const urlCount = (content.match(/<url>/g) || []).length;
-      expect(urlCount).toBe(19);
+      expect(urlCount).toBe(27);
     });
 
     it('formats each entry cleanly with url and loc tags', () => {

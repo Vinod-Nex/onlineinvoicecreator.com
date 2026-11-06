@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Contato e Suporte – Online Invoice Creator';
+const description = 'Entre em contato com nossa equipe de suporte. Dúvidas, sugestões ou relatórios sobre o gerador de recibos e faturas online.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/contato';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Contato', href: getRouteUrl('contact', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-contato.png"
+  ogImageAlt="Contato e Suporte – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="text-center max-w-2xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        <span>Canal Oficial de Atendimento</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Contato e Suporte
+      </h1>
+
+      <p class="text-sm sm:text-base text-mute leading-relaxed">
+        Tem alguma dúvida sobre a geração de recibos, sugestão de novos recursos ou encontrou alguma inconsistência? Nossa equipe está à disposição para ajudar.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+      <!-- Direct Email Card -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <h2 class="text-base font-bold text-ink">E-mail Direto</h2>
+          <p class="text-xs text-mute leading-relaxed">
+            Envie sua mensagem diretamente para nossa caixa postal. Respondemos normalmente em até 24 a 48 horas úteis.
+          </p>
+        </div>
+
+        <a
+          href="mailto:support@onlineinvoicecreator.com"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-xs transition-colors"
+        >
+          <span>support@onlineinvoicecreator.com</span>
+        </a>
+      </div>
+
+      <!-- FAQ Card -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <h2 class="text-base font-bold text-ink">Dúvidas Rápidas</h2>
+          <p class="text-xs text-mute leading-relaxed">
+            Consulte as dúvidas frequentes em nossa página do Gerador de Recibo para respostas imediatas sobre validade e Pix.
+          </p>
+        </div>
+
+        <a
+          href={getRouteUrl('receipt', locale)}
+          class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface border border-hairline hover:bg-surface-soft text-ink text-xs font-semibold transition-colors"
+        >
+          <span>Ver Perguntas Frequentes</span>
+        </a>
+      </div>
+
+      <!-- Privacy & LGPD Card -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h2 class="text-base font-bold text-ink">Privacidade e LGPD</h2>
+          <p class="text-xs text-mute leading-relaxed">
+            Para solicitações relacionadas à proteção de dados e privacidade, conheça nossa política e garantias locais.
+          </p>
+        </div>
+
+        <a
+          href={getRouteUrl('privacy', locale)}
+          class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface border border-hairline hover:bg-surface-soft text-ink text-xs font-semibold transition-colors"
+        >
+          <span>Política de Privacidade</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+

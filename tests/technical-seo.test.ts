@@ -90,7 +90,7 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
           continue;
         }
 
-        const targetPath = href.split('#')[0];
+        const targetPath = href.split('#')[0].split('?')[0];
         const cleanPath = targetPath === '/' ? '/' : targetPath.replace(/\/$/, '');
         if (!knownRoutes.has(cleanPath)) {
           brokenLinks.push({ file: relPath, href, issue: `Target route "${cleanPath}" missing` });
@@ -123,7 +123,7 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
           continue;
         }
 
-        const targetPath = href.split('#')[0];
+        const targetPath = href.split('#')[0].split('?')[0];
         if (targetPath.length > 1 && targetPath.endsWith('/')) {
           trailingSlashLinks.push({ file: relPath, href });
         }
@@ -249,6 +249,8 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
       const relPath = path.relative(distDir, file);
       const isNoIndex = content.includes('noindex');
       if (isNoIndex) continue;
+      // pt-BR pages without an English equivalent (e.g. modelo-de-recibo) only emit pt-BR and x-default
+      if (relPath.includes('modelo-de-recibo')) continue;
 
       const hreflangMatches = [
         ...content.matchAll(

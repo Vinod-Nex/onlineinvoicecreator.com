@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Política de Privacidade LGPD – Seus Dados Seguros';
+const description = 'Privacidade e segurança: processamento local no seu navegador, sem armazenamento em servidores e conformidade com a LGPD.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/privacidade';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Política de Privacidade', href: getRouteUrl('privacy', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-privacidade.png"
+  ogImageAlt="Política de Privacidade LGPD – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Conformidade com a LGPD (Lei nº 13.709/2018)</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Política de Privacidade
+      </h1>
+
+      <p class="text-xs sm:text-sm text-mute">
+        Última atualização: 06 de novembro de 2026 · Vigência nacional no Brasil
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">1. Princípio de Arquitetura: 100% no Seu Navegador</h2>
+        <p>
+          O Online Invoice Creator opera sob um princípio fundamental de privacidade por design (<em>privacy by design</em>). Diferente de sistemas tradicionais de gestão empresarial, nossa plataforma não envia, processa ou armazena os dados dos seus recibos, faturas ou clientes em servidores remotos ou bancos de dados em nuvem.
+        </p>
+        <p>
+          Toda a lógica de digitação, formatação de máscaras de CPF/CNPJ, escrita do valor por extenso e renderização em arquivo PDF acontece exclusivamente na memória local do seu navegador (Google Chrome, Safari, Firefox, Edge, etc.) no seu próprio dispositivo.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">2. Armazenamento Local (localStorage)</h2>
+        <p>
+          Para que você não perca seu trabalho ao atualizar a página ou fechar a aba acidentalmente, utilizamos o recurso padrão de <code>localStorage</code> do seu navegador. Esse recurso salva o rascunho do recibo somente no seu dispositivo.
+        </p>
+        <p>
+          Nenhum funcionário ou terceiro tem acesso a esse conteúdo. Você pode apagar permanentemente esses dados a qualquer momento clicando no botão "Limpar meus dados" localizado na barra superior de ferramentas de qualquer um dos nossos geradores.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">3. Direitos dos Titulares perante a LGPD</h2>
+        <p>
+          Em total observância à Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018), garantimos os seguintes direitos:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>Direito de eliminação:</strong> Você tem controle total sobre seus dados e pode expurgar o rascunho local instantaneamente.</li>
+          <li><strong>Minimização de dados:</strong> Não solicitamos criação de conta, e-mail, senha ou número de cartão de crédito para utilização dos geradores.</li>
+          <li><strong>Não comercialização:</strong> Jamais vendemos, alugamos ou monetizamos dados cadastrais, financeiros ou fiscais dos usuários.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">4. Cookies e Tecnologias de Análise</h2>
+        <p>
+          Podemos utilizar cookies estritamente essenciais para o funcionamento técnico do site e cookies analíticos anônimos para entender métricas agregadas de acesso (como número de visitas e páginas mais acessadas). Os cookies analíticos nunca cruzam dados com o conteúdo gerado nos recibos.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">5. Contato e Encarregado de Proteção de Dados (DPO)</h2>
+        <p>
+          Caso você tenha qualquer dúvida sobre esta Política de Privacidade ou deseje enviar sugestões sobre a segurança da nossa plataforma, entre em contato diretamente pelo e-mail:
+          <a href="mailto:support@onlineinvoicecreator.com" class="text-primary font-semibold hover:underline">
+            support@onlineinvoicecreator.com
+          </a>.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+

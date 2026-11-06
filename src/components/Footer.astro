@@ -10,36 +10,66 @@ interface Props {
 const { locale = DEFAULT_LOCALE } = Astro.props;
 const d = getDictionary(locale);
 
-const toolLinks = [
-  { name: 'Free Invoice Generator', href: getRouteUrl('home', locale) },
-  { name: 'Free Receipt Generator', href: getRouteUrl('receipt', locale) },
-  { name: 'Rent Receipt Generator', href: getRouteUrl('rent-receipt', locale) },
-  { name: 'Itemized Receipt Maker', href: getRouteUrl('receipt-items', locale) },
-  { name: 'Excel Invoice Generator', href: getRouteUrl('invoice-excel', locale) },
-];
+const toolLinks = locale === 'pt-br'
+  ? [
+      { name: 'Gerador de Recibo de Pagamento', href: getRouteUrl('receipt', 'pt-br') },
+      { name: 'Recibo de Aluguel Grátis', href: getRouteUrl('rent-receipt', 'pt-br') },
+      { name: 'Modelo de Recibo', href: getRouteUrl('receipt-template', 'pt-br') },
+      { name: 'Fatura Comercial Online', href: `${getRouteUrl('receipt', 'pt-br')}?tipo=fatura` },
+      { name: 'Início', href: getRouteUrl('home', 'pt-br') },
+    ]
+  : [
+      { name: 'Free Invoice Generator', href: getRouteUrl('home', locale) },
+      { name: 'Free Receipt Generator', href: getRouteUrl('receipt', locale) },
+      { name: 'Rent Receipt Generator', href: getRouteUrl('rent-receipt', locale) },
+      { name: 'Itemized Receipt Maker', href: getRouteUrl('receipt-items', locale) },
+      { name: 'Excel Invoice Generator', href: getRouteUrl('invoice-excel', locale) },
+    ];
 
-const templateLinks = [
-  { name: 'Freelancer Invoices', href: getRouteUrl('invoice-freelance', locale) },
-  { name: 'Contractor Invoices', href: getRouteUrl('contractor-invoice', locale) },
-  { name: 'Australia Tax Invoices (ATO)', href: getRouteUrl('tax-invoice-australia', locale) },
-  { name: 'Photography Invoices', href: getRouteUrl('photography-invoice', locale) },
-  { name: 'Design System & Style Guide', href: '/style-guide' },
-];
+const templateLinks = locale === 'pt-br'
+  ? [
+      { name: 'Recibo Simples e Gratuito', href: getRouteUrl('receipt', 'pt-br') },
+      { name: 'Recibo com QR Code Pix', href: getRouteUrl('receipt', 'pt-br') },
+      { name: 'Recibo de Aluguel com IPTU', href: getRouteUrl('rent-receipt', 'pt-br') },
+      { name: 'Modelo de Recibo Pronto', href: getRouteUrl('receipt-template', 'pt-br') },
+      { name: 'Recibo de Venda no Balcão', href: `${getRouteUrl('receipt', 'pt-br')}?tipo=venda` },
+    ]
+  : [
+      { name: 'Freelancer Invoices', href: getRouteUrl('invoice-freelance', locale) },
+      { name: 'Contractor Invoices', href: getRouteUrl('contractor-invoice', locale) },
+      { name: 'Australia Tax Invoices (ATO)', href: getRouteUrl('tax-invoice-australia', locale) },
+      { name: 'Photography Invoices', href: getRouteUrl('photography-invoice', locale) },
+      { name: 'Design System & Style Guide', href: '/style-guide' },
+    ];
 
-const resourceLinks = [
-  { name: 'Invoicing Blog & Guides', href: getRouteUrl('blog', locale) },
-  { name: 'How to Invoice Clients', href: getRouteUrl('blog-freelance', locale) },
-  { name: 'Small Business Bookkeeping', href: getRouteUrl('blog', locale) },
-  { name: 'GST & VAT Compliance Guide', href: getRouteUrl('tax-invoice-australia', locale) },
-];
+const resourceLinks = locale === 'pt-br'
+  ? [
+      { name: 'Como Fazer um Recibo', href: `${getRouteUrl('receipt', 'pt-br')}#como-fazer` },
+      { name: 'Recibo vs Nota Fiscal', href: `${getRouteUrl('receipt', 'pt-br')}#recibo-vs-nota-fiscal` },
+      { name: 'Valor por Extenso Automático', href: `${getRouteUrl('receipt', 'pt-br')}#valor-por-extenso` },
+      { name: 'Recibo de Locação Residencial', href: `${getRouteUrl('rent-receipt', 'pt-br')}#guia-aluguel` },
+    ]
+  : [
+      { name: 'Invoicing Blog & Guides', href: getRouteUrl('blog', locale) },
+      { name: 'How to Invoice Clients', href: getRouteUrl('blog-freelance', locale) },
+      { name: 'Small Business Bookkeeping', href: getRouteUrl('blog', locale) },
+      { name: 'GST & VAT Compliance Guide', href: getRouteUrl('tax-invoice-australia', locale) },
+    ];
 
-const companyLinks = [
-  { name: d.footer.aboutUs, href: getRouteUrl('about', locale) },
-  { name: d.footer.contactUs, href: getRouteUrl('contact', locale) },
-  { name: d.footer.privacyPolicy, href: getRouteUrl('privacy', locale) },
-  { name: 'Terms and Conditions', href: getRouteUrl('terms', locale) },
-  { name: 'Product Changelog', href: getRouteUrl('changelog', locale) },
-];
+const companyLinks = locale === 'pt-br'
+  ? [
+      { name: 'Sobre Nós', href: getRouteUrl('about', 'pt-br') },
+      { name: 'Contato e Suporte', href: getRouteUrl('contact', 'pt-br') },
+      { name: 'Política de Privacidade (LGPD)', href: getRouteUrl('privacy', 'pt-br') },
+      { name: 'Termos de Uso', href: getRouteUrl('terms', 'pt-br') },
+    ]
+  : [
+      { name: d.footer.aboutUs, href: getRouteUrl('about', locale) },
+      { name: d.footer.contactUs, href: getRouteUrl('contact', locale) },
+      { name: d.footer.privacyPolicy, href: getRouteUrl('privacy', locale) },
+      { name: 'Terms and Conditions', href: getRouteUrl('terms', locale) },
+      { name: 'Product Changelog', href: getRouteUrl('changelog', locale) },
+    ];
 ---
 
 <footer
@@ -203,10 +233,14 @@ const companyLinks = [
         <a href={getRouteUrl('contact', locale)} class="hover:text-ink transition-colors">
           {d.footer.contactUs}
         </a>
-        <span class="text-hairline">·</span>
-        <a href={getRouteUrl('changelog', locale)} class="hover:text-ink transition-colors">
-          {d.footer.changelog}
-        </a>
+        {locale !== 'pt-br' && (
+          <>
+            <span class="text-hairline">·</span>
+            <a href={getRouteUrl('changelog', locale)} class="hover:text-ink transition-colors">
+              {d.footer.changelog}
+            </a>
+          </>
+        )}
       </div>
     </div>
   </div>

@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Sobre Nós – Gerador de Recibos Privado e Gratuito';
+const description = 'Conheça nossa missão: ferramentas financeiras gratuitas, 100% no navegador, sem cadastro e sem armazenamento de dados pessoais.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/sobre';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Sobre Nós', href: getRouteUrl('about', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-sobre.png"
+  ogImageAlt="Sobre Nós – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span>Nossa Filosofia & Compromisso com o Usuário</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Sobre Nós
+      </h1>
+
+      <p class="text-base text-mute leading-relaxed">
+        Construindo ferramentas financeiras limpas, gratuitas e sem vigilância para autônomos, pequenos empresários e profissionais em todo o Brasil.
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Nossa Missão</h2>
+        <p>
+          O Online Invoice Creator nasceu de uma constatação simples: gerar um recibo ou fatura de cobrança básica na internet tornou-se uma experiência frustrante. A maioria dos sites exige cadastros longos com confirmação de e-mail, impõe limites de downloads ou insere marcas d'água gigantescas para forçar planos pagos.
+        </p>
+        <p>
+          Nós acreditamos que ferramentas utilitárias essenciais do dia a dia comercial devem ser simples, rápidas e verdadeiramente gratuitas.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Os Três Pilares da Nossa Plataforma</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div class="p-5 rounded-2xl border border-hairline bg-surface-card space-y-2">
+            <h3 class="font-bold text-ink text-base">1. Zero Servidores</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Tudo roda no seu navegador. Nossos servidores entregam apenas o código inicial e não recebem cópia de nenhum dado que você digita.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-hairline bg-surface-card space-y-2">
+            <h3 class="font-bold text-ink text-base">2. Sem Marcas d'Água</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              O documento que você cria pertence a você e aos seus clientes. Todos os arquivos em PDF e imagens PNG saem 100% limpos e profissionais.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-hairline bg-surface-card space-y-2">
+            <h3 class="font-bold text-ink text-base">3. Padrão Brasileiro</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Suporte nativo ao padrão de moeda Real (R$), valor por extenso correto, máscaras de CPF/CNPJ e QR Code Pix oficial do Banco Central.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Como Mantemos a Plataforma Gratuita?</h2>
+        <p>
+          Mantemos os custos operacionais extremamente baixos através de uma arquitetura estática moderna hospedada globalmente e de parcerias e patrocínios não invasivos. Não vendemos dados de usuários, não enviamos spam e não solicitamos dados de cartão de crédito.
+        </p>
+      </section>
+
+      <section class="pt-4 border-t border-hairline">
+        <p class="text-xs text-mute">
+          Dúvidas ou sugestões de melhoria? Fale com nossa equipe através da página de
+          <a href={getRouteUrl('contact', locale)} class="text-primary font-semibold hover:underline">
+            Contato e Suporte
+          </a>.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+

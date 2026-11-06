@@ -12,6 +12,10 @@ export type RouteKey =
   | 'home'
   | 'receipt'
   | 'rent-receipt'
+  | 'receipt-template'
+  | 'pt-invoice-generator'
+  | 'pt-estimate-generator'
+  | 'pt-recibo-mei'
   | 'invoice-freelance'
   | 'invoice-excel'
   | 'contractor-invoice'
@@ -50,6 +54,34 @@ export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
     es: 'generador-de-recibos-de-alquiler',
     fr: 'generateur-de-quittance-de-loyer',
     de: 'mietquittung-erstellen',
+  },
+  'receipt-template': {
+    en: 'receipt-template',
+    'pt-br': 'modelo-de-recibo',
+    es: 'modelo-de-recibos',
+    fr: 'modele-de-recu',
+    de: 'quittungsmuster',
+  },
+  'pt-invoice-generator': {
+    en: 'invoice-generator-pt',
+    'pt-br': 'gerador-de-fatura',
+    es: 'generador-de-facturas-pt',
+    fr: 'generateur-de-factures-pt',
+    de: 'rechnungs-generator-pt',
+  },
+  'pt-estimate-generator': {
+    en: 'estimate-generator-pt',
+    'pt-br': 'gerador-de-orcamento',
+    es: 'generador-de-presupuestos',
+    fr: 'generateur-de-devis',
+    de: 'kostenvoranschlag-erstellen',
+  },
+  'pt-recibo-mei': {
+    en: 'mei-receipt',
+    'pt-br': 'recibo-mei',
+    es: 'recibo-autonomo',
+    fr: 'recu-auto-entrepreneur',
+    de: 'kleinunternehmer-quittung',
   },
   'invoice-freelance': {
     en: 'invoice-generator-for-freelancers',
@@ -224,8 +256,49 @@ export function getRouteKeyFromPath(pathname: string): { key: RouteKey; locale: 
 }
 
 /**
+ * Registry of routes that actually exist (are built and published) in each locale.
+ * Ensures hreflang alternates are strictly reciprocal and only point to pages that actually exist.
+ */
+export const BUILT_ROUTES: Record<Locale, Set<RouteKey>> = {
+  en: new Set<RouteKey>([
+    'home',
+    'receipt',
+    'rent-receipt',
+    'invoice-freelance',
+    'invoice-excel',
+    'contractor-invoice',
+    'photography-invoice',
+    'receipt-items',
+    'tax-invoice-australia',
+    'about',
+    'contact',
+    'privacy',
+    'terms',
+    'changelog',
+    'blog',
+    'blog-freelance',
+    'blog-pro-forma',
+    'blog-invoice-vs-receipt',
+    'blog-numbering',
+  ]),
+  'pt-br': new Set<RouteKey>([
+    'home',
+    'receipt',
+    'rent-receipt',
+    'receipt-template',
+    'about',
+    'contact',
+    'privacy',
+    'terms',
+  ]),
+  es: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
+  fr: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
+  de: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
+};
+
+/**
  * Generates hreflang alternate links for SEO.
- * ONLY includes published locales, plus a self-reference and x-default pointing to the English URL.
+ * ONLY includes published locales that actually have the route built, plus x-default.
  */
 export function getHreflangAlternates(
   routeKey: RouteKey,
@@ -234,12 +307,13 @@ export function getHreflangAlternates(
   const base = siteUrl.replace(/\/$/, '');
   const alternates: Array<{ lang: string; href: string }> = [];
 
-  // English URL
-  const enUrl = `${base}${getRouteUrl(routeKey, 'en')}`;
+  // English URL if built in English
+  const isBuiltInEn = BUILT_ROUTES.en.has(routeKey);
+  const enUrl = isBuiltInEn ? `${base}${getRouteUrl(routeKey, 'en')}` : `${base}/`;
 
-  // Published locales
+  // Published locales that have this route built
   for (const loc of LOCALES) {
-    if (isLocalePublished(loc)) {
+    if (isLocalePublished(loc) && BUILT_ROUTES[loc].has(routeKey)) {
       const config = LOCALE_CONFIGS[loc];
       const localizedUrl = `${base}${getRouteUrl(routeKey, loc)}`;
       alternates.push({
@@ -261,12 +335,12 @@ export function getHreflangAlternates(
 /**
  * Given the current pathname and a target locale:
  * 1. Resolves the current page's RouteKey.
- * 2. If the RouteKey exists in the target locale, returns the translated URL.
+ * 2. If the RouteKey exists in the target locale and is built, returns the translated URL.
  * 3. If no equivalent exists, falls back to the target locale's homepage.
  */
 export function getLocalizedEquivalentUrl(currentPathname: string, targetLocale: Locale): string {
   const resolved = getRouteKeyFromPath(currentPathname);
-  if (resolved) {
+  if (resolved && BUILT_ROUTES[targetLocale].has(resolved.key)) {
     return getRouteUrl(resolved.key, targetLocale);
   }
   // Fallback to target locale home

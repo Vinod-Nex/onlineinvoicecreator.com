@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Termos de Uso – Online Invoice Creator Brasil';
+const description = 'Termos e condições de uso das nossas ferramentas gratuitas de recibos e faturas. Documentos comerciais legítimos sem custo.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/termos';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Termos de Uso', href: getRouteUrl('terms', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-termos.png"
+  ogImageAlt="Termos de Uso – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        <span>Condições de Uso e Isenção de Responsabilidade</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Termos de Uso
+      </h1>
+
+      <p class="text-xs sm:text-sm text-mute">
+        Vigência: 06 de novembro de 2026 · Brasil
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">1. Aceitação dos Termos</h2>
+        <p>
+          Ao acessar e utilizar os serviços do Online Invoice Creator, você concorda expressamente em cumprir estes Termos de Uso e todas as leis e regulamentos brasileiros aplicáveis. Se você não concordar com estes termos, solicitamos que não utilize nossas ferramentas.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">2. Finalidade das Ferramentas e Exigência de Documentos Genuínos</h2>
+        <p>
+          Nossos geradores foram criados com o objetivo de auxiliar profissionais autônomos, pequenos comerciantes, locadores e empresas a criar recibos de pagamento, comprovantes de aluguel e faturas comerciais legítimas de forma prática e gratuita.
+        </p>
+        <p>
+          <strong>É estritamente proibido:</strong> utilizar nossa plataforma para criar documentos fraudulentos, simular quitações financeiras fictícias, falsificar dados de terceiros ou praticar qualquer conduta tipificada como ilícito civil ou crime contra a ordem tributária (Lei nº 8.137/1990) ou estelionato perante o Código Penal brasileiro. O usuário assume responsabilidade exclusiva e integral pelas informações declaradas nos documentos gerados.
+        </p>
+      </section>
+
+      <!-- verificar: verificar com fonte oficial ou contador -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">3. Não Substituição de Notas Fiscais e Assessoria Tributária</h2>
+        <p>
+          O usuário reconhece expressamente que os recibos e faturas comerciais emitidos através deste site possuem natureza de documento particular de quitação civil. <strong>Eles não substituem a Nota Fiscal Eletrônica (NF-e, NFS-e ou NFC-e)</strong> quando exigida pelos órgãos fazendários municipais, estaduais ou federais.
+        </p>
+        <!-- verificar: verificar com fonte oficial ou contador -->
+        <p>
+          As informações fornecidas em nossos artigos, guias e ferramentas têm caráter exclusivamente informativo geral e não configuram parecer contábil, tributário ou consultoria jurídica especializada. Recomendamos consultar sempre um profissional de contabilidade habilitado no CRC.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">4. Disponibilidade do Serviço e Isenção de Garantias</h2>
+        <p>
+          O serviço é fornecido "no estado em que se encontra" (<em>as is</em>), sem garantias expressas ou implícitas de funcionamento ininterrupto. Como o processamento ocorre localmente no navegador, não nos responsabilizamos por perdas de rascunhos causadas por limpeza manual de cache, falhas de hardware ou panes no dispositivo do usuário.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">5. Lei Aplicável e Foro</h2>
+        <p>
+          Estes Termos de Uso são regidos e interpretados segundo a legislação brasileira. Para dirimir eventuais controvérsias oriundas do uso desta plataforma, fica eleito o Foro da Comarca de São Paulo - SP, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+

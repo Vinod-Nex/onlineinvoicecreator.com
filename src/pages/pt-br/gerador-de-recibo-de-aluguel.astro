@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BrazilianReceiptForm from '../../components/BrazilianReceiptForm.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Recibo de Aluguel Grátis – Gerador em PDF';
+const description = 'Crie um recibo de aluguel com locador, locatário, valor e período. Baixe o PDF na hora, sem cadastro e sem marca d\'água.';
+const canonical = 'https://onlineinvoicecreator.com/pt-br/gerador-de-recibo-de-aluguel';
+const locale = 'pt-br';
+
+const breadcrumbs = [
+  { label: 'Início', href: getRouteUrl('home', locale) },
+  { label: 'Recibo de Aluguel', href: getRouteUrl('rent-receipt', locale) },
+];
+
+const rentFaqItems = [
+  {
+    question: 'O que é obrigatório constar no recibo de aluguel?',
+    answer: 'O recibo de aluguel deve indicar obrigatoriamente a identificação do locador e do locatário (nome e CPF/CNPJ), o endereço completo do imóvel, o valor detalhado da locação, o mês de referência correspondente, a data da quitação e a assinatura do locador ou administradora responsável.',
+  },
+  {
+    question: 'Por quanto tempo locador e inquilino devem guardar o recibo?',
+    answer: 'De acordo com a prática jurídica e os prazos prescricionais do Código Civil e da Lei do Inquilinato, recomenda-se guardar os comprovantes de aluguel por no mínimo 3 anos após o término da locação. Para fins de fiscalização do Imposto de Renda (IRPF), guarde por 5 anos.',
+  },
+  {
+    question: 'Como registrar condomínio e IPTU no mesmo recibo?',
+    answer: 'Em nossa ferramenta, marque a opção de discriminação de despesas da locação. Você pode inserir o aluguel líquido e campos específicos para a cota condominial, a parcela de IPTU e o consumo de água, totalizando automaticamente o montante recebido.',
+  },
+  {
+    question: 'O locador é obrigado a fornecer recibo de aluguel?',
+    answer: 'Sim, a Lei do Inquilinato (Lei nº 8.245/1991, artigo 22) estabelece expressamente como dever do locador fornecer ao locatário o recibo discriminado das quantias pagas, sob pena de infração contratual e penalidade civil em caso de recusa injustificada.',
+  },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: true,
+  breadcrumbs,
+  faqItems: rentFaqItems,
+  webAppOptions: {
+    name: 'Gerador de Recibo de Aluguel Grátis',
+    description,
+    url: canonical,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    features: [
+      'Discriminação detalhada de aluguel, condomínio, IPTU e água',
+      'Cálculo de valor por extenso automático em R$',
+      'Validação de CPF e CNPJ de locador e locatário',
+      'Emissão em conformidade com a Lei do Inquilinato',
+    ],
+  },
+  inLanguage: 'pt-BR',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-pt-br-gerador-de-recibo-de-aluguel.png"
+  ogImageAlt="Recibo de Aluguel Grátis – Gerador em PDF"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Page Header (H1) -->
+    <header class="text-center max-w-3xl mx-auto space-y-3 pt-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+        <span>Locação Residencial e Comercial (Lei 8.245/91)</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink font-display">
+        Recibo de Aluguel Grátis
+      </h1>
+
+      <p class="text-sm sm:text-base text-mute leading-relaxed">
+        Gere comprovantes mensais de locação de imóveis com cálculo automático de aluguel, condomínio, IPTU e água. Baixe o PDF formatado na hora, sem cadastro e sem marca d'água.
+      </p>
+    </header>
+
+    <!-- Interactive Tool defaulted to Rent Receipt -->
+    <BrazilianReceiptForm defaultType="aluguel" />
+
+    <!-- Educational & Legal Guidance on Rent Receipts (600 - 900 Words) -->
+    <article id="guia-aluguel" class="max-w-4xl mx-auto space-y-10 pt-12 pb-16 border-t border-hairline text-ink">
+      
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          O que colocar no recibo de aluguel para ter validade jurídica
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          O recibo de aluguel é o documento formal que comprova que o inquilino (locatário) cumpriu pontualmente suas obrigações financeiras relativas à locação de determinado imóvel. De acordo com o artigo 22 da Lei do Inquilinato (Lei Federal nº 8.245/1991), o proprietário ou imobiliária é obrigado a fornecer recibo detalhado das importâncias pagas.
+        </p>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Para garantir total segurança e transparência entre as partes, certifique-se de preencher com precisão os seguintes campos:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+          <div class="p-4 rounded-2xl border border-hairline bg-surface-card space-y-1.5 text-xs">
+            <h3 class="font-bold text-ink text-sm">Dados das Partes</h3>
+            <p class="text-mute leading-relaxed">
+              Nome completo e CPF ou CNPJ tanto do locador quanto do locatário. Se houver administradora ou procurador, indique os dados da representação.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-hairline bg-surface-card space-y-1.5 text-xs">
+            <h3 class="font-bold text-ink text-sm">Endereço do Imóvel Locado</h3>
+            <p class="text-mute leading-relaxed">
+              Logradouro completo, número predial, apartamento ou sala, bairro, CEP e cidade, identificando sem ambiguidade o local alugado.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-hairline bg-surface-card space-y-1.5 text-xs">
+            <h3 class="font-bold text-ink text-sm">Mês de Referência (Período)</h3>
+            <p class="text-mute leading-relaxed">
+              Indicação exata do mês e ano a que se refere o pagamento (por exemplo, "Fevereiro de 2026"), evitando dúvidas sobre competência contábil.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-hairline bg-surface-card space-y-1.5 text-xs">
+            <h3 class="font-bold text-ink text-sm">Valor por Extenso e Assinatura</h3>
+            <p class="text-mute leading-relaxed">
+              O montante em reais por extenso impede adulterações. A assinatura física ou digital do locador atesta a quitação irrevogável.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Como registrar e discriminar condomínio, IPTU e água
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Um dos erros mais comuns na locação de imóveis é emitir recibos com um valor global único sem discriminar o que é aluguel puro e o que são encargos e taxas acessórias. Discriminar cada item é fundamental por três razões principais:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-mute leading-relaxed">
+          <li><strong class="text-ink">Declaração de Imposto de Renda:</strong> Apenas o valor líquido do aluguel compõe a base tributável do locador (Carnê-Leão ou ajuste anual). Despesas de condomínio e IPTU repassadas ao condomínio ou prefeitura não constituem renda tributável.</li>
+          <li><strong class="text-ink">Reajuste Contratual Anual:</strong> O índice de reajuste (como IPCA ou IGP-M) incide exclusivamente sobre o valor do aluguel, e não sobre as taxas condominiais ou impostos municipais.</li>
+          <li><strong class="text-ink">Clareza Financeira:</strong> Em caso de atraso ou cobrança de encargos extraordinários de condomínio (que são de responsabilidade do proprietário), o recibo discriminado protege ambas as partes.</li>
+        </ul>
+      </section>
+
+      <!-- verificar: verificar com fonte oficial ou contador -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Quando e por quanto tempo guardar o comprovante de aluguel?
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Tanto o inquilino quanto o proprietário devem armazenar os recibos e comprovantes de pagamento pelo prazo mínimo de <strong>3 anos</strong>, conforme previsto no artigo 206, § 3º do Código Civil para pretensão relativa a aluguéis de prédios urbanos.
+        </p>
+        <!-- verificar: verificar com fonte oficial ou contador -->
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Para fins tributários perante a Receita Federal do Brasil, o prazo recomendado é de <strong>5 anos</strong>, que corresponde ao período em que o fisco pode solicitar esclarecimentos sobre rendimentos de aluguéis declarados no Imposto de Renda da Pessoa Física (DIRPF).
+        </p>
+      </section>
+
+      <section class="space-y-4 pt-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight font-display">
+          Dúvidas Frequentes sobre Recibos de Aluguel
+        </h2>
+        <div class="space-y-3">
+          {rentFaqItems.map((item) => (
+            <details class="group rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 transition-all">
+              <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-ink select-none">
+                <span>{item.question}</span>
+                <svg class="h-4 w-4 text-mute transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed pt-2 border-t border-hairline">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Internal links to other pt-BR tools -->
+      <section class="rounded-3xl border border-hairline bg-surface-soft/60 p-6 sm:p-8 space-y-4">
+        <h2 class="text-xl font-bold text-ink">Outras Ferramentas e Modelos Financeiros</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <a href={getRouteUrl('receipt', locale)} class="p-3 rounded-xl bg-surface-card border border-hairline hover:border-primary transition-colors flex items-center justify-between text-ink font-semibold">
+            <span>Gerador de Recibo de Pagamento Geral</span>
+            <span class="text-primary">→</span>
+          </a>
+          <a href={getRouteUrl('receipt-template', locale)} class="p-3 rounded-xl bg-surface-card border border-hairline hover:border-primary transition-colors flex items-center justify-between text-ink font-semibold">
+            <span>Modelo de Recibo em Branco e Preenchido</span>
+            <span class="text-primary">→</span>
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </div>
+</BaseLayout>
+

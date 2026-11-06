@@ -1,6 +1,7 @@
 import QRCode from 'qrcode';
+import { generatePixPayload } from './pix';
 
-export type PaymentQrType = 'none' | 'upi' | 'paypal' | 'link' | 'url' | 'sepa' | 'epc';
+export type PaymentQrType = 'none' | 'pix' | 'upi' | 'paypal' | 'link' | 'url' | 'sepa' | 'epc';
 
 export interface PaymentQrConfig {
   type: PaymentQrType | string;
@@ -36,6 +37,15 @@ export function formatPaymentUri(
   const normalizedType = (config.type || '').toLowerCase();
 
   switch (normalizedType) {
+    case 'pix': {
+      return generatePixPayload({
+        key: cleanValue,
+        merchantName: config.recipientName,
+        amount: config.amount,
+        txid: config.reference || '***',
+      });
+    }
+
     case 'upi': {
       // UPI specification: upi://pay?pa=recipient@vpa&pn=Recipient+Name&am=100.00&cu=INR
       const pa = cleanValue;

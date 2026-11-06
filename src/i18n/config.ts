@@ -48,7 +48,7 @@ export const LOCALE_CONFIGS: Record<Locale, LocaleConfig> = {
     code: 'pt-br',
     lang: 'pt-BR',
     displayName: 'Português (Brasil)',
-    published: false, // Ready for subsequent language prompt
+    published: true, // Published Brazilian Portuguese version
     defaultCurrency: 'BRL',
     regionalFormat: 'pt-BR',
     dir: 'ltr',

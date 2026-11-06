@@ -219,7 +219,7 @@ async function runTechnicalSeoAudit() {
 
     function checkInternalLink(sourceRoute, href) {
       const [rawPath, rawHash] = href.split('#');
-      let targetPath = rawPath;
+      let targetPath = rawPath.split('?')[0];
 
       // Handle relative paths
       if (!targetPath.startsWith('/')) {

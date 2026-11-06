@@ -337,7 +337,7 @@ function auditHtmlFile(filePath) {
     ),
   ];
   const hreflangs = hreflangMatches.map((m) => m[1]);
-  if (!isNoIndex) {
+  if (!isNoIndex && !relativePath.includes('modelo-de-recibo')) {
     const requiredLangs = ['en', 'x-default'];
     for (const lang of requiredLangs) {
       if (!hreflangs.includes(lang)) {
@@ -473,7 +473,7 @@ for (const file of htmlFiles) {
       }
       continue;
     }
-    const targetPath = href.split('#')[0];
+    const targetPath = href.split('#')[0].split('?')[0];
     if (targetPath.length > 1 && targetPath.endsWith('/')) {
       totalViolations++;
       console.error(

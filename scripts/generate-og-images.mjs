@@ -152,6 +152,71 @@ const staticPages = [
       'Discover how to number invoices sequentially for audit compliance. Compare 4 numbering systems, prefix conventions, and zero-padding rules.',
     tags: ['Sequential Numbering', 'Zero-Padding Rules', 'Audit Compliance'],
   },
+  // Brazilian Portuguese (pt-BR) Pages
+  {
+    slug: 'og-pt-br-index',
+    title: 'Gerador de Recibo e Fatura Grátis Online',
+    badge: '100% Grátis · Sem Cadastro',
+    description:
+      "Crie recibos online grátis e baixe o PDF. Sem cadastro, sem marca d'água. Seus dados ficam no seu navegador.",
+    tags: ['Recibo de Pagamento', 'Recibo de Aluguel', 'Pix Instantâneo'],
+  },
+  {
+    slug: 'og-pt-br-gerador-de-recibo',
+    title: 'Gerador de Recibo Grátis',
+    badge: 'Crie e Baixe em PDF',
+    description:
+      "Gere seu recibo online grátis e simples. Preencha os dados, veja a prévia e baixe o PDF. Sem cadastro e sem marca d'água.",
+    tags: ['Valor por Extenso', 'QR Code Pix', 'PDF A4 Grátis'],
+  },
+  {
+    slug: 'og-pt-br-gerador-de-recibo-de-aluguel',
+    title: 'Recibo de Aluguel Grátis',
+    badge: 'Lei do Inquilinato',
+    description:
+      "Crie um recibo de aluguel com locador, locatário, valor e período. Baixe o PDF na hora, sem cadastro e sem marca d'água.",
+    tags: ['Aluguel', 'Condomínio', 'IPTU e Água'],
+  },
+  {
+    slug: 'og-pt-br-modelo-de-recibo',
+    title: 'Modelo de Recibo Grátis',
+    badge: 'Modelo Pronto & Formatado',
+    description:
+      "Use um modelo de recibo pronto: preencha online, confira a prévia e baixe em PDF. Grátis, sem cadastro e sem marca d'água.",
+    tags: ['Modelo Pronto', 'Exemplo Preenchido', 'Download em PDF'],
+  },
+  {
+    slug: 'og-pt-br-privacidade',
+    title: 'Política de Privacidade',
+    badge: 'Conformidade LGPD',
+    description:
+      'Privacidade e segurança: processamento local no seu navegador, sem armazenamento em servidores e conformidade com a LGPD.',
+    tags: ['LGPD', 'Processamento Local', 'Sem Servidores'],
+  },
+  {
+    slug: 'og-pt-br-termos',
+    title: 'Termos de Uso',
+    badge: 'Uso Legítimo & Gratuito',
+    description:
+      'Termos e condições de uso das nossas ferramentas gratuitas de recibos e faturas. Documentos comerciais legítimos sem custo.',
+    tags: ['Termos de Uso', 'Documentos Genuínos', 'Isenção Legal'],
+  },
+  {
+    slug: 'og-pt-br-sobre',
+    title: 'Sobre Nós',
+    badge: 'Nossa Filosofia',
+    description:
+      'Conheça nossa missão: ferramentas financeiras gratuitas, 100% no navegador, sem cadastro e sem armazenamento de dados pessoais.',
+    tags: ['Ferramentas Gratuitas', 'Privacidade Total', 'Feito para o Brasil'],
+  },
+  {
+    slug: 'og-pt-br-contato',
+    title: 'Contato e Suporte',
+    badge: 'Canal Oficial de Atendimento',
+    description:
+      'Entre em contato com nossa equipe de suporte. Dúvidas, sugestões ou relatórios sobre o gerador de recibos e faturas online.',
+    tags: ['Suporte Rápido', 'E-mail Direto', 'Feedback'],
+  },
 ];
 
 // Read tool page JSON files
