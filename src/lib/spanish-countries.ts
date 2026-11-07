@@ -199,3 +199,4 @@ export function formatRegionalMoney(amount: number, countryCode: string): string
     maximumFractionDigits: country.hasCents ? 2 : 0,
   }).format(amount);
 }
+
