@@ -1,45 +1,8 @@
 [
   {
     "id": "TC001",
-    "title": "Restore a saved invoice draft after refresh",
-    "description": "This verifies that invoice data is preserved in browser storage and restored after the page is refreshed.",
-    "category": "Browser Draft Saving and Reset",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the business details field with a business name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
-      },
-      {
-        "type": "action",
-        "description": "Refresh the page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the previously entered invoice data is restored"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the draft remains available after reload"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC002",
     "title": "Create and export a complete invoice",
-    "description": "Verifies that a user can enter full invoice details, line items, and payment information, then export a completed invoice as a PDF.",
+    "description": "Verifies that a user can enter full invoice details, line items, and payment information and then export the finished invoice as a PDF.",
     "category": "Invoice Creation and Editing",
     "steps": [
       {
@@ -48,51 +11,79 @@
       },
       {
         "type": "action",
-        "description": "Fill in the invoice number field with a valid invoice number"
+        "description": "Fill in the invoice number field with INV-1001"
       },
       {
         "type": "action",
-        "description": "Fill in the issue date field with a valid date"
+        "description": "Fill in a valid issue date into the issue date field"
       },
       {
         "type": "action",
-        "description": "Fill in the due date field with a valid date"
+        "description": "Fill in a valid due date into the due date field"
       },
       {
         "type": "action",
-        "description": "Fill in the payment terms field with standard net terms"
+        "description": "Fill in the purchase order number field with PO-7788"
       },
       {
         "type": "action",
-        "description": "Fill in the sender business details with valid business information"
+        "description": "Fill in the payment terms field with Due within 14 days"
       },
       {
         "type": "action",
-        "description": "Fill in the client details with valid client information"
+        "description": "Fill in the sender business details field with Northstar Consulting"
       },
       {
         "type": "action",
-        "description": "Add a line item with a description, quantity, and rate"
+        "description": "Fill in the recipient client details field with Acme Studio"
       },
       {
         "type": "action",
-        "description": "Click the download invoice action"
+        "description": "Fill in the first line item description field with Strategy session"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 2"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 150"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to add another line item"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second line item description field with Implementation support"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second line item rate field with 300"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to export the invoice as a PDF"
       },
       {
         "type": "assertion",
-        "description": "Verify the invoice preview shows the entered invoice content"
+        "description": "Verify the completed invoice preview is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify a PDF export action is available"
+        "description": "Verify a PDF export is available"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC003",
-    "title": "Download a completed invoice as a PDF",
-    "description": "This verifies that a user can finish an invoice and export it as a PDF from the main route.",
+    "id": "TC002",
+    "title": "Download a completed invoice as PDF from the primary builder",
+    "description": "This test verifies that a user can complete the main invoice form and download the finished document as a PDF.",
     "category": "PDF Download and Printing",
     "steps": [
       {
@@ -101,76 +92,39 @@
       },
       {
         "type": "action",
-        "description": "Fill in the business details field with a business name"
+        "description": "Fill in the invoice header details with valid values"
       },
       {
         "type": "action",
-        "description": "Fill in the client details field with a client name"
+        "description": "Fill in the business details with valid values"
       },
       {
         "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
+        "description": "Fill in the client details with valid values"
       },
       {
         "type": "action",
-        "description": "Set the invoice metadata fields"
+        "description": "Fill in multiple line items with valid values"
       },
       {
         "type": "action",
-        "description": "Download the document as a PDF"
+        "description": "Choose the PDF download action"
       },
       {
         "type": "assertion",
-        "description": "Verify the PDF export is initiated"
+        "description": "Verify a PDF download is generated"
       },
       {
         "type": "assertion",
-        "description": "Verify the generated document reflects the completed invoice"
+        "description": "Verify the completed invoice remains available in the preview after export"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC004",
-    "title": "Restore an autosaved invoice draft after refresh",
-    "description": "Verifies that entered invoice data is restored after refreshing the browser and can be cleared back to a blank state.",
-    "category": "Invoice Creation and Editing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the invoice number field with a valid invoice number"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Refresh the browser"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved draft content is restored"
-      },
-      {
-        "type": "action",
-        "description": "Clear or reset the invoice form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the invoice form returns to a blank state"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC005",
-    "title": "Clear saved invoice data and return to a blank form",
-    "description": "This verifies that a user can remove locally saved invoice data and return the form to an empty state.",
+    "id": "TC003",
+    "title": "Restore a saved draft after refreshing the page",
+    "description": "This test verifies that invoice data is automatically saved locally and restored after a browser refresh.",
     "category": "Browser Draft Saving and Reset",
     "steps": [
       {
@@ -179,39 +133,88 @@
       },
       {
         "type": "action",
-        "description": "Fill in the business details field with a business name"
+        "description": "Fill in the invoice header details with valid values"
       },
       {
         "type": "action",
-        "description": "Fill in the client details field with a client name"
+        "description": "Fill in the client details with valid values"
       },
       {
         "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
+        "description": "Fill in at least one line item with valid values"
       },
       {
         "type": "action",
-        "description": "Clear saved data"
-      },
-      {
-        "type": "action",
-        "description": "Confirm the reset"
+        "description": "Refresh the browser page"
       },
       {
         "type": "assertion",
-        "description": "Verify the invoice form is blank"
+        "description": "Verify the previously entered invoice data is restored"
       },
       {
         "type": "assertion",
-        "description": "Verify no saved draft data remains visible"
+        "description": "Verify the draft remains editable after restoration"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC006",
-    "title": "Create and download a freelancer invoice",
-    "description": "A freelancer can enter project billing details, review the specialized preview, and download the finished invoice as a PDF.",
+    "id": "TC004",
+    "title": "Restore an in-progress invoice draft after refresh",
+    "description": "Verifies that invoice data is saved locally and restored after the page is reloaded so the user can continue editing.",
+    "category": "Invoice Creation and Editing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice number field with INV-1003"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Northstar Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the recipient client details field with Acme Studio"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 120"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the draft to auto-save"
+      },
+      {
+        "type": "action",
+        "description": "Refresh the browser"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved draft is restored"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the in-progress invoice content remains available for editing"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Create and export a freelancer invoice",
+    "description": "A freelancer can enter project billing details, review the generated invoice preview, and export the completed document as a PDF.",
     "category": "Freelancer Invoice Template",
     "steps": [
       {
@@ -220,39 +223,154 @@
       },
       {
         "type": "action",
-        "description": "Fill in the freelancer project details field with a project name"
+        "description": "Fill in the freelancer project details and billing information"
       },
       {
         "type": "action",
-        "description": "Fill in the client details field with a client name"
+        "description": "Add at least one billable line item"
       },
       {
         "type": "action",
-        "description": "Fill in the billing information field with a valid rate and terms"
+        "description": "Add the payment terms"
       },
       {
         "type": "action",
-        "description": "Add a line item with a service description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Click the control to download the invoice as a PDF"
+        "description": "Click the download invoice action"
       },
       {
         "type": "assertion",
-        "description": "Verify the freelancer invoice preview is displayed"
+        "description": "Verify the invoice preview is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify the invoice is available for PDF export"
+        "description": "Verify the PDF export completes successfully"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Clear saved invoice data after confirmation",
+    "description": "This test verifies that a user can reset a saved invoice draft and return to a blank form only after confirming the action.",
+    "category": "Browser Draft Saving and Reset",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice header details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in at least one line item with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Choose the reset action"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the reset action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the invoice form is cleared"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a blank invoice state is displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC007",
-    "title": "Create and download a contractor invoice",
-    "description": "A contractor can enter labor and material charges, review the separated totals, and download the completed invoice as a PDF.",
+    "title": "Create and export an Australian tax invoice",
+    "description": "An Australian business user can enter an ABN, add invoice items, review GST calculations, and export the tax invoice as a PDF.",
+    "category": "Australian Tax Invoice Template",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tax-invoice-template-australia"
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid ABN"
+      },
+      {
+        "type": "action",
+        "description": "Add at least one invoice item"
+      },
+      {
+        "type": "action",
+        "description": "Review the automatic GST calculation in the preview"
+      },
+      {
+        "type": "action",
+        "description": "Click the download invoice action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Australian tax invoice preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify GST totals are shown in the preview"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Open print mode for a completed invoice",
+    "description": "This test verifies that a user can open print mode from a finished invoice and reach the browser print preview flow.",
+    "category": "PDF Download and Printing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice header details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the business details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in multiple line items with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Open the print action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the browser print preview opens"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the completed invoice content is included in the print preview"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Create and export a contractor invoice with separated billing",
+    "description": "A contractor can enter labor and material charges separately, review the split totals, and export the finished invoice as a PDF.",
     "category": "Contractor Invoice Template",
     "steps": [
       {
@@ -261,27 +379,809 @@
       },
       {
         "type": "action",
-        "description": "Fill in the contractor labor details field with labor information"
+        "description": "Enter the labor hours and labor rate"
       },
       {
         "type": "action",
-        "description": "Fill in the material expenses field with material cost information"
+        "description": "Enter the material expenses"
       },
       {
         "type": "action",
-        "description": "Fill in the client details field with a client name"
+        "description": "Add any additional billing details"
       },
       {
         "type": "action",
-        "description": "Add a billing item for labor"
+        "description": "Click the download invoice action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the contractor invoice preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify labor and material totals are shown separately"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Create and export a rent receipt",
+    "description": "A landlord or tenant can enter property, parties, rental period, and payment details, then download the rent receipt as a PDF.",
+    "category": "Rent Receipt Generation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-rent-receipt-generator"
       },
       {
         "type": "action",
-        "description": "Add a billing item for materials"
+        "description": "Fill in the landlord name field with a landlord name"
       },
       {
         "type": "action",
-        "description": "Click the control to download the contractor invoice as a PDF"
+        "description": "Fill in the tenant name field with a tenant name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the property address field with a full address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent period field with a valid month and year"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent amount field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Download the rent receipt as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the rent receipt preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the PDF download action is available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Switch templates without losing invoice data",
+    "description": "This test verifies that a user can enter invoice details, switch templates, and keep the same data visible in the preview while the document style updates.",
+    "category": "Template Switching and Live Preview",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice header details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in at least two line items with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Select a different invoice template"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice data remains visible in the preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the preview restyles for the selected template"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Create and export a sales receipt",
+    "description": "A user can enter receipt details, add itemized purchases with tax, and download the completed receipt as a PDF.",
+    "category": "Receipt Generator",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-online-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the transaction details field with a unique transaction reference"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the store or cashier field with a store name"
+      },
+      {
+        "type": "action",
+        "description": "Add an itemized purchase line"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item description field with a product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Set the tax information to a valid rate"
+      },
+      {
+        "type": "action",
+        "description": "Download the receipt as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a completed receipt preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the PDF download action is available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Recalculate totals when tax, discount, and shipping change",
+    "description": "Verifies that tax, discount, and shipping controls update the invoice totals correctly after line items are added.",
+    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 2"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 100"
+      },
+      {
+        "type": "action",
+        "description": "Select a currency"
+      },
+      {
+        "type": "action",
+        "description": "Enable tax"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the tax rate field with 10"
+      },
+      {
+        "type": "action",
+        "description": "Enable discount"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the discount field with 15"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping charges field with 25"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the invoice totals are recalculated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the grand total is displayed in the preview"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Create and export an itemized receipt",
+    "description": "A user can enter multiple receipt items with quantities and prices, review totals, and download the final receipt as a PDF.",
+    "category": "Itemized Receipt Maker",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /receipt-maker-with-items"
+      },
+      {
+        "type": "action",
+        "description": "Add the first receipt item"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first item description field with a product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first quantity field with a valid quantity"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first unit price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Add the second receipt item"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second item description field with another product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second quantity field with a valid quantity"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second unit price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Download the itemized receipt as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the itemized receipt preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the PDF download action is available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Export the completed document after reviewing the preview",
+    "description": "A user can complete a specialized invoice, review the live preview, and confirm that the export action is available from the finished document.",
+    "category": "Freelancer Invoice Template",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /invoice-generator-for-freelancers"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the freelancer project details and billing information"
+      },
+      {
+        "type": "action",
+        "description": "Add at least one billable line item"
+      },
+      {
+        "type": "action",
+        "description": "Review the invoice preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the completed invoice preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the export action is available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC016",
+    "title": "Keep invoice data when switching templates and back",
+    "description": "This test verifies that a user can change templates and return to the previous one without losing the entered invoice content.",
+    "category": "Template Switching and Live Preview",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice header details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in at least one line item with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Select a different invoice template"
+      },
+      {
+        "type": "action",
+        "description": "Select the previous invoice template again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice data is still present in the form and preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the preview reflects the restored template selection"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC017",
+    "title": "Maintain freelancer invoice data while editing",
+    "description": "A freelancer can keep entered invoice information visible in the preview while updating billing details before export.",
+    "category": "Freelancer Invoice Template",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /invoice-generator-for-freelancers"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the freelancer project details and billing information"
+      },
+      {
+        "type": "action",
+        "description": "Add multiple billable line items"
+      },
+      {
+        "type": "action",
+        "description": "Change the billing rate or payment terms"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the completed invoice preview remains visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice details are still reflected in the preview"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC018",
+    "title": "Record a receipt with multiple purchased items",
+    "description": "A user can add several purchase lines and see the receipt totals update correctly before export.",
+    "category": "Receipt Generator",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-online-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Enter the transaction details"
+      },
+      {
+        "type": "action",
+        "description": "Add the first purchase line"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first item description field with a product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first item price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Add a second purchase line"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second item description field with another product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the second item price field with a valid amount"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify multiple receipt items are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt totals are updated"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Show validation when a required client field is missing",
+    "description": "Verifies that missing required invoice information blocks completion and the first missing field is highlighted for correction.",
+    "category": "Invoice Creation and Editing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice number field with INV-1002"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid issue date into the issue date field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid due date into the due date field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Northstar Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Leave the recipient client details field empty"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to export the invoice as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a field-level validation error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify focus moves to the first missing required field"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC020",
+    "title": "Record rent payment details on a receipt",
+    "description": "A user can fill in the required rent receipt fields so the preview shows the property and payment information together.",
+    "category": "Rent Receipt Generation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-rent-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the landlord name field with a landlord name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the tenant name field with a tenant name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the property address field with a full address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent period field with a valid month and year"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent amount field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the property and period details are displayed in the receipt preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected payment method is reflected in the receipt"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC021",
+    "title": "Upload a logo and keep it while editing the invoice",
+    "description": "Verifies that adding a company logo updates the preview and the logo remains visible while invoice details continue to be edited.",
+    "category": "Logo Upload and Visual Branding",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Upload a logo image"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Northstar Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the recipient client details field with Acme Studio"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Design work"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 200"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the logo appears in the invoice preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the branded invoice layout remains displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC022",
+    "title": "Keep Australian tax invoice data while editing",
+    "description": "An Australian business user can continue editing invoice items and still see the entered details and GST calculation in the preview.",
+    "category": "Australian Tax Invoice Template",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tax-invoice-template-australia"
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid ABN"
+      },
+      {
+        "type": "action",
+        "description": "Add multiple invoice items"
+      },
+      {
+        "type": "action",
+        "description": "Change an invoice item amount"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Australian tax invoice preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice details remain visible in the preview"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC023",
+    "title": "Handle a receipt with tax applied to items",
+    "description": "A user can add tax to receipt items and see the receipt totals include the tax calculation.",
+    "category": "Receipt Generator",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-online-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the transaction details field with a unique transaction reference"
+      },
+      {
+        "type": "action",
+        "description": "Add an itemized purchase line"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item description field with a product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Set the tax information to a valid rate"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify tax is included in the receipt totals"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt preview remains printable"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC024",
+    "title": "Review calculated totals on an itemized receipt",
+    "description": "A user can see the receipt update its subtotal, tax, and total after entering item quantities and prices.",
+    "category": "Itemized Receipt Maker",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /receipt-maker-with-items"
+      },
+      {
+        "type": "action",
+        "description": "Add a receipt item"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item description field with a product name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the quantity field with a valid quantity"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the unit price field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Set the tax information to a valid rate"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt totals are calculated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the preview reflects the entered items"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC025",
+    "title": "Cancel invoice reset and keep the draft",
+    "description": "This test verifies that canceling a reset confirmation leaves the current invoice draft unchanged.",
+    "category": "Browser Draft Saving and Reset",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice header details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in at least one line item with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Choose the reset action"
+      },
+      {
+        "type": "action",
+        "description": "Cancel the reset action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice data is still present"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the draft was not cleared"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC026",
+    "title": "Switch document templates without losing entered data",
+    "description": "Verifies that changing between invoice template pages preserves entered invoice data while the preview restyles for the selected template.",
+    "category": "Invoice Creation and Editing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice number field with INV-1005"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Northstar Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the recipient client details field with Acme Studio"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 120"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open a specialized invoice template"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the entered invoice data is preserved"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the preview uses the specialized template styling"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC027",
+    "title": "Review contractor invoice totals before export",
+    "description": "A contractor can verify that the preview reflects labor, materials, and other billing details before downloading the document.",
+    "category": "Contractor Invoice Template",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contractor-invoice-template"
+      },
+      {
+        "type": "action",
+        "description": "Enter the labor hours and labor rate"
+      },
+      {
+        "type": "action",
+        "description": "Enter the material expenses"
+      },
+      {
+        "type": "action",
+        "description": "Review the invoice preview"
       },
       {
         "type": "assertion",
@@ -295,9 +1195,62 @@
     "priority": "High"
   },
   {
-    "id": "TC008",
-    "title": "Create a sales receipt with payment details and line items",
-    "description": "This verifies that a user can complete a sales receipt from start to finish and export the finished document as a PDF.",
+    "id": "TC028",
+    "title": "Generate and export an Australian tax invoice",
+    "description": "Verifies that a user can create an Australian GST invoice with business details and export the finished document as a PDF.",
+    "category": "Invoice Creation and Editing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tax-invoice-template-australia"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice number field with INV-AU-1001"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the ABN field with 12 345 678 901"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Sydney Services Pty Ltd"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the recipient client details field with Coastal Retailers"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Bookkeeping"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 500"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to export the invoice as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Australian tax invoice preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the GST-enabled totals are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC029",
+    "title": "Record transaction details for a receipt",
+    "description": "A user can enter store, cashier, and transaction information so the receipt shows the required payment context.",
     "category": "Receipt Generator",
     "steps": [
       {
@@ -310,761 +1263,31 @@
       },
       {
         "type": "action",
-        "description": "Fill in the transaction details"
+        "description": "Fill in the transaction details field with a unique transaction reference"
       },
       {
         "type": "action",
-        "description": "Fill in the store or cashier information"
+        "description": "Fill in the store name field with a store name"
       },
       {
         "type": "action",
-        "description": "Add an itemized purchase line"
-      },
-      {
-        "type": "action",
-        "description": "Add tax to the receipt"
-      },
-      {
-        "type": "action",
-        "description": "Download the receipt as a PDF"
+        "description": "Fill in the cashier name field with a staff name"
       },
       {
         "type": "assertion",
-        "description": "Verify a completed receipt preview is displayed"
+        "description": "Verify transaction details are displayed in the receipt preview"
       },
       {
         "type": "assertion",
-        "description": "Verify the receipt is ready for PDF export"
+        "description": "Verify the selected payment method is reflected in the receipt"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC009",
-    "title": "Create and download an Australian tax invoice",
-    "description": "A user can enter an ABN, add invoice items, see GST calculated automatically, and download the Australian tax invoice as a PDF.",
-    "category": "Australian Tax Invoice Template",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /tax-invoice-template-australia"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the ABN field with a valid ABN"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add an invoice item with a description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Add a second invoice item with a description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Click the control to download the tax invoice as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the Australian tax invoice preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify GST is calculated in the preview"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC010",
-    "title": "Create a rent receipt with property and payment details",
-    "description": "This verifies that a landlord or tenant can enter rental details, review the printable receipt, and export it as a PDF.",
-    "category": "Rent Receipt Generation",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /free-rent-receipt-generator"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the landlord name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the tenant name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the property address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rent period"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rent amount"
-      },
-      {
-        "type": "action",
-        "description": "Select a payment method"
-      },
-      {
-        "type": "action",
-        "description": "Download the rent receipt as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a printable rent receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the rent receipt is ready for PDF export"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC011",
-    "title": "Update totals when pricing controls change",
-    "description": "This verifies that changing currency, tax, discount, or shipping updates the invoice totals in the preview.",
-    "category": "Template Switching and Live Preview",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the business details field with a business name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
-      },
-      {
-        "type": "action",
-        "description": "Set the currency and pricing controls"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the totals update in the preview"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the invoice summary reflects the selected pricing settings"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC012",
-    "title": "Generate an itemized receipt with calculated totals",
-    "description": "This verifies that a user can add multiple receipt items, apply tax, review the computed totals, and export the finished receipt as a PDF.",
-    "category": "Itemized Receipt Maker",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /receipt-maker-with-items"
-      },
-      {
-        "type": "action",
-        "description": "Add a receipt item"
-      },
-      {
-        "type": "action",
-        "description": "Add another receipt item"
-      },
-      {
-        "type": "action",
-        "description": "Enter tax information"
-      },
-      {
-        "type": "action",
-        "description": "Review the receipt totals"
-      },
-      {
-        "type": "action",
-        "description": "Download the itemized receipt as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the itemized receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the calculated totals are shown"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC013",
-    "title": "Show validation for missing required invoice fields",
-    "description": "Verifies that missing required invoice information is flagged and the first missing field receives focus before the invoice can be completed.",
-    "category": "Invoice Creation and Editing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the invoice number field with a valid invoice number"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the issue date field with a valid date"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the due date field with a valid date"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the payment terms field with standard net terms"
-      },
-      {
-        "type": "action",
-        "description": "Attempt to continue without entering client details"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a field-level validation message is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify focus moves to the first missing required field"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC014",
-    "title": "Switch templates without losing invoice data",
-    "description": "This verifies that a user can enter invoice details, switch templates, and keep the same data visible in the updated preview.",
-    "category": "Template Switching and Live Preview",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the business details field with a business name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
-      },
-      {
-        "type": "action",
-        "description": "Switch to another available template"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the entered invoice data remains visible in the preview"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the preview updates to reflect the selected template"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC015",
-    "title": "Update freelancer invoice details before export",
-    "description": "A freelancer can change billing details on an in-progress invoice and see the preview stay in sync before downloading.",
-    "category": "Freelancer Invoice Template",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /invoice-generator-for-freelancers"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the freelancer project details field with an initial project name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with an initial client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a service description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Update the line item amount to a different valid value"
-      },
-      {
-        "type": "action",
-        "description": "Click the control to download the invoice as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated freelancer invoice preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the invoice totals reflect the edited line item"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC016",
-    "title": "Open print mode for a completed invoice",
-    "description": "This verifies that a user can open the browser print view after completing an invoice.",
-    "category": "PDF Download and Printing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the business details field with a business name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
-      },
-      {
-        "type": "action",
-        "description": "Open print mode"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the print preview is shown"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the completed invoice is ready to print"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC017",
-    "title": "Recalculate totals when tax discount and shipping change",
-    "description": "Verifies that tax, discount, and shipping controls update the invoice totals correctly after line items are added.",
-    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Select a currency"
-      },
-      {
-        "type": "action",
-        "description": "Enable tax and enter a tax rate"
-      },
-      {
-        "type": "action",
-        "description": "Enable a discount and enter a valid discount value"
-      },
-      {
-        "type": "action",
-        "description": "Enter a shipping charge"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the invoice totals are recalculated"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the preview reflects the updated grand total"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC018",
-    "title": "Keep contractor invoice totals accurate while editing charges",
-    "description": "A contractor can revise labor or material charges and the preview should recalculate before export.",
-    "category": "Contractor Invoice Template",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /contractor-invoice-template"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the contractor labor details field with labor information"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the material expenses field with material cost information"
-      },
-      {
-        "type": "action",
-        "description": "Add a labor billing item with a valid amount"
-      },
-      {
-        "type": "action",
-        "description": "Add a material billing item with a valid amount"
-      },
-      {
-        "type": "action",
-        "description": "Update one of the amounts to a different valid value"
-      },
-      {
-        "type": "action",
-        "description": "Click the control to download the contractor invoice as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the contractor invoice preview updates after editing a charge"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the recalculated total is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC019",
-    "title": "Keep invoice data intact after switching templates back and forth",
-    "description": "This verifies that a user can change templates and return to the original one without losing any entered invoice information.",
-    "category": "Template Switching and Live Preview",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the business details field with a business name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the client details field with a client name"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and price"
-      },
-      {
-        "type": "action",
-        "description": "Switch to another available template"
-      },
-      {
-        "type": "action",
-        "description": "Switch back to the previous template"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the entered invoice data remains visible in the preview"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the selected template returns to the original layout"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC020",
-    "title": "Review the rent receipt preview before exporting",
-    "description": "This verifies that the rent receipt updates into a printable preview after entering the required rental and payment details.",
-    "category": "Rent Receipt Generation",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /free-rent-receipt-generator"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the landlord name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the tenant name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the property address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rent period"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rent amount"
-      },
-      {
-        "type": "action",
-        "description": "Select a payment method"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a printable rent receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the entered rental details appear in the preview"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC021",
-    "title": "Preserve invoice data while switching templates and currency",
-    "description": "Verifies that invoice content stays intact when the user changes template and currency settings during editing.",
-    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the invoice number field with a valid invoice number"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Select a different template"
-      },
-      {
-        "type": "action",
-        "description": "Select a different currency"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the entered invoice data is still present"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the preview updates with the selected template and currency"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC022",
-    "title": "Keep GST totals visible after editing an Australian invoice",
-    "description": "A user can update line items on an Australian tax invoice and confirm the tax calculation still reflects the latest values.",
-    "category": "Australian Tax Invoice Template",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /tax-invoice-template-australia"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the ABN field with a valid ABN"
-      },
-      {
-        "type": "action",
-        "description": "Add an invoice item with a description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Add a second invoice item with a description and amount"
-      },
-      {
-        "type": "action",
-        "description": "Update one invoice item amount to a different valid value"
-      },
-      {
-        "type": "action",
-        "description": "Click the control to download the tax invoice as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the invoice preview updates after the item change"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the GST total remains visible in the preview"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC023",
-    "title": "Generate an Australian tax invoice with GST",
-    "description": "Verifies that the Australian tax invoice route applies GST calculations and supports final export.",
-    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /tax-invoice-template-australia"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the Australian business details with valid information"
-      },
-      {
-        "type": "action",
-        "description": "Enter the ABN field with a valid number"
-      },
-      {
-        "type": "action",
-        "description": "Add an itemized line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Enable GST and enter the tax rate"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify GST calculations are shown in the preview"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the tax invoice can be exported as a PDF"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC024",
-    "title": "Create a tax invoice with Australian GST calculations",
-    "description": "This verifies that a user can complete the Australian tax invoice flow and see the GST-inclusive totals before exporting.",
-    "category": "Template Switching and Live Preview",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /tax-invoice-template-australia"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the Australian tax invoice details"
-      },
-      {
-        "type": "action",
-        "description": "Add at least one taxable line item"
-      },
-      {
-        "type": "action",
-        "description": "Set the invoice metadata fields"
-      },
-      {
-        "type": "action",
-        "description": "Download the document as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the Australian tax invoice preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the GST calculation is reflected in the totals"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC025",
-    "title": "Generate a freelancer invoice with specialized fields",
-    "description": "Verifies that the freelancer invoice route supports the specialized invoice flow and produces a completed exportable invoice.",
-    "category": "Invoice Creation and Editing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /invoice-generator-for-freelancers"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the invoice details with valid freelancer information"
-      },
-      {
-        "type": "action",
-        "description": "Add a service line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Review the freelancer-specific preview"
-      },
-      {
-        "type": "action",
-        "description": "Click the download invoice action"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the freelancer invoice preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a PDF export action is available"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC026",
-    "title": "Use specialized freelancer invoice fields and export the result",
-    "description": "This verifies that a freelancer can complete the dedicated invoice flow, review the specialized preview, and export the finished document.",
-    "category": "Template Switching and Live Preview",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /invoice-generator-for-freelancers"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the freelancer invoice details"
-      },
-      {
-        "type": "action",
-        "description": "Add at least one service line item"
-      },
-      {
-        "type": "action",
-        "description": "Set the invoice metadata fields"
-      },
-      {
-        "type": "action",
-        "description": "Download the document as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the specialized freelancer invoice preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the completed freelancer invoice is ready for export"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC027",
-    "title": "Generate a contractor invoice with labor and milestone details",
-    "description": "Verifies that the contractor invoice route supports contractor-specific fields and a completed invoice export.",
+    "id": "TC030",
+    "title": "Generate and export a contractor invoice",
+    "description": "Verifies that a user can create a contractor-focused invoice on its dedicated page and export it as a PDF.",
     "category": "Invoice Creation and Editing",
     "steps": [
       {
@@ -1073,19 +1296,31 @@
       },
       {
         "type": "action",
-        "description": "Fill in the contractor invoice details with valid project information"
+        "description": "Fill in the invoice number field with INV-2001"
       },
       {
         "type": "action",
-        "description": "Add a labor or materials line item with a description, quantity, and rate"
+        "description": "Fill in the sender business details field with Northstar Consulting"
       },
       {
         "type": "action",
-        "description": "Review the contractor-specific preview"
+        "description": "Fill in the recipient client details field with BuildRight Pty Ltd"
       },
       {
         "type": "action",
-        "description": "Click the download invoice action"
+        "description": "Fill in the labor line item description field with Site work"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the labor line item quantity field with 3"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the labor line item rate field with 180"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to export the invoice as a PDF"
       },
       {
         "type": "assertion",
@@ -1093,15 +1328,224 @@
       },
       {
         "type": "assertion",
-        "description": "Verify a PDF export action is available"
+        "description": "Verify a PDF export is available"
       }
     ],
-    "priority": "High"
+    "priority": "Medium"
   },
   {
-    "id": "TC028",
-    "title": "Add and remove a company logo",
-    "description": "Verifies that a user can upload a logo, see it in the preview, remove it, and return to a plain invoice layout.",
+    "id": "TC031",
+    "title": "Generate and export a freelancer invoice template",
+    "description": "This test verifies that a user can complete the freelancer invoice page and export the finished document as a PDF.",
+    "category": "Template Switching and Live Preview",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /invoice-generator-for-freelancers"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the invoice details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the client details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in multiple line items with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Choose the PDF download action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a PDF download is generated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the freelancer invoice preview is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC032",
+    "title": "Review a printable rent receipt preview",
+    "description": "A user can enter rental details and confirm the printable receipt preview is populated before exporting it.",
+    "category": "Rent Receipt Generation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-rent-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the landlord name field with a landlord name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the tenant name field with a tenant name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the property address field with a full address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent period field with a valid month and year"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the rent amount field with a valid amount"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a printable rent receipt preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt includes the rental period"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC033",
+    "title": "Clamp an excessive discount to the subtotal",
+    "description": "Verifies that a discount larger than the subtotal is corrected to zero and the invoice total remains valid.",
+    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Small task"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 50"
+      },
+      {
+        "type": "action",
+        "description": "Enable discount"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the discount field with 9999"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the discount is clamped to a valid amount"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a discount validation message is visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC034",
+    "title": "Generate and export a receipt",
+    "description": "Verifies that a user can create a receipt on the dedicated receipt page and export it as a PDF.",
+    "category": "Invoice Creation and Editing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-online-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the receipt number field with RCPT-1001"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the payer details field with Jane Customer"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the payment method field with Card"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the transaction ID field with TXN-7788"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item description field with Service payment"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the item amount field with 85"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to export the receipt as a PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt preview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a PDF export is available"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC035",
+    "title": "Generate and export a receipt with itemized entries",
+    "description": "This test verifies that a user can complete the receipt generator with itemized purchases and export the finished receipt as a PDF.",
+    "category": "Template Switching and Live Preview",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /free-online-receipt-generator"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the receipt details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the payer details with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in multiple receipt items with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Choose the PDF download action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a PDF download is generated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt preview is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC036",
+    "title": "Remove an uploaded logo and return to a plain layout",
+    "description": "Verifies that removing a logo updates the preview back to the default layout without losing the invoice content.",
     "category": "Logo Upload and Visual Branding",
     "steps": [
       {
@@ -1110,382 +1554,73 @@
       },
       {
         "type": "action",
-        "description": "Upload a valid logo image"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the logo appears in the invoice preview"
+        "description": "Upload a logo image"
       },
       {
         "type": "action",
-        "description": "Remove the logo from the invoice"
+        "description": "Click the control to remove the logo"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Design work"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 200"
       },
       {
         "type": "assertion",
-        "description": "Verify the preview returns to a plain branded layout"
+        "description": "Verify the logo is no longer displayed in the preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the plain invoice layout is displayed"
       }
     ],
     "priority": "Medium"
-  },
-  {
-    "id": "TC029",
-    "title": "Generate an itemized receipt and export it",
-    "description": "Verifies that the itemized receipt generator supports receipt details, multiple lines, and printable PDF export.",
-    "category": "Invoice Creation and Editing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /receipt-maker-with-items"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the receipt details with valid transaction information"
-      },
-      {
-        "type": "action",
-        "description": "Add an itemized receipt line with description, quantity, and unit price"
-      },
-      {
-        "type": "action",
-        "description": "Review the receipt preview"
-      },
-      {
-        "type": "action",
-        "description": "Click the download receipt action"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the itemized receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a PDF export action is available"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC030",
-    "title": "Create an itemized receipt and export it as a PDF",
-    "description": "This verifies that a user can generate a standard receipt with itemized lines and download the printable result.",
-    "category": "PDF Download and Printing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /free-online-receipt-generator"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the receipt details"
-      },
-      {
-        "type": "action",
-        "description": "Add itemized receipt lines"
-      },
-      {
-        "type": "action",
-        "description": "Set the payment details"
-      },
-      {
-        "type": "action",
-        "description": "Download the document as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the receipt is ready for PDF export"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC031",
-    "title": "Generate a rent receipt with property and rental details",
-    "description": "Verifies that the rent receipt generator captures property and rental period information and supports export.",
-    "category": "Invoice Creation and Editing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /free-rent-receipt-generator"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the property address field with valid property details"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rental period field with a valid rental period"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the tenant and landlord details with valid information"
-      },
-      {
-        "type": "action",
-        "description": "Review the rent receipt preview"
-      },
-      {
-        "type": "action",
-        "description": "Click the download receipt action"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the rent receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a PDF export action is available"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC032",
-    "title": "Create a rent receipt with property and rental period details",
-    "description": "This verifies that a landlord or tenant can generate a rent receipt with the required property information and export it.",
-    "category": "PDF Download and Printing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /free-rent-receipt-generator"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the rent receipt details"
-      },
-      {
-        "type": "action",
-        "description": "Enter the property address and rental period"
-      },
-      {
-        "type": "action",
-        "description": "Set the payment details"
-      },
-      {
-        "type": "action",
-        "description": "Download the document as a PDF"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the rent receipt preview is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the rent receipt is ready for PDF export"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC033",
-    "title": "Use the contact page to send a support inquiry",
-    "description": "This verifies that a user can open the contact page, enter a message, and submit a support request successfully.",
-    "category": "Contact Form",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /contact"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the name field"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the email field"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the message field"
-      },
-      {
-        "type": "action",
-        "description": "Submit the contact form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a contact form success confirmation is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the support inquiry was submitted"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC034",
-    "title": "Clamp an excessive discount to zero",
-    "description": "Verifies that a discount larger than the subtotal is corrected and the invoice total remains valid.",
-    "category": "Pricing, Tax, Discount, Shipping, and Currency Controls",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Add a line item with a description, quantity, and rate"
-      },
-      {
-        "type": "action",
-        "description": "Enter a discount larger than the subtotal"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the discount is clamped to zero"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify an explanatory validation message is visible"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC035",
-    "title": "Navigate from the invoice tools to informational pages",
-    "description": "This verifies that users can reach the site information pages from the main app and view the expected content on each page.",
-    "category": "Site Navigation",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Click the link to the about page"
-      },
-      {
-        "type": "action",
-        "description": "Click the link to the privacy policy"
-      },
-      {
-        "type": "action",
-        "description": "Click the link to the terms page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the about page content is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the privacy and terms page content is displayed"
-      }
-    ],
-    "priority": "Low"
-  },
-  {
-    "id": "TC036",
-    "title": "Submit a support message successfully",
-    "description": "A visitor can send a support request from the contact page and see confirmation that the message was submitted.",
-    "category": "Contact Support Form",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /contact"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the name field with a valid full name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the email field with a valid email address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the message field with a support request"
-      },
-      {
-        "type": "action",
-        "description": "Submit the form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a submission confirmation is visible"
-      }
-    ],
-    "priority": "Low"
   },
   {
     "id": "TC037",
-    "title": "Submit a support message with a detailed issue",
-    "description": "A visitor can send a longer support message from the contact page and receive confirmation that the request was received.",
-    "category": "Contact Support Form",
+    "title": "Use the dedicated invoice templates for specialized work",
+    "description": "A user can open each specialized template page and see the appropriate document builder for that use case.",
+    "category": "Australian Tax Invoice Template",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /contact"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the name field with a valid full name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the email field with a valid email address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the message field with a detailed question about using the app"
-      },
-      {
-        "type": "action",
-        "description": "Submit the form"
+        "description": "Navigate to /invoice-generator-for-freelancers"
       },
       {
         "type": "assertion",
-        "description": "Verify a feedback status is visible"
+        "description": "Verify the freelancer invoice builder is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /contractor-invoice-template"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the contractor invoice builder is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /tax-invoice-template-australia"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Australian tax invoice builder is displayed"
       }
     ],
-    "priority": "Low"
+    "priority": "Medium"
   },
   {
     "id": "TC038",
-    "title": "Submit a support message after correcting an entry",
-    "description": "A visitor can correct a previously entered contact form field and still submit the request successfully.",
-    "category": "Contact Support Form",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /contact"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the name field with a valid full name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the email field with a valid email address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the message field with an initial support request"
-      },
-      {
-        "type": "action",
-        "description": "Replace the message field content with a revised support request"
-      },
-      {
-        "type": "action",
-        "description": "Submit the form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a submission confirmation is visible"
-      }
-    ],
-    "priority": "Low"
-  },
-  {
-    "id": "TC039",
-    "title": "Open the contact page from site navigation",
-    "description": "A visitor can reach the contact page through in-app navigation and view the support form.",
-    "category": "Contact Support Form",
+    "title": "Reset a completed invoice after confirmation",
+    "description": "Verifies that a user can clear a completed invoice using the reset flow and confirm the action.",
+    "category": "Invoice Creation and Editing",
     "steps": [
       {
         "type": "action",
@@ -1493,19 +1628,84 @@
       },
       {
         "type": "action",
-        "description": "Click the link to the contact page"
+        "description": "Fill in the invoice number field with INV-1004"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the sender business details field with Northstar Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the recipient client details field with Acme Studio"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item description field with Consulting"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item quantity field with 1"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first line item rate field with 120"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to reset the form"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the reset action"
       },
       {
         "type": "assertion",
-        "description": "Verify the contact form is displayed"
+        "description": "Verify the form is cleared"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the invoice preview returns to its initial state"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC039",
+    "title": "Submit a support request successfully",
+    "description": "A visitor can send a support request through the contact form and see a confirmation status afterward.",
+    "category": "Contact Support Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the full name field with Jordan Smith"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with jordan.smith@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message field with I need help with the invoice PDF export."
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a submission confirmation or feedback status is visible"
       }
     ],
     "priority": "Low"
   },
   {
     "id": "TC040",
-    "title": "Open the contact page and review support options",
-    "description": "A visitor can open the contact page and see the available support contact information and form content.",
+    "title": "Require a name before sending a message",
+    "description": "A visitor cannot submit the contact form without providing a name and sees a validation state instead of a successful submission.",
     "category": "Contact Support Form",
     "steps": [
       {
@@ -1513,12 +1713,119 @@
         "description": "Navigate to /contact"
       },
       {
-        "type": "assertion",
-        "description": "Verify the support form is displayed"
+        "type": "action",
+        "description": "Fill in the email field with jordan.smith@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message field with I need help with the invoice PDF export."
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
       },
       {
         "type": "assertion",
-        "description": "Verify support contact information is visible"
+        "description": "Verify a validation error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a submission confirmation or feedback status is not visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC041",
+    "title": "Require an email address before sending a message",
+    "description": "A visitor cannot submit the contact form without providing an email address and sees a validation state instead of a successful submission.",
+    "category": "Contact Support Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the full name field with Jordan Smith"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message field with I need help with the invoice PDF export."
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a submission confirmation or feedback status is not visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC042",
+    "title": "Require a message before sending a request",
+    "description": "A visitor cannot submit the contact form without a message and sees a validation state instead of a successful submission.",
+    "category": "Contact Support Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the full name field with Jordan Smith"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with jordan.smith@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a submission confirmation or feedback status is not visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC043",
+    "title": "Preserve entered support details before submission",
+    "description": "A visitor can type support details into the form and keep them visible before submitting so the request can be reviewed first.",
+    "category": "Contact Support Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the full name field with Jordan Smith"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with jordan.smith@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message field with I need help with the invoice PDF export."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the support form retains the entered details"
       }
     ],
     "priority": "Low"
