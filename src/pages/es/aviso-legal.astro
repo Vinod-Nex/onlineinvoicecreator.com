@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Aviso Legal – Información General y Titularidad';
+const description = 'Información general y condiciones de titularidad del servicio Online Invoice Creator conforme al artículo 10 de la Ley LSSI-CE de España.';
+const canonical = 'https://onlineinvoicecreator.com/es/aviso-legal';
+const locale = 'es';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: getRouteUrl('home', locale) },
+  { label: 'Aviso Legal', href: getRouteUrl('aviso-legal', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'es',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-es-aviso-legal.png"
+  ogImageAlt="Aviso Legal – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        <span>Cumplimiento Normativo LSSI-CE</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Aviso Legal
+      </h1>
+
+      <p class="text-xs sm:text-sm text-mute">
+        <!-- verificar: actualizar fecha y datos de contacto oficiales -->
+        Última actualización: 07 de noviembre de 2026 · Información general conforme al Art. 10 de la Ley 34/2002 (LSSI-CE)
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <!-- verificar: confirmar datos identificativos del prestador del servicio -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">1. Datos Identificativos del Prestador del Servicio</h2>
+        <p>
+          En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se ponen a disposición de los usuarios los datos identificativos y de contacto relativos a la titularidad de este sitio web:
+        </p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li><strong>Denominación comercial:</strong> Online Invoice Creator</li>
+          <li><strong>Dominio web:</strong> https://onlineinvoicecreator.com</li>
+          <li><strong>Correo electrónico de contacto:</strong> support@onlineinvoicecreator.com</li>
+          <!-- verificar: añadir NIF/CIF o razón social de la entidad operadora si es una sociedad mercantil constituida -->
+          <li><strong>Actividad principal:</strong> Prestación de herramientas informáticas y utilidades web de libre acceso para la generación y confección de comprobantes en PDF.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">2. Objeto y Condiciones Generales de Uso</h2>
+        <p>
+          El presente Aviso Legal regula el acceso, navegación y uso del portal web Online Invoice Creator. El acceso al sitio web atribuye la condición de usuario e implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en este documento.
+        </p>
+        <p>
+          El usuario se compromete a hacer un uso diligente, correcto y lícito de los servicios y contenidos facilitados en el portal, absteniéndose de emplearlos para actividades ilícitas, contrarias a la buena fe o al orden público.
+        </p>
+      </section>
+
+      <!-- verificar: revisar el alcance de la exención de responsabilidad civil y fiscal -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">3. Carácter Informativo y Exención de Responsabilidad Legal o Fiscal</h2>
+        <p>
+          Los documentos, formularios, plantillas y archivos en PDF elaborados mediante las herramientas de esta página tienen fines exclusivamente informativos, civiles y comerciales entre las partes que los suscriben.
+        </p>
+        <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200 space-y-1">
+          <p class="font-bold">Información general, no es asesoramiento legal ni fiscal:</p>
+          <p>
+            Online Invoice Creator no es una asesoría contable ni jurídica. El software no emite facturas electrónicas oficiales homologadas ante la Agencia Tributaria en España ni comprobantes fiscales digitales por internet (CFDI) válidos ante el Servicio de Administración Tributaria (SAT) en México.
+          </p>
+        </div>
+        <p>
+          El titular del sitio declina toda responsabilidad derivada del uso erróneo, incompleto, inexacto o no conforme a la normativa tributaria aplicable de los documentos descargados por el usuario.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">4. Propiedad Intelectual e Industrial</h2>
+        <p>
+          Todos los derechos de propiedad intelectual sobre el código fuente, la arquitectura de navegación, interfaces gráficas, diseño visual, logotipos y textos explicativos son titularidad exclusiva de Online Invoice Creator o de sus licenciantes legítimos.
+        </p>
+        <p>
+          Queda expresamente prohibida la reproducción total o parcial de los contenidos de este sitio web con fines comerciales o de lucro directo sin autorización previa por escrito.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">5. Legislación Aplicable y Jurisdicción</h2>
+        <p>
+          <!-- verificar: ratificar fuero competente según domicilio del titular o normativa comunitaria europea -->
+          Para la resolución de cualquier controversia o cuestión litigiosa relativa a este sitio web o a las actividades en él desarrolladas, será de aplicación la legislación española y europea correspondiente, sometiéndose las partes a los juzgados y tribunales competentes con arreglo a derecho.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

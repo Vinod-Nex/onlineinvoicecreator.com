@@ -1,0 +1,380 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SpanishReceiptForm from '../../components/SpanishReceiptForm.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Generador de Recibos Gratis – Crear y Descargar en PDF';
+const description = 'Genera recibos de pago gratis online. Completa los datos, visualiza el resultado y descarga tu PDF al instante. Sin registro y sin marca de agua.';
+const canonical = 'https://onlineinvoicecreator.com/es/generador-de-recibos';
+const locale = 'es';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: getRouteUrl('home', locale) },
+  { label: 'Generador de Recibos', href: getRouteUrl('receipt', locale) },
+];
+
+const faqItems = [
+  {
+    question: '¿Qué es un generador de recibos?',
+    answer: 'Un generador de recibos es una herramienta digital que permite crear comprobantes de pago profesionales en formato PDF de manera rápida. Te permite registrar los datos de quien paga, quien cobra, el concepto del servicio o producto y el importe exacto. El documento final sirve para justificar formalmente la liquidación de una operación económica entre ambas partes.',
+  },
+  {
+    question: '¿Hay un generador de recibos gratis y sin registro?',
+    answer: 'Sí, Online Invoice Creator ofrece un generador de recibos completamente gratuito que no requiere registro, inicio de sesión ni suscripciones. Puedes ingresar desde cualquier navegador web, rellenar los datos de tu comprobante, verificar la vista previa en tiempo real y descargar el archivo PDF de inmediato. No aplicamos límites de descarga ni añadimos marcas de agua molestas.',
+  },
+  {
+    question: '¿Cómo hacer un recibo de pago?',
+    answer: 'Para hacer un recibo de pago, selecciona tu país para configurar la moneda y el formato adecuado. Completa los nombres y números de identificación fiscal de quien emite y quien recibe el dinero. Escribe la fecha, el importe numérico, la forma de pago utilizada y la descripción del concepto. Por último, añade tu firma y descarga el comprobante en PDF.',
+  },
+  {
+    question: '¿Qué debe incluir un recibo?',
+    answer: 'Un recibo de pago completo debe incluir la fecha y lugar de emisión, la identificación con documento fiscal de ambas partes, el concepto detallado de la operación y el importe total en números y en letras. Además, es recomendable señalar el método de abono acordado, la referencia de pago y la firma o sello de quien percibe los fondos para acreditar conformidad.',
+  },
+  {
+    question: '¿Cuál es la diferencia entre factura y recibo?',
+    answer: 'Una factura es un documento mercantil y tributario obligatorio que desglosa impuestos para la declaración fiscal ante la autoridad correspondiente. Por el contrario, un recibo es un comprobante de liquidación dineraria que acredita que una deuda o compromiso económico ha sido pagado satisfactoriamente. El recibo no sustituye a la factura cuando esta es exigible por la legislación tributaria aplicable.',
+  },
+  {
+    question: '¿Un recibo hecho aquí es válido?',
+    answer: 'Sí, el recibo generado tiene plena validez civil y probatoria como constancia fehaciente de pago entre particulares, autónomos y empresas. Cumple la función de justificar que los fondos fueron transferidos o entregados debidamente. Sin embargo, no constituye una factura electrónica oficial con validez fiscal ante la Agencia Tributaria en España ni ante el SAT mediante CFDI en México.',
+  },
+  {
+    question: '¿Sirve para México, España, Argentina o Colombia?',
+    answer: 'Sí, la herramienta está adaptada para México, España, Argentina, Colombia, Chile, Perú y otros países hispanohablantes. Al seleccionar tu país en el menú superior, el generador ajusta automáticamente la divisa local, la estructura de identificación fiscal (como RFC, NIF, CUIT o NIT), las normas de puntuación numérica, el tamaño de papel y la conversión del importe en letras.',
+  },
+  {
+    question: '¿Puedo descargar el recibo en PDF?',
+    answer: 'Sí, puedes descargar el recibo en formato PDF estándar de alta definición listo para imprimir o enviar digitalmente. El motor de exportación procesa el documento localmente respetando el tamaño de página configurado (A4 o Carta) y codificando correctamente todos los caracteres especiales en español. También dispones de una opción rápida para exportar el comprobante como imagen PNG.',
+  },
+  {
+    question: '¿Puedo añadir mi logo?',
+    answer: 'Sí, tienes la posibilidad de subir el logotipo de tu negocio o actividad profesional para personalizar el comprobante. La imagen se inserta de forma instantánea en la cabecera del documento y se almacena únicamente en la memoria local de tu navegador. Tu archivo gráfico nunca se sube a servidores externos, garantizando rapidez y total privacidad de tu identidad visual.',
+  },
+  {
+    question: '¿Guardan mis datos?',
+    answer: 'No, no guardamos ninguna información personal ni financiera en nuestros servidores. Todo el procesamiento de datos, cálculos numéricos y generación de archivos PDF ocurre íntegramente dentro de tu navegador web mediante tecnologías del lado del cliente. Los borradores opcionales permanecen guardados en el almacenamiento local de tu propio dispositivo hasta que decidas borrarlos de manera definitiva.',
+  },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: true,
+  breadcrumbs,
+  faqItems,
+  inLanguage: 'es',
+  webAppOptions: {
+    name: 'Generador de Recibos Gratis en PDF',
+    description,
+    url: canonical,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    features: [
+      'Conversión de importe en letras automático en español',
+      'Configuración para España, México, Argentina, Colombia, Chile y Perú',
+      'Código QR de pago SEPA EPC y bloque para transferencias bancarias',
+      'Exportación en PDF y PNG sin marcas de agua',
+      'Privacidad total en el navegador de tu dispositivo',
+    ],
+  },
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-es-generador-de-recibos.png"
+  ogImageAlt="Generador de Recibos Gratis – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 sm:space-y-14">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Hero Header -->
+    <header class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span>Sin Registro · Sin Marcas de Agua · Descarga Inmediata</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-ink font-display">
+        Generador de Recibos Gratis
+      </h1>
+
+      <p class="text-base sm:text-lg text-mute leading-relaxed max-w-2xl mx-auto">
+        Crea tu recibo de pago online de forma sencilla y profesional. Selecciona tu país, completa los campos y obtén el PDF con el importe en letras automático.
+      </p>
+    </header>
+
+    <!-- Interactive Generator Component -->
+    <section id="herramienta-recibo" class="scroll-mt-6">
+      <SpanishReceiptForm />
+    </section>
+
+    <!-- Legal Disclaimers & Notices -->
+    <!-- verificar: aviso sobre normativa de facturación y diferencias entre recibo y factura -->
+    <aside class="max-w-4xl mx-auto rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 text-xs text-mute leading-relaxed">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <div class="space-y-1">
+          <p class="font-bold text-ink">Aviso Legal y Fiscal Importante</p>
+          <p>
+            Esta herramienta genera documentos en formato PDF para acreditar el pago y la entrega de cantidades dinerarias entre partes. Un recibo certifica la liquidación de una deuda, pero no sustituye a una factura tributaria cuando esta sea obligatoria. En México, este documento no produce un comprobante fiscal digital por internet (CFDI ante el SAT). En España, no sustituye a la factura reglamentaria ni a los sistemas de facturación electrónica verificables.
+          </p>
+          <p class="text-[11px] text-mute/80">
+            <!-- verificar: verificar requisitos tributarios en la Agencia Tributaria y SAT -->
+            Información general, no es asesoramiento legal ni fiscal.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Comprehensive Editorial Content (800 - 1200 words) -->
+    <article class="max-w-4xl mx-auto space-y-10 text-mute text-sm leading-relaxed border-t border-hairline pt-10">
+      
+      <!-- H2 Section 1 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Generador de Recibos de Pago Gratis Online
+        </h2>
+        <p>
+          Contar con un justificante claro de las transacciones comerciales es fundamental para cualquier autónomo, arrendador o pequeño empresario. Nuestro generador de recibos de pago gratis online te permite redactar un comprobante en cuestión de segundos, sin necesidad de instalar programas adicionales ni crear cuentas de usuario. La herramienta se ejecuta por completo en tu navegador, garantizando la máxima rapidez y protegiendo tu información confidencial.
+        </p>
+      </section>
+
+      <!-- H2 Section 2 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Cómo Hacer un Recibo de Pago en 4 Pasos
+        </h2>
+        <p>
+          Generar un recibo de pago profesional y válido requiere pocos minutos cuando dispones de una estructura clara. Sigue estos cuatro pasos para emitir tu comprobante sin errores desde tu navegador:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">1</span>
+              Configura tu país y preferencias
+            </h3>
+            <p class="text-xs">
+              Selecciona tu país en la barra superior. Esto ajustará al instante la moneda (EUR, MXN, ARS, COP, CLP, PEN), los separadores numéricos y el tamaño de papel (A4 o Carta para México). También adaptará la etiqueta de identificación fiscal según tu territorio (NIF/CIF en España, RFC en México, CUIT en Argentina, NIT en Colombia, RUT en Chile o RUC en Perú).
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">2</span>
+              Completa emisor y pagador
+            </h3>
+            <p class="text-xs">
+              Escribe los nombres completos de quien recibe el abono (emisor) y de quien realiza el desembolso (pagador o cliente). Añade los números de identificación fiscal respectivos y las direcciones. Si cuentas con un logotipo comercial, súbelo para personalizar el encabezado del documento con tu identidad visual.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">3</span>
+              Detalla el concepto e importe
+            </h3>
+            <p class="text-xs">
+              Describe de forma concreta el motivo del pago: anticipos de servicios, mensualidades de alquiler o venta de artículos. Introduce el importe numérico en la casilla de valor. Nuestra aplicación convertirá de manera automática esa cantidad a su expresión completa en letras según la divisa seleccionada, evitando discrepancias.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">4</span>
+              Elige pago y descarga tu PDF
+            </h3>
+            <p class="text-xs">
+              Indica el método liquidado: efectivo, transferencia bancaria o tarjeta. Si cobras por transferencia en España, puedes habilitar el código QR estándar SEPA EPC. Para México o Argentina, puedes indicar tu clave CLABE interbancaria, CBU o Alias. Revisa la vista previa, añade tu firma si lo deseas y pulsa en Descargar PDF para obtener tu archivo limpio y sin marcas de agua.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- H2 Section 3 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Qué Debe Incluir un Recibo de Pago Completo
+        </h2>
+        <p>
+          Para que un recibo cumpla su propósito de salvaguarda legal y contable, debe contener elementos indispensables:
+        </p>
+
+        <ol class="list-decimal pl-5 space-y-2">
+          <li><strong>Título visible del documento:</strong> Debe indicar con total claridad que se trata de un Recibo de Pago.</li>
+          <li><strong>Numeración consecutiva:</strong> Un número correlativo y serie de emisión que facilite la localización contable.</li>
+          <li><strong>Fecha de libramiento:</strong> El día, mes y año exactos en que se realiza la entrega efectiva del dinero.</li>
+          <li><strong>Datos de las partes:</strong> Nombre completo, número de identificación tributaria (RFC, NIF, CUIT, NIT) y domicilio.</li>
+          <li><strong>Declaración expresa de cobro:</strong> La fórmula contractual donde el receptor manifiesta haber recibido a entera satisfacción la cantidad dineraria.</li>
+          <li><strong>Importe en números y en letras:</strong> La cifra numérica clara acompañada del importe transcrito en palabras para evitar manipulaciones.</li>
+          <li><strong>Concepto específico del pago:</strong> El detalle de la prestación, contrato de alquiler o venta liquidada.</li>
+          <li><strong>Método de pago:</strong> Identificación del medio utilizado (efectivo, transferencia o tarjeta).</li>
+          <li><strong>Firma del receptor:</strong> La rúbrica acreditando la conformidad de la liquidación de la obligación.</li>
+        </ol>
+      </section>
+
+      <!-- H2 Section 4 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Ejemplo Práctico de Recibo de Pago
+        </h2>
+        <p>
+          Imagina una operación habitual entre un profesional independiente y su cliente en la que se formaliza un pago por servicios profesionales:
+        </p>
+
+        <div class="p-5 rounded-2xl bg-card border border-hairline font-mono text-xs space-y-2 text-ink shadow-2xs">
+          <div class="flex justify-between border-b border-hairline pb-2 font-bold">
+            <span>RECIBO N.º REC-2026-0045</span>
+            <span>Fecha: 15/03/2026</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-[11px]">
+            <div>
+              <span class="text-mute">Emisor:</span> Javier Gómez Martínez (NIF: 12345678Z)<br />
+              Calle Alcalá 120, Madrid, España
+            </div>
+            <div>
+              <span class="text-mute">Pagador:</span> Soluciones Digitales S.L. (CIF: B-98765432)<br />
+              Paseo de la Castellana 45, Madrid, España
+            </div>
+          </div>
+          <div class="py-2 border-y border-hairline text-xs font-sans italic bg-ground/50 p-3 rounded-lg">
+            «Recibí de Soluciones Digitales S.L. la cantidad de 650,00 € (seiscientos cincuenta euros con cero céntimos) por concepto de servicios de auditoría y soporte informático del mes de febrero de 2026.»
+          </div>
+          <div class="flex justify-between items-center pt-2 text-[11px]">
+            <span><strong>Forma de pago:</strong> Transferencia bancaria (Ref. TRANSF-88412)</span>
+            <span class="text-emerald-600 font-bold">Estado: Pagado en su totalidad</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- H2 Section 5 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Recibo vs Factura: Conoce las Diferencias Esenciales
+        </h2>
+        <p>
+          Muchas personas confunden el recibo con la factura. Aunque ambos son documentos mercantiles habituales, tienen naturalezas jurídicas y fiscales muy distintas:
+        </p>
+        <p>
+          <strong>El recibo</strong> es un comprobante de liquidación y descargo. Su función principal consiste en demostrar fehacientemente que una suma de dinero ha sido entregada y recibida. No genera obligaciones tributarias directas ni acredita la deducción fiscal del gasto si la legislación exige factura reglamentaria.
+        </p>
+        <p>
+          <strong>La factura</strong> es un documento tributario oficial con requisitos formales estrictos establecidos por agencias tributarias (como la Agencia Tributaria en España, el SAT en México o la AFIP en Argentina). La factura desglosa los impuestos aplicables (como el IVA) y permite la deducción fiscal del gasto ante las autoridades hacendarias.
+        </p>
+        <p>
+          En resumen: la factura acredita la venta o servicio a efectos fiscales, mientras que el recibo acredita la extinción del pago o entrega dineraria.
+        </p>
+      </section>
+
+      <!-- H2 Section 6 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Conversión Automática de Importe en Letra
+        </h2>
+        <p>
+          La inclusión del importe en letra es una práctica tradicional recomendada para evitar manipulaciones o errores de lectura en las cifras numéricas. Cuando un recibo contiene discrepancias entre números y letras, la norma mercantil habitual otorga prioridad a la cantidad expresada por escrito en palabras.
+        </p>
+        <p>
+          Nuestra aplicación incorpora un algoritmo avanzado de conversión gramatical que transforma de forma inmediata cualquier número a texto en español neutro correcto. Contempla declinaciones de género, uso de centenas, millones y la denominación propia de la moneda de cada país (euros con céntimos, pesos mexicanos con centavos, pesos argentinos, pesos colombianos, soles peruanos o pesos chilenos). Así obtienes un comprobante blindado contra dudas de interpretación.
+        </p>
+      </section>
+
+      <!-- H2 Section 7 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Para Quién Sirve Este Generador de Recibos
+        </h2>
+        <p>
+          Nuestra plataforma está concebida para atender las necesidades cotidianas de emisión documental de diversos perfiles:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>Autónomos y trabajadores independientes:</strong> Justifica anticipos y honorarios por servicios profesionales ante clientes particulares o empresas.</li>
+          <li><strong>Pequeños negocios y talleres:</strong> Emite comprobantes de entrega a cuenta o cobros en efectivo en tu mostrador de manera ágil.</li>
+          <li><strong>Propietarios de inmuebles en alquiler:</strong> Confecciona justificantes mensuales de arrendamiento para inquilinos de viviendas o locales comerciales.</li>
+          <li><strong>Vendedores online y creadores:</strong> Entrega comprobantes limpios en PDF para confirmar transferencias directas sin depender de intermediarios.</li>
+        </ul>
+      </section>
+
+      <!-- H2 Section 8 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Privacidad y Seguridad Garantizada en tu Dispositivo
+        </h2>
+        <p>
+          En Online Invoice Creator protegemos la confidencialidad de tu facturación y los datos personales de tus clientes. A diferencia de otras herramientas, nuestro software no envía la información introducida a servidores remotos. 
+        </p>
+        <p>
+          Todos los cálculos, formato de texto y composición gráfica del PDF ocurren dentro del propio navegador de tu dispositivo. Tus datos no se transfieren a terceros ni se emplean con fines publicitarios. Si guardas un borrador, permanece en el almacenamiento local de tu navegador y puedes borrarlo cuando desees pulsando en <em>Borrar mis datos</em>.
+        </p>
+      </section>
+
+      <!-- H2 Section 9 -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+          Consejos Prácticos para Cobrar a Tiempo
+        </h2>
+        <p>
+          Mantener un flujo de caja saludable en tu actividad económica depende de buenos hábitos administrativos. Aplica estos consejos:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+          <div class="p-3.5 rounded-xl bg-card border border-hairline text-xs space-y-1">
+            <strong class="text-ink">1. Emite el comprobante sin demoras:</strong>
+            <p>Entrega el recibo inmediatamente después de prestar el servicio. La inmediatez refuerza la prioridad de pago.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-card border border-hairline text-xs space-y-1">
+            <strong class="text-ink">2. Especifica métodos de pago claros:</strong>
+            <p>Facilita el desembolso proporcionando instrucciones precisas, como tu código IBAN con QR en Europa o tu clave CLABE o Alias en Latinoamérica.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-card border border-hairline text-xs space-y-1">
+            <strong class="text-ink">3. Fija fechas de vencimiento precisas:</strong>
+            <p>Evita frases ambiguas y establece días concretos en el calendario para el vencimiento de facturas y recibos.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-card border border-hairline text-xs space-y-1">
+            <strong class="text-ink">4. Mantén copias organizadas:</strong>
+            <p>Guarda siempre una copia en PDF de los recibos emitidos para un control riguroso de tu contabilidad personal o societaria.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- H2 Section 10: FAQ -->
+      <section class="space-y-6 pt-6 border-t border-hairline">
+        <div class="space-y-2">
+          <h2 class="text-2xl font-bold tracking-tight text-ink font-display">
+            Preguntas Frecuentes sobre el Generador de Recibos
+          </h2>
+          <p class="text-xs text-mute">
+            Respuestas a las dudas más comunes sobre la emisión de comprobantes, requisitos legales y funcionamiento técnico.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          {faqItems.map((faq) => (
+            <details class="group rounded-xl bg-card border border-hairline p-4 transition-all">
+              <summary class="flex items-center justify-between cursor-pointer font-bold text-ink text-sm select-none list-none">
+                <span>{faq.question}</span>
+                <span class="text-mute group-open:rotate-180 transition-transform">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </span>
+              </summary>
+              <p class="mt-3 text-xs text-mute leading-relaxed pt-2 border-t border-hairline">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

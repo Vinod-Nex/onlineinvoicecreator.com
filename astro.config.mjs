@@ -192,6 +192,7 @@ export default defineConfig({
             const urlRegex = /<url>([\s\S]*?)<\/url>/g;
             const englishUrls = [];
             const ptBrUrls = [];
+            const esUrls = [];
             let match;
             while ((match = urlRegex.exec(clean)) !== null) {
               const inner = match[1];
@@ -202,6 +203,8 @@ export default defineConfig({
                 const block = `  <url>\n    <loc>${loc}</loc>\n  </url>`;
                 if (loc.includes('/pt-br')) {
                   ptBrUrls.push({ loc, block });
+                } else if (loc.includes('/es')) {
+                  esUrls.push({ loc, block });
                 } else {
                   englishUrls.push({ loc, block });
                 }
@@ -242,6 +245,16 @@ export default defineConfig({
               'https://onlineinvoicecreator.com/pt-br/termos',
             ];
 
+            const esOrder = [
+              'https://onlineinvoicecreator.com/es',
+              'https://onlineinvoicecreator.com/es/generador-de-recibos',
+              'https://onlineinvoicecreator.com/es/aviso-legal',
+              'https://onlineinvoicecreator.com/es/sobre',
+              'https://onlineinvoicecreator.com/es/contacto',
+              'https://onlineinvoicecreator.com/es/privacidad',
+              'https://onlineinvoicecreator.com/es/terminos',
+            ];
+
             const sortedBlocks = [];
             for (const url of englishOrder) {
               const found = englishUrls.find((u) => u.loc === url);
@@ -257,6 +270,14 @@ export default defineConfig({
             }
             for (const u of ptBrUrls) {
               if (!ptBrOrder.includes(u.loc)) sortedBlocks.push(u.block);
+            }
+
+            for (const url of esOrder) {
+              const found = esUrls.find((u) => u.loc === url);
+              if (found) sortedBlocks.push(found.block);
+            }
+            for (const u of esUrls) {
+              if (!esOrder.includes(u.loc)) sortedBlocks.push(u.block);
             }
 
             return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${sortedBlocks.join('\n')}\n</urlset>\n`;

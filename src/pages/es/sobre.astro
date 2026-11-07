@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Sobre Nosotros – Herramientas Financieras Privadas';
+const description = 'Conoce Online Invoice Creator: herramientas financieras gratuitas para autónomos y pequeñas empresas que funcionan 100% en el navegador.';
+const canonical = 'https://onlineinvoicecreator.com/es/sobre';
+const locale = 'es';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: getRouteUrl('home', locale) },
+  { label: 'Sobre Nosotros', href: getRouteUrl('about', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'es',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-es-sobre.png"
+  ogImageAlt="Sobre Nosotros – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span>Nuestra Misión y Filosofía de Privacidad</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Sobre Nosotros
+      </h1>
+
+      <p class="text-base text-mute leading-relaxed">
+        Desarrollamos utilidades financieras sencillas, gratuitas y respetuosas con la privacidad para autónomos, profesionales y pequeñas empresas en el mundo hispanohablante.
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Nuestra Misión</h2>
+        <p>
+          Online Invoice Creator nació con un propósito directo: simplificar la creación de comprobantes de pago y facturas cotidianas sin barreras artificiales. En la actualidad, la mayoría de los servicios en línea exigen registros obligatorios, correos de confirmación, pagos mensuales recurrentes o insertan marcas de agua gigantescas en tus documentos.
+        </p>
+        <p>
+          Creemos que confeccionar un justificante de pago en PDF para tu cliente debe ser tan simple y rápido como escribir en una hoja en blanco, sin intermediarios ni recopilación de información comercial confidencial.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Principios Fundamentales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm">100% en tu Navegador</h3>
+            <p class="text-xs">
+              No enviamos tus datos a servidores externos. Todo el motor de cálculo y renderizado gráfico se ejecuta localmente en la memoria de tu dispositivo.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm">Sin Registro ni Cuentas</h3>
+            <p class="text-xs">
+              Acceso libre e inmediato. No solicitamos tarjetas de crédito ni te obligamos a recordar contraseñas para descargar tus documentos en PDF.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-card border border-hairline space-y-2">
+            <h3 class="font-bold text-ink text-sm">Adaptado a tu País</h3>
+            <p class="text-xs">
+              Diseñado con rigor para España, México, Argentina, Colombia, Chile y Perú, contemplando divisas locales, identificaciones fiscales y conversión en letras.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">Compromiso con la Calidad</h2>
+        <p>
+          Actualizamos continuamente nuestro código para garantizar compatibilidad con los estándares web modernos, accesibilidad visual y renderizado tipográfico de alta fidelidad para documentos impresos.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

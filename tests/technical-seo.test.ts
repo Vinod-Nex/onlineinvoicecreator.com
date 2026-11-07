@@ -249,8 +249,8 @@ describe('Phase 31: Technical SEO Audit & Crawl Validation', () => {
       const relPath = path.relative(distDir, file);
       const isNoIndex = content.includes('noindex');
       if (isNoIndex) continue;
-      // pt-BR pages without an English equivalent (e.g. modelo-de-recibo) only emit pt-BR and x-default
-      if (relPath.includes('modelo-de-recibo')) continue;
+      // Localized pages without an English equivalent (e.g. modelo-de-recibo, aviso-legal) only emit local and x-default
+      if (relPath.includes('modelo-de-recibo') || relPath.includes('aviso-legal')) continue;
 
       const hreflangMatches = [
         ...content.matchAll(

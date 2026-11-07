@@ -13,23 +13,59 @@ interface Props {
 const { currentPath = Astro.url.pathname.replace(/\/$/, '') || '/', locale = DEFAULT_LOCALE } = Astro.props;
 const d = getDictionary(locale);
 
-const tools = [
-  {
-    name: d.tools.invoiceGenerator,
-    href: getRouteUrl('home', locale),
-    description: d.tools.invoiceGeneratorDesc,
-  },
-  {
-    name: d.tools.receiptGenerator,
-    href: getRouteUrl('receipt', locale),
-    description: d.tools.receiptGeneratorDesc,
-  },
-  {
-    name: d.tools.rentReceiptGenerator,
-    href: getRouteUrl('rent-receipt', locale),
-    description: d.tools.rentReceiptGeneratorDesc,
-  },
-];
+const tools = locale === 'pt-br'
+  ? [
+      {
+        name: d.tools.invoiceGenerator,
+        href: getRouteUrl('home', 'pt-br'),
+        description: d.tools.invoiceGeneratorDesc,
+      },
+      {
+        name: d.tools.receiptGenerator,
+        href: getRouteUrl('receipt', 'pt-br'),
+        description: d.tools.receiptGeneratorDesc,
+      },
+      {
+        name: d.tools.rentReceiptGenerator,
+        href: getRouteUrl('rent-receipt', 'pt-br'),
+        description: d.tools.rentReceiptGeneratorDesc,
+      },
+    ]
+  : locale === 'es'
+  ? [
+      {
+        name: 'Generador de recibos',
+        href: getRouteUrl('receipt', 'es'),
+        description: 'Crea y descarga recibos de pago en PDF al instante',
+      },
+      {
+        name: 'Factura y comprobante',
+        href: `${getRouteUrl('home', 'es')}#workspace-recibos`,
+        description: 'Documentos comerciales y de cobro en tu navegador',
+      },
+      {
+        name: 'Recibo de alquiler',
+        href: `${getRouteUrl('receipt', 'es')}?tipo=alquiler`,
+        description: 'Comprobante de arrendamiento mensual con fianza',
+      },
+    ]
+  : [
+      {
+        name: d.tools.invoiceGenerator,
+        href: getRouteUrl('home', locale),
+        description: d.tools.invoiceGeneratorDesc,
+      },
+      {
+        name: d.tools.receiptGenerator,
+        href: getRouteUrl('receipt', locale),
+        description: d.tools.receiptGeneratorDesc,
+      },
+      {
+        name: d.tools.rentReceiptGenerator,
+        href: getRouteUrl('rent-receipt', locale),
+        description: d.tools.rentReceiptGeneratorDesc,
+      },
+    ];
 
 const templates = locale === 'pt-br'
   ? [
@@ -37,6 +73,13 @@ const templates = locale === 'pt-br'
       { name: 'Recibo de aluguel', href: getRouteUrl('rent-receipt', 'pt-br'), tag: 'Imóvel' },
       { name: 'Recibo de venda', href: `${getRouteUrl('receipt', 'pt-br')}?tipo=venda`, tag: 'Comércio' },
       { name: 'Modelo de recibo', href: getRouteUrl('receipt-template', 'pt-br'), tag: 'Exemplo' },
+    ]
+  : locale === 'es'
+  ? [
+      { name: 'Recibo de pago', href: getRouteUrl('receipt', 'es'), tag: 'Popular' },
+      { name: 'Recibo de alquiler', href: `${getRouteUrl('receipt', 'es')}?tipo=alquiler`, tag: 'Inmueble' },
+      { name: 'Factura simple', href: `${getRouteUrl('home', 'es')}#workspace-recibos`, tag: 'Comercial' },
+      { name: 'Factura con IVA', href: `${getRouteUrl('home', 'es')}#workspace-recibos`, tag: 'IVA' },
     ]
   : [
       { name: d.templatesMenu.freelancerInvoices, href: getRouteUrl('invoice-freelance', locale), tag: d.templatesMenu.tagPopular },
@@ -105,16 +148,18 @@ const templates = locale === 'pt-br'
       </a>
 
       <!-- Rent Receipt Link -->
-      <a
-        href={getRouteUrl('rent-receipt', locale)}
-        class={`px-2.5 xl:px-3 py-1.5 text-sm font-semibold rounded-full transition-colors ${
-          currentPath === getRouteUrl('rent-receipt', locale)
-            ? 'bg-surface-soft text-primary dark:bg-surface-elevated'
-            : 'text-ink hover:text-primary hover:bg-surface-soft dark:hover:bg-surface-elevated'
-        }`}
-      >
-        {d.nav.rentReceipt}
-      </a>
+      {locale !== 'es' && (
+        <a
+          href={getRouteUrl('rent-receipt', locale)}
+          class={`px-2.5 xl:px-3 py-1.5 text-sm font-semibold rounded-full transition-colors ${
+            currentPath === getRouteUrl('rent-receipt', locale)
+              ? 'bg-surface-soft text-primary dark:bg-surface-elevated'
+              : 'text-ink hover:text-primary hover:bg-surface-soft dark:hover:bg-surface-elevated'
+          }`}
+        >
+          {d.nav.rentReceipt}
+        </a>
+      )}
 
       <!-- Templates Dropdown (CSS Hover & Focus-Within) -->
       <div class="relative group">
@@ -162,7 +207,7 @@ const templates = locale === 'pt-br'
       </div>
 
       <!-- Blog Link -->
-      {locale !== 'pt-br' && (
+      {locale === 'en' && (
         <a
           href={getRouteUrl('blog', locale)}
           class={`px-2.5 xl:px-3 py-1.5 text-sm font-semibold rounded-full transition-colors ${
@@ -340,7 +385,7 @@ const templates = locale === 'pt-br'
 
           <!-- Bottom Actions -->
           <div class="pt-3 border-t border-hairline space-y-2">
-            {locale !== 'pt-br' && (
+            {locale === 'en' && (
               <a
                 href={getRouteUrl('blog', locale)}
                 class="flex items-center justify-between text-xs font-semibold text-ink hover:text-primary p-1"
@@ -349,7 +394,7 @@ const templates = locale === 'pt-br'
                 <span>→</span>
               </a>
             )}
-            <a href={`${getRouteUrl('home', locale)}#invoice-workspace`} id="mobile-btn-create-invoice" class="btn btn-cobalt w-full text-xs h-10 shadow-sm">
+            <a href={`${getRouteUrl('home', locale)}#workspace-recibos`} id="mobile-btn-create-invoice" class="btn btn-cobalt w-full text-xs h-10 shadow-sm">
               {d.nav.createFreeInvoice}
             </a>
           </div>
@@ -382,10 +427,12 @@ const templates = locale === 'pt-br'
         window.location.pathname === '/' ||
         window.location.pathname === '' ||
         window.location.pathname === '/pt-br' ||
-        window.location.pathname === '/pt-br/';
+        window.location.pathname === '/pt-br/' ||
+        window.location.pathname === '/es' ||
+        window.location.pathname === '/es/';
       if (isHome) {
         e.preventDefault();
-        const ws = document.getElementById('invoice-workspace');
+        const ws = document.getElementById('workspace-recibos') || document.getElementById('invoice-workspace');
         if (ws) {
           ws.scrollIntoView({ behavior: 'smooth' });
         }

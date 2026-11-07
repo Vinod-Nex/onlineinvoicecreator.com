@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Términos y Condiciones de Uso – Servicio Gratuito';
+const description = 'Términos y condiciones del generador de recibos y facturas. Documentos en PDF para fines civiles y mercantiles, sin valor fiscal oficial.';
+const canonical = 'https://onlineinvoicecreator.com/es/terminos';
+const locale = 'es';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: getRouteUrl('home', locale) },
+  { label: 'Términos', href: getRouteUrl('terms', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'es',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-es-terminos.png"
+  ogImageAlt="Términos y Condiciones de Uso – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        <span>Condiciones Generales del Servicio</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Términos y Condiciones de Uso
+      </h1>
+
+      <p class="text-xs sm:text-sm text-mute">
+        Vigencia: 07 de noviembre de 2026 · Uso gratuito para particulares, autónomos y empresas
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">1. Aceptación de los Términos</h2>
+        <p>
+          Al acceder y utilizar el portal Online Invoice Creator, aceptas de forma íntegra los presentes Términos y Condiciones. Si no estás conforme con alguna de estas estipulaciones, debes abstenerte de hacer uso de nuestras herramientas.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">2. Gratuidad y Acceso sin Registro</h2>
+        <p>
+          Nuestras herramientas de generación de recibos, plantillas y documentos comerciales en PDF se proporcionan de manera totalmente gratuita. No exigimos creación de cuentas, contraseñas ni suscripciones periódicas para acceder a la funcionalidad completa del servicio.
+        </p>
+      </section>
+
+      <!-- verificar: confirmar exención de asesoramiento fiscal ante tribunales mercantiles -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">3. Ausencia de Valor Fiscal Oficial y Exención de Asesoramiento</h2>
+        <p>
+          Los documentos generados a través de esta plataforma tienen naturaleza civil, informativa y probatoria de entregas o compromisos económicos entre partes privadas.
+        </p>
+        <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200 space-y-1">
+          <p class="font-bold">Información general, no es asesoramiento legal ni fiscal:</p>
+          <p>
+            Esta herramienta no genera comprobantes fiscales digitales por internet (CFDI) conforme a las exigencias del SAT en México, ni facturas electrónicas con firma digital centralizada reglamentadas por la Agencia Tributaria en España. Corresponde exclusivamente al usuario verificar las obligaciones tributarias vigentes en su respectivo país antes de emitir cualquier comprobante contable.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">4. Responsabilidad sobre los Datos Introducidos</h2>
+        <p>
+          Tú eres el único responsable de la exactitud, veracidad y licitud de la información que introduces en los formularios (nombres, importes, cuentas de pago y conceptos). Online Invoice Creator no revisa, audita ni valida la veracidad del contenido consignado en los documentos generados.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">5. Disponibilidad del Servicio</h2>
+        <p>
+          Nos esforzamos por mantener la plataforma disponible las 24 horas del día. Sin embargo, no podemos garantizar la continuidad ininterrumpida ante labores de mantenimiento, actualizaciones de software o incidencias ajenas a nuestro control. Dado que el servicio opera en tu navegador, te sugerimos descargar y archivar siempre tus archivos PDF en tu propio dispositivo.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">6. Modificaciones de los Términos</h2>
+        <p>
+          Nos reservamos el derecho de actualizar estos términos en cualquier momento para reflejar mejoras en la herramienta o adaptaciones normativas. La versión actualizada siempre estará disponible en esta página.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

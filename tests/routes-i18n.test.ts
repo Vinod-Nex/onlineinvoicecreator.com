@@ -83,7 +83,7 @@ describe('i18n Routes & Localization Architecture Suite', () => {
     it('prefixes non-default locales with /locale/', () => {
       expect(getRouteUrl('home', 'pt-br')).toBe('/pt-br');
       expect(getRouteUrl('receipt', 'pt-br')).toBe('/pt-br/gerador-de-recibo');
-      expect(getRouteUrl('about', 'es')).toBe('/es/sobre-nosotros');
+      expect(getRouteUrl('about', 'es')).toBe('/es/sobre');
       expect(getRouteUrl('privacy', 'fr')).toBe('/fr/confidentialite');
       expect(getRouteUrl('terms', 'de')).toBe('/de/agb');
     });
@@ -189,7 +189,7 @@ describe('i18n Routes & Localization Architecture Suite', () => {
       expect(equivalentPt).toBe('/pt-br/gerador-de-recibo');
 
       const equivalentEs = getLocalizedEquivalentUrl('/about', 'es');
-      expect(equivalentEs).toBe('/es/sobre-nosotros');
+      expect(equivalentEs).toBe('/es/sobre');
 
       const equivalentEn = getLocalizedEquivalentUrl('/fr/a-propos', 'en');
       expect(equivalentEn).toBe('/about');

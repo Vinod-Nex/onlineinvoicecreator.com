@@ -16,6 +16,10 @@ export type RouteKey =
   | 'pt-invoice-generator'
   | 'pt-estimate-generator'
   | 'pt-recibo-mei'
+  | 'es-invoice-generator'
+  | 'es-invoice-template'
+  | 'es-freelance-invoice'
+  | 'es-salary-receipt'
   | 'invoice-freelance'
   | 'invoice-excel'
   | 'contractor-invoice'
@@ -26,6 +30,7 @@ export type RouteKey =
   | 'contact'
   | 'privacy'
   | 'terms'
+  | 'aviso-legal'
   | 'changelog'
   | 'blog'
   | 'blog-freelance'
@@ -51,7 +56,7 @@ export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
   'rent-receipt': {
     en: 'free-rent-receipt-generator',
     'pt-br': 'gerador-de-recibo-de-aluguel',
-    es: 'generador-de-recibos-de-alquiler',
+    es: 'recibo-de-alquiler',
     fr: 'generateur-de-quittance-de-loyer',
     de: 'mietquittung-erstellen',
   },
@@ -82,6 +87,34 @@ export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
     es: 'recibo-autonomo',
     fr: 'recu-auto-entrepreneur',
     de: 'kleinunternehmer-quittung',
+  },
+  'es-invoice-generator': {
+    en: 'invoice-generator-es',
+    'pt-br': 'gerador-de-fatura-es',
+    es: 'generador-de-facturas',
+    fr: 'generateur-de-factures-es',
+    de: 'rechnungs-generator-es',
+  },
+  'es-invoice-template': {
+    en: 'invoice-template-es',
+    'pt-br': 'modelo-de-fatura-es',
+    es: 'plantilla-de-factura',
+    fr: 'modele-de-facture-es',
+    de: 'rechnungsvorlage-es',
+  },
+  'es-freelance-invoice': {
+    en: 'freelance-invoice-es',
+    'pt-br': 'fatura-autonomo-es',
+    es: 'factura-para-autonomos',
+    fr: 'facture-independant-es',
+    de: 'freiberufler-rechnung-es',
+  },
+  'es-salary-receipt': {
+    en: 'salary-receipt-es',
+    'pt-br': 'recibo-salario-es',
+    es: 'recibo-de-sueldo',
+    fr: 'bulletin-paie-es',
+    de: 'gehaltsabrechnung-es',
   },
   'invoice-freelance': {
     en: 'invoice-generator-for-freelancers',
@@ -128,7 +161,7 @@ export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
   about: {
     en: 'about',
     'pt-br': 'sobre',
-    es: 'sobre-nosotros',
+    es: 'sobre',
     fr: 'a-propos',
     de: 'ueber-uns',
   },
@@ -152,6 +185,13 @@ export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
     es: 'terminos',
     fr: 'conditions',
     de: 'agb',
+  },
+  'aviso-legal': {
+    en: 'legal-notice',
+    'pt-br': 'aviso-legal',
+    es: 'aviso-legal',
+    fr: 'mentions-legales',
+    de: 'impressum',
   },
   changelog: {
     en: 'changelog',
@@ -291,7 +331,15 @@ export const BUILT_ROUTES: Record<Locale, Set<RouteKey>> = {
     'privacy',
     'terms',
   ]),
-  es: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
+  es: new Set<RouteKey>([
+    'home',
+    'receipt',
+    'about',
+    'contact',
+    'privacy',
+    'terms',
+    'aviso-legal',
+  ]),
   fr: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
   de: new Set<RouteKey>(['home', 'about', 'contact', 'privacy', 'terms']),
 };

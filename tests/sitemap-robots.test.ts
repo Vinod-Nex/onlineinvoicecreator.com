@@ -157,9 +157,22 @@ describe('Phase 28: Sitemap and robots.txt Configuration', () => {
         expect(content, `Missing in sitemap: ${blogUrl}`).toContain(`<loc>${blogUrl}</loc>`);
       }
 
-      // Count total <url> tags (19 English + 8 Brazilian Portuguese = 27 total indexable pages)
+      // Count total <url> tags (19 English + 8 Brazilian Portuguese + 7 Spanish = 34 total indexable pages)
       const urlCount = (content.match(/<url>/g) || []).length;
-      expect(urlCount).toBe(27);
+      expect(urlCount).toBe(34);
+
+      const expectedSpanishPages = [
+        'https://onlineinvoicecreator.com/es',
+        'https://onlineinvoicecreator.com/es/generador-de-recibos',
+        'https://onlineinvoicecreator.com/es/aviso-legal',
+        'https://onlineinvoicecreator.com/es/sobre',
+        'https://onlineinvoicecreator.com/es/contacto',
+        'https://onlineinvoicecreator.com/es/privacidad',
+        'https://onlineinvoicecreator.com/es/terminos',
+      ];
+      for (const esUrl of expectedSpanishPages) {
+        expect(content, `Missing in sitemap: ${esUrl}`).toContain(`<loc>${esUrl}</loc>`);
+      }
     });
 
     it('formats each entry cleanly with url and loc tags', () => {

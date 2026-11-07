@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getRouteUrl } from '../../i18n/routes';
+import { buildPageSchemaGraph } from '../../lib/schema';
+
+const title = 'Política de Privacidad – Protección de Datos Locales';
+const description = 'Política de privacidad de Online Invoice Creator: procesamiento local en el navegador, sin cuentas y sin almacenamiento de datos en servidores.';
+const canonical = 'https://onlineinvoicecreator.com/es/privacidad';
+const locale = 'es';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: getRouteUrl('home', locale) },
+  { label: 'Privacidad', href: getRouteUrl('privacy', locale) },
+];
+
+const pageSchema = buildPageSchemaGraph({
+  canonicalUrl: canonical,
+  title,
+  description,
+  isHomePage: false,
+  isToolPage: false,
+  breadcrumbs,
+  inLanguage: 'es',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale={locale}
+  schema={pageSchema}
+  ogImage="/og/og-es-privacidad.png"
+  ogImageAlt="Política de Privacidad – Online Invoice Creator"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="space-y-3 pb-6 border-b border-hairline">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+        <span>Compromiso con el RGPD y Principios de Privacidad Iberoamericanos</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-display">
+        Política de Privacidad
+      </h1>
+
+      <p class="text-xs sm:text-sm text-mute">
+        Última actualización: 07 de noviembre de 2026 · Tratamiento seguro exclusivamente en tu navegador
+      </p>
+    </header>
+
+    <article class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-mute leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">1. Arquitectura de Privacidad por Diseño (Client-Side)</h2>
+        <p>
+          En Online Invoice Creator aplicamos un enfoque estricto de privacidad por diseño. Las herramientas de generación de recibos y facturas operan de manera íntegra en el lado del cliente utilizando JavaScript directamente en tu navegador web.
+        </p>
+        <p>
+          Los datos que introduces en los formularios (nombres, documentos fiscales, importes, cuentas bancarias, direcciones o logotipos) <strong>nunca se transmiten a nuestros servidores</strong> ni a sistemas de almacenamiento externos. El cálculo matemático, la conversión a letras y la renderización en PDF o PNG ocurren exclusivamente en la memoria de tu dispositivo.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">2. Marco Normativo Aplicable (RGPD y Normativas de Latinoamérica)</h2>
+        <p>
+          <!-- verificar: ratificar designación de encargado o responsable de tratamiento conforme a la AEPD -->
+          Esta política se redacta en cumplimiento del Reglamento General de Protección de Datos de la Unión Europea (RGPD - Reglamento UE 2016/679) y de la Ley Orgánica 3/2018 (LOPDGDD) en España, así como de los principios rectores de protección de datos personales vigentes en México (LFPDPPP), Argentina (Ley 25.326), Colombia (Ley 1581 de 2012), Chile y Perú.
+        </p>
+        <p>
+          Dado que no recopilamos ni registramos datos de carácter personal relativos a tu facturación o tus clientes, no actuamos como custodios de tus bases de datos documentales.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">3. Uso del Almacenamiento Local (localStorage)</h2>
+        <p>
+          Para tu comodidad, la plataforma ofrece la posibilidad de conservar un borrador de trabajo o guardar tus preferencias de emisión (país seleccionado, moneda o datos de emisor habituales).
+        </p>
+        <p>
+          Esta información se guarda exclusivamente en el <code>localStorage</code> interno de tu navegador web. Tienes en todo momento el control absoluto: puedes eliminar cualquier información guardada pulsando sobre el botón <strong>«Borrar mis datos»</strong> presente en la herramienta o limpiando el historial de navegación de tu dispositivo.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">4. Cookies y Tecnologías Similares</h2>
+        <p>
+          Nuestro sitio web utiliza un número mínimo de cookies clasificadas en:
+        </p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li><strong>Cookies técnicas esenciales:</strong> Necesarias para recordar tus preferencias de idioma, modo visual o consentimiento previo. No requieren autorización previa.</li>
+          <li><strong>Cookies analíticas y de medición:</strong> Nos ayudan a entender métricas generales de tráfico y navegación de forma disociada y agregada.</li>
+          <li><strong>Cookies publicitarias o de terceros:</strong> Gestionadas con arreglo a tu consentimiento previo mediante el panel de preferencias de cookies accesible desde el pie de página.</li>
+        </ul>
+        <p>
+          Puedes aceptar o rechazar las cookies no esenciales a través de nuestro banner de cookies eligiendo la opción «Solo esenciales».
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-ink">5. Ejercicio de Derechos de Protección de Datos</h2>
+        <p>
+          De conformidad con el RGPD y las legislaciones iberoamericanas, los usuarios tienen derecho de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición. Dado que no almacenamos tus datos en servidores, el borrado de cualquier contenido se ejecuta de forma autónoma borrando los datos de tu navegador.
+        </p>
+        <p>
+          Si tienes alguna consulta relativa a esta política, puedes remitir un correo electrónico a <strong>support@onlineinvoicecreator.com</strong>.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

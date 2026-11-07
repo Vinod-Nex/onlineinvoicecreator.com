@@ -1,0 +1,753 @@
+---
+/**
+ * SpanishReceiptForm Component
+ *
+ * Herramienta en español neutro internacional para recibos y facturas comerciales.
+ * Soporta selectores para España, México, Argentina, Colombia, Chile, Perú y Otros.
+ *
+ * Incluye:
+ * - Selector de país con actualización automática de moneda, formato numérico e ID Fiscal
+ * - Declaración formal "Recibí de ... la cantidad de ... por concepto de ..."
+ * - Conversión automática a importe en letras en euros y pesos
+ * - Desglose de alquiler (renta, comunidad, IBI, suministros)
+ * - Transferencia bancaria (IBAN, CLABE SPEI, CBU/CVU/Alias) y código SEPA EPC QR para España
+ * - Exportación en PDF A4 / Carta, PNG e Impresión
+ */
+
+import { SPANISH_COUNTRIES, DEFAULT_SPANISH_COUNTRY } from '../lib/spanish-countries';
+
+interface Props {
+  defaultType?: 'recibo' | 'alquiler' | 'factura_simple' | 'factura_iva';
+}
+
+const { defaultType = 'recibo' } = Astro.props;
+const defaultCountry = SPANISH_COUNTRIES[DEFAULT_SPANISH_COUNTRY];
+---
+
+<div
+  id="spanish-receipt-root"
+  data-default-type={defaultType}
+  class="w-full max-w-[1560px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8"
+>
+  <!-- Privacy & Serverless Guarantee Banner -->
+  <aside
+    class="mb-6 rounded-3xl bg-surface-card border border-hairline p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4 no-print"
+    aria-label="Garantía de privacidad"
+  >
+    <div class="flex items-start sm:items-center gap-3.5">
+      <div class="h-10 w-10 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center shrink-0 text-accent-teal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <p class="text-xs sm:text-sm font-bold text-ink">
+            100% Privado en tu Navegador (Conforme con RGPD y Protección de Datos)
+          </p>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse"></span>
+            <span>Sin almacenamiento en servidores</span>
+          </span>
+        </div>
+        <p class="text-xs text-mute mt-0.5 leading-relaxed">
+          Tus datos se procesan localmente en la memoria de tu dispositivo. No subimos recibos, clientes ni importes a servidores externos.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="btn-clear-es-data"
+        class="h-9 px-3.5 text-xs font-semibold rounded-full text-accent-danger bg-accent-danger/10 hover:bg-accent-danger/20 border border-accent-danger/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+        title="Borra los datos guardados en este navegador"
+      >
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        <span>Borrar mis datos</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Legal & Tax Clarification Notice -->
+  <div class="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 leading-relaxed no-print flex items-start gap-3">
+    <svg class="h-5 w-5 text-amber-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <div>
+      <p class="font-semibold text-ink">Aviso Legal y Tributario Importante:</p>
+      <p class="mt-0.5">
+        Este generador crea documentos comerciales en formato PDF para justificación de cobro y registro entre partes. No produce facturación electrónica gubernamental (como el CFDI en México ante el SAT ni Facturae/TicketBAI en España). <strong>Información general, no es asesoramiento legal ni fiscal.</strong>
+      </p>
+      <!-- verificar: Requisitos de factura simplificada y facturación electrónica según Real Decreto 1619/2012 y Ley Crea y Crece en España -->
+    </div>
+  </div>
+
+  <!-- Workspace 2-Column Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+    
+    <!-- LEFT COLUMN: Form Controls & Inputs -->
+    <div id="es-form-col" class="lg:col-span-6 space-y-6">
+
+      <!-- Country Selector & Document Mode Card -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Country Selector -->
+          <div>
+            <label for="es-country-select" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
+              País y Formato Regional
+            </label>
+            <select
+              id="es-country-select"
+              class="w-full px-3.5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
+            >
+              {Object.values(SPANISH_COUNTRIES).map((country) => (
+                <option value={country.code} selected={country.code === defaultCountry.code}>
+                  {country.name} ({country.currency} · {country.currencySymbol})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Document Type Selector -->
+          <div>
+            <label for="es-doc-type-select" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
+              Tipo de Documento
+            </label>
+            <select
+              id="es-doc-type-select"
+              class="w-full px-3.5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
+            >
+              <option value="recibo" selected={defaultType === 'recibo'}>Recibo de Pago</option>
+              <option value="alquiler" selected={defaultType === 'alquiler'}>Recibo de Alquiler</option>
+              <option value="factura_simple" selected={defaultType === 'factura_simple'}>Factura Simple</option>
+              <option value="factura_iva" selected={defaultType === 'factura_iva'}>Factura con IVA</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Layout Selector Tabs -->
+        <div>
+          <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-2">
+            Diseño Visual del PDF
+          </label>
+          <div class="grid grid-cols-4 gap-2">
+            {[
+              { id: 'layout-modern', val: 'modern', label: 'Moderno' },
+              { id: 'layout-classic', val: 'classic', label: 'Clásico' },
+              { id: 'layout-minimal', val: 'minimal', label: 'Mínimo' },
+              { id: 'layout-corporate', val: 'corporate', label: 'Corporativo' },
+            ].map((l) => (
+              <label class="relative flex items-center justify-center p-2 rounded-xl border border-hairline bg-surface hover:bg-surface-soft cursor-pointer text-center text-xs font-medium text-ink transition-all">
+                <input
+                  type="radio"
+                  name="es-layout"
+                  value={l.val}
+                  class="sr-only peer"
+                  checked={l.val === 'modern'}
+                />
+                <span class="peer-checked:font-bold peer-checked:text-primary">{l.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- General Receipt Details -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-4">
+        <h2 class="text-sm font-bold text-ink uppercase tracking-wider">
+          Datos de Emisión
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div>
+            <label for="es-receipt-number" class="block text-xs font-semibold text-charcoal mb-1">
+              Número de Documento *
+            </label>
+            <input
+              type="text"
+              id="es-receipt-number"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="REC-2026-001"
+            />
+          </div>
+          <div>
+            <label for="es-receipt-date" class="block text-xs font-semibold text-charcoal mb-1">
+              Fecha de Emisión *
+            </label>
+            <input
+              type="text"
+              id="es-receipt-date"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="dd/mm/aaaa"
+            />
+          </div>
+          <div>
+            <label for="es-receipt-city" class="block text-xs font-semibold text-charcoal mb-1">
+              Ciudad / Población
+            </label>
+            <input
+              type="text"
+              id="es-receipt-city"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Ej. Madrid, CDMX, Bogotá"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Emitter (Emisor / Quien cobra) -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-4">
+        <h2 class="text-sm font-bold text-ink uppercase tracking-wider">
+          Emisor (Quien Recibe el Pago)
+        </h2>
+
+        <div class="space-y-3.5">
+          <div>
+            <label for="es-emitter-name" class="block text-xs font-semibold text-charcoal mb-1">
+              Nombre Completo o Razón Social *
+            </label>
+            <input
+              type="text"
+              id="es-emitter-name"
+              class="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Nombre del emisor o empresa"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label id="es-label-emitter-doc" for="es-emitter-doc" class="block text-xs font-semibold text-charcoal mb-1">
+                {defaultCountry.taxIdLabel}
+              </label>
+              <input
+                type="text"
+                id="es-emitter-doc"
+                class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 font-mono"
+                placeholder={defaultCountry.taxIdPlaceholder}
+              />
+            </div>
+            <div>
+              <label for="es-emitter-phone" class="block text-xs font-semibold text-charcoal mb-1">
+                Teléfono
+              </label>
+              <input
+                type="text"
+                id="es-emitter-phone"
+                class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="+34 600 000 000"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="es-emitter-address" class="block text-xs font-semibold text-charcoal mb-1">
+              Dirección Fiscal o Comercial
+            </label>
+            <input
+              type="text"
+              id="es-emitter-address"
+              class="w-full px-3.5 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Calle, número, código postal y ciudad"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Payer (Cliente / Quien paga) -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-4">
+        <h2 class="text-sm font-bold text-ink uppercase tracking-wider">
+          Pagador (Recibí de / Cliente)
+        </h2>
+
+        <div class="space-y-3.5">
+          <div>
+            <label for="es-payer-name" class="block text-xs font-semibold text-charcoal mb-1">
+              Recibí de (Nombre o Razón Social) *
+            </label>
+            <input
+              type="text"
+              id="es-payer-name"
+              class="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Nombre del cliente o empresa pagadora"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label id="es-label-payer-doc" for="es-payer-doc" class="block text-xs font-semibold text-charcoal mb-1">
+                {defaultCountry.taxIdLabel}
+              </label>
+              <input
+                type="text"
+                id="es-payer-doc"
+                class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 font-mono"
+                placeholder={defaultCountry.taxIdPlaceholder}
+              />
+            </div>
+            <div>
+              <label for="es-payer-address" class="block text-xs font-semibold text-charcoal mb-1">
+                Dirección del Pagador
+              </label>
+              <input
+                type="text"
+                id="es-payer-address"
+                class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="Domicilio del cliente"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rental Fields (Visible only when Alquiler is selected) -->
+      <div id="es-rent-fields" class="rounded-3xl border border-blue-500/20 bg-blue-50/30 dark:bg-blue-950/10 p-5 sm:p-6 shadow-xs space-y-4 hidden">
+        <div class="flex items-center gap-2">
+          <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <h2 class="text-sm font-bold text-blue-900 dark:text-blue-300 uppercase tracking-wider">
+            Detalles del Alquiler de Inmueble
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="sm:col-span-2">
+            <label for="es-rent-property" class="block text-xs font-semibold text-charcoal mb-1">
+              Dirección del Inmueble Arrendado *
+            </label>
+            <input
+              type="text"
+              id="es-rent-property"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="Calle, número, piso y puerta del inmueble"
+            />
+          </div>
+          <div>
+            <label for="es-rent-month" class="block text-xs font-semibold text-charcoal mb-1">
+              Periodo / Mes Correspondiente *
+            </label>
+            <input
+              type="text"
+              id="es-rent-month"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="Ej. Octubre 2026"
+            />
+          </div>
+          <div>
+            <label for="es-rent-base" class="block text-xs font-semibold text-charcoal mb-1">
+              Renta Base
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              id="es-rent-base"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="0.00"
+            />
+          </div>
+          <div>
+            <label for="es-rent-community" class="block text-xs font-semibold text-charcoal mb-1">
+              Gastos de Comunidad
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              id="es-rent-community"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="0.00"
+            />
+          </div>
+          <div>
+            <label for="es-rent-ibi" class="block text-xs font-semibold text-charcoal mb-1">
+              IBI / Impuesto Predial
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              id="es-rent-ibi"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="0.00"
+            />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="es-rent-utilities" class="block text-xs font-semibold text-charcoal mb-1">
+              Suministros (Agua, Gas, Luz u Otros)
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              id="es-rent-utilities"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink"
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Monetary Amount, Concept & Automatic Extenso -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-4">
+        <h2 class="text-sm font-bold text-ink uppercase tracking-wider">
+          Importe y Concepto del Pago
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <!-- Numerical Amount -->
+          <div>
+            <label for="es-amount" class="block text-xs font-semibold text-charcoal mb-1">
+              Importe Numérico *
+            </label>
+            <div class="relative flex items-center">
+              <span id="es-currency-symbol" class="absolute left-3 text-xs font-bold text-mute">
+                {defaultCountry.currencySymbol}
+              </span>
+              <input
+                type="number"
+                step="0.01"
+                id="es-amount"
+                class="w-full pl-9 pr-3 py-2.5 text-sm font-bold rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div>
+            <label for="es-payment-method" class="block text-xs font-semibold text-charcoal mb-1">
+              Forma de Pago *
+            </label>
+            <select
+              id="es-payment-method"
+              class="w-full px-3 py-2.5 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
+            >
+              <option value="Transferencia bancaria">Transferencia bancaria</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Tarjeta de débito/crédito">Tarjeta de débito/crédito</option>
+              <option value="Bizum / Pago móvil">Bizum / Pago móvil</option>
+              <option value="Domiciliación bancaria">Domiciliación bancaria</option>
+            </select>
+          </div>
+
+          <!-- Extenso -->
+          <div class="sm:col-span-2">
+            <label for="es-extenso" class="block text-xs font-semibold text-charcoal mb-1">
+              Importe en Letra (Generado automáticamente)
+            </label>
+            <input
+              type="text"
+              id="es-extenso"
+              class="w-full px-3 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 italic"
+              placeholder="mil doscientos cincuenta euros con cincuenta céntimos"
+            />
+          </div>
+
+          <!-- Concept -->
+          <div class="sm:col-span-2">
+            <label for="es-concept" class="block text-xs font-semibold text-charcoal mb-1">
+              Por Concepto De (Descripción detallada) *
+            </label>
+            <textarea
+              id="es-concept"
+              rows="3"
+              class="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 leading-relaxed"
+              placeholder="Describe detalladamente los servicios prestados o productos entregados..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank Transfer & SEPA EPC QR -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs space-y-4">
+        <h2 class="text-sm font-bold text-ink uppercase tracking-wider">
+          Datos de Pago y Transferencia
+        </h2>
+
+        <div class="space-y-3.5">
+          <div>
+            <label id="es-label-bank-details" for="es-bank-details" class="block text-xs font-semibold text-charcoal mb-1">
+              {defaultCountry.bankingTransferLabel}
+            </label>
+            <input
+              type="text"
+              id="es-bank-details"
+              class="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20 font-mono"
+              placeholder={defaultCountry.bankingTransferPlaceholder}
+            />
+          </div>
+
+          <!-- SEPA EPC Row (Spain only) -->
+          <div id="es-sepa-row" class="space-y-3 pt-1 border-t border-hairline">
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="es-sepa-enabled"
+                class="rounded border-hairline text-primary focus:ring-primary h-4 w-4 cursor-pointer"
+              />
+              <label for="es-sepa-enabled" class="text-xs font-semibold text-ink cursor-pointer">
+                Incluir código QR SEPA EPC (transferencia europea instantánea)
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-6">
+              <div>
+                <label for="es-sepa-iban" class="block text-[11px] font-semibold text-charcoal mb-0.5">
+                  IBAN para QR SEPA
+                </label>
+                <input
+                  type="text"
+                  id="es-sepa-iban"
+                  class="w-full px-3 py-1.5 text-xs rounded-lg border border-hairline bg-surface text-ink font-mono"
+                  placeholder="ES9121000418450200051332"
+                />
+              </div>
+              <div>
+                <label for="es-sepa-bic" class="block text-[11px] font-semibold text-charcoal mb-0.5">
+                  BIC / SWIFT (Opcional)
+                </label>
+                <input
+                  type="text"
+                  id="es-sepa-bic"
+                  class="w-full px-3 py-1.5 text-xs rounded-lg border border-hairline bg-surface text-ink font-mono"
+                  placeholder="CAIXESBBXXX"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Signature Name -->
+          <div>
+            <label for="es-signature-name" class="block text-xs font-semibold text-charcoal mb-1">
+              Nombre de la Persona que Firma *
+            </label>
+            <input
+              type="text"
+              id="es-signature-name"
+              class="w-full px-3.5 py-2 text-xs font-medium rounded-xl border border-hairline bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Nombre del emisor o representante legal"
+            />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Real-Time Live Preview & Actions -->
+    <div id="es-prev-col" class="lg:col-span-6 lg:sticky lg:top-20 space-y-4">
+      
+      <!-- Primary Export Actions Toolbar -->
+      <div class="rounded-3xl border border-hairline bg-surface-card p-4 shadow-sm flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="btn-export-es-pdf"
+            class="h-10 px-4 text-xs font-bold rounded-xl bg-primary hover:bg-primary-hover text-white shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Descargar PDF</span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-export-es-png"
+            class="h-10 px-3.5 text-xs font-semibold rounded-xl border border-hairline bg-surface hover:bg-surface-soft text-ink transition-colors flex items-center gap-1.5 cursor-pointer"
+            title="Descarga el recibo como imagen PNG"
+          >
+            <span>PNG</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          id="btn-print-es"
+          class="h-10 px-4 text-xs font-semibold rounded-xl border border-hairline bg-surface hover:bg-surface-soft text-ink transition-colors flex items-center gap-1.5 cursor-pointer"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir</span>
+        </button>
+      </div>
+
+      <!-- Live Printable Document Preview Canvas -->
+      <div class="rounded-3xl border border-hairline bg-white text-gray-900 p-6 sm:p-8 shadow-xl overflow-hidden font-sans">
+        <article id="es-receipt-canvas" class="space-y-6">
+
+          <!-- Header: Title, Number, Date, City -->
+          <div class="flex flex-col sm:flex-row items-start justify-between gap-4 pb-6 border-b border-gray-200">
+            <div>
+              <div id="prev-es-doc-title" role="heading" aria-level="2" class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                RECIBO DE PAGO
+              </div>
+              <p class="text-xs text-gray-500 mt-1">
+                Documento de Justificación de Pago
+              </p>
+            </div>
+
+            <div class="sm:text-right space-y-1 text-xs">
+              <p class="font-mono text-gray-700">
+                Nº: <strong id="prev-es-number" class="text-gray-900 font-bold">REC-2026-001</strong>
+              </p>
+              <p class="text-gray-600">
+                Fecha: <span id="prev-es-date">01/01/2026</span>
+              </p>
+              <p class="text-gray-600">
+                Lugar: <span id="prev-es-city">Madrid</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Highlight Box: Numerical Amount & Importe en Letras -->
+          <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                Importe Total Recibido
+              </span>
+              <p id="prev-es-amount" class="text-2xl sm:text-3xl font-extrabold text-primary tabular-nums">
+                1.250,50 €
+              </p>
+            </div>
+
+            <div class="sm:text-right max-w-md">
+              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                Importe en Letra
+              </span>
+              <p id="prev-es-extenso" class="text-xs font-semibold text-gray-700 italic leading-relaxed">
+                (mil doscientos cincuenta euros con cincuenta céntimos)
+              </p>
+            </div>
+          </div>
+
+          <!-- Parties: Emisor & Pagador -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-6 pt-2 border-t border-gray-200 text-xs">
+            <!-- Emisor -->
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-400 uppercase tracking-wider text-[11px]">
+                Emisor (Quien Cobra)
+              </span>
+              <p id="prev-es-emitter-name" class="font-bold text-gray-900 text-sm">
+                Nombre del Emisor
+              </p>
+              <p id="prev-es-emitter-doc" class="text-gray-600 font-mono">
+                NIF: 00000000X
+              </p>
+              <p id="prev-es-emitter-address" class="text-gray-600 leading-relaxed"></p>
+              <p id="prev-es-emitter-phone" class="text-gray-600"></p>
+            </div>
+
+            <!-- Pagador -->
+            <div class="space-y-1.5 sm:border-l sm:border-gray-200 sm:pl-6">
+              <span class="font-bold text-gray-400 uppercase tracking-wider text-[11px]">
+                Pagador (Recibí de / Cliente)
+              </span>
+              <p id="prev-es-payer-name" class="font-bold text-gray-900 text-sm">
+                Nombre del Cliente
+              </p>
+              <p id="prev-es-payer-doc" class="text-gray-600 font-mono">
+                NIF: 00000000X
+              </p>
+              <p id="prev-es-payer-address" class="text-gray-600 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Formal Legal Statement: "Recibí de ... la cantidad de ... por concepto de ..." -->
+          <div class="p-4 rounded-xl bg-primary/5 border border-primary/20 text-xs leading-relaxed text-gray-800">
+            <p id="prev-es-formal-statement" class="font-medium">
+              Recibí de [Cliente] la cantidad de mil doscientos cincuenta euros con cincuenta céntimos (1.250,50 €) por concepto de servicios profesionales.
+            </p>
+          </div>
+
+          <!-- Detailed Concept & Payment Method -->
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-xs">
+            <span class="font-bold text-gray-500 uppercase tracking-wider text-[11px] block">
+              Concepto Detallado del Pago
+            </span>
+            <p id="prev-es-concept" class="text-gray-800 leading-relaxed whitespace-pre-wrap">
+              Descripción de los servicios o productos entregados.
+            </p>
+            <div class="pt-2 border-t border-gray-200 flex items-center justify-between text-gray-600 text-[11px]">
+              <span>Forma de pago: <strong id="prev-es-method" class="text-gray-900">Transferencia bancaria</strong></span>
+              <span>Comprobante de quitación comercial plena</span>
+            </div>
+          </div>
+
+          <!-- Rental Section (if applicable) -->
+          <div id="prev-es-rent-block" class="p-4 rounded-xl bg-blue-50/50 border border-blue-200 space-y-1.5 text-xs hidden">
+            <span class="font-bold text-blue-900 uppercase tracking-wider text-[11px] block">
+              Datos del Inmueble y Periodo de Alquiler
+            </span>
+            <p class="text-gray-700">
+              Inmueble: <strong id="prev-es-rent-property" class="text-gray-900"></strong>
+            </p>
+            <p class="text-gray-700">
+              Periodo / Mes: <strong id="prev-es-rent-month" class="text-gray-900"></strong>
+            </p>
+            <p id="prev-es-rent-breakdown" class="text-[11px] text-gray-600 pt-1 font-mono"></p>
+          </div>
+
+          <!-- Bank Details Block -->
+          <div id="prev-es-bank-block" class="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs space-y-1 hidden">
+            <span class="font-bold text-gray-500 uppercase tracking-wider text-[11px] block">
+              Datos Bancarios para Transferencia
+            </span>
+            <p id="prev-es-bank-details" class="font-mono text-gray-800 font-semibold"></p>
+          </div>
+
+          <!-- SEPA EPC QR Code (Spain only) -->
+          <div id="prev-es-sepa-block" class="p-4 rounded-xl border border-gray-200 flex items-center gap-4 bg-gray-50 hidden">
+            <img
+              id="prev-es-sepa-qr"
+              src=""
+              alt="Código QR SEPA EPC"
+              width="112"
+              height="112"
+              class="h-28 w-28 rounded-lg border border-gray-300 bg-white p-1 shrink-0"
+            />
+            <div class="space-y-1 text-xs">
+              <span class="font-bold text-gray-900 text-sm block">Pago Directo SEPA EPC</span>
+              <p class="text-gray-600 text-[11px] leading-relaxed">
+                Escanea con la aplicación de tu banco para realizar la transferencia instantánea en euros sin comisiones.
+              </p>
+            </div>
+          </div>
+
+          <!-- Document Footer & Signature -->
+          <div class="pt-8 border-t border-gray-200 mt-8 space-y-6">
+            <div class="flex flex-col sm:flex-row items-end justify-between gap-6">
+              <div class="text-xs text-gray-500">
+                <p id="prev-es-city-date">Madrid, a 01/01/2026</p>
+                <p class="text-[10px] text-gray-400 mt-0.5">Generado con onlineinvoicecreator.com</p>
+              </div>
+
+              <!-- Signature Line -->
+              <div class="text-center min-w-[240px]">
+                <div class="w-full border-b border-gray-900 mb-1.5"></div>
+                <p id="prev-es-signature-line" class="text-xs font-bold text-gray-900">
+                  Nombre del Emisor
+                </p>
+                <p class="text-[10px] text-gray-500">Firma del Emisor / Responsable</p>
+              </div>
+            </div>
+          </div>
+
+        </article>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  import '../scripts/spanish-receipt-client';
+</script>

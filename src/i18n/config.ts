@@ -58,7 +58,7 @@ export const LOCALE_CONFIGS: Record<Locale, LocaleConfig> = {
     code: 'es',
     lang: 'es',
     displayName: 'Español',
-    published: false, // Ready for subsequent language prompt
+    published: true,
     defaultCurrency: 'EUR',
     regionalFormat: 'es-ES',
     dir: 'ltr',

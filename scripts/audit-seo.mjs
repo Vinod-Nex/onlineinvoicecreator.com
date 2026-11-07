@@ -337,7 +337,7 @@ function auditHtmlFile(filePath) {
     ),
   ];
   const hreflangs = hreflangMatches.map((m) => m[1]);
-  if (!isNoIndex && !relativePath.includes('modelo-de-recibo')) {
+  if (!isNoIndex && !relativePath.includes('modelo-de-recibo') && !relativePath.includes('aviso-legal')) {
     const requiredLangs = ['en', 'x-default'];
     for (const lang of requiredLangs) {
       if (!hreflangs.includes(lang)) {

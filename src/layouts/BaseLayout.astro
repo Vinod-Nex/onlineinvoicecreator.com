@@ -166,6 +166,9 @@ if (schema) {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt || title} />
     <meta property="og:locale" content={localeConfig.ogLocale} />
+    {activeLocale === 'es' && (
+      <meta property="og:locale:alternate" content="es_MX" />
+    )}
     {getPublishedLocales()
       .filter((loc) => loc !== activeLocale)
       .map((loc) => (

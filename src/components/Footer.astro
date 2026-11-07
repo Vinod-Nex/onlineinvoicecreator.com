@@ -18,6 +18,13 @@ const toolLinks = locale === 'pt-br'
       { name: 'Gerador de Fatura Comercial', href: `${getRouteUrl('home', 'pt-br')}#invoice-workspace` },
       { name: 'Início', href: getRouteUrl('home', 'pt-br') },
     ]
+  : locale === 'es'
+  ? [
+      { name: 'Generador de Recibos de Pago', href: getRouteUrl('receipt', 'es') },
+      { name: 'Factura Comercial y Cobro', href: `${getRouteUrl('home', 'es')}#workspace-recibos` },
+      { name: 'Recibo de Alquiler', href: `${getRouteUrl('receipt', 'es')}?tipo=alquiler` },
+      { name: 'Inicio', href: getRouteUrl('home', 'es') },
+    ]
   : [
       { name: 'Free Invoice Generator', href: getRouteUrl('home', locale) },
       { name: 'Free Receipt Generator', href: getRouteUrl('receipt', locale) },
@@ -34,6 +41,13 @@ const templateLinks = locale === 'pt-br'
       { name: 'Modelo de Recibo Pronto', href: getRouteUrl('receipt-template', 'pt-br') },
       { name: 'Recibo de Venda no Balcão', href: `${getRouteUrl('receipt', 'pt-br')}?tipo=venda` },
     ]
+  : locale === 'es'
+  ? [
+      { name: 'Recibo de Pago Simple', href: getRouteUrl('receipt', 'es') },
+      { name: 'Recibo con Código QR', href: getRouteUrl('receipt', 'es') },
+      { name: 'Recibo de Alquiler y Fianza', href: `${getRouteUrl('receipt', 'es')}?tipo=alquiler` },
+      { name: 'Factura Comercial con IVA', href: `${getRouteUrl('home', 'es')}#workspace-recibos` },
+    ]
   : [
       { name: 'Freelancer Invoices', href: getRouteUrl('invoice-freelance', locale) },
       { name: 'Contractor Invoices', href: getRouteUrl('contractor-invoice', locale) },
@@ -49,6 +63,13 @@ const resourceLinks = locale === 'pt-br'
       { name: 'Valor por Extenso Automático', href: `${getRouteUrl('receipt', 'pt-br')}#valor-por-extenso` },
       { name: 'Recibo de Locação Residencial', href: `${getRouteUrl('rent-receipt', 'pt-br')}#guia-aluguel` },
     ]
+  : locale === 'es'
+  ? [
+      { name: 'Cómo Hacer un Recibo de Pago', href: `${getRouteUrl('receipt', 'es')}#como-hacer` },
+      { name: 'Diferencias entre Recibo y Factura', href: `${getRouteUrl('receipt', 'es')}#recibo-vs-factura` },
+      { name: 'Importe en Letras Automático', href: `${getRouteUrl('receipt', 'es')}#importe-en-letra` },
+      { name: 'Aviso Legal (LSSI-CE)', href: getRouteUrl('aviso-legal', 'es') },
+    ]
   : [
       { name: 'Invoicing Blog & Guides', href: getRouteUrl('blog', locale) },
       { name: 'How to Invoice Clients', href: getRouteUrl('blog-freelance', locale) },
@@ -62,6 +83,14 @@ const companyLinks = locale === 'pt-br'
       { name: 'Contato e Suporte', href: getRouteUrl('contact', 'pt-br') },
       { name: 'Política de Privacidade (LGPD)', href: getRouteUrl('privacy', 'pt-br') },
       { name: 'Termos de Uso', href: getRouteUrl('terms', 'pt-br') },
+    ]
+  : locale === 'es'
+  ? [
+      { name: 'Sobre Nosotros', href: getRouteUrl('about', 'es') },
+      { name: 'Contacto y Soporte', href: getRouteUrl('contact', 'es') },
+      { name: 'Política de Privacidad (RGPD)', href: getRouteUrl('privacy', 'es') },
+      { name: 'Términos y Condiciones', href: getRouteUrl('terms', 'es') },
+      { name: 'Aviso Legal', href: getRouteUrl('aviso-legal', 'es') },
     ]
   : [
       { name: d.footer.aboutUs, href: getRouteUrl('about', locale) },
@@ -233,7 +262,15 @@ const companyLinks = locale === 'pt-br'
         <a href={getRouteUrl('contact', locale)} class="hover:text-ink transition-colors">
           {d.footer.contactUs}
         </a>
-        {locale !== 'pt-br' && (
+        {locale === 'es' && (
+          <>
+            <span class="text-hairline">·</span>
+            <a href={getRouteUrl('aviso-legal', locale)} class="hover:text-ink transition-colors">
+              Aviso Legal
+            </a>
+          </>
+        )}
+        {locale === 'en' && (
           <>
             <span class="text-hairline">·</span>
             <a href={getRouteUrl('changelog', locale)} class="hover:text-ink transition-colors">

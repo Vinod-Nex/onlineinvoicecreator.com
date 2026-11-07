@@ -217,6 +217,63 @@ const staticPages = [
       'Entre em contato com nossa equipe de suporte. Dúvidas, sugestões ou relatórios sobre o gerador de recibos e faturas online.',
     tags: ['Suporte Rápido', 'E-mail Direto', 'Feedback'],
   },
+  // Spanish (es) Pages
+  {
+    slug: 'og-es-index',
+    title: 'Generador de Recibos y Facturas Gratis Online',
+    badge: '100% Gratis · Sin Registro',
+    description:
+      'Crea recibos y facturas en PDF gratis. Sin registro ni marca de agua. Funciona en tu navegador para México, España, Argentina y Colombia.',
+    tags: ['Recibos de Pago', 'Importe en Letras', 'España & LatAm'],
+  },
+  {
+    slug: 'og-es-generador-de-recibos',
+    title: 'Generador de Recibos Gratis',
+    badge: 'Crear y Descargar en PDF',
+    description:
+      'Genera recibos de pago gratis online. Completa los datos, visualiza el resultado y descarga tu PDF al instante. Sin registro y sin marca de agua.',
+    tags: ['Importe en Letras', 'Multipaís', 'PDF A4 y Carta'],
+  },
+  {
+    slug: 'og-es-aviso-legal',
+    title: 'Aviso Legal',
+    badge: 'Cumplimiento LSSI-CE',
+    description:
+      'Información general y condiciones de titularidad del servicio Online Invoice Creator conforme al artículo 10 de la Ley LSSI-CE de España.',
+    tags: ['LSSI-CE Art. 10', 'Información General', 'Titularidad Web'],
+  },
+  {
+    slug: 'og-es-privacidad',
+    title: 'Política de Privacidad',
+    badge: 'RGPD y Privacidad Local',
+    description:
+      'Política de privacidad de Online Invoice Creator: procesamiento local en el navegador, sin cuentas y sin almacenamiento de datos en servidores.',
+    tags: ['RGPD / LOPDGDD', '100% en Navegador', 'Cero Rastreo'],
+  },
+  {
+    slug: 'og-es-terminos',
+    title: 'Términos y Condiciones de Uso',
+    badge: 'Servicio Gratuito',
+    description:
+      'Términos y condiciones del generador de recibos y facturas. Documentos en PDF para fines civiles y mercantiles, sin valor fiscal oficial.',
+    tags: ['Términos de Uso', 'Documentos Civiles', 'Exención Fiscal'],
+  },
+  {
+    slug: 'og-es-sobre',
+    title: 'Sobre Nosotros',
+    badge: 'Nuestra Filosofía',
+    description:
+      'Conoce Online Invoice Creator: herramientas financieras gratuitas para autónomos y pequeñas empresas que funcionan 100% en el navegador.',
+    tags: ['Privacidad Total', 'Sin Registro', 'Autónomos y Negocios'],
+  },
+  {
+    slug: 'og-es-contacto',
+    title: 'Contacto y Asistencia',
+    badge: 'Canal Oficial de Soporte',
+    description:
+      'Ponte en contacto con nuestro equipo para dudas, sugerencias o asistencia sobre el generador de recibos y facturas en PDF.',
+    tags: ['Soporte Directo', 'Correo Oficial', 'Atención Rápida'],
+  },
 ];
 
 // Read tool page JSON files
@@ -468,8 +525,12 @@ async function main() {
 
   let count = 0;
   for (const page of allPages) {
-    const pngBuffer = await renderCardToPng(page);
     const destPath = path.join(PUBLIC_OG_DIR, `${page.slug}.png`);
+    if (fs.existsSync(destPath) && !process.env.FORCE_OG) {
+      count++;
+      continue;
+    }
+    const pngBuffer = await renderCardToPng(page);
     fs.writeFileSync(destPath, pngBuffer);
     count++;
     console.log(
