@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://onlineinvoicecreator.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://onlineinvoicecreator.com/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://onlineinvoicecreator.com/pt-br"/>
   </url>
   <url>
     <loc>https://onlineinvoicecreator.com/about</loc>
@@ -51,12 +48,16 @@
     <loc>https://onlineinvoicecreator.com/privacy</loc>
   </url>
   <url>
-    <loc>https://onlineinvoicecreator.com/pt-br</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://onlineinvoicecreator.com/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://onlineinvoicecreator.com/pt-br"/>
+    <loc>https://onlineinvoicecreator.com/receipt-maker-with-items</loc>
   </url>
   <url>
-    <loc>https://onlineinvoicecreator.com/pt-br/contato</loc>
+    <loc>https://onlineinvoicecreator.com/tax-invoice-template-australia</loc>
+  </url>
+  <url>
+    <loc>https://onlineinvoicecreator.com/terms</loc>
+  </url>
+  <url>
+    <loc>https://onlineinvoicecreator.com/pt-br</loc>
   </url>
   <url>
     <loc>https://onlineinvoicecreator.com/pt-br/gerador-de-recibo</loc>
@@ -68,21 +69,15 @@
     <loc>https://onlineinvoicecreator.com/pt-br/modelo-de-recibo</loc>
   </url>
   <url>
-    <loc>https://onlineinvoicecreator.com/pt-br/privacidade</loc>
-  </url>
-  <url>
     <loc>https://onlineinvoicecreator.com/pt-br/sobre</loc>
   </url>
   <url>
+    <loc>https://onlineinvoicecreator.com/pt-br/contato</loc>
+  </url>
+  <url>
+    <loc>https://onlineinvoicecreator.com/pt-br/privacidade</loc>
+  </url>
+  <url>
     <loc>https://onlineinvoicecreator.com/pt-br/termos</loc>
-  </url>
-  <url>
-    <loc>https://onlineinvoicecreator.com/receipt-maker-with-items</loc>
-  </url>
-  <url>
-    <loc>https://onlineinvoicecreator.com/tax-invoice-template-australia</loc>
-  </url>
-  <url>
-    <loc>https://onlineinvoicecreator.com/terms</loc>
   </url>
 </urlset>

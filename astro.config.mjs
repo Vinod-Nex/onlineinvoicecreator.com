@@ -176,15 +176,7 @@ export default defineConfig({
         if (isNoIndexPage(item.url)) {
           return undefined;
         }
-        if (item.links && item.links.length > 0) {
-          item.links = item.links.filter((link) => {
-            const code = link.lang?.toLowerCase();
-            return code === 'en' || isLocalePublished(code);
-          });
-          if (item.links.length <= 1) {
-            delete item.links;
-          }
-        }
+        delete item.links;
         return item;
       },
     }),
@@ -198,26 +190,76 @@ export default defineConfig({
           function formatSitemap0(xml) {
             let clean = xml.replace(/<\?xml-stylesheet[^>]*\?>\s*/g, '');
             const urlRegex = /<url>([\s\S]*?)<\/url>/g;
-            const urls = [];
+            const englishUrls = [];
+            const ptBrUrls = [];
             let match;
             while ((match = urlRegex.exec(clean)) !== null) {
               const inner = match[1];
               const locMatch = inner.match(/<loc>([\s\S]*?)<\/loc>/);
               const loc = locMatch ? locMatch[1].trim() : '';
-              const linkMatches = inner.match(/<xhtml:link[^>]*\/>/g) || [];
 
-              let block = '  <url>\n';
               if (loc) {
-                block += `    <loc>${loc}</loc>\n`;
+                const block = `  <url>\n    <loc>${loc}</loc>\n  </url>`;
+                if (loc.includes('/pt-br')) {
+                  ptBrUrls.push({ loc, block });
+                } else {
+                  englishUrls.push({ loc, block });
+                }
               }
-              for (const link of linkMatches) {
-                block += `    ${link.trim()}\n`;
-              }
-              block += '  </url>';
-              urls.push(block);
             }
 
-            return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
+            // Keep the exact English ordering as in the screenshot
+            const englishOrder = [
+              'https://onlineinvoicecreator.com/',
+              'https://onlineinvoicecreator.com/about',
+              'https://onlineinvoicecreator.com/blog',
+              'https://onlineinvoicecreator.com/blog/how-to-number-invoices',
+              'https://onlineinvoicecreator.com/blog/how-to-write-an-invoice-for-freelance-work',
+              'https://onlineinvoicecreator.com/blog/invoice-vs-receipt',
+              'https://onlineinvoicecreator.com/blog/what-is-a-pro-forma-invoice',
+              'https://onlineinvoicecreator.com/changelog',
+              'https://onlineinvoicecreator.com/contact',
+              'https://onlineinvoicecreator.com/contractor-invoice-template',
+              'https://onlineinvoicecreator.com/free-online-receipt-generator',
+              'https://onlineinvoicecreator.com/free-rent-receipt-generator',
+              'https://onlineinvoicecreator.com/invoice-generator-excel',
+              'https://onlineinvoicecreator.com/invoice-generator-for-freelancers',
+              'https://onlineinvoicecreator.com/photography-invoice-generator',
+              'https://onlineinvoicecreator.com/privacy',
+              'https://onlineinvoicecreator.com/receipt-maker-with-items',
+              'https://onlineinvoicecreator.com/tax-invoice-template-australia',
+              'https://onlineinvoicecreator.com/terms',
+            ];
+
+            const ptBrOrder = [
+              'https://onlineinvoicecreator.com/pt-br',
+              'https://onlineinvoicecreator.com/pt-br/gerador-de-recibo',
+              'https://onlineinvoicecreator.com/pt-br/gerador-de-recibo-de-aluguel',
+              'https://onlineinvoicecreator.com/pt-br/modelo-de-recibo',
+              'https://onlineinvoicecreator.com/pt-br/sobre',
+              'https://onlineinvoicecreator.com/pt-br/contato',
+              'https://onlineinvoicecreator.com/pt-br/privacidade',
+              'https://onlineinvoicecreator.com/pt-br/termos',
+            ];
+
+            const sortedBlocks = [];
+            for (const url of englishOrder) {
+              const found = englishUrls.find((u) => u.loc === url);
+              if (found) sortedBlocks.push(found.block);
+            }
+            for (const u of englishUrls) {
+              if (!englishOrder.includes(u.loc)) sortedBlocks.push(u.block);
+            }
+
+            for (const url of ptBrOrder) {
+              const found = ptBrUrls.find((u) => u.loc === url);
+              if (found) sortedBlocks.push(found.block);
+            }
+            for (const u of ptBrUrls) {
+              if (!ptBrOrder.includes(u.loc)) sortedBlocks.push(u.block);
+            }
+
+            return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${sortedBlocks.join('\n')}\n</urlset>\n`;
           }
 
           function formatSitemapIndex(xml) {
