@@ -188,6 +188,12 @@ class SpanishReceiptController {
     const curBadge = document.getElementById('es-currency-symbol');
     if (curBadge) curBadge.textContent = this.country.currencySymbol;
 
+    // Paper size attribute on preview canvas
+    const canvas = document.getElementById('es-receipt-canvas');
+    if (canvas) {
+      canvas.setAttribute('data-paper', this.country.defaultPaper);
+    }
+
     // SEPA QR is only shown for Spain / EUR
     const sepaRow = document.getElementById('es-sepa-row');
     if (sepaRow) {
@@ -433,6 +439,15 @@ class SpanishReceiptController {
     if (this.state.docType === 'factura_iva') docTitle = 'FACTURA COMERCIAL';
     setText('prev-es-doc-title', docTitle);
 
+    // Canvas layout & paper attributes
+    const canvas = document.getElementById('es-receipt-canvas');
+    if (canvas) {
+      canvas.setAttribute('data-paper', this.country.defaultPaper);
+      canvas.setAttribute('data-layout', this.state.layout);
+      canvas.classList.remove('layout-modern', 'layout-classic', 'layout-minimal', 'layout-corporate');
+      canvas.classList.add(`layout-${this.state.layout}`);
+    }
+
     setText('prev-es-number', this.state.receiptNumber || 'REC-001');
     setText('prev-es-date', this.state.date || '');
     setText('prev-es-city', this.state.city || '');
@@ -549,3 +564,4 @@ if (typeof window !== 'undefined') {
     new SpanishReceiptController();
   }
 }
+

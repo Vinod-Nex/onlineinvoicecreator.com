@@ -244,9 +244,9 @@ const companyLinks = locale === 'pt-br'
     </div>
 
     <!-- Bottom Row: Copyright & Legal Slugs -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-hairline text-[11px] text-mute">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-hairline text-[11px] text-mute text-center sm:text-left">
       <div>{d.footer.copyright}</div>
-      <div class="flex items-center gap-4">
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1.5 sm:gap-x-4">
         <a href={getRouteUrl('privacy', locale)} class="hover:text-ink transition-colors">
           {d.footer.privacyPolicy}
         </a>
