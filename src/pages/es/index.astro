@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import SpanishReceiptForm from '../../components/SpanishReceiptForm.astro';
+import InvoiceForm from '../../components/InvoiceForm.astro';
 import { getRouteUrl } from '../../i18n/routes';
 import { buildPageSchemaGraph } from '../../lib/schema';
 
@@ -16,34 +16,44 @@ const breadcrumbs = [
 
 const tools = [
   {
+    title: 'Factura Comercial y Cobranza',
+    badge: 'Herramienta Activa',
+    badgeColor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
+    description: 'Genera documentos de cobro comercial para desglosar productos o servicios, base imponible, impuestos (IVA) y descuentos. Completa y descarga tu PDF de inmediato.',
+    href: '#invoice-workspace',
+    buttonText: 'Crear Factura Online',
+    icon: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z',
+    features: ['Desglose de artículos, cantidad y precio unitario', 'Cálculo automático de subtotales, IVA y descuentos', 'Diseño formal en PDF A4 o Carta sin marca de agua', '100% privado en tu navegador'],
+  },
+  {
     title: 'Generador de Recibos de Pago',
-    badge: 'Herramienta Principal',
+    badge: 'Más Utilizado',
     badgeColor: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
     description: 'Crea comprobantes de pago profesionales con importe en letras automático, selección de país (España, México, Argentina, Colombia) y código QR de transferencia.',
     href: getRouteUrl('receipt', locale),
     buttonText: 'Abrir Generador de Recibos',
     icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-    features: ['Importe en letras automático', 'Formatos para España, México, Argentina y Colombia', 'Descarga directa en PDF y PNG', '100% privado en tu navegador'],
+    features: ['Importe en letras automático en euros y pesos', 'Formatos para España, México, Argentina y Colombia', 'Descarga directa en PDF y PNG', 'Sin necesidad de registro'],
   },
   {
     title: 'Recibo de Alquiler o Arrendamiento',
     badge: 'Inmuebles y Locales',
-    badgeColor: 'bg-blue-500/10 text-blue-600 border-blue-500/20',
-    description: 'Comprobante mensual de arrendamiento para justificar el pago de renta, gastos comunitarios y fianza entre propietario e inquilino.',
-    href: getRouteUrl('receipt', locale),
+    badgeColor: 'bg-primary/10 text-primary border-primary/20',
+    description: 'Comprobante mensual de arrendamiento para justificar el pago de renta, gastos comunitarios, IBI y suministros entre propietario e inquilino.',
+    href: `${getRouteUrl('receipt', locale)}?tipo=alquiler`,
     buttonText: 'Crear Recibo de Alquiler',
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-    features: ['Desglose de renta y comunidad', 'Período y mes correspondiente', 'Sin registro obligatorio', 'Apto para cualquier divisa'],
+    features: ['Desglose de renta, comunidad, IBI y suministros', 'Período y mes correspondiente', 'Sin registro obligatorio', 'Apto para cualquier divisa'],
   },
   {
-    title: 'Factura Simple y Documento de Cobro',
-    badge: 'Comercial',
-    badgeColor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
-    description: 'Genera documentos de cobro comercial para desglosar productos o servicios, base imponible e impuestos como el IVA o retenciones.',
-    href: '#workspace-recibos',
-    buttonText: 'Usar Generador Directo',
-    icon: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z',
-    features: ['Cálculo de IVA y subtotales', 'Diseño formal en PDF A4 o Carta', 'Logotipo personalizable', 'Tratamiento de datos en local'],
+    title: 'Modelo de Recibo y Formato',
+    badge: 'Ejemplo y Guía',
+    badgeColor: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
+    description: 'Consulta un modelo estructurado con todos los requisitos legales para acreditar pagos: datos fiscales, desglose, fecha y declaración de cobro.',
+    href: `${getRouteUrl('receipt', locale)}#como-hacer-recibo`,
+    buttonText: 'Ver Guía de Recibo',
+    icon: 'M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2',
+    features: ['Estructura legal recomendada', 'Ejemplo práctico completo', 'Guía paso a paso', 'Diferencias entre recibo y factura'],
   },
 ];
 
@@ -56,15 +66,15 @@ const pageSchema = buildPageSchemaGraph({
   breadcrumbs,
   inLanguage: 'es',
   webAppOptions: {
-    name: 'Generador de Recibos y Facturas Gratis',
-    description: 'Herramienta online para generar recibos y facturas en PDF sin registro, con soporte para España, México, Argentina y Colombia.',
+    name: 'Generador de Recibos y Facturas Gratis Online',
+    description: 'Herramienta online para generar facturas comerciales y recibos de pago en PDF sin registro, con soporte para España, México, Argentina y Colombia.',
     applicationCategory: 'BusinessApplication',
     features: [
-      'Importe en letras automático en español',
-      'Selectores adaptados para España, México, Argentina, Colombia, Chile y Perú',
+      'Emisión de facturas comerciales con desglose de artículos y subtotales',
+      'Cálculo automático de impuestos, descuentos y totales en EUR, MXN, ARS y COP',
+      'Generador de recibos de pago con importe en letras automático',
       'Descarga en PDF limpio y sin marcas de agua',
-      'Opciones de pago por transferencia bancaria (SEPA, CLABE, CBU/Alias)',
-      'Procesamiento seguro exclusivamente dentro del navegador',
+      'Procesamiento seguro exclusivamente dentro del navegador (RGPD)',
     ],
   },
 });
@@ -94,27 +104,30 @@ const pageSchema = buildPageSchemaGraph({
       </h1>
 
       <p class="text-base sm:text-lg text-mute leading-relaxed max-w-2xl mx-auto">
-        Crea comprobantes de pago y documentos comerciales en PDF en segundos. Ajustado para España, México, Argentina y Colombia con importe en letras automático y total privacidad.
+        Crea facturas comerciales y recibos de pago profesionales en segundos. Con desglose de artículos, cálculo automático de impuestos, soporte para múltiples divisas y descarga en PDF sin marcas de agua.
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
         <a
-          href="#workspace-recibos"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-hover shadow-sm transition-all focus:outline-hidden focus:ring-2 focus:ring-primary/40 active:scale-[0.98]"
+          href="#invoice-workspace"
+          class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-sm transition-all focus:outline-hidden focus:ring-2 focus:ring-primary/40 active:scale-[0.98]"
         >
+          <span>Crear Factura Ahora</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
-          Crear Recibo Ahora
         </a>
         <a
           href={getRouteUrl('receipt', locale)}
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-hairline text-ink text-sm font-semibold hover:border-strong transition-all focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+          class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-card border border-hairline hover:bg-surface-soft text-ink text-sm font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary/40"
         >
-          <svg class="w-4 h-4 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          Guía y Ejemplos de Recibo
+          <span>Generador de Recibos</span>
+        </a>
+        <a
+          href={`${getRouteUrl('receipt', locale)}?tipo=alquiler`}
+          class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-card border border-hairline hover:bg-surface-soft text-ink text-sm font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+        >
+          <span>Recibo de Alquiler</span>
         </a>
       </div>
     </section>
@@ -159,21 +172,27 @@ const pageSchema = buildPageSchemaGraph({
       </div>
     </div>
 
-    <!-- Interactive Generator Workspace -->
-    <section id="workspace-recibos" class="scroll-mt-6">
-      <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-hairline pb-4">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-bold text-ink font-display">
-            Área de Creación del Documento
-          </h2>
-          <p class="text-xs sm:text-sm text-mute mt-1">
-            Personaliza los datos en el panel izquierdo y observa la actualización del documento en tiempo real.
+    <!-- Statutory Legal Notice Regarding CFDI and E-Invoicing -->
+    <aside class="rounded-2xl bg-amber-500/10 border border-amber-500/20 p-5 text-xs text-amber-900 dark:text-amber-200">
+      <div class="flex items-start gap-3">
+        <svg class="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div class="space-y-1">
+          <p class="font-bold text-ink">Aviso Legal y Tributario Importante:</p>
+          <p class="leading-relaxed">
+            Este generador crea documentos comerciales en formato PDF para justificación de cobro y registro entre partes. No produce facturación electrónica gubernamental (como el CFDI en México ante el SAT ni Facturae/TicketBAI en España). <strong>Información general, no es asesoramiento legal ni fiscal.</strong>
           </p>
         </div>
       </div>
+    </aside>
 
-      <SpanishReceiptForm />
-    </section>
+    <!-- Interactive Invoice Generator Workspace -->
+    <main class="w-full bg-canvas -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+      <InvoiceForm locale={locale} />
+    </main>
 
     <!-- Available Tools Cards Section -->
     <section class="space-y-6 pt-6">
@@ -186,69 +205,106 @@ const pageSchema = buildPageSchemaGraph({
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {tools.map((tool) => (
-          <div class="flex flex-col rounded-2xl bg-card border border-hairline p-6 hover:border-strong transition-all shadow-xs group">
-            <div class="flex items-center justify-between gap-3 mb-4">
-              <span class={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-semibold border ${tool.badgeColor}`}>
-                {tool.badge}
-              </span>
-              <div class="w-9 h-9 rounded-xl bg-ground flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tool.icon}></path>
-                </svg>
-              </div>
-            </div>
-
-            <h3 class="text-lg font-bold text-ink font-display mb-2">
-              {tool.title}
-            </h3>
-
-            <p class="text-xs text-mute leading-relaxed mb-4 grow">
-              {tool.description}
-            </p>
-
-            <ul class="space-y-1.5 mb-6 pt-3 border-t border-hairline text-xs text-mute">
-              {tool.features.map((feat) => (
-                <li class="flex items-center gap-2">
-                  <svg class="w-3.5 h-3.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          <div class="flex flex-col justify-between rounded-3xl bg-surface-card border border-hairline p-6 sm:p-8 hover:border-strong transition-all shadow-xs group space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-3">
+                <div class="h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tool.icon}></path>
                   </svg>
-                  <span>{feat}</span>
-                </li>
-              ))}
-            </ul>
+                </div>
+                <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border ${tool.badgeColor}`}>
+                  {tool.badge}
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-bold text-ink font-display">
+                  {tool.title}
+                </h3>
+                <p class="text-sm text-mute mt-2 leading-relaxed">
+                  {tool.description}
+                </p>
+              </div>
+
+              <ul class="space-y-2 pt-3 border-t border-hairline text-xs text-mute">
+                {tool.features.map((feat) => (
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <a
               href={tool.href}
-              class="w-full text-center py-2.5 px-4 rounded-xl bg-ground hover:bg-card border border-hairline text-xs font-semibold text-ink hover:text-primary transition-all focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+              class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface hover:bg-surface-soft border border-hairline text-ink font-semibold text-xs transition-colors"
             >
-              {tool.buttonText} &rarr;
+              <span>{tool.buttonText}</span>
+              <svg class="h-3.5 w-3.5 text-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
             </a>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Important Legal Disclaimer Card -->
-    <!-- verificar: advertencia sobre validez tributaria y e-factura / CFDI -->
-    <aside class="max-w-4xl mx-auto rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 sm:p-6 text-xs text-mute leading-relaxed">
-      <div class="flex items-start gap-3">
-        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-        </svg>
-        <div class="space-y-1.5">
-          <p class="font-bold text-ink">Información de Validez Legal y Fiscal</p>
-          <p>
-            Esta herramienta genera documentos civiles y comerciales en formato PDF para justificación de pagos y operaciones mercantiles. No emite un CFDI para México (factura electrónica avalada por el SAT a través de un PAC) ni una factura electrónica obligatoria bajo la normativa tributaria española o de otros países.
+    <!-- Value Propositions & Trust -->
+    <section class="rounded-3xl border border-hairline bg-surface-card p-6 sm:p-10 shadow-xs space-y-8">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display">
+          ¿Por Qué Usar Nuestro Generador de Facturas y Recibos?
+        </h2>
+        <p class="text-sm text-mute">
+          Diseñado para profesionales independientes, autónomos y pequeñas empresas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center sm:text-left">
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto sm:mx-0">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-bold text-ink">Privacidad Local (RGPD)</h3>
+          <p class="text-xs text-mute leading-relaxed">
+            Tus datos de facturación y clientes no se envían a servidores remotos. Todo el procesamiento se realiza en la memoria de tu navegador.
           </p>
-          <p class="text-[11px] text-mute/80">
-            <!-- verificar: verificar antes de publicar conforme a las novedades de la Ley Crea y Crece en España -->
-            Información general, no es asesoramiento legal ni fiscal.
+        </div>
+
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mx-auto sm:mx-0">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="3" y1="9" x2="21" y2="9" />
+              <line x1="9" y1="21" x2="9" y2="9" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-bold text-ink">Multidivisa y Multipaís</h3>
+          <p class="text-xs text-mute leading-relaxed">
+            Compatible con euros (EUR), pesos mexicanos (MXN), pesos argentinos (ARS), pesos colombianos (COP) y dólares (USD).
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mx-auto sm:mx-0">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-bold text-ink">Descarga Rápida en PDF</h3>
+          <p class="text-xs text-mute leading-relaxed">
+            Obtén tu documento en PDF nítido y profesional al instante, sin marcas de agua y listo para enviar a tus clientes o imprimir.
           </p>
         </div>
       </div>
-    </aside>
+    </section>
   </div>
 </BaseLayout>
-

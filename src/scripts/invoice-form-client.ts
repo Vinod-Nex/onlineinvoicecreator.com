@@ -107,6 +107,28 @@ export function setupInvoiceForm() {
     }
   }
 
+  // If on Spanish route or document has lang es, preset document title, EUR, and Spanish defaults
+  const isSpanishPage =
+    typeof window !== 'undefined' &&
+    (window.location.pathname.startsWith('/es') || document.documentElement?.lang === 'es');
+  if (isSpanishPage && !storedDraft) {
+    if (!invoice.documentTitle || invoice.documentTitle === 'INVOICE') {
+      invoice.documentTitle = 'FACTURA';
+    }
+    if (!invoice.currency || invoice.currency === 'USD') {
+      invoice.currency = 'EUR';
+    }
+    if (invoice.sender.name === 'Your Business Name') {
+      invoice.sender.name = 'Tu Empresa o Nombre';
+    }
+    if (invoice.client.name === 'Client Name') {
+      invoice.client.name = 'Nombre del Cliente';
+    }
+    if (invoice.lineItems?.[0] && invoice.lineItems[0].description === 'Professional Services') {
+      invoice.lineItems[0].description = 'Servicios Profesionales';
+    }
+  }
+
   // Ensure line items have at least 1 item
   if (!invoice.lineItems || invoice.lineItems.length === 0) {
     invoice.lineItems = [
@@ -502,17 +524,34 @@ export function setupInvoiceForm() {
       const isPtBr =
         typeof window !== 'undefined' &&
         (window.location.pathname.startsWith('/pt-br') || document.documentElement?.lang === 'pt-BR');
-      const labelItem = isPtBr ? `Item nº ${index + 1}` : `Item #${index + 1}`;
-      const labelRemove = isPtBr ? 'Remover item' : 'Remove item';
-      const labelDesc = isPtBr ? 'Descrição' : 'Description';
+      const isSpanish =
+        typeof window !== 'undefined' &&
+        (window.location.pathname.startsWith('/es') || document.documentElement?.lang === 'es');
+      const labelItem = isPtBr
+        ? `Item nº ${index + 1}`
+        : isSpanish
+          ? `Artículo nº ${index + 1}`
+          : `Item #${index + 1}`;
+      const labelRemove = isPtBr ? 'Remover item' : isSpanish ? 'Eliminar artículo' : 'Remove item';
+      const labelDesc = isPtBr ? 'Descrição' : isSpanish ? 'Descripción' : 'Description';
       const placeholderDesc = isPtBr
         ? 'ex.: Desenvolvimento de Website ou Consultoria'
-        : 'e.g. Website Design & Development';
-      const errDesc = isPtBr ? 'A descrição é obrigatória' : 'Description is required';
-      const labelQty = isPtBr ? 'Qtd' : 'Qty';
-      const errNum = isPtBr ? 'Deve ser ≥ 0' : 'Must be ≥ 0';
-      const labelRate = isPtBr ? `Preço (${currencySymbol})` : `Rate (${currencySymbol})`;
-      const labelTax = isPtBr ? 'Imposto (%)' : 'Tax (%)';
+        : isSpanish
+          ? 'ej.: Diseño web o Consultoría'
+          : 'e.g. Website Design & Development';
+      const errDesc = isPtBr
+        ? 'A descrição é obrigatória'
+        : isSpanish
+          ? 'La descripción es obligatoria'
+          : 'Description is required';
+      const labelQty = isPtBr ? 'Qtd' : isSpanish ? 'Cant' : 'Qty';
+      const errNum = isPtBr ? 'Deve ser ≥ 0' : isSpanish ? 'Debe ser ≥ 0' : 'Must be ≥ 0';
+      const labelRate = isPtBr
+        ? `Preço (${currencySymbol})`
+        : isSpanish
+          ? `Precio (${currencySymbol})`
+          : `Rate (${currencySymbol})`;
+      const labelTax = isPtBr ? 'Imposto (%)' : isSpanish ? 'Impuesto (%)' : 'Tax (%)';
 
       rowEl.innerHTML = `
         <div class="flex items-center justify-between gap-3 mb-3 pb-2 border-b border-hairline/40">

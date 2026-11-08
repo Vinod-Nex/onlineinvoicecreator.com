@@ -19,6 +19,15 @@ if (locale === 'pt-br') {
     defaultInvoice.lineItems[0].description = 'Serviços Prestados';
   }
 }
+if (locale === 'es') {
+  defaultInvoice.documentTitle = 'FACTURA';
+  defaultInvoice.currency = 'EUR';
+  defaultInvoice.sender.name = 'Tu Empresa o Nombre';
+  defaultInvoice.client.name = 'Nombre del Cliente';
+  if (defaultInvoice.lineItems[0]) {
+    defaultInvoice.lineItems[0].description = 'Servicios Profesionales';
+  }
+}
 ---
 
 <div id="invoice-preview-container" class="w-full">
@@ -26,9 +35,9 @@ if (locale === 'pt-br') {
   <div class="flex items-center justify-between mb-2 no-print">
     <h2 class="text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-1.5">
       <span class="flex h-2 w-2 rounded-full bg-accent-teal"></span>
-      <span>{locale === 'pt-br' ? 'Prévia da Fatura' : 'Invoice Preview'}</span>
+      <span>{locale === 'pt-br' ? 'Prévia da Fatura' : locale === 'es' ? 'Vista Previa de la Factura' : 'Invoice Preview'}</span>
     </h2>
-    <span class="text-[11px] text-mute">{locale === 'pt-br' ? 'Visualização em tempo real' : 'Live real-time view'}</span>
+    <span class="text-[11px] text-mute">{locale === 'pt-br' ? 'Visualização em tempo real' : locale === 'es' ? 'Visualización en tiempo real' : 'Live real-time view'}</span>
   </div>
 
   <!-- Template Switcher, Paper Format & Export Toolbar (Hidden in Print) -->
@@ -222,32 +231,32 @@ if (locale === 'pt-br') {
             id="preview-doc-title"
             class="tmpl-doc-title text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight uppercase"
           >
-            {defaultInvoice.documentTitle || (locale === 'pt-br' ? 'FATURA' : 'INVOICE')}
+            {defaultInvoice.documentTitle || (locale === 'pt-br' ? 'FATURA' : locale === 'es' ? 'FACTURA' : 'INVOICE')}
           </div>
           <span class="tmpl-badge-status px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
-            {locale === 'pt-br' ? 'Emitida' : 'Issued'}
+            {locale === 'pt-br' || locale === 'es' ? 'Emitida' : 'Issued'}
           </span>
         </div>
 
         <div class="text-xs sm:text-sm text-gray-700 space-y-1">
           <p>
-            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Fatura Nº:' : 'Invoice #:'}</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Fatura Nº:' : locale === 'es' ? 'Factura Nº:' : 'Invoice #:'}</span>
             <strong id="preview-invoice-number" class="text-gray-900 font-bold ml-1 tabular-nums">
               {defaultInvoice.invoiceNumber}
             </strong>
           </p>
           <p id="preview-row-po" class="hidden">
-            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Pedido Nº:' : 'PO #:'}</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Pedido Nº:' : locale === 'es' ? 'Pedido Nº:' : 'PO #:'}</span>
             <span id="preview-po-number" class="ml-1 font-mono font-semibold text-gray-900 tabular-nums"></span>
           </p>
           <p>
-            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Emissão:' : 'Issue Date:'}</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Emissão:' : locale === 'es' ? 'Fecha de Emisión:' : 'Issue Date:'}</span>
             <span id="preview-issue-date" class="ml-1 tabular-nums">
               {defaultInvoice.issueDate}
             </span>
           </p>
           <p>
-            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Vencimento:' : 'Due Date:'}</span>
+            <span class="text-gray-500 font-medium">{locale === 'pt-br' ? 'Data de Vencimento:' : locale === 'es' ? 'Fecha de Vencimiento:' : 'Due Date:'}</span>
             <span id="preview-due-date" class="ml-1 font-semibold text-gray-900 tabular-nums">
               {defaultInvoice.dueDate}
             </span>
@@ -279,7 +288,7 @@ if (locale === 'pt-br') {
           {defaultInvoice.client.phone}
         </p>
         <p id="preview-client-tax-id" class="text-xs text-gray-500 font-medium pt-0.5">
-          {defaultInvoice.client.taxId ? (locale === 'pt-br' ? `CNPJ/CPF: ${defaultInvoice.client.taxId}` : `Tax ID: ${defaultInvoice.client.taxId}`) : ''}
+          {defaultInvoice.client.taxId ? (locale === 'pt-br' ? `CNPJ/CPF: ${defaultInvoice.client.taxId}` : locale === 'es' ? `NIF/CIF/RFC: ${defaultInvoice.client.taxId}` : `Tax ID: ${defaultInvoice.client.taxId}`) : ''}
         </p>
       </div>
 
@@ -310,10 +319,10 @@ if (locale === 'pt-br') {
           id="preview-header-grand-total"
           class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
         >
-          {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
+          {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : locale === 'es' ? 'es-ES' : 'en-US')}
         </span>
         <span id="preview-terms-pill" class="text-xs text-gray-500 font-medium">
-          {locale === 'pt-br' ? 'Vence em 14 dias' : 'Due in 14 days'}
+          {locale === 'pt-br' ? 'Vence em 14 dias' : locale === 'es' ? 'Vence en 14 días' : 'Due in 14 days'}
         </span>
       </div>
     </section>
@@ -336,11 +345,11 @@ if (locale === 'pt-br') {
         >
           <!-- Dynamically populated line items -->
           <tr class="tmpl-table-row" aria-label="Professional Services 1 $0.00 0% $">
-            <td class="py-3 px-3 font-medium text-gray-900">{locale === 'pt-br' ? 'Serviços Prestados' : 'Professional Services'}</td>
+            <td class="py-3 px-3 font-medium text-gray-900">{locale === 'pt-br' ? 'Serviços Prestados' : locale === 'es' ? 'Servicios Profesionales' : 'Professional Services'}</td>
             <td class="py-3 px-3 text-center tabular-nums">1</td>
-            <td class="py-3 px-3 text-right tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}</td>
+            <td class="py-3 px-3 text-right tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : locale === 'es' ? 'es-ES' : 'en-US')}</td>
             <td class="py-3 px-3 text-right tabular-nums">0%</td>
-            <td class="py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}</td>
+            <td class="py-3 px-3 text-right font-semibold text-gray-900 tabular-nums">{formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : locale === 'es' ? 'es-ES' : 'en-US')}</td>
           </tr>
         </tbody>
       </table>
@@ -373,7 +382,7 @@ if (locale === 'pt-br') {
             </p>
             <div class="tmpl-signature-line w-44 pt-1"></div>
             <span class="text-[10px] uppercase tracking-wider text-gray-500 block">
-              {locale === 'pt-br' ? 'Assinatura Autorizada' : 'Authorized Signature'}
+              {locale === 'pt-br' ? 'Assinatura Autorizada' : locale === 'es' ? 'Firma Autorizada' : 'Authorized Signature'}
             </span>
           </div>
         </div>
@@ -389,7 +398,7 @@ if (locale === 'pt-br') {
           <div class="flex items-center justify-between text-gray-600">
             <span id="preview-lbl-subtotal">{d.preview.subtotal}:</span>
             <span id="preview-subtotal" class="font-medium text-gray-900 tabular-nums">
-              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
+              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : locale === 'es' ? 'es-ES' : 'en-US')}
             </span>
           </div>
 
@@ -397,7 +406,7 @@ if (locale === 'pt-br') {
             id="preview-row-discount"
             class="hidden flex items-center justify-between text-emerald-600 font-medium"
           >
-            <span id="preview-discount-label">{locale === 'pt-br' ? 'Desconto:' : 'Discount:'}</span>
+            <span id="preview-discount-label">{locale === 'pt-br' ? 'Desconto:' : locale === 'es' ? 'Descuento:' : 'Discount:'}</span>
             <span id="preview-discount" class="tabular-nums">
               -$0.00
             </span>
@@ -412,19 +421,19 @@ if (locale === 'pt-br') {
             id="preview-row-shipping"
             class="hidden flex items-center justify-between text-gray-600"
           >
-            <span id="preview-lbl-shipping">{locale === 'pt-br' ? 'Frete / Envio:' : 'Shipping:'}</span>
+            <span id="preview-lbl-shipping">{locale === 'pt-br' ? 'Frete / Envio:' : locale === 'es' ? 'Envío / Portes:' : 'Shipping:'}</span>
             <span id="preview-shipping" class="font-medium text-gray-900 tabular-nums">
               $0.00
             </span>
           </div>
 
           <div class="tmpl-grand-total-row pt-3 border-t border-gray-300 flex items-baseline justify-between">
-            <span id="preview-lbl-total" class="font-bold text-gray-900 text-sm sm:text-base">{locale === 'pt-br' ? 'Total Geral:' : 'Grand Total:'}</span>
+            <span id="preview-lbl-total" class="font-bold text-gray-900 text-sm sm:text-base">{locale === 'pt-br' ? 'Total Geral:' : locale === 'es' ? 'Total General:' : 'Grand Total:'}</span>
             <span
               id="preview-grand-total"
               class="tmpl-grand-total text-xl sm:text-2xl font-extrabold text-gray-900 tabular-nums"
             >
-              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : 'en-US')}
+              {formatCurrency(0, defaultInvoice.currency, locale === 'pt-br' ? 'pt-BR' : locale === 'es' ? 'es-ES' : 'en-US')}
             </span>
           </div>
 
@@ -433,7 +442,7 @@ if (locale === 'pt-br') {
             id="preview-row-amount-paid"
             class="hidden flex items-center justify-between text-gray-600 pt-1"
           >
-            <span id="preview-lbl-amount-paid">{locale === 'pt-br' ? 'Valor Pago:' : 'Amount Paid:'}</span>
+            <span id="preview-lbl-amount-paid">{locale === 'pt-br' ? 'Valor Pago:' : locale === 'es' ? 'Importe Pagado:' : 'Amount Paid:'}</span>
             <span id="preview-amount-paid" class="font-medium text-gray-900 tabular-nums">
               $0.00
             </span>
@@ -463,24 +472,24 @@ if (locale === 'pt-br') {
     >
       <div class="space-y-2">
         <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-          {locale === 'pt-br' ? 'Métodos e Dados de Pagamento' : 'Payment Methods & Details'}
+          {locale === 'pt-br' ? 'Métodos e Dados de Pagamento' : locale === 'es' ? 'Datos y Métodos de Pago' : 'Payment Methods & Details'}
         </span>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1.5 text-gray-700">
           <p id="preview-bank-item" class="hidden">
-            <span class="text-gray-500">{locale === 'pt-br' ? 'Banco:' : 'Bank:'}</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Banco:' : locale === 'es' ? 'Banco:' : 'Bank:'}</span>{' '}
             <strong id="preview-bank-name" class="font-semibold text-gray-900 ml-1"></strong>
           </p>
           <p id="preview-account-item" class="hidden">
-            <span class="text-gray-500">{locale === 'pt-br' ? 'Titular:' : 'Account Name:'}</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Titular:' : locale === 'es' ? 'Titular:' : 'Account Name:'}</span>{' '}
             <span id="preview-account-name" class="font-medium text-gray-900 ml-1"></span>
           </p>
           <p id="preview-acc-num-item" class="hidden">
-            <span class="text-gray-500">{locale === 'pt-br' ? 'Conta:' : 'Account #:'}</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Conta:' : locale === 'es' ? 'Nº de Cuenta / IBAN:' : 'Account #:'}</span>{' '}
             <span id="preview-account-number" class="font-mono text-gray-900 ml-1"></span>
           </p>
           <p id="preview-routing-item" class="hidden">
-            <span class="text-gray-500">{locale === 'pt-br' ? 'Agência:' : 'Routing / BSB:'}</span>{' '}
+            <span class="text-gray-500">{locale === 'pt-br' ? 'Agência:' : locale === 'es' ? 'Código Entidad:' : 'Routing / BSB:'}</span>{' '}
             <span id="preview-routing-number" class="font-mono text-gray-900 ml-1"></span>
           </p>
           <p id="preview-iban-item" class="hidden">
@@ -494,7 +503,7 @@ if (locale === 'pt-br') {
         </div>
 
         <div id="preview-link-item" class="hidden pt-1">
-          <span class="text-gray-500">{locale === 'pt-br' ? 'Pagar Online:' : 'Pay Online:'}</span>
+          <span class="text-gray-500">{locale === 'pt-br' ? 'Pagar Online:' : locale === 'es' ? 'Pagar Online:' : 'Pay Online:'}</span>
           <a
             id="preview-payment-link"
             href="#"
@@ -508,7 +517,7 @@ if (locale === 'pt-br') {
           id="preview-instructions-item"
           class="hidden pt-1 text-gray-600 whitespace-pre-line text-xs"
         >
-          <span class="text-gray-500 font-semibold">{locale === 'pt-br' ? 'Instruções:' : 'Instructions:'}</span>{' '}
+          <span class="text-gray-500 font-semibold">{locale === 'pt-br' ? 'Instruções:' : locale === 'es' ? 'Instrucciones:' : 'Instructions:'}</span>{' '}
           <span id="preview-custom-instructions"></span>
         </div>
       </div>
@@ -527,7 +536,7 @@ if (locale === 'pt-br') {
         </div>
         <div class="space-y-1 text-center sm:text-left">
           <div class="flex items-center justify-center sm:justify-start gap-2">
-            <span class="text-xs font-bold text-gray-900 tracking-tight">{locale === 'pt-br' ? 'Pague com QR Code' : 'Instant Scan to Pay'}</span>
+            <span class="text-xs font-bold text-gray-900 tracking-tight">{locale === 'pt-br' ? 'Pague com QR Code' : locale === 'es' ? 'Paga con Código QR' : 'Instant Scan to Pay'}</span>
             <span
               id="preview-qr-badge"
               class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20"
@@ -536,7 +545,7 @@ if (locale === 'pt-br') {
             </span>
           </div>
           <p id="preview-qr-hint" class="text-xs text-gray-600 leading-relaxed max-w-sm">
-            {locale === 'pt-br' ? 'Escaneie este código no aplicativo do seu banco para pagar com agilidade.' : 'Scan this code with your banking or camera app on your mobile phone to pay instantly.'}
+            {locale === 'pt-br' ? 'Escaneie este código no aplicativo do seu banco para pagar com agilidade.' : locale === 'es' ? 'Escanea este código en tu app bancaria o cámara para pagar con rapidez.' : 'Scan this code with your banking or camera app on your mobile phone to pay instantly.'}
           </p>
         </div>
       </div>

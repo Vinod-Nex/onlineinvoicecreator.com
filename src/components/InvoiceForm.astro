@@ -21,6 +21,15 @@ if (locale === 'pt-br') {
     defaultInvoice.lineItems[0].description = 'Serviços Prestados';
   }
 }
+if (locale === 'es') {
+  defaultInvoice.documentTitle = 'FACTURA';
+  defaultInvoice.currency = 'EUR';
+  defaultInvoice.sender.name = 'Tu Empresa o Nombre';
+  defaultInvoice.client.name = 'Nombre del Cliente';
+  if (defaultInvoice.lineItems[0]) {
+    defaultInvoice.lineItems[0].description = 'Servicios Profesionales';
+  }
+}
 ---
 
 <div

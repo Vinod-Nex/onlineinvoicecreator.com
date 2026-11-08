@@ -47,15 +47,17 @@ async function runSpanish30() {
     if (title.length > 60) throw new Error(`Title exceeds 60 chars: ${title.length}`);
   });
 
-  // ES002: Spanish Hub embeds interactive workspace with country selector
-  await test('ES002 - Spanish Hub embeds interactive workspace with country selector', async (page) => {
+  // ES002: Spanish Hub embeds interactive invoice workspace
+  await test('ES002 - Spanish Hub embeds interactive invoice generator workspace with EUR default', async (page) => {
     await page.goto('http://localhost:4321/es');
-    const workspace = page.locator('#workspace-recibos');
+    const workspace = page.locator('#invoice-workspace');
     await workspace.waitFor({ state: 'visible' });
-    const countrySelect = page.locator('#es-country-select');
-    await countrySelect.waitFor({ state: 'visible' });
-    const val = await countrySelect.inputValue();
-    if (val !== 'ES') throw new Error(`Expected default country ES, got ${val}`);
+    const numInput = page.locator('#field-invoice-number');
+    await numInput.waitFor({ state: 'visible' });
+    const currSelect = page.locator('#field-currency');
+    await currSelect.waitFor({ state: 'visible' });
+    const val = await currSelect.inputValue();
+    if (val !== 'EUR') throw new Error(`Expected default currency EUR, got ${val}`);
   });
 
   // ES003: Spanish Hub quick features strip
