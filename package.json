@@ -28,6 +28,7 @@
     "test:frontend-30": "node tests/test-all-30.mjs",
     "test:ptbr-30": "node tests/test-ptbr-30.mjs",
     "test:es-30": "node tests/test-es-30.mjs",
+    "test:es-50": "node tests/test-es-50.mjs",
     "test:backend-30": "node tests/test-backend-30.mjs",
     "test:responsive": "node tests/responsive-audit.mjs",
     "indexnow": "node scripts/submit-indexnow.mjs",
